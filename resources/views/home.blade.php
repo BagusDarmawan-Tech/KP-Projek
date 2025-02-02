@@ -9,197 +9,170 @@
     <!-- CSS Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   </head>
+       
 
-  <nav class="navbar navbar-expand-lg bg-light py-5 bg-dark bg-opacity-10">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active text-" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Galeri</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Forum Anak
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Apa </a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">CFGI</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Kegiatan Arek Suroboyo</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown link
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm py-4" id="mainNav">
-          <div class="container px-5">
-              <a class="navbar-brand fw-bold" href="#page-top">Start Bootstrap</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                  Menu
-                  <i class="bi-list"></i>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarResponsive">
-                  <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
-                      <li class="nav-item"><a class="nav-link me-lg-3" href="#features">Features</a></li>
-                      <li class="nav-item"><a class="nav-link me-lg-3" href="#download">Download</a></li>
-                      <li class="nav-item"><a class="nav-link me-lg-3" href="#features">Features</a></li>
-                      <li class="nav-item"><a class="nav-link me-lg-3" href="#download">Download</a></li>
-                      <li class="nav-item"><a class="nav-link me-lg-3" href="#features">Features</a></li>
-                      <li class="nav-item"><a class="nav-link me-lg-3" href="#download">Download</a></li>
-                  </ul>
-                  <button class="btn btn-primary rounded-pill px-3 mb-2 mb-lg-0" data-bs-toggle="modal" data-bs-target="#feedbackModal">
-                      <span class="d-flex align-items-center">
-                          <i class="bi-chat-text-fill me-2"></i>
-                          <span class="small">Send Feedback</span>
-                      </span>
-                  </button>
-              </div>
-          </div>
-      </nav>
   <body>
-    <main>
-          <div>
-            <div data-mdb-input-init class="form-outline mb-4">
-                <label class="form-label" for="datatable-search-input">Search</label>
-                <input type="text" class="form-control" id="datatable-search-input" />
-            </div>
-              <div id="datatable">
-              </div>
-            <table class="table align-middle mb-0 bg-white">
-                <thead class="bg-light">
-                  <tr>
-                    <th>Name</th>
-                    <th>Title</th>
-                    <th>Status</th>
-                    <th>Position</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>
-                      <div class="d-flex align-items-center">
-                        <img
-                            src="https://mdbootstrap.com/img/new/avatars/8.jpg"
-                            alt=""
-                            style="width: 45px; height: 45px"
-                            class="rounded-circle"
-                            />
-                        <div class="ms-3">
-                          <p class="fw-bold mb-1">John Doe</p>
-                          <p class="text-muted mb-0">john.doe@gmail.com</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <p class="fw-normal mb-1">Software engineer</p>
-                      <p class="text-muted mb-0">IT department</p>
-                    </td>
-                    <td>
-                      <span class="badge badge-success rounded-pill d-inline">Active</span>
-                    </td>
-                    <td>Senior</td>
-                    <td>
-                      <button type="button" class="btn btn-link btn-sm btn-rounded">
-                        Edit
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="d-flex align-items-center">
-                        <img
-                            src="https://mdbootstrap.com/img/new/avatars/6.jpg"
-                            class="rounded-circle"
-                            alt=""
-                            style="width: 45px; height: 45px"
-                            />
-                        <div class="ms-3">
-                          <p class="fw-bold mb-1">Alex Ray</p>
-                          <p class="text-muted mb-0">alex.ray@gmail.com</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <p class="fw-normal mb-1">Consultant</p>
-                      <p class="text-muted mb-0">Finance</p>
-                    </td>
-                    <td>
-                      <span class="badge badge-primary rounded-pill d-inline"
-                            >Onboarding</span
-                        >
-                    </td>
-                    <td>Junior</td>
-                    <td>
-                      <button
-                              type="button"
-                              class="btn btn-link btn-rounded btn-sm fw-bold"
-                              data-mdb-ripple-color="dark"
-                              >
-                        Edit
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="d-flex align-items-center">
-                        <img
-                            src="https://mdbootstrap.com/img/new/avatars/7.jpg"
-                            class="rounded-circle"
-                            alt=""
-                            style="width: 45px; height: 45px"
-                            />
-                        <div class="ms-3">
-                          <p class="fw-bold mb-1">Kate Hunington</p>
-                          <p class="text-muted mb-0">kate.hunington@gmail.com</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <p class="fw-normal mb-1">Designer</p>
-                      <p class="text-muted mb-0">UI/UX</p>
-                    </td>
-                    <td>
-                      <span class="badge badge-warning rounded-pill d-inline">Awaiting</span>
-                    </td>
-                    <td>Senior</td>
-                    <td>
-                      <button
-                              type="button"
-                              class="btn btn-link btn-rounded btn-sm fw-bold"
-                              data-mdb-ripple-color="dark"
-                              >
-                        Edit
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+     <!-- Navigation-->
+     <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm py-4" id="mainNav">
+      <div class="container px-5">
+          <a class="navbar-brand fw-bold" href="#page-top">Start Bootstrap</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+              Menu
+              <i class="bi-list"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+              <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
+                  <li class="nav-item"><a class="nav-link me-lg-3" href="#features">Features</a></li>
+                  <li class="nav-item"><a class="nav-link me-lg-3" href="#download">Download</a></li>
+                  <li class="nav-item"><a class="nav-link me-lg-3" href="#features">Features</a></li>
+                  <li class="nav-item"><a class="nav-link me-lg-3" href="#download">Download</a></li>
+                  <li class="nav-item"><a class="nav-link me-lg-3" href="#features">Features</a></li>
+                  <li class="nav-item"><a class="nav-link me-lg-3" href="#download">Download</a></li>
+                  <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Dropdown link
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">Action</a></li>
+                      <li><a class="dropdown-item" href="#">Another action</a></li>
+                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                  </li>
+              </ul>
+              <button class="btn btn-primary rounded-pill px-3 mb-2 mb-lg-0" data-bs-toggle="modal" data-bs-target="#feedbackModal">
+                  <span class="d-flex align-items-center">
+                      <i class="bi-chat-text-fill me-2"></i>
+                      <span class="small">Send Feedback</span>
+                  </span>
+              </button>
           </div>
+      </div>
+  </nav>
+  {{-- Navigasi END --}}
+    <main>
+      <div class="container-fluid">
+        <div class="container h-5 py-5">
+
+        </div>
+        <div class="container">
+          <div data-mdb-input-init class="form-outline mb-4">
+              <label class="form-label" for="datatable-search-input">Search</label>
+              <input type="text" class="form-control" id="datatable-search-input" />
+          </div>
+            <div id="datatable">
+            </div>
+          <table class="table align-middle mb-0 bg-white">
+              <thead class="bg-light">
+                <tr>
+                  <th>Name</th>
+                  <th>Title</th>
+                  <th>Status</th>
+                  <th>Position</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <img
+                          src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                          alt=""
+                          style="width: 45px; height: 45px"
+                          class="rounded-circle"
+                          />
+                      <div class="ms-3">
+                        <p class="fw-bold mb-1">John Doe</p>
+                        <p class="text-muted mb-0">john.doe@gmail.com</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="fw-normal mb-1">Software engineer</p>
+                    <p class="text-muted mb-0">IT department</p>
+                  </td>
+                  <td>
+                    <span class="badge badge-success rounded-pill d-inline">Active</span>
+                  </td>
+                  <td>Senior</td>
+                  <td>
+                    <button type="button" class="btn btn-link btn-sm btn-rounded">
+                      Edit
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <img
+                          src="https://mdbootstrap.com/img/new/avatars/6.jpg"
+                          class="rounded-circle"
+                          alt=""
+                          style="width: 45px; height: 45px"
+                          />
+                      <div class="ms-3">
+                        <p class="fw-bold mb-1">Alex Ray</p>
+                        <p class="text-muted mb-0">alex.ray@gmail.com</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="fw-normal mb-1">Consultant</p>
+                    <p class="text-muted mb-0">Finance</p>
+                  </td>
+                  <td>
+                    <span class="badge badge-primary rounded-pill d-inline"
+                          >Onboarding</span
+                      >
+                  </td>
+                  <td>Junior</td>
+                  <td>
+                    <button
+                            type="button"
+                            class="btn btn-link btn-rounded btn-sm fw-bold"
+                            data-mdb-ripple-color="dark"
+                            >
+                      Edit
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <img
+                          src="https://mdbootstrap.com/img/new/avatars/7.jpg"
+                          class="rounded-circle"
+                          alt=""
+                          style="width: 45px; height: 45px"
+                          />
+                      <div class="ms-3">
+                        <p class="fw-bold mb-1">Kate Hunington</p>
+                        <p class="text-muted mb-0">kate.hunington@gmail.com</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="fw-normal mb-1">Designer</p>
+                    <p class="text-muted mb-0">UI/UX</p>
+                  </td>
+                  <td>
+                    <span class="badge badge-warning rounded-pill d-inline">Awaiting</span>
+                  </td>
+                  <td>Senior</td>
+                  <td>
+                    <button
+                            type="button"
+                            class="btn btn-link btn-rounded btn-sm fw-bold"
+                            data-mdb-ripple-color="dark"
+                            >
+                      Edit
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+      </div>
           
     </main>
         <!-- Footer -->
