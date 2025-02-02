@@ -54,7 +54,32 @@
       </div>
     </div>
   </nav>
-
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm py-4" id="mainNav">
+          <div class="container px-5">
+              <a class="navbar-brand fw-bold" href="#page-top">Start Bootstrap</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                  Menu
+                  <i class="bi-list"></i>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarResponsive">
+                  <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
+                      <li class="nav-item"><a class="nav-link me-lg-3" href="#features">Features</a></li>
+                      <li class="nav-item"><a class="nav-link me-lg-3" href="#download">Download</a></li>
+                      <li class="nav-item"><a class="nav-link me-lg-3" href="#features">Features</a></li>
+                      <li class="nav-item"><a class="nav-link me-lg-3" href="#download">Download</a></li>
+                      <li class="nav-item"><a class="nav-link me-lg-3" href="#features">Features</a></li>
+                      <li class="nav-item"><a class="nav-link me-lg-3" href="#download">Download</a></li>
+                  </ul>
+                  <button class="btn btn-primary rounded-pill px-3 mb-2 mb-lg-0" data-bs-toggle="modal" data-bs-target="#feedbackModal">
+                      <span class="d-flex align-items-center">
+                          <i class="bi-chat-text-fill me-2"></i>
+                          <span class="small">Send Feedback</span>
+                      </span>
+                  </button>
+              </div>
+          </div>
+      </nav>
   <body>
     <main>
           <div>
@@ -178,17 +203,17 @@
           
     </main>
         <!-- Footer -->
-    <footer class="text-center text-lg-start bg-body-tertiary text-muted bg-dark text-light">
+    <footer class="text-center text-lg-start bg-body-tertiary text-muted text-light" style="background: rgb(233, 36, 103)">
         <!-- Section: Social media -->
         <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
         <!-- Left -->
-        <div class="me-5 d-none d-lg-block">
+        <div class="me-5 d-none d-lg-block text-light">
             <span>Get connected with us on social networks:</span>
         </div>
         <!-- Left -->
     
         <!-- Right -->
-        <div>
+        <div class="text-light">
             <a href="" class="me-4 text-reset">
             <i class="bi bi-facebook fs-2 text-light"></i>
             </a>
@@ -213,8 +238,8 @@
         <!-- Section: Social media -->
     
         <!-- Section: Links  -->
-        <section class="">
-        <div class="container text-center text-md-start mt-5 bg-dark text-light">
+        <section class="text-light"   style="background: rgb(233, 36, 103)">
+        <div class="container text-center text-md-start mt-5 text-light">
             <!-- Grid row -->
             <div class="row mt-3">
             <!-- Grid column -->
@@ -225,10 +250,8 @@
                 </h6>
                 <div class="row">
                     {{-- <div class="col-4"><img class="img-fluid" src="{{ asset('logo.png') }}" alt=""></div> --}}
-                    <div class="col-4"><img class="img-fluid" src="{{ asset('kla-log.png') }}" alt=""></div>
-                    <div class="col-4"><img class="img-fluid" src="{{ asset('logo-sby.png') }}" alt=""></div>
-                    <div class="col-4"><img class="img-fluid" src="{{ asset('favicon.png') }}" alt=""></div>
-
+                    <div class="col-6"><img class="img-fluid" src="{{ asset('kla-log.png') }}" alt=""></div>
+                    <div class="col-6"><img class="img-fluid" src="{{ asset('logo-sby.png') }}" alt=""></div>
                 </div>
                 <p class="text-start lh-1">
                     Kota Layak Anak adalah Kota yang mempunyai 
