@@ -14,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('halaman-forum-anak-kegiatan-forum-anak-kecamatan');
+    return view('pantau-anak');
 });

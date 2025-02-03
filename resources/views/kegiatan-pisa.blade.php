@@ -99,7 +99,7 @@
         <header class="masthead text-center text-white position-relative">
             <div class="masthead-content">
                 <div class="container px-5">
-                    <h1 class="masthead-heading mb-0">Kegiatan Kecamatan</h1>
+                    <h1 class="masthead-heading mb-0">Kegiatan PISA</h1>
                     <h2 class="masthead-subheading mb-0">Lorem, ipsum dolor sit amet consectetur adipisicing.</h2>
                 </div>
             </div>
@@ -119,7 +119,7 @@
         <section class="container-sm border border-dark rounded-top" >
             <!-- Gallery -->
             <div class="row py-lg-5 rounded-top" style="background-color: #a2094e" >
-                <h3 class="text-center text-light">Kegiatan Forum Anak Kecamatan</h3>
+                <h3 class="text-center text-light">PISA</h3>
             </div>
             <div class="row py-3">
                 <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">

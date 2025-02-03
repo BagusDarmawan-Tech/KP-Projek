@@ -99,7 +99,7 @@
         <header class="masthead text-center text-white position-relative">
             <div class="masthead-content">
                 <div class="container px-5">
-                    <h1 class="masthead-heading mb-0">Kegiatan Kecamatan</h1>
+                    <h1 class="masthead-heading mb-0">Suara Anak Surabaya</h1>
                     <h2 class="masthead-subheading mb-0">Lorem, ipsum dolor sit amet consectetur adipisicing.</h2>
                 </div>
             </div>
@@ -119,56 +119,66 @@
         <section class="container-sm border border-dark rounded-top" >
             <!-- Gallery -->
             <div class="row py-lg-5 rounded-top" style="background-color: #a2094e" >
-                <h3 class="text-center text-light">Kegiatan Forum Anak Kecamatan</h3>
+                <h3 class="text-center text-light">Pantau Suara Anak</h3>
             </div>
-            <div class="row py-3">
-                <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-                <img
-                    src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp"
-                    class="w-100 shadow-1-strong rounded mb-4"
-                    alt="Boat on Calm Water"
-                />
-            
-                <img
-                    src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain1.webp"
-                    class="w-100 shadow-1-strong rounded mb-4"
-                    alt="Wintry Mountain Landscape"
-                />
-                </div>
-            
-                <div class="col-lg-4 mb-4 mb-lg-0">
-                <img
-                    src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain2.webp"
-                    class="w-100 shadow-1-strong rounded mb-4"
-                    alt="Mountains in the Clouds"
-                />
-            
-                <img
-                    src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp"
-                    class="w-100 shadow-1-strong rounded mb-4"
-                    alt="Boat on Calm Water"
-                />
-                </div>
-            
-                <div class="col-lg-4 mb-4 mb-lg-0">
-                <img
-                    src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(18).webp"
-                    class="w-100 shadow-1-strong rounded mb-4"
-                    alt="Waves at Sea"
-                />
-            
-                <img
-                    src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain3.webp"
-                    class="w-100 shadow-1-strong rounded mb-4"
-                    alt="Yosemite National Park"
-                />
-                </div>
+            <div class="row ">
+                <div class="container">                     
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <!-- Kontrol Atas (Tampilkan & Cari) -->
+                            <div class="row mb-3">
+                                <div class="col-md-6 d-flex justify-content-start">
+                                    <label for="showEntries" class="form-label me-2 mb-0">Tampilkan</label>
+                                    <select id="showEntries" class="form-select form-select-sm" onchange="changeEntries(this.value)" style="width: 80px;">
+                                        <option value="10">10</option>
+                                        <option value="25">25</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 d-flex justify-content-end">
+                                    <label for="searchInput" class="form-label me-2 mb-0">Cari:</label>
+                                    <input type="text" id="searchInput" class="form-control form-control-sm" placeholder="Masukkan kata kunci" style="width: 200px;">
+                                </div>
+                            </div>
+                
+                
+                            <!-- Tabel -->
+                            <div class="table-responsive">
+                                <table class="table table-hover table-bordered">
+                                    <thead class="table-primary">
+                                        <tr>
+                                            <th style="font-weight: normal;">No</th>
+                                            <th style="font-weight: normal;">Kategori</th>
+                                            <th style="font-weight: normal;">Nama</th>
+                                            <th style="font-weight: normal;">Keterangan</th>
+                                            <th style="font-weight: normal;">File</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{-- @foreach($documents as $index => $document) --}}
+                                            <tr>
+                                                <td style="font-weight: normal;"></td>
+                                                <td style="font-weight: normal;"></td>
+                                                <td style="font-weight: normal;"></td>
+                                                <td style="font-weight: normal;"></td>
+                                                <td style="font-weight: normal;">
+                                                    <a href="" class="btn btn-primary" download>Download</a>
+                                                </td>
+                                            </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                
+                        </div>
+                    </div>
+                </div
             </div>
             <!-- Gallery -->
         </section>
         
         <!-- Footer-->
-        <footer class="text-center text-lg-start bg-body-tertiary text-muted text-light" style="background: rgb(233, 36, 103)">
+        <footer class="text-center text-lg-start bg-body-tertiary text-muted text-light mt-4" style="background: rgb(233, 36, 103)">
             <!-- Section: Social media -->
             <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
             <!-- Left -->
@@ -288,3 +298,4 @@
         <script src="js/scripts.js"></script>
     </body>
 </html>
+
