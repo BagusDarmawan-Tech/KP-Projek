@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\forumanakController;
+use App\Http\Controllers\GaleriController;
+use App\Http\Controllers\keckelController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,8 +18,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/galeri', [GaleriController::class, 'galeri'])->name('galeri');
+Route::get('/skkec', [forumanakController::class, 'skkec'])->name('Skkec');
+Route::get('/skkel', [forumanakController::class, 'skkel'])->name('Skkel');
+Route::get('/kasrpa', [keckelController::class, 'kasrpa'])->name('Kasrpa');
+Route::get('/pemantauananak', [forumanakController::class, 'pemantauananak'])->name('pemantauananak');
+Route::get('/kegareksby', [forumanakController::class, 'kegareksby'])->name('kegareksby');
+
+
 Route::get('/', function () {
-    return view('frontend.index');
+    return view('frontend.HalamanHome');
 });
 
 Route::get('/admin/logout', [AdminController::class, 'destroy'])->name('admin.logout');
