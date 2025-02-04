@@ -8,6 +8,6 @@ class GaleriController extends Controller
 {
     public function galeri()
     {
-        return view('frontend.galeri'); 
+        return view('frontend.content.landing-page'); 
     }
 }

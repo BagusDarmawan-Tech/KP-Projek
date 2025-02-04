@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app-web')
 
 @section('title', 'Home - SITALAS')
 

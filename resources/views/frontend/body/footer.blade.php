@@ -1,114 +1,79 @@
-<footer class="text-center text-lg-start bg-body-tertiary text-muted text-light" style="background: rgb(233, 36, 103)">
-    <!-- Section: Social media -->
-    <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-    <!-- Left -->
-    <div class="me-5 d-none d-lg-block text-light">
-        <span>Get connected with us on social networks:</span>
-    </div>
-    <!-- Left -->
+<footer id="footer" class="footer">
 
-    <!-- Right -->
-    <div class="text-light">
-        <a href="" class="me-4 text-reset">
-        <i class="bi bi-facebook fs-2 text-light"></i>
-        </a>
-        <a href="" class="me-4 text-reset">
-        <i class="bi bi-twitter-x fs-2 text-light"></i>
-        </a>
-        <a href="" class="me-4 text-reset">
-            <i class="bi bi-tiktok fs-2 text-light"></i>
-        </a>
-        <a href="" class="me-4 text-reset">
-        <i class="bi bi-instagram fs-2 text-light"></i>
-        </a>
-    </div>
-    <!-- Right -->
-    </section>
-    <!-- Section: Social media -->
-
-    <!-- Section: Links  -->
-    <section class="text-light"   style="background: rgb(233, 36, 103)">
-    <div class="container text-center text-md-start mt-5 text-light">
-        <!-- Grid row -->
-        <div class="row mt-3">
-        <!-- Grid column -->
-        <div class="col-md-3 col-lg-5 col-xl-3 mx-auto mb-4">
-            <div class="row">
-                {{-- <div class="col-4"><img class="img-fluid" src="{{ asset('logo.png') }}" alt=""></div> --}}
-                <div class="col-6"><img class="img-fluid" src="{{ asset('kla-log.png') }}" alt=""></div>
-                <div class="col-6"><img class="img-fluid" src="{{ asset('logo-sby.png') }}" alt=""></div>
-            </div>
-            <p class="text-start lh-1">
-                Kota Layak Anak adalah Kota yang mempunyai 
-                sistem pembangunan berbasis hak anak melalui
-                pengintegrasian komitmen dan sumber daya pemerintah.
-            </p>
+    <div class="footer-newsletter">
+      <div class="container">
+        <div class="row justify-content-center text-center">
+          <div class="col-lg-6">
+            <h4>Join Our Newsletter</h4>
+            <p>Subscribe to our newsletter and receive the latest news about our products and services!</p>
+            <form action="forms/newsletter.php" method="post" class="php-email-form">
+              <div class="newsletter-form"><input type="email" name="email"><input type="submit" value="Subscribe"></div>
+              <div class="loading">Loading</div>
+              <div class="error-message"></div>
+              <div class="sent-message">Your subscription request has been sent. Thank you!</div>
+            </form>
+          </div>
         </div>
-        <!-- Grid column -->
-
-        <!-- Grid column -->
-        {{-- <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-            <!-- Links -->
-            <h6 class="text-uppercase fw-bold mb-4">
-            Products
-            </h6>
-            <p>
-            <a href="#!" class="text-reset">Lorem, ipsum.</a>
-            </p>
-            <p>
-            <a href="#!" class="text-reset">Lorem, ipsum.</a>
-            </p>
-            <p>
-            <a href="#!" class="text-reset">Lorem, ipsum.</a>
-            </p>
-            <p>
-            <a href="#!" class="text-reset">Lorem, ipsum.</a>
-            </p>
-        </div> --}}
-        <!-- Grid column -->
-
-        {{-- <!-- Grid column -->
-        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-            <!-- Links -->
-            <h6 class="text-uppercase fw-bold mb-4">
-            Useful links
-            </h6>
-            <p>
-            <a href="#!" class="text-reset">Pricing</a>
-            </p>
-            <p>
-            <a href="#!" class="text-reset">Settings</a>
-            </p>
-            <p>
-            <a href="#!" class="text-reset">Orders</a>
-            </p>
-            <p>
-            <a href="#!" class="text-reset">Help</a>
-            </p>
-        </div>
-        <!-- Grid column --> --}}
-
-        <!-- Grid column -->
-        <div class="col-md-4 col-lg-5 col-xl-3 mx-auto mb-md-0 mb-4">
-            <!-- Links -->
-            <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-            <p><i class="bi bi-geo-alt-fill"></i> Jl. Jimerto No. 25-27, Ketabang, Kec. Genteng, Kota SBY, Jawa Timur 60272</p>
-            <p>
-            <i class="bi bi-envelope"></i>
-              info@example.com
-            </p>
-            <p><i class="bi bi-telephone"></i>  (031) 5475600</p>
-        </div>
-        <!-- Grid column -->
-        </div>
-        <!-- Grid row -->
+      </div>
     </div>
-    </section>
-    <!-- Section: Links  -->
 
-    <!-- Copyright -->
-    <div class="text-center p-4 text-light bg-opacity-10 bg-dark">
-    © 2025 Copyright
+    <div class="container footer-top">
+      <div class="row gy-4">
+        <div class="col-lg-4 col-md-6 footer-about">
+          <a href="index.html" class="d-flex align-items-center">
+            <span class="sitename">eNno</span>
+          </a>
+          <div class="footer-contact pt-3">
+            <p>A108 Adam Street</p>
+            <p>New York, NY 535022</p>
+            <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
+            <p><strong>Email:</strong> <span>info@example.com</span></p>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Useful Links</h4>
+          <ul>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">About us</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Services</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Our Services</h4>
+          <ul>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Web Design</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Web Development</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Product Management</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Marketing</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-4 col-md-12">
+          <h4>Follow Us</h4>
+          <p>Cras fermentum odio eu feugiat lide par naso tierra videa magna derita valies</p>
+          <div class="social-links d-flex">
+            <a href=""><i class="bi bi-twitter-x"></i></a>
+            <a href=""><i class="bi bi-facebook"></i></a>
+            <a href=""><i class="bi bi-instagram"></i></a>
+            <a href=""><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+
+      </div>
     </div>
-    <!-- Copyright -->
-</footer>
+
+    <div class="container copyright text-center mt-4">
+      <p>© <span>Copyright</span> <strong class="px-1 sitename">eNno</strong> <span>All Rights Reserved</span></p>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you've purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> Distributed by <a href=“https://themewagon.com>ThemeWagon
+      </div>
+    </div>
+
+  </footer>

@@ -1,11 +1,12 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\forumanakController;
 use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\keckelController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\forumanakController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+// Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/galeri', [GaleriController::class, 'galeri'])->name('galeri');
 Route::get('/skkec', [forumanakController::class, 'skkec'])->name('Skkec');
 Route::get('/skkel', [forumanakController::class, 'skkel'])->name('Skkel');
@@ -27,8 +28,12 @@ Route::get('/kegareksby', [forumanakController::class, 'kegareksby'])->name('keg
 
 
 Route::get('/', function () {
-    return view('frontend.HalamanHome');
+    return view('frontend.user-main');
 });
+
+Route::get('/coba', function () {
+    return view('pages.coba');
+})->name('coba');
 
 Route::get('/admin/logout', [AdminController::class, 'destroy'])->name('admin.logout');
 
