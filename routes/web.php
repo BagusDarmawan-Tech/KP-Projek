@@ -18,7 +18,7 @@ use App\Http\Controllers\forumanakController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-// Route::get('/', [HomeController::class, 'home'])->name('home');
+
 Route::get('/galeri', [GaleriController::class, 'galeri'])->name('galeri');
 Route::get('/skkec', [forumanakController::class, 'skkec'])->name('Skkec');
 Route::get('/skkel', [forumanakController::class, 'skkel'])->name('Skkel');
@@ -28,12 +28,8 @@ Route::get('/kegareksby', [forumanakController::class, 'kegareksby'])->name('keg
 
 
 Route::get('/', function () {
-    return view('frontend.user-main');
-});
-
-Route::get('/coba', function () {
-    return view('pages.coba');
-})->name('coba');
+    return view('frontend.content.landing-page');
+})->name('content');
 
 Route::get('/admin/logout', [AdminController::class, 'destroy'])->name('admin.logout');
 

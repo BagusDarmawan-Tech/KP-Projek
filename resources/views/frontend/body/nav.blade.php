@@ -9,8 +9,8 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="/galeri" class="active">Home</a></li>
-          <li><a href="#about">Galeri</a></li>
+          <li><a href="/" class="active">Home</a></li>
+          <li><a href="/galeri">Galeri</a></li>
 
           <!-- bagian Forum Anak -->
           <li class="dropdown"><a href="#"><span>Forum Anak</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>

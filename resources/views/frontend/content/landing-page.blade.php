@@ -1,6 +1,6 @@
 @extends('frontend.user-main')
 
-@section('coba')
+@section('content')
     <!-- Hero Section -->
     <section id="hero" class="hero section">
 

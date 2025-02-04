@@ -12,6 +12,6 @@ class keckelController extends Controller
         $documents = Rpa::paginate(10);
 
        
-        return view('frontend.keckellayanananak.kasrpa', compact('documents')); 
+        return view('frontend.content.kasrpa', compact('documents')); 
     }
 }

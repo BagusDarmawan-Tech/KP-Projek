@@ -15,7 +15,7 @@ class forumanakController extends Controller
         $documents = skkec::paginate(10);
 
         
-        return view('frontend.forumanak.skkec', compact('documents')); 
+        return view('frontend.content.skkec', compact('documents')); 
     }
 
     public function skkel() {
@@ -23,16 +23,16 @@ class forumanakController extends Controller
         $documents = skkel::paginate(10);
 
         
-        return view('frontend.forumanak.skkel', compact('documents')); 
+        return view('frontend.content.skkel', compact('documents')); 
     }
 
     public function pemantauananak()
     {
-        return view('forumanak.pemantauananak'); 
+        return view('frontend.content.pemantauananak'); 
     }
 
     public function kegareksby()
     {
-        return view('forumanak.kegareksby'); 
+        return view('frontend.content.kegareksby'); 
     }
 }

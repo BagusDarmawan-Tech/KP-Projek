@@ -43,7 +43,7 @@
   <!--END Navigasi-->
 
   <main class="main">
-    @yield('coba')
+    @yield('content')
   </main>
 
 

@@ -1,4 +1,4 @@
-@extends('frontend.app-web')
+@extends('frontend.user-main')
 
 @section('content')
 <!-- Gallery Section -->
@@ -6,7 +6,7 @@
     <!-- Title Section -->
     <div class="mb-5 position-relative text-center">
         <h2 class="p-3 text-white rounded-pill d-inline-block position-relative" style="background-color: rgb(233, 36, 103); z-index: 2;">
-            Pemantauan Usulan Anak 
+            Galeri Kegiatan
         </h2>
         <div class="position-absolute top-50 start-50 translate-middle w-100" style="z-index: 1;">
             <svg width="100%" height="100" viewBox="0 0 500 100" preserveAspectRatio="none">
@@ -58,5 +58,5 @@
     transform: scale(1.05);
 }
 </style>
-
+<!-- End of Gallery Section -->
 @endsection
