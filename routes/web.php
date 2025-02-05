@@ -31,6 +31,7 @@ Route::get('/', function () {
     return view('frontend.content.landing-page');
 })->name('content');
 
+//Logout
 Route::get('/admin/logout', [AdminController::class, 'destroy'])->name('admin.logout');
 
 Route::get('/dashboard', function () {

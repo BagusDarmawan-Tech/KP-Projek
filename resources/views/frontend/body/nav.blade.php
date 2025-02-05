@@ -143,7 +143,7 @@
            <!-- selesai bagian menu anyar -->
 
 
-          <li><a href="#contact">Login</a></li>
+          <li><a href="{{ route('login') }}">Login</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
