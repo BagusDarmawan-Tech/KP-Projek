@@ -4,84 +4,39 @@
 
     <li class="nav-item">
       <a class="nav-link " href="index.html">
-        <i class="bi bi-grid"></i>
+        <i class="bi bi-grid"></i> 
         <span>Dashboard</span>
       </a>
     </li><!-- End Dashboard Nav -->
 
     <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-menu-button-wide"></i><span>Config</span><i class="bi bi-chevron-down ms-auto"></i>
+        <i class="bi bi-gear-wide"></i><span>Config</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
       <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
           <a href="components-alerts.html">
-            <i class="bi bi-circle"></i><span>Alerts</span>
+            <i class="bi bi-circle"></i><span>Users Management</span>
           </a>
         </li>
         <li>
           <a href="components-accordion.html">
-            <i class="bi bi-circle"></i><span>Accordion</span>
+            <i class="bi bi-circle"></i><span>Role Management</span>
           </a>
         </li>
         <li>
           <a href="components-badges.html">
-            <i class="bi bi-circle"></i><span>Badges</span>
+            <i class="bi bi-circle"></i><span>Configurasi App</span>
           </a>
         </li>
         <li>
           <a href="components-breadcrumbs.html">
-            <i class="bi bi-circle"></i><span>Breadcrumbs</span>
+            <i class="bi bi-circle"></i><span>Module Management</span>
           </a>
         </li>
         <li>
           <a href="components-buttons.html">
-            <i class="bi bi-circle"></i><span>Buttons</span>
-          </a>
-        </li>
-        <li>
-          <a href="components-cards.html">
-            <i class="bi bi-circle"></i><span>Cards</span>
-          </a>
-        </li>
-        <li>
-          <a href="components-carousel.html">
-            <i class="bi bi-circle"></i><span>Carousel</span>
-          </a>
-        </li>
-        <li>
-          <a href="components-list-group.html">
-            <i class="bi bi-circle"></i><span>List group</span>
-          </a>
-        </li>
-        <li>
-          <a href="components-modal.html">
-            <i class="bi bi-circle"></i><span>Modal</span>
-          </a>
-        </li>
-        <li>
-          <a href="components-tabs.html">
-            <i class="bi bi-circle"></i><span>Tabs</span>
-          </a>
-        </li>
-        <li>
-          <a href="components-pagination.html">
-            <i class="bi bi-circle"></i><span>Pagination</span>
-          </a>
-        </li>
-        <li>
-          <a href="components-progress.html">
-            <i class="bi bi-circle"></i><span>Progress</span>
-          </a>
-        </li>
-        <li>
-          <a href="components-spinners.html">
-            <i class="bi bi-circle"></i><span>Spinners</span>
-          </a>
-        </li>
-        <li>
-          <a href="components-tooltips.html">
-            <i class="bi bi-circle"></i><span>Tooltips</span>
+            <i class="bi bi-circle"></i><span>Menu Management</span>
           </a>
         </li>
       </ul>
@@ -89,27 +44,57 @@
 
     <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-journal-text"></i><span>Web Management</span><i class="bi bi-chevron-down ms-auto"></i>
+        <i class="bi bi-keyboard"></i><span>Web Management</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
       <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
           <a href="forms-elements.html">
-            <i class="bi bi-circle"></i><span>Form Elements</span>
+            <i class="bi bi-circle"></i><span>Menu Management</span>
           </a>
         </li>
         <li>
           <a href="forms-layouts.html">
-            <i class="bi bi-circle"></i><span>Form Layouts</span>
+            <i class="bi bi-circle"></i><span>Artikel</span>
           </a>
         </li>
         <li>
           <a href="forms-editors.html">
-            <i class="bi bi-circle"></i><span>Form Editors</span>
+            <i class="bi bi-circle"></i><span>Kategori Artikel</span>
           </a>
         </li>
         <li>
           <a href="forms-validation.html">
-            <i class="bi bi-circle"></i><span>Form Validation</span>
+            <i class="bi bi-circle"></i><span>Slider</span>
+          </a>
+        </li>
+        <li>
+          <a href="forms-editors.html">
+            <i class="bi bi-circle"></i><span>Klaster</span>
+          </a>
+        </li>
+        <li>
+          <a href="forms-validation.html">
+            <i class="bi bi-circle"></i><span>Sub Kegiatan</span>
+          </a>
+        </li>
+        <li>
+          <a href="forms-editors.html">
+            <i class="bi bi-circle"></i><span>Galleri</span>
+          </a>
+        </li>
+        <li>
+          <a href="forms-validation.html">
+            <i class="bi bi-circle"></i><span>Forum Anak</span>
+          </a>
+        </li>
+        <li>
+          <a href="forms-validation.html">
+            <i class="bi bi-circle"></i><span>Halaman </span>
+          </a>
+        </li>
+        <li>
+          <a href="forms-validation.html">
+            <i class="bi bi-circle"></i><span>Pemantauan Usulan </span>
           </a>
         </li>
       </ul>
@@ -117,17 +102,17 @@
 
     <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-layout-text-window-reverse"></i><span>Kecamatan Layak Anak</span><i class="bi bi-chevron-down ms-auto"></i>
+        <i class="bi bi-house-gear-fill"></i><span>Kecamatan Layak Anak</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
       <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
           <a href="tables-general.html">
-            <i class="bi bi-circle"></i><span>General Tables</span>
+            <i class="bi bi-circle"></i><span>Dokumen Kecamatan</span>
           </a>
         </li>
         <li>
           <a href="tables-data.html">
-            <i class="bi bi-circle"></i><span>Data Tables</span>
+            <i class="bi bi-circle"></i><span>Dokumen Kecamatan</span>
           </a>
         </li>
       </ul>
@@ -135,22 +120,17 @@
 
     <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-bar-chart"></i><span>Kelurahan Layak Anak</span><i class="bi bi-chevron-down ms-auto"></i>
+        <i class="bi bi-house-gear-fill"></i><span>Kelurahan Layak Anak</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
       <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
           <a href="charts-chartjs.html">
-            <i class="bi bi-circle"></i><span>Chart.js</span>
+            <i class="bi bi-circle"></i><span>Dokumen Kelurahan</span>
           </a>
         </li>
         <li>
           <a href="charts-apexcharts.html">
-            <i class="bi bi-circle"></i><span>ApexCharts</span>
-          </a>
-        </li>
-        <li>
-          <a href="charts-echarts.html">
-            <i class="bi bi-circle"></i><span>ECharts</span>
+            <i class="bi bi-circle"></i><span>Kegiatan Kelurahan</span>
           </a>
         </li>
       </ul>
@@ -158,22 +138,17 @@
 
     <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-gem"></i><span>Mitra Anak</span><i class="bi bi-chevron-down ms-auto"></i>
+        <i class="bi bi-palette"></i><span>Mitra Anak</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
       <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
           <a href="icons-bootstrap.html">
-            <i class="bi bi-circle"></i><span>Bootstrap Icons</span>
+            <i class="bi bi-circle"></i><span>Kegiatan CFGI</span>
           </a>
         </li>
         <li>
           <a href="icons-remix.html">
-            <i class="bi bi-circle"></i><span>Remix Icons</span>
-          </a>
-        </li>
-        <li>
-          <a href="icons-boxicons.html">
-            <i class="bi bi-circle"></i><span>Boxicons</span>
+            <i class="bi bi-circle"></i><span>Artikel Anak</span>
           </a>
         </li>
       </ul>
@@ -181,22 +156,17 @@
 
     <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#icons" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-gem"></i><span>Pusat Informasi Sahabat Anak</span><i class="bi bi-chevron-down ms-auto"></i>
+        <i class="bi bi-info-circle"></i><span>Pusat Informasi Sahabat Anak</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
       <ul id="icons" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
           <a href="icons-bootstrap.html">
-            <i class="bi bi-circle"></i><span>Bootstrap Icons</span>
+            <i class="bi bi-circle"></i><span>Dokumen PISA</span>
           </a>
         </li>
         <li>
           <a href="icons-remix.html">
-            <i class="bi bi-circle"></i><span>Remix Icons</span>
-          </a>
-        </li>
-        <li>
-          <a href="icons-boxicons.html">
-            <i class="bi bi-circle"></i><span>Boxicons</span>
+            <i class="bi bi-circle"></i><span>Kegiatan PISA</span>
           </a>
         </li>
       </ul>
@@ -204,14 +174,14 @@
 
     <li class="nav-item">
       <a class="nav-link collapsed" href="#">
-        <i class="bi bi-person"></i>
+        <i class="bi bi-journal-text"></i>
         <span>Kegiatan Arek Suroboyo</span>
       </a>
     </li>
 
     <li class="nav-item">
       <a class="nav-link collapsed" href="#">
-        <i class="bi bi-person"></i>
+        <i class="bi bi-journal-text"></i>
         <span>Kegiatan Forum Anak Surabaya</span>
       </a>
     </li>
@@ -222,17 +192,12 @@
       <ul id="usulan-kegiatan" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
           <a href="icons-bootstrap.html">
-            <i class="bi bi-circle"></i><span>Bootstrap Icons</span>
+            <i class="bi bi-circle"></i><span>Pemantauan Suara Anak</span>
           </a>
         </li>
         <li>
           <a href="icons-remix.html">
-            <i class="bi bi-circle"></i><span>Remix Icons</span>
-          </a>
-        </li>
-        <li>
-          <a href="icons-boxicons.html">
-            <i class="bi bi-circle"></i><span>Boxicons</span>
+            <i class="bi bi-circle"></i><span>Karya</span>
           </a>
         </li>
       </ul>

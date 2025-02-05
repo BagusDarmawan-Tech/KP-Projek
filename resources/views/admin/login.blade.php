@@ -3,8 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
 </head>
   <body class="">
@@ -23,26 +24,33 @@
                         <h4 class="mt-1 mb-5 pb-1">Selamat Datang Admin</h4>
                       </div>
       
-                      <form>
+
+                      <!-- Form Login-->
+                      <form method="POST" action="{{ route('login') }}">
+                        @csrf
+                        <div data-mdb-input-init class="form-outline mb-4">
+                            <label for="floatingInputDisabled" :value="__('Email')">Username</label>
+                            <input id="email" class="form-control" type="email" name="email" :value="old('email')" required autofocus autocomplete="username">
+                        </div>
+                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
       
                         <div data-mdb-input-init class="form-outline mb-4">
-                            <label for="floatingInputDisabled">Username</label>
-                            <input type="text" class="form-control" id="floatingInputDisabled">
+                            <labelfor="password" :value="__('Password')">Password</labelfor=>
+                          <input id="password" class="form-control"
+                          type="password"
+                          name="password"
+                          required autocomplete="current-password" />
                         </div>
-      
-                        <div data-mdb-input-init class="form-outline mb-4">
-                            <label class="form-label" for="form2Example22">Password</label>
-                          <input type="password" id="form2Example22" class="form-control" />
-                        </div>
-
-                        <div data-mdb-input-init class="form-outline mb-4">
-                            <label class="form-label" for="form2Example22">CAPTA</label>
-                          <input type="password" id="form2Example22" class="form-control" />
-                        </div>
-
+                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                        
                         <div class="d-grid gap-2">
-                            <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button">Button</button>
+                          <x-primary-button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3">
+                              {{ __('Log in') }}        
+                              <i class="bi bi-box-arrow-in-right"></i>
+
+                          </x-primary-button>
                         </div>
+
       
                         {{-- <div class="d-flex align-items-center justify-content-center pb-4">
                           <p class="mb-0 me-2">Don't have an account?</p>
@@ -50,7 +58,7 @@
                         </div> --}}
       
                       </form>
-      
+                      <!-- END Form Login-->
                     </div>
                   </div>
                   <div class="col-lg-6 d-flex align-items-center gradient-custom-2">

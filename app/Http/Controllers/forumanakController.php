@@ -5,11 +5,13 @@ use App\Models\Skkec;
 use App\Models\Skkel;
 use App\Models\pemantauananak;
 
+
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class forumanakController extends Controller
 {
+    // HALAMAN FORUM ANAK/SK KECAMATAN 
     public function skkec() {
         
         $documents = skkec::paginate(10);
