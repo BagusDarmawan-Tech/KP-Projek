@@ -7,6 +7,8 @@ use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\keckelController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\forumanakController;
+use App\Http\Controllers\CFCIController;
+use App\Http\Controllers\CFCISkController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,18 +20,62 @@ use App\Http\Controllers\forumanakController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+// HalamanCFCISk
+// Route::get('/galeri', [GaleriController::class, 'galeri'])->name('galeri');
 
-Route::get('/galeri', [GaleriController::class, 'galeri'])->name('galeri');
-Route::get('/skkec', [forumanakController::class, 'skkec'])->name('Skkec');
+
+// Route halaman CFCI
+Route::get('/CFCI/Kegiatan', [CFCIController::class, 'HalamanCFCI'])->name('CFCIKegiatan');
+Route::get('/CFCI/SK', [CFCIController::class, 'HalamanCFCISk'])->name('CFCISK');
+Route::get('/CFCI/ArtikelKegiatan', [CFCIController::class, 'ArtikelKegiatan'])->name('HalamanArtikel');
+Route::get('/CFCI/Galeri', [CFCIController::class, 'GaleriCFCI'])->name('HalamanGaleri');
+Route::get('/CFCI/Sk-Kecamatan', [CFCIController::class, 'SkKecamatan'])->name('CFCISkecam');
+Route::get('/CFCI/SK-Kelurahan', [CFCIController::class, 'SkKelurahan'])->name('SkKelurahan');
+
+Route::get('/CFCI/SK-Kecamatan', [CFCIController::class, 'Ckecamatan'])->name('Ckecamatan');
+
+// BATAS SELESAI Route halaman CFCI
+
+// ROUTE HALAMAN GALERI
+Route::get('/Galeri-Kota-Layak-Anak', [GaleriController::class, 'galeriKotaLayakAnak'])->name('galeri-kota-layakanak');
+Route::get('/Galeri-Anak', [GaleriController::class, 'GaleriAnak'])->name('GaleriAnak');
+// SELESAI HALAMAN GALERI
+
+
+// BATAS HALAMAN FORUM ANAK 
+
+Route::get('/skkec', [forumanakController::class, 'skkec'])->name('Skkecam');
 Route::get('/skkel', [forumanakController::class, 'skkel'])->name('Skkel');
 Route::get('/kasrpa', [keckelController::class, 'kasrpa'])->name('Kasrpa');
 Route::get('/pemantauananak', [forumanakController::class, 'pemantauananak'])->name('pemantauananak');
 Route::get('/kegareksby', [forumanakController::class, 'kegareksby'])->name('kegareksby');
 
+Route::get('/coba', [forumanakController::class, 'coba'])->name('coba');
 
-Route::get('/', function () {
-    return view('frontend.content.landing-page');
-})->name('content');
+// ROUTE HALAMAN FORUM ANAK
+
+// HALAMAN BAGIAN KLASTER
+
+// BATAS BAGIAN HALAMAN KLASTER
+
+
+// HALAMAN BAGIAN KOTA LAYAK ANAK
+
+// BATAS HALAMAN BAGIAN KOTA LAYAK ANAK
+
+// HALAMAN BAGIAN PISA
+
+// BATAS HALAMAN PISA
+
+// HALAMAN BAGIAN SUARA ANAK
+
+// BATAS HALAMAN BAGIAN SUARA ANAK
+
+// HALAMAN BAGIAN MITRA ANAK
+
+// BATAS HALAMAN BAGIAN MITRA ANAK
+
+Route::get('/', function () {return view('frontend.content.landing-page');})->name('content');
 
 //Logout
 Route::get('/admin/logout', [AdminController::class, 'destroy'])->name('admin.logout');

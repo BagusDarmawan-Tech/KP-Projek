@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Models\Skkec;
 use App\Models\Skkel;
+use App\Models\CFCIsKecam;
+
 
 
 use Illuminate\Http\Request;
@@ -10,6 +12,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class forumanakController extends Controller
 {
+    // HALAMAN FORUM ANAK/SK KECAMATAN 
     public function skkec() {
         
         $documents = skkec::paginate(10);

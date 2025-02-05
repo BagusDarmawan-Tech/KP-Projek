@@ -2,11 +2,11 @@
 
 @section('content')
 <div class="container mt-5">
-    <!-- Card dengan efek unik -->
+    <!-- Card dengan Efek Header -->
     <div class="card shadow-lg border-0 position-relative overflow-hidden">
-        <!-- Bagian Header -->
-        <div class="custom-header text-center text-white py-4">
-            <h2 class="mb-0 text-light">SK FAS KECAMATAN - SITALAS</h2>
+        <!-- Bagian Header dengan Warna -->
+        <div class="custom-header text-center py-4">
+            <h2 class="mb-0 text-white">KAS RPA - SITALAS</h2>
         </div>
 
         <div class="card-body mt-4">
@@ -32,8 +32,8 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Pengupload</th>
-                            <th>Kategori</th>
+                            <!-- <th>Pengupload</th> -->
+                            <!-- <th>Kategori</th> -->
                             <th>Nama</th>
                             <th>Keterangan</th>
                             <th>File</th>
@@ -43,12 +43,12 @@
                         @forelse($documents as $index => $document)
                             <tr>
                                 <td class="text-center">{{ $index + 1 }}</td>
-                                <td>{{ $document->penguploud }}</td>
-                                <td>{{ $document->kategori }}</td>
+                                <!-- <td>{{ $document->penguploud }}</td>
+                                <td>{{ $document->kategori }}</td> -->
                                 <td>{{ $document->nama }}</td>
                                 <td>{{ $document->keterangan }}</td>
                                 <td class="text-center">
-                                    <a href="{{ asset('storage/files/' . $document->file) }}" class="btn btn-sm btn-success" download>
+                                    <a href="{{ asset('storage/files/' . $document->file) }}" class="btn btn-sm btn-outline-secondary" download>
                                         📥 Download
                                     </a>
                                 </td>
@@ -73,7 +73,7 @@
     </div>
 </div>
 
-<!-- CSS -->
+<!-- CSS untuk Efek Header -->
 <style>
     .custom-header {
         font-size: 22px;

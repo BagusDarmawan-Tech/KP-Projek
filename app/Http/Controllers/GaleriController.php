@@ -10,4 +10,17 @@ class GaleriController extends Controller
     {
         return view('frontend.content.galeri'); 
     }
+
+    public function galeriKotaLayakAnak()
+    {
+        return view('frontend.content.galeri'); 
+    }
+
+
+    public function GaleriAnak()
+    {
+        return view('frontend.content.galeri'); 
+    }
+
 }
+
