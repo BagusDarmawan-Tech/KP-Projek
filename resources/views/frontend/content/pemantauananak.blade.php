@@ -1,62 +1,91 @@
 @extends('frontend.user-main')
 
 @section('content')
-<!-- Gallery Section -->
-
-    <!-- Title Section -->
-    <div class="mb-5 position-relative text-center">
-        <h2 class="p-3 text-white rounded-pill d-inline-block position-relative" style="background-color: rgb(233, 36, 103); z-index: 2;">
-            Pemantauan Usulan Anak 
-        </h2>
-        <div class="position-absolute top-50 start-50 translate-middle w-100" style="z-index: 1;">
-            <svg width="100%" height="100" viewBox="0 0 500 100" preserveAspectRatio="none">
-                <path d="M0,0 C150,100 350,0 500,100 L500,00 L0,0 Z" style="fill:rgb(233, 36, 103);"></path>
-            </svg>
-        </div>
-    </div>
-
-    <div class="row">
-        <!-- First Column -->
-        <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-            <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp" 
-                 class="w-100 shadow rounded-3 mb-4 img-hover-effect" alt="Boat on Calm Water" />
-
-            <img src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain1.webp" 
-                 class="w-100 shadow rounded-3 mb-4 img-hover-effect" alt="Wintry Mountain Landscape" />
+<div class="container mt-5">
+    <!-- Card dengan efek unik -->
+    <div class="card shadow-lg border-0 position-relative overflow-hidden">
+        <!-- Bagian Header -->
+        <div class="custom-header text-center text-white py-4">
+            <h2 class="mb-0">PEMANTAUAN USULAN ANAK</h2>
         </div>
 
-        <!-- Second Column -->
-        <div class="col-lg-4 mb-4 mb-lg-0">
-            <img src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain2.webp" 
-                 class="w-100 shadow rounded-3 mb-4 img-hover-effect" alt="Mountains in the Clouds" />
+        <div class="card-body mt-4">
+            <!-- Kontrol Atas (Tampilkan & Cari) -->
+            <div class="row mb-3 align-items-center">
+                <div class="col-md-6">
+                    <label for="showEntries" class="form-label me-2">Tampilkan</label>
+                    <select id="showEntries" class="form-select form-select-sm d-inline-block" style="width: 80px;">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
+                <div class="col-md-6 text-end">
+                    <input type="text" id="searchInput" class="form-control form-control-sm d-inline-block" placeholder="🔍 Cari dokumen..." style="width: 200px;">
+                </div>
+            </div>
 
-            <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp" 
-                 class="w-100 shadow rounded-3 mb-4 img-hover-effect" alt="Boat on Calm Water" />
-        </div>
+            <!-- Tabel -->
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered align-middle">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Usulan Anak Untuk Pembangunan Kota Surabaya</th>
+                            <th>OPD Pelaksana</th>
+                            <th>Status Tindak Lanjut</th>
+                            <th>Keterangan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($documents as $index => $document)
+                            <tr>
+                                <td class="text-center">{{ $index + 1 }}</td>
+                                <td>{{ $document->usulananak }}</td>
+                                <td>{{ $document->OPDpelaksana }}</td>
+                                <td>{{ $document->statustindak }}</td>
+                                <td>{{ $document->keterangan }}</td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="6" class="text-center text-muted">Tidak ada data tersedia</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
 
-        <!-- Third Column -->
-        <div class="col-lg-4 mb-4 mb-lg-0">
-            <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(18).webp" 
-                 class="w-100 shadow rounded-3 mb-4 img-hover-effect" alt="Waves at Sea" />
-
-            <img src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain3.webp" 
-                 class="w-100 shadow rounded-3 mb-4 img-hover-effect" alt="Yosemite National Park" />
+            <!-- Paginasi -->
+            <div class="d-flex justify-content-between align-items-center mt-3">
+                <span class="text-muted">Menampilkan {{ $documents->count() }} dari {{ $documents->total() }} data</span>
+                <nav>
+                    {{ $documents->links() }}
+                </nav>
+            </div>
         </div>
     </div>
 </div>
 
+<!-- CSS -->
 <style>
-.img-hover-effect {
-    transition: transform 0.3s ease-out;
-    border: 5px solid white; 
-    max-height: 250px;
-    object-fit: cover;
-    will-change: transform;
-}
+    .custom-header {
+        font-size: 22px;
+        font-weight: bold;
+        padding: 15px;
+        border-radius: 15px 15px 50% 50%;
+        background: rgb(233, 36, 103);
+        color: white;
+    }
 
-.img-hover-effect:hover {
-    transform: scale(1.05);
-}
+    .table th {
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .btn-outline-secondary {
+        border-radius: 10px;
+    }
 </style>
 
 @endsection
