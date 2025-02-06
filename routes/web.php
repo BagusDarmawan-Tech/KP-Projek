@@ -69,7 +69,6 @@ Route::get('/kesehatan-dasar', [KlasterController::class, 'kesehatandasar'])->na
 Route::get('/lingkungan-keluarga', [KlasterController::class, 'lingkungankeluarga'])->name('lingkungan-keluarga');
 Route::get('/pendidikan-pemanfaatan', [KlasterController::class, 'pendidikanpemanfaatan'])->name('pendidikan-pemanfaatan');
 Route::get('/perlindungan-khusus', [KlasterController::class, 'PerlindunganKhusus'])->name('perlindungan-khusus');
-
 // BATAS BAGIAN HALAMAN KLASTER
 
 
