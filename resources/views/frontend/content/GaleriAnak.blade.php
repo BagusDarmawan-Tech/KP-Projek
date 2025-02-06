@@ -10,7 +10,7 @@
 
 <section id="gallery">
     <div class="container">
-        <div class="row row-cols-1 row-cols-md-3 g-4 row g-4 justify-content-center">
+        <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
             @php
                 $images = [
                     "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp",
@@ -35,6 +35,7 @@
         </div>
     </div>
 </section>
+
 <!-- Bootstrap Modal -->
 <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -72,7 +73,6 @@
         object-fit: cover;
     }
 
-    /* Tombol overlay "+" */
     .overlay {
         position: absolute;
         top: 50%;
@@ -99,7 +99,6 @@
         font-weight: bold;
     }
 
-    /* Responsif */
     @media (max-width: 768px) {
         .col-md-6 {
             flex: 0 0 50%;
