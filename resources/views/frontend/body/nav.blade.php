@@ -46,7 +46,7 @@
           <li class="dropdown"><a href="#"><span>Klaster</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li class="dropdown"><a href="{{route('haksipil')}}"><span>Hak Sipil dan Kebebabasan</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-              <li class="dropdown"><a href="#"><span>Kelembagaan</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a> 
+              <li class="dropdown"><a href="{{route('kelembagaan')}}"><span>Kelembagaan</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a> 
               <li class="dropdown"><a href="#"><span>Kesehatan Dasar dan kesejahteraan</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
               <li class="dropdown"><a href="#"><span>Lingkungan Kelurga dan Pengasuhan Alternatif</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
               <li class="dropdown"><a href="#"><span>Pendidikan, Pemanfaatan Waktu Luang dan Kegiatan Budaya</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
