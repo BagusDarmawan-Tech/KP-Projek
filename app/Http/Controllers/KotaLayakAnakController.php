@@ -5,13 +5,13 @@ use App\Models\Rpa;
 
 use Illuminate\Http\Request;
 
-class keckelController extends Controller
+class KotaLayakAnakController extends Controller
 {
     public function kasrpa() {
         
         $documents = Rpa::paginate(10);
 
        
-        return view('frontend.content.kasrpa', compact('documents')); 
+        return view('frontend.content.KasRpa', compact('documents')); 
     }
 }

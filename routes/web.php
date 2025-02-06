@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\GaleriController;
-use App\Http\Controllers\keckelController;
+use App\Http\Controllers\KotaLayakAnakController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\forumanakController;
 use App\Http\Controllers\CFCIController;
@@ -53,7 +53,6 @@ Route::get('/Galeri-Anak', [GaleriController::class, 'GaleriAnak'])->name('Galer
 
 Route::get('/skkec', [forumanakController::class, 'skkec'])->name('Skkecam');
 Route::get('/skkel', [forumanakController::class, 'skkel'])->name('Skkel');
-Route::get('/kasrpa', [keckelController::class, 'kasrpa'])->name('Kasrpa');
 Route::get('/pemantauananak', [forumanakController::class, 'pemantauananak'])->name('pemantauananak');
 Route::get('/kegareksby', [forumanakController::class, 'kegareksby'])->name('kegareksby');
 
@@ -73,7 +72,7 @@ Route::get('/perlindungan-khusus', [KlasterController::class, 'PerlindunganKhusu
 
 
 // HALAMAN BAGIAN KOTA LAYAK ANAK
-
+Route::get('/kasrpa', [KotaLayakAnakController::class, 'kasrpa'])->name('Kasrpa');
 // BATAS HALAMAN BAGIAN KOTA LAYAK ANAK
 
 // HALAMAN BAGIAN PISA
