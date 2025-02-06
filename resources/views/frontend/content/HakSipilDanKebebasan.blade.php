@@ -76,7 +76,7 @@
         font-weight: bold;
         padding: 15px;
         border-radius: 15px 15px 50% 50%;
-        background: #10bc69;;
+        background: rgb(233, 36,103);
         color: white;
     }
 

@@ -5,7 +5,7 @@
 
 <!-- Main Content -->
 <div class="container mt-5 pt-4">
-    <div class="card shadow-lg border-0 rounded-4 text-center p-3" style="background: #10bc69;">
+    <div class="card shadow-lg border-0 rounded-4 text-center p-3" style="background: rgb(233, 36,103);">
         <h2 class="fw-bold text-white m-0">KEGIATAN FORUM ANAK SURABAYA</h2>
     </div>
 </div>
@@ -18,7 +18,7 @@
                 <div class="card shadow-lg border-0 rounded-4 overflow-hidden hover-shadow">
                     <img src="https://suarapubliknews.net/wp-content/uploads/2024/08/YNU_7150-1.jpg" alt="Alur Sosialisasi dan Simulasi Bencana Kebakaran" class="card-img-top">
                     <div class="card-body">
-                    <h5 class="card-title" style="color: #10bc69;">Alur Sosialisasi dan Simulasi Bencana Kebakaran</h5>
+                    <h5 class="card-title" style="color: rgb(233, 36,103);">Alur Sosialisasi dan Simulasi Bencana Kebakaran</h5>
                         <p class="card-text text-secondary">Halo arek suroboyo, yuk simak infografis alur sosialisasi dan simulasi bencana Kebakaran...</p>
                         <button class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#modal1">Selengkapnya</button>
                     </div>
@@ -30,7 +30,7 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                        <h5 class="card-title" style="color: #10bc69;">Alur Sosialisasi dan Simulasi Bencana Kebakaran</h5>
+                        <h5 class="card-title" style="color: rgb(233, 36,103);">Alur Sosialisasi dan Simulasi Bencana Kebakaran</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -49,7 +49,7 @@
                 <div class="card shadow-lg border-0 rounded-4 overflow-hidden hover-shadow">
                     <img src="https://asset.kompas.com/crops/u2_wc8ieb_2BzqsnPtkeCoZkolk=/0x0:1278x852/1200x800/data/photo/2023/07/02/64a15afcb55ce.jpeg" alt="Alur Sosialisasi dan Simulasi Bencana Gempa Bumi" class="card-img-top">
                     <div class="card-body">
-                    <h5 class="card-title" style="color: #10bc69;">Alur Sosialisasi dan Simulasi Bencana Kebakaran</h5>
+                    <h5 class="card-title" style="color: rgb(233, 36,103);">Alur Sosialisasi dan Simulasi Bencana Kebakaran</h5>
                         <p class="card-text text-secondary">Halo arek suroboyo, yuk simak infografis alur sosialisasi dan simulasi bencana gempa bumi...</p>
                         <button class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#modal2">Selengkapnya</button>
                     </div>
@@ -80,7 +80,7 @@
                 <div class="card shadow-lg border-0 rounded-4 overflow-hidden hover-shadow">
                     <img src="https://cdn.antaranews.com/cache/1200x800/2023/09/15/eri-dan-RAP-Sonokwijenan-Surabaya-9.jpg.webp" alt="Pencegahan mempekerjakan anak di Aplikasi Assik" class="card-img-top">
                     <div class="card-body">
-                    <h5 class="card-title" style="color: #10bc69;">Alur Sosialisasi dan Simulasi Bencana Kebakaran</h5>
+                    <h5 class="card-title" style="color: rgb(233, 36,103);">Alur Sosialisasi dan Simulasi Bencana Kebakaran</h5>
                         <p class="card-text text-secondary">Pemerintah Kota Surabaya memiliki Aplikasi ASSIK (Arek Suroboyo Siap Kerjo)...</p>
                         <button class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#modal3">Selengkapnya</button>
                     </div>

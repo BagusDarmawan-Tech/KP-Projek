@@ -5,7 +5,7 @@
 <div class="container mt-5 pt-4">
     <!-- Card Pembatas Besar dengan Judul dan Galeri -->
     <div class="card shadow-lg border-0 rounded-4 p-4">
-        <div class="card-header text-center" style="background: #10bc69;">
+        <div class="card-header text-center" style="background: rgb(233, 36,103);">
             <h2 class="fw-bold text-white m-0">GALERI KOTA LAYAK ANAK</h2>
         </div>
         <div class="card-body">
