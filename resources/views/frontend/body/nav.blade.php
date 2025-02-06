@@ -3,8 +3,7 @@
 
       <a href="/asset/img/logo.png" class="logo d-flex align-items-center me-auto">
         <!-- Uncomment the line below if you also wish to use an image logo -->
-        <!-- <img src="assets/img/logo.png" alt=""> -->
-        <h1 class="sitename">SITALAS</h1>
+        <img src="{{asset('assets/img/logo.png')}}" alt="Logo" width="120" height="180">
       </a>
 
       <nav id="navmenu" class="navmenu">
@@ -78,7 +77,7 @@
             <ul>
               <li class="dropdown"><a href="{{route('CFCISK')}}"><span>SK</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                 <ul>
-                  <li><a href="{{route('Ckecamatan')}}">SK Kecamatan</a></li>
+                  <li><a href="{{route('CFCIKecamatann')}}">SK Kecamatan</a></li>
                   <li><a href="{{route('SkKelurahan')}}">SK Kelurahan</a></li>
                 </ul>
               </li>
@@ -93,8 +92,8 @@
            <!-- HALAMAN PISA  -->
           <li class="dropdown"><a href="#"><span>PISA</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="#">Dokumen</a></li>
-              <li><a href="#">Kegiatan</a></li>
+              <li><a href="{{route('HalamanPisa')}}">Dokumen</a></li>
+              <li><a href="{{route('KegiatanPisa')}}">Kegiatan</a></li>
 </ul>
           <!-- SELESAI BAGIAN PISA -->
         
@@ -102,15 +101,15 @@
 
           <li class="dropdown"><a href="#"><span>Suara  Anak</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="#">Pantau Suara Anak</a></li>
-              <li><a href="#">Karya Anak</a></li>
+              <li><a href="{{route('suaraanak')}}">Pantau Suara Anak</a></li>
+              <li><a href="{{route('KaryaAnak')}}">Karya Anak</a></li>
 </ul>
            <!-- selesai bagian menu anyar -->
 
            <!-- Halaman Mitra Anak  -->
            <li class="dropdown"><a href="#"><span>Mitra Anak</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="#">Artikel</a></li>
+              <li><a href="{{route('HalamanArtikel')}}">Artikel</a></li>
           </ul>
             <!-- Selesai Mitra Anak -->
 

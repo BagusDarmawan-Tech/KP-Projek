@@ -540,8 +540,8 @@ h6 {
 }
 
 .footer .footer-newsletter {
-  background-color: color-mix(in srgb, var(--default-color), transparent 97%);
-  padding: 50px 0;
+  background-color:rgb(233, 36, 103);
+  padding: 5px 0;
 }
 
 .footer .footer-newsletter h4 {
@@ -592,9 +592,9 @@ h6 {
 .footer .footer-newsletter .newsletter-form input[type=submit]:hover {
   background: color-mix(in srgb, var(--accent-color), transparent 20%);
 }
-
+/* bagian praturan footer */
 .footer .footer-top {
-  padding-top: 50px;
+  padding-top: 90px;
 }
 
 .footer .social-links a {
@@ -1753,6 +1753,6 @@ section,
 /*--------------------------------------------------------------
 # Starter Section Section
 --------------------------------------------------------------*/
-.starter-section {
+/* .starter-section { */
   /* Add your styles here */
-}
+/* } */

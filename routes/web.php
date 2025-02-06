@@ -8,7 +8,9 @@ use App\Http\Controllers\keckelController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\forumanakController;
 use App\Http\Controllers\CFCIController;
-use App\Http\Controllers\CFCISkController;
+use App\Http\Controllers\SuaraAnakController;
+use App\Http\Controllers\pisaController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -25,12 +27,12 @@ use App\Http\Controllers\CFCISkController;
 
 
 // Route halaman CFCI
-Route::get('/CFCI/Kegiatan', [CFCIController::class, 'HalamanCFCI'])->name('CFCIKegiatan');
+Route::get('/CFCI/Kegiatan', [CFCIController::class, 'Kegiatan'])->name('CFCIKegiatan');
 Route::get('/CFCI/SK', [CFCIController::class, 'HalamanCFCISk'])->name('CFCISK');
-Route::get('/CFCI/ArtikelKegiatan', [CFCIController::class, 'ArtikelKegiatan'])->name('HalamanArtikel');
-Route::get('/CFCI/Galeri', [CFCIController::class, 'GaleriCFCI'])->name('HalamanGaleri');
-Route::get('/CFCI/Sk-Kecamatan', [CFCIController::class, 'SkKecamatan'])->name('CFCISkecam');
-Route::get('/CFCI/SK-Kelurahan', [CFCIController::class, 'SkKelurahan'])->name('SkKelurahan');
+Route::get('/CFCI/ArtikelKegiatan', [CFCIController::class, 'CFCIArtikel'])->name('HalamanArtikel');
+Route::get('/CFCI/Galeri', [CFCIController::class, 'galeri'])->name('HalamanGaleri');
+Route::get('/CFCI/SkKecamatan', [CFCIController::class, 'CFCIKecamatann'])->name('CFCIKecamatann'); //bagian kecamatan 
+Route::get('/CFCI/SKKelurahan', [CFCIController::class, 'CFCIKelurahan'])->name('SkKelurahan');
 
 Route::get('/CFCI/SK-Kecamatan', [CFCIController::class, 'Ckecamatan'])->name('Ckecamatan');
 
@@ -66,8 +68,12 @@ Route::get('/coba', [forumanakController::class, 'coba'])->name('coba');
 // HALAMAN BAGIAN PISA
 
 // BATAS HALAMAN PISA
+Route::get('/dokumenPisa', [pisaController::class, 'dokumenPisa'])->name('HalamanPisa');
+Route::get('/KegiatanPisa', [pisaController::class, 'KegiatanPisa'])->name('KegiatanPisa');
 
 // HALAMAN BAGIAN SUARA ANAK
+Route::get('/PantauSuaraAnak', [SuaraAnakController::class, 'PsuaraAnak'])->name('suaraanak');
+Route::get('/KaryaAnak', [SuaraAnakController::class, 'karyaAnak'])->name('KaryaAnak');
 
 // BATAS HALAMAN BAGIAN SUARA ANAK
 

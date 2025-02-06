@@ -1,10 +1,9 @@
-
 @extends('frontend.user-main')
 @section('content')
 <section id="portfolio" class="portfolio section">
 <div class="container section-title" data-aos="fade-up">
-        <span>ARTIKEL KEGIATAN</span>
-        <h2>ARTIKEL KEGIATAN</h2>
+        <span>KARYA ANAK SURABAYA</span>
+        <h2>KARYA ANAK SURABAYA</h2>
         <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
       </div><!-- End Section Title -->
 
