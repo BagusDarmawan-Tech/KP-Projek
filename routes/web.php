@@ -75,7 +75,11 @@ Route::get('/coba', [forumanakController::class, 'coba'])->name('coba');
 
 // BATAS HALAMAN BAGIAN MITRA ANAK
 
+
 Route::get('/', function () {return view('frontend.content.landing-page');})->name('content');
+
+
+//Backend autentikasi 
 
 //Logout
 Route::get('/admin/logout', [AdminController::class, 'destroy'])->name('admin.logout');
@@ -83,6 +87,11 @@ Route::get('/admin/logout', [AdminController::class, 'destroy'])->name('admin.lo
 Route::get('/dashboard', function () {
     return view('admin.index');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+
+Route::get('/loop', function () {
+    return ('<h1>Admin</h1>');
+})->middleware(['auth', 'verified','role:developer']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
