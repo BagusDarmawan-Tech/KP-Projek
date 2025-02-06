@@ -6,6 +6,7 @@ use App\Models\Kelembagaan;
 use App\Models\KesehatanDasar;
 use App\Models\LingkunganKeluarga;
 use App\Models\PendidikanPemanfaatan;
+use App\Models\perlindungankhusus;
 
 use Illuminate\Http\Request;
 
@@ -49,5 +50,13 @@ class KlasterController extends Controller
 
         
         return view('frontend.content.PendidikanPemanfaatan', compact('documents')); 
+    }
+
+    public function perlindungankhusus() {
+        
+        $documents = perlindungankhusus::paginate(10);
+
+        
+        return view('frontend.content.PerlindunganKhusus', compact('documents')); 
     }
 }

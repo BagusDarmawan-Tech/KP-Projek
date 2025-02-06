@@ -65,9 +65,11 @@ Route::get('/coba', [forumanakController::class, 'coba'])->name('coba');
 
 Route::get('/haksipil', [KlasterController::class, 'haksipildankebebasan'])->name('haksipil');
 Route::get('/kelembagaan', [KlasterController::class, 'kelembagaan'])->name('kelembagaan');
-Route::get('/kesehatandasar', [KlasterController::class, 'kesehatandasar'])->name('kesehatandasar');
-Route::get('/lingkungankeluarga', [KlasterController::class, 'lingkungankeluarga'])->name('lingkungankeluarga');
-Route::get('/pendidikanpemanfaatan', [KlasterController::class, 'pendidikanpemanfaatan'])->name('pendidikanpemanfaatan');
+Route::get('/kesehatan-dasar', [KlasterController::class, 'kesehatandasar'])->name('kesehatan-dasar');
+Route::get('/lingkungan-keluarga', [KlasterController::class, 'lingkungankeluarga'])->name('lingkungan-keluarga');
+Route::get('/pendidikan-pemanfaatan', [KlasterController::class, 'pendidikanpemanfaatan'])->name('pendidikan-pemanfaatan');
+Route::get('/perlindungan-khusus', [KlasterController::class, 'PerlindunganKhusus'])->name('perlindungan-khusus');
+
 // BATAS BAGIAN HALAMAN KLASTER
 
 
