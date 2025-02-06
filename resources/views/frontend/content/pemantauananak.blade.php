@@ -5,8 +5,8 @@
     <!-- Card dengan efek unik -->
     <div class="card shadow-lg border-0 position-relative overflow-hidden">
         <!-- Bagian Header -->
-        <div class="custom-header text-center text-white py-4">
-            <h2 class="mb-0">PEMANTAUAN USULAN ANAK</h2>
+        <div class="custom-header text-center py-4">
+            <h2 class="mb-0 text-white">Pemantauan Usulan Anak</h2>
         </div>
 
         <div class="card-body mt-4">
@@ -74,7 +74,7 @@
         font-weight: bold;
         padding: 15px;
         border-radius: 15px 15px 50% 50%;
-        background: rgb(233, 36, 103);
+        background: #10bc69;
         color: white;
     }
 
