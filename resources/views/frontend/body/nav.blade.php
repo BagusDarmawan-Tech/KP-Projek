@@ -64,7 +64,7 @@
                   <li><a href="#">Kegiatan Kelurahan</a></li>
                 </ul>
               </li>
-              <li><a href="#">Kas RPA</a></li>
+              <li><a href="{{route('Kasrpa')}}">Kas RPA</a></li>
             </ul>
           </li>
 
