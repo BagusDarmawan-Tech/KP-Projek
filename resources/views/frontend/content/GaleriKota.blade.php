@@ -12,7 +12,7 @@
             <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
                 @php
                     $images = [
-                        "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp",
+                        "assets/img/portfolio/app-1.jpg",
                         "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(18).webp",
                         "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(19).webp",
                         "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(72).webp",
