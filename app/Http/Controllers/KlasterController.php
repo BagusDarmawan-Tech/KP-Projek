@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\HakSipilDanKebebasan;
 use App\Models\Kelembagaan;
+use App\Models\KesehatanDasar;
 
 use Illuminate\Http\Request;
 
@@ -21,6 +22,14 @@ class KlasterController extends Controller
         $documents = kelembagaan::paginate(10);
 
         
-        return view('frontend.content.HakSipilDanKebebasan', compact('documents')); 
+        return view('frontend.content.kelembagaan', compact('documents')); 
+    }
+
+    public function kesehatandasar() {
+        
+        $documents = kesehatandasar::paginate(10);
+
+        
+        return view('frontend.content.KesehatanDasar', compact('documents')); 
     }
 }

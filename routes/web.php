@@ -65,6 +65,7 @@ Route::get('/coba', [forumanakController::class, 'coba'])->name('coba');
 
 Route::get('/haksipil', [KlasterController::class, 'haksipildankebebasan'])->name('haksipil');
 Route::get('/kelembagaan', [KlasterController::class, 'kelembagaan'])->name('kelembagaan');
+Route::get('/kesehatandasar', [KlasterController::class, 'kesehatandasar'])->name('kesehatandasar');
 
 // BATAS BAGIAN HALAMAN KLASTER
 
