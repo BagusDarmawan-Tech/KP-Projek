@@ -8,8 +8,13 @@ use App\Http\Controllers\keckelController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\forumanakController;
 use App\Http\Controllers\CFCIController;
+
 use App\Http\Controllers\SuaraAnakController;
 use App\Http\Controllers\pisaController;
+
+
+
+use App\Http\Controllers\KlasterController;
 
 
 /*
@@ -58,6 +63,7 @@ Route::get('/coba', [forumanakController::class, 'coba'])->name('coba');
 
 // HALAMAN BAGIAN KLASTER
 
+Route::get('/haksipil', [KlasterController::class, 'haksipildankebebasan'])->name('haksipil');
 // BATAS BAGIAN HALAMAN KLASTER
 
 
