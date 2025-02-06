@@ -17,7 +17,7 @@ class forumanakController extends Controller
         $documents = skkec::paginate(10);
 
         
-        return view('frontend.content.skkec', compact('documents')); 
+        return view('frontend.content.SkFasKecamatan', compact('documents')); 
     }
 
     public function skkel() {
