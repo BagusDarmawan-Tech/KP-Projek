@@ -67,6 +67,7 @@ Route::get('/haksipil', [KlasterController::class, 'haksipildankebebasan'])->nam
 Route::get('/kelembagaan', [KlasterController::class, 'kelembagaan'])->name('kelembagaan');
 Route::get('/kesehatandasar', [KlasterController::class, 'kesehatandasar'])->name('kesehatandasar');
 Route::get('/lingkungankeluarga', [KlasterController::class, 'lingkungankeluarga'])->name('lingkungankeluarga');
+Route::get('/pendidikanpemanfaatan', [KlasterController::class, 'pendidikanpemanfaatan'])->name('pendidikanpemanfaatan');
 // BATAS BAGIAN HALAMAN KLASTER
 
 

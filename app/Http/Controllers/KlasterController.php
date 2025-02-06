@@ -5,6 +5,7 @@ use App\Models\HakSipilDanKebebasan;
 use App\Models\Kelembagaan;
 use App\Models\KesehatanDasar;
 use App\Models\LingkunganKeluarga;
+use App\Models\PendidikanPemanfaatan;
 
 use Illuminate\Http\Request;
 
@@ -40,5 +41,13 @@ class KlasterController extends Controller
 
         
         return view('frontend.content.LingkunganKeluarga', compact('documents')); 
+    }
+
+    public function pendidikanpemanfaatan() {
+        
+        $documents = pendidikanpemanfaatan::paginate(10);
+
+        
+        return view('frontend.content.PendidikanPemanfaatan', compact('documents')); 
     }
 }
