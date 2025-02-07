@@ -8,7 +8,7 @@
         <div class="row gy-1">
           <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center" data-aos="fade-up">
            <center> <h1>SELAMAT DATANG DI WEBSITE SITALAS</h1></center>
-            <p>We are team of talented designers making websites with Bootstrap</p>
+          
             <!-- <div class="d-flex">
               <a href="#about" class="btn-get-started">Get Started</a>
               <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
@@ -67,7 +67,6 @@
       <div class="container section-title" data-aos="fade-up">
         <span>KOTA LAYAK ANAK<br></span>
         <h2>KOTA LAYAK ANAK</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
       </div><!-- End Section Title -->
 
       <div class="container">
@@ -114,7 +113,6 @@
       <div class="container section-title" data-aos="fade-up">
         <span>GALERI SITALAS</span>
         <h2>GALERI SITALAS</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
       </div><!-- End Section Title -->
 
       <div class="container">
@@ -218,10 +216,10 @@
 
           <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
             <li data-filter="*" class="filter-active">All</li>
-            <li data-filter=".filter-app">App</li>
-            <li data-filter=".filter-product">Product</li>
-            <li data-filter=".filter-branding">Branding</li>
-            <li data-filter=".filter-books">Books</li>
+            <li data-filter=".filter-app">Kesehatan Anak</li>
+            <li data-filter=".filter-product">Kegiatan Arek Surabaya</li>
+            <li data-filter=".filter-branding">Perlindungan Anak</li>
+            <li data-filter=".filter-books">Teknologi dan Enovasi</li>
           </ul><!-- End Portfolio Filters -->
 
           <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
@@ -231,23 +229,23 @@
               <div class="portfolio-info">
                 <h4>App 1</h4>
                 <p>Lorem ipsum, dolor sit amet consectetur</p>
-                <a href="assets/img/portfolio/app-1.jpg" title="App 1" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="assets/img/portfolio/app-1.jpg" title="App 1" data-gallery="portfolio-gallery-app" "><i class="bi bi-zoom-in"></i></a>
                 <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
               </div>
             </div><!-- End Portfolio Item -->
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-              <img src="assets/img/portfolio/product-1.jpg" class="img-fluid" alt="">
+              <img src="{{ asset('assets/img/portfolio/product-1.jpg')}}" class="img-fluid" alt="">
               <div class="portfolio-info">
                 <h4>Product 1</h4>
                 <p>Lorem ipsum, dolor sit amet consectetur</p>
-                <a href="assets/img/portfolio/product-1.jpg" title="Product 1" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="{{ asset('assets/img/portfolio/product-1.jpg')}}" title="Product 1" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                 <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
               </div>
             </div><!-- End Portfolio Item -->
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-              <img src="assets/img/portfolio/branding-1.jpg" class="img-fluid" alt="">
+              <img src="{{ asset('assets/img/portfolio/branding-1.jpg')}}" class="img-fluid" alt="">
               <div class="portfolio-info">
                 <h4>Branding 1</h4>
                 <p>Lorem ipsum, dolor sit amet consectetur</p>
@@ -391,37 +389,8 @@
           </div><!-- End Stats Item -->
             <!-- BAGIAN KUNJUNGAN WEB -->
 
-
-<!-- BAGIAN HALAMAN BERITA DAN ARTIKEL  -->
-
-
-
-<!-- SELESAI HALAMAN BERITA DAN ARTIKEL  -->
-
-
-    <!-- Call To Action Section -->
-    <section id="call-to-action" class="call-to-action section accent-background">
-
-      <div class="container">
-        <div class="row justify-content-center" data-aos="zoom-in" data-aos-delay="100">
-          <div class="col-xl-10">
-            <div class="text-center">
-              <h3>Call To Action</h3>
-              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-              <a class="cta-btn" href="#">Call To Action</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </section><!-- /Call To Action Section -->
-              <div>
-                <h1>Lokasi</h1>
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.8507938365497!2d112.74516277357107!3d-7.257816571300096!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7f9650a8a8883%3A0xb7bdb9b29f06f4bf!2sDinas%20Komunikasi%20dan%20Informatika%20Surabaya!5e0!3m2!1sen!2sid!4v1738832731622!5m2!1sen!2sid" frameborder="0" style="border:0; width: 100%; height: 270px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-          
-
-        
+     <!-- bagian halaman kontak -->
+              
     </section><!-- /Contact Section -->
 
 @endsection
