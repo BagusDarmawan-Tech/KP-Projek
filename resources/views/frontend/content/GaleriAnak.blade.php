@@ -12,22 +12,26 @@
             <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
                 @php
                     $images = [
-                        "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp",
-                        "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(18).webp",
-                        "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(19).webp",
-                        "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(72).webp",
-                        "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(77).webp",
-                        "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(81).webp"
+                        ["url" => "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp", "description" => "Foto kegiatan senam untuk anak-anak di lingkungan sekitar."],
+                        ["url" => "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(18).webp", "description" => "Foto kegiatan senam untuk anak-anak di lingkungan sekitar."],
+                        ["url" => "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(19).webp", "description" => "Foto kegiatan senam untuk anak-anak di lingkungan sekitar."],
+                        ["url" => "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(72).webp", "description" => "Foto kegiatan senam untuk anak-anak di lingkungan sekitar."],
+                        ["url" => "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(77).webp", "description" => "Foto kegiatan senam untuk anak-anak di lingkungan sekitar."],
+                        ["url" => "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(81).webp", "description" => "Foto kegiatan senam untuk anak-anak di lingkungan sekitar."]
                     ];
                 @endphp
 
                 @foreach($images as $index => $image)
                 <div class="col-lg-4 col-md-6">
                     <div class="card-gallery">
-                        <img src="{{ $image }}" class="gallery-image" alt="Gallery Image" data-img-src="{{ $image }}" data-img-index="{{ $index }}" data-bs-toggle="modal" data-bs-target="#imageModal">
-                        <div class="overlay" data-img-src="{{ $image }}" data-bs-toggle="modal" data-bs-target="#imageModal">
+                        <img src="{{ $image['url'] }}" class="gallery-image" alt="Gallery Image" data-img-src="{{ $image['url'] }}" data-img-index="{{ $index }}" data-img-description="{{ $image['description'] }}" data-bs-toggle="modal" data-bs-target="#imageModal">
+                        <div class="overlay" data-img-src="{{ $image['url'] }}" data-description="{{ $image['description'] }}" data-bs-toggle="modal" data-bs-target="#imageModal">
                             <span class="plus-icon">+</span>
                         </div>
+                    </div>
+                    <!-- Deskripsi Gambar yang Ditampilkan di Luar Modal -->
+                    <div class="text-center mt-2">
+                        <p>{{ $image['description'] }}</p>
                     </div>
                 </div>
                 @endforeach
@@ -57,6 +61,9 @@
                     &gt;
                 </button>
 
+                <!-- Deskripsi Gambar di Modal -->
+                <div id="imageDescription" class="mt-3 text-center"></div>
+                
                 <div id="imageCounter" class="mt-3"></div>
             </div>
         </div>
@@ -153,12 +160,12 @@
 <script>
     let currentIndex = 0;
     let images = [
-        "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp",
-        "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(18).webp",
-        "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(19).webp",
-        "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(72).webp",
-        "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(77).webp",
-        "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(81).webp"
+        {url: "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp", description: "Foto kegiatan senam untuk anak-anak di lingkungan sekitar."},
+        {url: "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(18).webp", description: "Foto kegiatan senam untuk anak-anak di lingkungan sekitar."},
+        {url: "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(19).webp", description: "Foto kegiatan senam untuk anak-anak di lingkungan sekitar."},
+        {url: "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(72).webp", description: "Foto kegiatan senam untuk anak-anak di lingkungan sekitar."},
+        {url: "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(77).webp", description: "Foto kegiatan senam untuk anak-anak di lingkungan sekitar."},
+        {url: "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(81).webp", description: "Foto kegiatan senam untuk anak-anak di lingkungan sekitar."}
     ];
 
     // Membuka modal dan menampilkan gambar
@@ -166,7 +173,11 @@
         if (event.target.classList.contains("overlay") || event.target.classList.contains("gallery-image")) {
             const imgSrc = event.target.getAttribute("data-img-src");
             currentIndex = event.target.getAttribute("data-img-index");
+            const description = event.target.getAttribute("data-img-description");
+
+            // Update modal image and description
             document.getElementById("modalImage").setAttribute("src", imgSrc);
+            document.getElementById("imageDescription").textContent = description;
             updateImageCounter();
         }
     });
@@ -181,7 +192,8 @@
     document.getElementById("prevBtn").addEventListener("click", function () {
         if (currentIndex > 0) {
             currentIndex--;
-            document.getElementById("modalImage").setAttribute("src", images[currentIndex]);
+            document.getElementById("modalImage").setAttribute("src", images[currentIndex].url);
+            document.getElementById("imageDescription").textContent = images[currentIndex].description;
             updateImageCounter();
         }
     });
@@ -190,9 +202,11 @@
     document.getElementById("nextBtn").addEventListener("click", function () {
         if (currentIndex < images.length - 1) {
             currentIndex++;
-            document.getElementById("modalImage").setAttribute("src", images[currentIndex]);
+            document.getElementById("modalImage").setAttribute("src", images[currentIndex].url);
+            document.getElementById("imageDescription").textContent = images[currentIndex].description;
             updateImageCounter();
         }
     });
 </script>
+
 @endsection
