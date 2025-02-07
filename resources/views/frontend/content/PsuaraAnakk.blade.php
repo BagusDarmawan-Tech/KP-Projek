@@ -1,7 +1,9 @@
 @extends('frontend.user-main')
 
 @section('content')
+<link href="{{ asset('assets/css/tabel.css') }}" rel="stylesheet">
 <div class="container mt-5">
+<div class="card shadow-lg border-0 position-relative overflow-hidden mb-5"> 
     
     <!-- Card dengan Efek Unik -->
     <div class="card shadow-lg border-0 position-relative overflow-hidden">
@@ -49,24 +51,5 @@
     </div>
 </div>
 
-<!-- CSS untuk Efek Warna -->
-<style>
-    .custom-header {
-        font-size: 22px;
-        font-weight: bold;
-        padding: 15px;
-        border-radius: 15px 15px 50% 50%;
-        background: rgb(233, 36, 103);
-        color: white;
-    }
 
-    .table th {
-        font-weight: bold;
-        text-align: center;
-    }
-
-    .btn-outline-secondary {
-        border-radius: 10px;
-    }
-</style>
 @endsection

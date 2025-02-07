@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\cfcisk;
 use Illuminate\Http\Request;
 use League\CommonMark\Node\Block\Document;
 

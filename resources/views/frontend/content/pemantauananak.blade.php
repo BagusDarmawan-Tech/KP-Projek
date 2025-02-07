@@ -1,10 +1,13 @@
 @extends('frontend.user-main')
 
 @section('content')
+<link href="{{ asset('assets/css/tabel.css') }}" rel="stylesheet">
 <div class="container mt-5">
-    <!-- Card dengan efek unik -->
+<div class="card shadow-lg border-0 position-relative overflow-hidden mb-5"> 
+    
+    <!-- Card dengan Efek Unik -->
     <div class="card shadow-lg border-0 position-relative overflow-hidden">
-        <!-- Bagian Header -->
+        <!-- Bagian Header dengan Warna -->
         <div class="custom-header text-center py-4">
             <h2 class="mb-0 text-white">Pemantauan Usulan Anak</h2>
         </div>
@@ -29,7 +32,7 @@
             <!-- Tabel -->
             <div class="table-responsive">
                 <table class="table table-hover table-bordered align-middle">
-                    <thead>
+                    <thead class="text-center">
                         <tr>
                             <th>No</th>
                             <th>Usulan Anak Untuk Pembangunan Kota Surabaya</th>
@@ -38,54 +41,15 @@
                             <th>Keterangan</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @forelse($documents as $index => $document)
-                            <tr>
-                                <td class="text-center">{{ $index + 1 }}</td>
-                                <td>{{ $document->usulananak }}</td>
-                                <td>{{ $document->OPDpelaksana }}</td>
-                                <td>{{ $document->statustindak }}</td>
-                                <td>{{ $document->keterangan }}</td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="6" class="text-center text-muted">Tidak ada data tersedia</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
+                    
                 </table>
             </div>
 
             <!-- Paginasi -->
-            <div class="d-flex justify-content-between align-items-center mt-3">
-                <span class="text-muted">Menampilkan {{ $documents->count() }} dari {{ $documents->total() }} data</span>
-                <nav>
-                    {{ $documents->links() }}
-                </nav>
-            </div>
+            
         </div>
     </div>
 </div>
 
-<!-- CSS -->
-<style>
-    .custom-header {
-        font-size: 22px;
-        font-weight: bold;
-        padding: 15px;
-        border-radius: 15px 15px 50% 50%;
-        background: rgb(233, 36,103);
-        color: white;
-    }
-
-    .table th {
-        font-weight: bold;
-        text-align: center;
-    }
-
-    .btn-outline-secondary {
-        border-radius: 10px;
-    }
-</style>
 
 @endsection

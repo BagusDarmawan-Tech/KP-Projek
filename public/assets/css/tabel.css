@@ -1,0 +1,34 @@
+
+    .custom-header {
+        font-size: 22px;
+        font-weight: bold;
+        padding: 15px;
+        border-radius: 15px 15px 50% 50%;
+        background: rgb(233, 36, 103);
+        color: white;
+    }
+
+    .table th {
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        border-color: #28a745;
+        color: white;
+        border-radius: 8px;
+        padding: 6px 12px;
+        font-size: 14px;
+    }
+
+    .btn-success:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+    }
+
+    .btn-success i {
+        margin-right: 5px;
+    }
+
+    

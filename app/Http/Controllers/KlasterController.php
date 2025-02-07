@@ -1,62 +1,48 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\HakSipilDanKebebasan;
-use App\Models\Kelembagaan;
-use App\Models\KesehatanDasar;
-use App\Models\LingkunganKeluarga;
-use App\Models\PendidikanPemanfaatan;
-use App\Models\perlindungankhusus;
 
 use Illuminate\Http\Request;
 
 class KlasterController extends Controller
 {
     public function haksipildankebebasan() {
-        
-        $documents = haksipildankebebasan::paginate(10);
 
         
-        return view('frontend.content.HakSipilDanKebebasan', compact('documents')); 
+        return view('frontend.content.HakSipilDanKebebasan'); 
     }
 
     public function kelembagaan() {
-        
-        $documents = kelembagaan::paginate(10);
-
-        
-        return view('frontend.content.kelembagaan', compact('documents')); 
+ 
+        return view('frontend.content.kelembagaan'); 
     }
 
     public function kesehatandasar() {
-        
-        $documents = kesehatandasar::paginate(10);
 
-        
-        return view('frontend.content.KesehatanDasar', compact('documents')); 
+        return view('frontend.content.KesehatanDasar'); 
     }
 
     public function lingkungankeluarga() {
         
-        $documents = lingkungankeluarga::paginate(10);
+        //$documents = lingkungankeluarga::paginate(10);
 
         
-        return view('frontend.content.LingkunganKeluarga', compact('documents')); 
+        return view('frontend.content.LingkunganKeluarga'); 
     }
 
     public function pendidikanpemanfaatan() {
         
-        $documents = pendidikanpemanfaatan::paginate(10);
+        // $documents = pendidikanpemanfaatan::paginate(10);
 
         
-        return view('frontend.content.PendidikanPemanfaatan', compact('documents')); 
+        return view('frontend.content.PendidikanPemanfaatan'); 
     }
 
     public function perlindungankhusus() {
         
-        $documents = perlindungankhusus::paginate(10);
+        // $documents = perlindungankhusus::paginate(10);
 
         
-        return view('frontend.content.PerlindunganKhusus', compact('documents')); 
+        return view('frontend.content.PerlindunganKhusus'); 
     }
 }
