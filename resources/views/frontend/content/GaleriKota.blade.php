@@ -3,6 +3,7 @@
 @section('content')
 <!-- Seksi Galeri -->
 <div class="container mt-5 pt-4">
+<div class="card shadow-lg border-0 position-relative overflow-hidden mb-5"> 
     <!-- Card Pembatas Besar dengan Judul dan Galeri -->
     <div class="card shadow-lg border-0 rounded-4 p-4">
         <div class="card-header text-center" style="background: rgb(233, 36,103);">

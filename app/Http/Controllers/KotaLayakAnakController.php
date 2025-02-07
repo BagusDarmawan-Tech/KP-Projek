@@ -13,4 +13,21 @@ class KotaLayakAnakController extends Controller
        
         return view('frontend.content.KasRpa'); 
     }
+
+    public function kegiatankecamatanlayakanak() {
+        
+        // $documents = Rpa::paginate(10);
+
+       
+        return view('frontend.content.KegiatanKecamatanLayakAnak'); 
+    }
+
+    public function kegiatankelurahanlayakanak() {
+        
+        // $documents = Rpa::paginate(10);
+
+       
+        return view('frontend.content.KegiatanKelurahanLayakAnak'); 
+    }
+
 }

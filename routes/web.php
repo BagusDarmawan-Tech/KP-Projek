@@ -55,8 +55,9 @@ Route::get('/skkec', [forumanakController::class, 'skkec'])->name('Skkecam');
 Route::get('/skkel', [forumanakController::class, 'skkel'])->name('Skkel');
 Route::get('/pemantauananak', [forumanakController::class, 'pemantauananak'])->name('pemantauananak');
 Route::get('/kegareksby', [forumanakController::class, 'kegareksby'])->name('kegareksby');
+Route::get('/kegiatan-forum-anak-kelurahan', [forumanakController::class, 'kegiatanforumanakkelurahan'])->name('kegiatanforumanakkelurahan');
+Route::get('/kegiatan-forum-anak-kecamatan', [forumanakController::class, 'kegiatanforumanakkecamatan'])->name('kegiatanforumanakkecamatan');
 
-Route::get('/coba', [forumanakController::class, 'coba'])->name('coba');
 
 // ROUTE HALAMAN FORUM ANAK
 
@@ -73,6 +74,8 @@ Route::get('/perlindungan-khusus', [KlasterController::class, 'PerlindunganKhusu
 
 // HALAMAN BAGIAN KOTA LAYAK ANAK
 Route::get('/kasrpa', [KotaLayakAnakController::class, 'kasrpa'])->name('Kasrpa');
+Route::get('/kegiatan-kecamatan-layak-anak', [KotaLayakAnakController::class, 'kegiatankecamatanlayakanak'])->name('kegiatankecamatanlayakanak');
+Route::get('/kegiatan-kelurahan-layak-anak', [KotaLayakAnakController::class, 'kegiatankelurahanlayakanak'])->name('kegiatankelurahanlayakanak');
 // BATAS HALAMAN BAGIAN KOTA LAYAK ANAK
 
 // HALAMAN BAGIAN PISA

@@ -25,14 +25,14 @@
               <li class="dropdown"><a href="#"><span>Forum Anak Kecamatan</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                 <ul>
                   <li><a href="{{route('Skkecam')}}">SK Fas Kecamatan</a></li>
-                  <li><a href="">Kegiatan Forum Anak Kecamatan</a></li>
+                  <li><a href="{{route('kegiatanforumanakkecamatan')}}">Kegiatan Forum Anak Kecamatan</a></li>
                 </ul>
               </li>
 
               <li class="dropdown"><a href="#"><span>Forum Anak Kelurahan</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                 <ul>
                   <li><a href="{{route('Skkel')}}">SK Fas Kelurahan</a></li>
-                  <li><a href="#">Kegiatan Forum Anak Kelurahan</a></li>
+                  <li><a href="{{route('kegiatanforumanakkelurahan')}}">Kegiatan Forum Anak Kelurahan</a></li>
                 </ul>
               </li>
               <li><a href="{{route('pemantauananak')}}">Pemantauan Usulan Anak</a></li>
@@ -60,8 +60,8 @@
             <ul>
               <li class="dropdown"><a href="#"><span>Kegiatan</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                 <ul>
-                  <li><a href="#">Kegiatan Kecamatan</a></li>
-                  <li><a href="#">Kegiatan Kelurahan</a></li>
+                  <li><a href="{{route('kegiatankecamatanlayakanak')}}">Kegiatan Kecamatan</a></li>
+                  <li><a href="{{route('kegiatankelurahanlayakanak')}}">Kegiatan Kelurahan</a></li>
                 </ul>
               </li>
               <li><a href="{{route('Kasrpa')}}">Kas RPA</a></li>

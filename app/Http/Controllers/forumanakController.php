@@ -34,4 +34,14 @@ class forumanakController extends Controller
     {
         return view('frontend.content.kegareksby'); 
     }
+
+    public function kegiatanforumanakkelurahan()
+    {
+        return view('frontend.content.KegiatanForumAnakKelurahan'); 
+    }
+
+    public function kegiatanforumanakkecamatan()
+    {
+        return view('frontend.content.KegiatanForumAnakKecamatan'); 
+    }
 }
