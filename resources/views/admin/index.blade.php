@@ -13,8 +13,7 @@
 
 <section class="section dashboard">
     <div class="row justify-content-center">
-
-        <div class="col-lg-6">
+        <div class="col-lg-12">
             <div class="card text-center shadow p-4">
                 <div class="card-body">
                     <img src="{{ asset('kids-rm.png') }}" alt="Dashboard Image" class="img-fluid mb-3" width="350">

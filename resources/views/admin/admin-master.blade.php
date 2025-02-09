@@ -59,6 +59,85 @@
 
   <!-- Vendor-bagus JS Files -->
   <link rel="stylesheet" href="{{ asset('assets/css/style-bagus.css') }}">
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let sessionExpiresAt = {{ session('sessionExpiresAt', time() + (config('session.lifetime') * 60)) }} * 1000;
+        let warningTime = 30000; // 30 detik sebelum logout
+        let warningTriggered = false;
+        let sessionActive = false;
+        let loginUrl = "{{ route('login') }}"; 
+
+        function checkSession() {
+            let now = new Date().getTime();
+            let timeLeft = sessionExpiresAt - now;
+
+            // Jika waktu sesi tinggal 30 detik dan belum ada peringatan sebelumnya
+            if (timeLeft <= warningTime && !warningTriggered) {
+                warningTriggered = true;
+                
+                let confirmExtend = confirm("⚠️ Sesi Anda akan habis dalam 30 detik. Klik OK untuk memperpanjang sesi.");
+                
+                if (confirmExtend) {
+                    extendSession(); 
+                } else {
+                    setTimeout(() => {
+                        alert("🔴 Sesi Anda telah habis. Anda akan dialihkan ke halaman login.");
+                        window.location.href = loginUrl;
+                    }, warningTime);
+                }
+            }
+
+            // Jika waktu habis dan tidak diklik, logout
+            if (timeLeft <= 0) {
+                alert("🔴 Sesi Anda telah habis. Anda akan dialihkan ke halaman login.");
+                window.location.href = loginUrl;
+            }
+        }
+
+        function extendSession() {
+            fetch('/session-keep-alive')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.sessionUpdated) {
+                        sessionExpiresAt = new Date().getTime() + ({{ config('session.lifetime') * 60 }} * 1000);
+                        warningTriggered = false;
+                    }
+                });
+        }
+
+        function keepSessionAlive() {
+            if (sessionActive) {
+                fetch('/session-keep-alive')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.logout) {
+                            alert("🔴 Sesi Anda telah habis.");
+                            window.location.href = loginUrl;
+                        } else {
+                            sessionExpiresAt = new Date().getTime() + ({{ config('session.lifetime') * 60 }} * 1000);
+                        }
+                    });
+            }
+        }
+
+        // Deteksi aktivitas pengguna untuk memperpanjang sesi
+        function resetSessionActivity() {
+            sessionActive = true;
+        }
+
+        document.addEventListener("mousemove", resetSessionActivity);
+        document.addEventListener("keydown", resetSessionActivity);
+        document.addEventListener("click", resetSessionActivity);
+
+        // Jalankan pengecekan sesi dan perbarui otomatis
+        setInterval(checkSession, 5000); // Cek status sesi setiap 5 detik
+        setInterval(keepSessionAlive, 30000); // Perpanjang sesi otomatis jika ada aktivitas setiap 30 detik
+    });
+  </script>
+
+
+
+
 
   <script src="{{ asset('assets/vendor-bagus/apexcharts/apexcharts.min.js' ) }}"></script>
   <script src="{{ asset('assets/vendor-bagus/bootstrap/js/bootstrap.bundle.min.js' ) }}"></script>

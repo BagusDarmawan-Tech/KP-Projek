@@ -1,20 +1,21 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\CFCIController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\pisaController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\GaleriController;
-use App\Http\Controllers\KotaLayakAnakController;
+use App\Http\Controllers\KlasterController;
+
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\forumanakController;
-use App\Http\Controllers\CFCIController;
+
+
 
 use App\Http\Controllers\SuaraAnakController;
-use App\Http\Controllers\pisaController;
-
-
-
-use App\Http\Controllers\KlasterController;
+use App\Http\Controllers\KotaLayakAnakController;
 
 
 /*
@@ -99,6 +100,13 @@ Route::get('/', function () {return view('frontend.content.landing-page');})->na
 
 
 //Backend autentikasi 
+//sesi waktu login
+Route::get('/session-keep-alive', function () {
+    session()->put('lastActivityTime', time());
+    session()->put('sessionExpiresAt', time() + (config('session.lifetime') * 60));
+    return response()->json(['sessionUpdated' => true]);
+});
+
 
 //Logout
 Route::get('/admin/logout', [AdminController::class, 'destroy'])->name('admin.logout');

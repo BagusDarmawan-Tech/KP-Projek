@@ -3,7 +3,7 @@
 
       <a href="/asset/img/logo.png" class="logo d-flex align-items-center me-auto">
         <!-- Uncomment the line below if you also wish to use an image logo -->
-        <img src="{{asset('assets/img/logo.png')}}" alt="Logo" width="120" height="180">
+        <img class=" img-fluid w-10" src="{{asset('assets/img/logo.png')}}" alt="Logo" width="120" height="300">
       </a>
 
       <nav id="navmenu" class="navmenu">

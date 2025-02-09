@@ -29,7 +29,7 @@
                       <form method="POST" action="{{ route('login') }}">
                         @csrf
                         <div data-mdb-input-init class="form-outline mb-4">
-                            <label for="floatingInputDisabled" :value="__('Email')">Username</label>
+                            <label for="floatingInputDisabled" :value="__('Email')">Email</label>
                             <input id="email" class="form-control" type="email" name="email" :value="old('email')" required autofocus autocomplete="username">
                         </div>
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />

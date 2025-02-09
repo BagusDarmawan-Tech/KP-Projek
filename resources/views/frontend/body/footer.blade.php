@@ -19,7 +19,7 @@
         <div class="col-lg-4 col-md-6 footer-about">
         <a href="/asset/img/logo.png" class="logo d-flex align-items-center me-auto">
         <!-- Uncomment the line below if you also wish to use an image logo -->
-        <img src="{{asset('assets/img/logo.png')}}" alt="Logo" width="187" height="100">
+        <img class="img-fluid" src="{{asset('assets/img/logo.png')}}" alt="Logo" width="187" height="100">
           </a>
           <div class="footer-contact pt-3">
             <p>Kota Layak Anak adalah Kota yang mempunyai sistem pembangunan berbasis hak anak melalui pengintegrasian komitmen dan sumber daya pemerintah.</p>
