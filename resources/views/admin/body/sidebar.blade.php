@@ -10,7 +10,7 @@
     </li><!-- End Dashboard Nav -->
 
     {{-- CONFIG --}}
-    
+    @if (auth()->user()->hasRole('developer') || auth()->user()->hasRole('admin'))
     <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-gear-wide"></i><span>Config</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -43,7 +43,7 @@
         </li>
       </ul>
     </li><!-- End Components Nav -->
-    
+    @endif
     {{-- END CONFIG --}}
 
     {{-- WEB MANAGEMENT --}}
