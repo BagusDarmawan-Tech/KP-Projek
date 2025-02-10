@@ -110,11 +110,12 @@ Route::get('/session-keep-alive', function () {
 });
 
 //Web Management
-Route::get('/slider', function () {
-    return view('admin.Slider');
-})->middleware(['auth', 'verified'])->name('slider');
-
-
+Route::middleware('auth')->group(function () {
+    Route::get('/slider', [WebManagementController::class, 'slider'])->name('slider');
+    Route::get('/sub-kegiatan', [WebManagementController::class, 'subkegiatan'])->name('sub-kegiatan');
+    Route::get('/galeri', [WebManagementController::class, 'galeri'])->name('galeri');
+    Route::get('/forum-anak', [WebManagementController::class, 'forumanak'])->name('forum-anak');
+});
 
 //Logout
 Route::get('/admin/logout', [AdminController::class, 'destroy'])->name('admin.logout');

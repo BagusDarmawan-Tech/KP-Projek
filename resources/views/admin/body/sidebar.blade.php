@@ -79,17 +79,17 @@
           </a>
         </li>
         <li>
-          <a href="forms-validation.html">
+          <a href="{{route('sub-kegiatan')}}">
             <i class="bi bi-circle"></i><span>Sub Kegiatan</span>
           </a>
         </li>
         <li>
-          <a href="forms-editors.html">
+          <a href="{{route('galeri')}}">
             <i class="bi bi-circle"></i><span>Galleri</span>
           </a>
         </li>
         <li>
-          <a href="forms-validation.html">
+          <a href="{{route('forum-anak')}}">
             <i class="bi bi-circle"></i><span>Forum Anak</span>
           </a>
         </li>
