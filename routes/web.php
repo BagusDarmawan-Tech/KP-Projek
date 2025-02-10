@@ -19,6 +19,7 @@ use App\Http\Controllers\SuaraAnakController;
 use App\Http\Controllers\KotaLayakAnakController;
 
 
+use App\Http\Controllers\WebManagementController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -107,6 +108,12 @@ Route::get('/session-keep-alive', function () {
     session()->put('sessionExpiresAt', time() + (config('session.lifetime') * 60));
     return response()->json(['sessionUpdated' => true]);
 });
+
+//Web Management
+Route::get('/slider', function () {
+    return view('admin.Slider');
+})->middleware(['auth', 'verified'])->name('slider');
+
 
 
 //Logout
