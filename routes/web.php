@@ -20,6 +20,7 @@ use App\Http\Controllers\KotaLayakAnakController;
 
 
 use App\Http\Controllers\WebManagementController;
+use App\Http\Controllers\KecamatanLayakController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -115,6 +116,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/sub-kegiatan', [WebManagementController::class, 'subkegiatan'])->name('sub-kegiatan');
     Route::get('/galeri', [WebManagementController::class, 'galeri'])->name('galeri');
     Route::get('/forum-anak', [WebManagementController::class, 'forumanak'])->name('forum-anak');
+});
+
+//Kecamatan Layak Anak
+Route::middleware('auth')->group(function () {
+    Route::get('/dokumen-kec', [KecamatanLayakController::class, 'dokumenkec'])->name('dokumen-kec');
+    
 });
 
 //Logout
