@@ -1,0 +1,183 @@
+@extends('admin.admin-master')
+@section('main')
+<link href="{{ asset('assets/css/tabel.css') }}" rel="stylesheet">
+
+<div class="container mt-5">
+    <div class="card shadow-lg border-0 position-relative overflow-hidden mb-5">
+        <div class="card-body mt-4">
+            <div class="text-center mb-4">
+                <h4 class="fw-bold">Pemantauan Usulan Anak</h4>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div></div> <!-- Spacer -->
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pemantauanModal">
+                    + Tambah Usulan
+                </button>
+            </div>
+
+            <!-- Kontrol Tampilkan & Cari -->
+            <div class="row mb-3 align-items-center">
+                <div class="col-md-6">
+                    <label for="showEntries" class="form-label me-2">Show</label>
+                    <select id="showEntries" class="form-select form-select-sm d-inline-block" style="width: 80px;">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                    entries
+                </div>
+                <div class="col-md-6 text-end">
+                    <input type="text" id="searchInput" class="form-control form-control-sm d-inline-block" placeholder="Search..." style="width: 200px;">
+                </div>
+            </div>
+
+            <!-- Tabel -->
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered align-middle text-center">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>No</th>
+                            <th>OPD</th>
+                            <th>OPD Terlibat</th>
+                            <th>Nama Usulan</th>
+                            <th>Tindak Lanjut</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Dinas Kesehatan</td>
+                            <td>Program Gizi Anak</td>
+                            <td>Pemeriksaan Berkala</td>
+                            <td>Program ini bertujuan untuk...</td>
+                            <td><span class="badge bg-success">Aktif</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-primary edit-btn" 
+                                    data-opd="Dinas Kesehatan" 
+                                    data-usulan="Pemeriksaan Berkala" 
+                                    data-tindak="Program ini bertujuan untuk..."
+                                    data-keterangan="Peraturan terkait kesehatan anak"
+                                    data-status="Aktif">
+                                    &#9998;
+                                </button>
+                                <button class="btn btn-sm btn-danger">&#128465;</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Tambah Usulan -->
+<div class="modal fade" id="pemantauanModal" tabindex="-1" aria-labelledby="pemantauanModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Tambah Pemantauan Usulan Anak Baru</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="namaOPD" class="form-label">Nama OPD</label>
+                        <select class="form-select" id="namaOPD">
+                            <option selected>--- Pilih OPD ---</option>
+                            <option value="Dinas Kesehatan">Dinas Kesehatan</option>
+                            <option value="Dinas Pendidikan">Dinas Pendidikan</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="namaUsulan" class="form-label">Nama Usulan</label>
+                        <input type="text" class="form-control" id="namaUsulan">
+                    </div>
+                    <div class="mb-3">
+                        <label for="tindakLanjut" class="form-label">Tindak Lanjut</label>
+                        <textarea class="form-control" id="tindakLanjut" rows="2"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="keterangan" class="form-label">Keterangan</label>
+                        <textarea class="form-control" id="keterangan" rows="2"></textarea>
+                    </div>
+                    <div class="mb-3 d-flex align-items-center">
+                        <label class="form-label me-2">Status</label>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="statusUsulan" checked>
+                            <label class="form-check-label" for="statusUsulan">Aktif</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Edit Usulan -->
+<div class="modal fade" id="editPemantauanModal" tabindex="-1" aria-labelledby="editPemantauanModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Pemantauan Usulan Anak</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="editNamaOPD" class="form-label">Nama OPD</label>
+                        <select class="form-select" id="editNamaOPD">
+                            <option selected>--- Pilih OPD ---</option>
+                            <option value="Dinas Kesehatan">Dinas Kesehatan</option>
+                            <option value="Dinas Pendidikan">Dinas Pendidikan</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editNamaUsulan" class="form-label">Nama Usulan</label>
+                        <input type="text" class="form-control" id="editNamaUsulan">
+                    </div>
+                    <div class="mb-3">
+                        <label for="editTindakLanjut" class="form-label">Tindak Lanjut</label>
+                        <textarea class="form-control" id="editTindakLanjut" rows="2"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editKeterangan" class="form-label">Keterangan</label>
+                        <textarea class="form-control" id="editKeterangan" rows="2"></textarea>
+                    </div>
+                    <div class="mb-3 d-flex align-items-center">
+                        <label class="form-label me-2">Status</label>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="editStatus">
+                            <label class="form-check-label" for="editStatus">Aktif</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.querySelectorAll(".edit-btn").forEach(button => {
+    button.addEventListener("click", function () {
+        document.getElementById("editNamaOPD").value = this.dataset.opd;
+        document.getElementById("editNamaUsulan").value = this.dataset.usulan;
+        document.getElementById("editTindakLanjut").value = this.dataset.tindak;
+        document.getElementById("editKeterangan").value = this.dataset.keterangan;
+        document.getElementById("editStatus").checked = this.dataset.status === "Aktif";
+        new bootstrap.Modal(document.getElementById("editPemantauanModal")).show();
+    });
+});
+</script>
+
+@endsection

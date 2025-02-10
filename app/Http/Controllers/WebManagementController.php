@@ -6,38 +6,39 @@ use Illuminate\Http\Request;
 
 class WebManagementController extends Controller
 {
-
     public function slider() {
-        
-        // $documents = Rpa::paginate(10);
-
-       
         return view('admin.Slider'); 
     }
 
-    public function subkegiatan() {
-        
-        // $documents = Rpa::paginate(10);
-
-       
+    public function subKegiatan() {
         return view('admin.SubKegiatan'); 
     }
 
-    public function forumanak() {
-        
-        // $documents = Rpa::paginate(10);
-
-       
+    public function forumAnak() {
         return view('admin.ForumAnak'); 
     }
 
     public function galeri() {
-        
-        // $documents = Rpa::paginate(10);
-
-       
         return view('admin.Galeri'); 
     }
 
-    
+    public function kategoriArtikel() {
+        return view('admin.KategoriArtikel'); 
+    }   
+
+    public function klaster1() {
+        return view('admin.Klaster'); 
+    }
+
+    public function pemantauanUsulan() {
+        return view('admin.PemantauanUsulan'); 
+    }
+
+    public function bagianHalaman() {
+        return view('admin.HalamanWebMan'); 
+    }
+
+    public function bagianArtikel() {
+        return view('admin.Artikel'); 
+    }
 }

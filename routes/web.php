@@ -12,8 +12,7 @@ use App\Http\Controllers\KlasterController;
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\forumanakController;
-
-
+use App\Http\Controllers\KelurahanLayakAnakController;
 
 use App\Http\Controllers\SuaraAnakController;
 use App\Http\Controllers\KotaLayakAnakController;
@@ -103,6 +102,21 @@ Route::get('/', function () {return view('frontend.content.landing-page');})->na
 
 
 //=======================  Backend  =============================//
+
+// bagian WebManagement
+Route::get('/KategoriArtikel', [WebManagementController::class, 'kategoriArtikel'])->name('kategoriArtikel');
+Route::get('/Klaster', [WebManagementController::class, 'Klaster1'])->name('Klaster');
+Route::get('/PemantauanUsulan', [WebManagementController::class, 'PemantauanUsulan'])->name('PemantauanUsulanAnak');
+Route::get('/bagianHalaman', [WebManagementController::class, 'BagianHalaman'])->name('Halamandong');
+Route::get('/Artikel', [WebManagementController::class, 'BagianArtikel'])->name('Arrtikel');
+
+
+//Bagian Kelurahan Layak Anak
+Route::get('/KelurahanLayakAnak', [KelurahanLayakAnakController::class, 'HalamanDokumen'])->name('HalamanDokument');
+// 
+
+
+//Backend autentikasi 
 //sesi waktu login
 Route::get('/session-keep-alive', function () {
     session()->put('lastActivityTime', time());

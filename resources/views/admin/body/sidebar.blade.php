@@ -59,12 +59,12 @@
           </a>
         </li>
         <li>
-          <a href="forms-layouts.html">
+          <a href="{{route('Arrtikel')}}">
             <i class="bi bi-circle"></i><span>Artikel</span>
           </a>
         </li>
         <li>
-          <a href="forms-editors.html">
+          <a href="{{route('kategoriArtikel')}}">
             <i class="bi bi-circle"></i><span>Kategori Artikel</span>
           </a>
         </li>
@@ -74,7 +74,7 @@
           </a>
         </li>
         <li>
-          <a href="forms-editors.html">
+          <a href="{{route('Klaster')}}">
             <i class="bi bi-circle"></i><span>Klaster</span>
           </a>
         </li>
@@ -94,12 +94,12 @@
           </a>
         </li>
         <li>
-          <a href="forms-validation.html">
+          <a href="{{route('Halamandong')}}">
             <i class="bi bi-circle"></i><span>Halaman </span>
           </a>
         </li>
         <li>
-          <a href="forms-validation.html">
+          <a href="{{route('PemantauanUsulanAnak')}}">
             <i class="bi bi-circle"></i><span>Pemantauan Usulan </span>
           </a>
         </li>
@@ -132,7 +132,7 @@
       </a>
       <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
-          <a href="charts-chartjs.html">
+          <a href="{{route('HalamanDokument')}}">
             <i class="bi bi-circle"></i><span>Dokumen Kelurahan</span>
           </a>
         </li>
