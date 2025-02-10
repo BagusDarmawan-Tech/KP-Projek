@@ -14,9 +14,9 @@ class KegiatanKelurahan extends Seeder
     public function run(): void
     {
         DB::table('kegiatan_kelurahan')->insert([
-            ['kelurahanid'=>'1','nama' => 'kelurahan A','gambar'=>'/test/test','keterangan'=>'lorem100','is_active'=>true],
-            ['kelurahanid'=>'2','nama' => 'kelurahan B','gambar'=>'/test/test','keterangan'=>'lorem100','is_active'=>true],
-            ['kelurahanid'=>'3','nama' => 'kelurahan C','gambar'=>'/test/test','keterangan'=>'lorem100','is_active'=>true],
+            ['kelurahanid'=>1,'dibuatOleh' => 'bagus','nama' => 'kelurahan A','gambar'=>'/test/test','keterangan'=>'lorem100','is_active'=>true],
+            ['kelurahanid'=>2,'dibuatOleh' => 'bagus','nama' => 'kelurahan B','gambar'=>'/test/test','keterangan'=>'lorem100','is_active'=>true],
+            ['kelurahanid'=>3,'dibuatOleh' => 'bagus','nama' => 'kelurahan C','gambar'=>'/test/test','keterangan'=>'lorem100','is_active'=>true],
         ]);
 
     }

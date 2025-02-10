@@ -34,7 +34,8 @@
             <li class="dropdown-header">
               <h6>{{ Auth::user()->name }}</h6>
               <span>{{ Auth::user()->email }}</span>
-              {{-- <span>{{ Auth::user()->role }}</span> --}}
+              <h6>{{ Auth::user()->roles->first()->name ?? 'No Role' }}
+              </h6>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -44,7 +45,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+              <a class="dropdown-item d-flex align-items-center" href="{{ route('profile.edit') }}">
                 <i class="bi bi-gear"></i>
                 <span>Account Settings</span>
               </a>
@@ -54,7 +55,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+              <a class="dropdown-item d-flex align-items-center" href="{{ route('register') }}">
                 <i class="bi bi-question-circle"></i>
                 <span>Need Help?</span>
               </a>

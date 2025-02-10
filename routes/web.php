@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\CFCIController;
@@ -95,11 +96,11 @@ Route::get('/KaryaAnak', [SuaraAnakController::class, 'karyaAnak'])->name('Karya
 
 // BATAS HALAMAN BAGIAN MITRA ANAK
 
-
+//Landing Page
 Route::get('/', function () {return view('frontend.content.landing-page');})->name('content');
 
 
-//Backend autentikasi 
+//=======================  Backend  =============================//
 //sesi waktu login
 Route::get('/session-keep-alive', function () {
     session()->put('lastActivityTime', time());
@@ -111,15 +112,18 @@ Route::get('/session-keep-alive', function () {
 //Logout
 Route::get('/admin/logout', [AdminController::class, 'destroy'])->name('admin.logout');
 
+//Register
+Route::get('register', [RegisteredUserController::class, 'create'])
+            ->name('register')->middleware(['auth', 'verified','role:developer']);
+Route::post('register', [RegisteredUserController::class, 'store']);
+
+//Dashboard
 Route::get('/dashboard', function () {
     return view('admin.index');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-Route::get('/loop', function () {
-    return ('<h1>Admin</h1>');
-})->middleware(['auth', 'verified','role:developer']);
-
+//Ganti password
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -127,3 +131,4 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+//======================= END Backend  =============================//

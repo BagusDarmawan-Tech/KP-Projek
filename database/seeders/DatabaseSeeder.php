@@ -26,6 +26,27 @@ class DatabaseSeeder extends Seeder
             JenisSurat::class,
             KegiatanKecamatan::class,
             KegiatanKelurahan::class,
+            KegiatanPisa::class,
+            DokumenPisa ::class,
+            KaryaAnak::class,
+            KegiatanArekSuroboyo::class,
+            KategoriArtikel::class,
+            KegiatanMitraAnak::class,
+            Kluster::class,
+            Slider::class,
+            SuaraAnak::class,
+            Halaman::class,
+            ForumAnak::class,
+            GaleriAnak::class,
+            Usulan::class,
+            SubKegiatan::class,
+            Artikel::class,
+            ArtikelMitraAnak::class,
+            KegiatanCfci::class,
+            KegiatanForumAnakSurabaya::class,
+            ConfigApp::class
+
+            
         ]);
     }
 }

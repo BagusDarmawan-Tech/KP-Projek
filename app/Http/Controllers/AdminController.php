@@ -12,7 +12,7 @@ class AdminController extends Controller
 
     public function create()
     {
-        return view('auth.login');
+        return view('admin.login');
     }
     
     public function destroy(Request $request)
