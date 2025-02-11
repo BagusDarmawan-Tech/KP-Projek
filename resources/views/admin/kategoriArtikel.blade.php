@@ -45,18 +45,21 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($kategori_artikel as $kategori)
                         <tr>
-                            <td>1</td>
-                            <td>artikel</td>
-                            <td>Dhian</td>
-                            <td>✓</td>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $kategori->nama }}</td>
+                            <td>{{ $kategori->dibuatOleh }}</td>
+                            <td>{{ $kategori->is_active }}</td>
                             <td>
                                 <button class="btn btn-sm btn-primary">&#9998;</button>
                                 <button class="btn btn-sm btn-danger">&#128465;</button>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
+                
             </div>
         </div>
     </div>
@@ -71,25 +74,32 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form method="POST" action="{{ route('createKategoriArtikel') }}">
+                    @csrf    
                     <div class="mb-3">
-                        <label for="kategoriNama" class="form-label">Nama</label>
-                        <input type="text" class="form-control" id="kategoriNama">
+                        <label for="nama" class="form-label">Nama</label>
+                        <input type="text" class="form-control" id="nama" name="nama" value="{{ old('nama') }}" required>
                     </div>
+            
                     <div class="mb-3">
                         <label for="kategoriStatus" class="form-label">Status</label>
-                        <select class="form-select" id="kategoriStatus">
-                            <option selected>--- Pilih Status ---</option>
-                            <option value="Aktif">Aktif</option>
-                            <option value="Non-Aktif">Non-Aktif</option>
+                        <select class="form-select" id="kategoriStatus" name="is_active" required>
+                            <option value="" disabled selected>--- Pilih Status ---</option>
+                            <option value="1" {{ old('is_active') == "1" ? 'selected' : '' }}>Aktif</option>
+                            <option value="0" {{ old('is_active') == "0" ? 'selected' : '' }}>Non-Aktif</option>
                         </select>
+                    </div>
+            
+                    <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
+            
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                        <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+            
         </div>
     </div>
 </div>

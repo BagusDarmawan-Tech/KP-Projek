@@ -20,6 +20,8 @@ use App\Http\Controllers\KotaLayakAnakController;
 
 use App\Http\Controllers\WebManagementController;
 use App\Http\Controllers\KecamatanLayakController;
+use App\Http\Controllers\UserManagement;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -130,6 +132,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/sub-kegiatan', [WebManagementController::class, 'subkegiatan'])->name('sub-kegiatan');
     Route::get('/galeri', [WebManagementController::class, 'galeri'])->name('galeri');
     Route::get('/forum-anak', [WebManagementController::class, 'forumanak'])->name('forum-anak');
+    //Tambah data
+    Route::post('/createKategoriArtikel', [WebManagementController::class, 'storeKategoriArtikel'])->name('createKategoriArtikel');
+    Route::post('/createSlide', [WebManagementController::class, 'storeSlider'])->name('createSlide');
+
 });
 
 //Kecamatan Layak Anak
@@ -137,6 +143,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/dokumen-kec', [KecamatanLayakController::class, 'dokumenkec'])->name('dokumen-kec');
     
 });
+
+
+//CONFIG
+Route::middleware('auth')->group(function () {
+    Route::get('/admin/config', [UserManagement::class, 'UserManagement'])
+    ->middleware(['auth', 'verified','role:developer'])->name('UserManagement');
+
+});
+
+//======================= Backend  =============================//
 
 //Logout
 Route::get('/admin/logout', [AdminController::class, 'destroy'])->name('admin.logout');

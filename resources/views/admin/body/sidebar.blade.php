@@ -10,14 +10,14 @@
     </li><!-- End Dashboard Nav -->
 
     {{-- CONFIG --}}
-    @if (auth()->user()->hasRole('developer') || auth()->user()->hasRole('admin'))
+    @if (auth()->user()->hasRole('developer') )
     <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-gear-wide"></i><span>Config</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
       <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
-          <a href="components-alerts.html">
+          <a href="{{route('UserManagement')}}">
             <i class="bi bi-circle"></i><span>Users Management</span>
           </a>
         </li>
