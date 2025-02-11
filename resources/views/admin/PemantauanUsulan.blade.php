@@ -82,39 +82,22 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
-                    <div class="mb-3">
-                        <label for="namaOPD" class="form-label">Nama OPD</label>
-                        <select class="form-select" id="namaOPD">
-                            <option selected>--- Pilih OPD ---</option>
-                            <option value="Dinas Kesehatan">Dinas Kesehatan</option>
-                            <option value="Dinas Pendidikan">Dinas Pendidikan</option>
-                        </select>
-                    </div>
+                <form method="POST" action="{{ route('createPemantauanUsulan') }}" >
+                    @csrf 
+                    <input type="hidden" name="userid" value="{{ Auth::user()->id }}">
                     <div class="mb-3">
                         <label for="namaUsulan" class="form-label">Nama Usulan</label>
-                        <input type="text" class="form-control" id="namaUsulan">
-                    </div>
-                    <div class="mb-3">
-                        <label for="tindakLanjut" class="form-label">Tindak Lanjut</label>
-                        <textarea class="form-control" id="tindakLanjut" rows="2"></textarea>
+                        <input type="text" class="form-control"  id="namaUsulan" name="namaUsulan" value="{{ old('namaUsulan') }}">
                     </div>
                     <div class="mb-3">
                         <label for="keterangan" class="form-label">Keterangan</label>
-                        <textarea class="form-control" id="keterangan" rows="2"></textarea>
+                        <textarea class="form-control" id="keterangan" rows="2" name="keterangan" value="{{ old('keterangan') }}"></textarea>
                     </div>
-                    <div class="mb-3 d-flex align-items-center">
-                        <label class="form-label me-2">Status</label>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="statusUsulan" checked>
-                            <label class="form-check-label" for="statusUsulan">Aktif</label>
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>

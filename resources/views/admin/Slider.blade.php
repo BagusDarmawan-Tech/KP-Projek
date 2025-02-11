@@ -41,24 +41,28 @@
                             <th>Gambar</th>
                             <th>Nama</th>
                             <th>Caption</th>
+                            <th>Deskripsi</th>
                             <th>Dibuat Oleh</th>
                             <th>Status</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($sliders as $Slider)
                         <tr>
                             <td>1</td>
-                            <td><img src="{{ asset('kids.jpg') }}" alt="Slider Image" width="80"></td>
-                            <td>Dhian</td>
-                            <td>Magang Kominfo</td>
-                            <td>Dhian</td>
-                            <td><span class="badge bg-success">Aktif</span></td>
+                            <td><img src="{{ asset($Slider->gambar) }}" alt="Slider Image" width="80"></td>
+                            <td>{{ $Slider->nama }}</td>
+                            <td>{{ $Slider->caption }}</td>
+                            <td>{{ $Slider->deskripsi }}</td>
+                            <td>{{ $Slider->dibuatOleh }}</td>
+                            <td><span class="badge bg-success">{{ $Slider->is_active }}</span></td>
                             <td>
                                 <button class="btn btn-sm btn-primary"><i class="bi bi-pencil-square"></i></button>
                                 <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -75,7 +79,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('createKategoriArtikel') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('createSlider') }}" enctype="multipart/form-data">
                     @csrf 
                     <div class="mb-3">
                         <label for="sliderNama" class="form-label">Nama </label>
@@ -91,8 +95,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="sliderGambar" class="form-label">Gambar</label>
-                        <input type="file" class="form-control" id="sliderGambar" name="gambar" value="{{ old('gambar') }}" required>
-                    </div>
+                        <input type="file" class="form-control" id="sliderGambar" name="gambar" required>                    </div>
                     <div class="mb-3">
                         <label for="kategoriStatus" class="form-label">Status</label>
                         <select class="form-select" id="kategoriStatus" name="is_active" required>
@@ -109,7 +112,7 @@
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
-        </div>
+            </div>
     </div>
 </div>
 

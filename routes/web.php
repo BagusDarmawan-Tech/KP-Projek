@@ -108,7 +108,7 @@ Route::get('/', function () {return view('frontend.content.landing-page');})->na
 // bagian WebManagement
 Route::get('/KategoriArtikel', [WebManagementController::class, 'kategoriArtikel'])->name('kategoriArtikel');
 Route::get('/Klaster', [WebManagementController::class, 'Klaster1'])->name('Klaster');
-Route::get('/PemantauanUsulan', [WebManagementController::class, 'PemantauanUsulan'])->name('PemantauanUsulanAnak');
+
 Route::get('/bagianHalaman', [WebManagementController::class, 'BagianHalaman'])->name('Halamandong');
 Route::get('/Artikel', [WebManagementController::class, 'BagianArtikel'])->name('Arrtikel');
 
@@ -132,9 +132,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/sub-kegiatan', [WebManagementController::class, 'subkegiatan'])->name('sub-kegiatan');
     Route::get('/galeri', [WebManagementController::class, 'galeri'])->name('galeri');
     Route::get('/forum-anak', [WebManagementController::class, 'forumanak'])->name('forum-anak');
+    Route::get('/PemantauanUsulan', [WebManagementController::class, 'PemantauanUsulan'])->name('PemantauanUsulanAnak');
+
     //Tambah data
     Route::post('/createKategoriArtikel', [WebManagementController::class, 'storeKategoriArtikel'])->name('createKategoriArtikel');
-    Route::post('/createSlide', [WebManagementController::class, 'storeSlider'])->name('createSlide');
+    Route::post('/createSlider', [WebManagementController::class, 'storeSlider'])->name('createSlider');
+    Route::post('/createPemantauanUsulan', [WebManagementController::class, 'storepemantauanUsulan'])->name('createPemantauanUsulan');
 
 });
 
