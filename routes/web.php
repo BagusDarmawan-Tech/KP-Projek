@@ -20,7 +20,6 @@ use App\Http\Controllers\PusatInformasiSahabatController;
 use App\Http\Controllers\KegiatanForumArekSurabayaController;
 use App\Http\Controllers\ConfigController;
 
-
 use App\Http\Controllers\WebManagementController;
 use App\Http\Controllers\KecamatanLayakController;
 use App\Http\Controllers\MitraAnakController;
