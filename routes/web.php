@@ -142,6 +142,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/createHalaman', [WebManagementController::class, 'storeHalaman'])->name('createHalaman');
     Route::post('/createGaleri', [WebManagementController::class, 'storeGaleri'])->name('createGaleri');
     Route::post('/createForumAnak', [WebManagementController::class, 'storeForumAnak'])->name('createForumAnak');
+    Route::post('/createSubKegiatan', [WebManagementController::class, 'storeSubKegiatan'])->name('createSubKegiatan');
+    Route::post('/createArtikel', [WebManagementController::class, 'storeArtikel'])->name('createArtikel');
 
 });
 

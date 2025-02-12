@@ -48,18 +48,24 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Kelembagaan</td>
-                            <td>Peraturan</td>
-                            <td>-</td> <!-- Pastikan ini menampilkan file jika ada -->
-                            <td>Ema</td>
-                            <td><span class="badge bg-success">Aktif</span></td>
-                            <td>
-                                <button class="btn btn-sm btn-primary"><i class="bi bi-pencil-square"></i></button>
-                                <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
-                            </td>
-                        </tr>
+                        @foreach ($subKegiatans as $subKegiatan )
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td> {{ $subKegiatan->user ? $subKegiatan->user->nama : 'Tidak ada pengguna' }}</td>
+                                <td>{{ $subKegiatan->nama }}</td>
+                                <td>
+                                    <a href="{{ asset('storage/' . $subKegiatan->dataPendukung) }}" target="_blank">
+                                        <i class="fas fa-file-pdf text-danger fa-2x"></i>
+                                    </a>
+                                </td>                                                                </td> <!-- Pastikan ini menampilkan file jika ada -->
+                                <td>{{ $subKegiatan->dibuatOleh }}</td>
+                                <td><span class="badge bg-success">{{ $subKegiatan->is_active }}</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary"><i class="bi bi-pencil-square"></i></button>
+                                    <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -77,39 +83,39 @@
             </div>
             <div class="modal-body">
 
+                <form method="POST" action="{{ route('createSubKegiatan') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label class="form-label">Klaster</label>
-                        <select class="form-select" name="klaster" required>
+                        <select class="form-select" name="klusterid" required>
                             <option selected>--- Pilih Klaster ---</option>
-                            <option value="Kelembagaan">Kelembagaan</option>
-                            <option value="Hak Sipil Dan Kebebasan">Hak Sipil Dan Kebebasan</option>
-                            <option value="Lingkungan Keluarga Dan Pengasuhan Alternatif">Lingkungan Keluarga Dan Pengasuhan Alternatif</option>
-                            <option value="Kesehatan Dasar Dan Kesejahteraan">Kesehatan Dasar Dan Kesejahteraan</option>
-                            <option value="Pendidikan, Pemanfaatan Waktu Luang Dan Kegiatan Budaya">Pendidikan, Pemanfaatan Waktu Luang Dan Kegiatan Budaya</option>
-                            <option value="Perlindungan Khusus">Perlindungan Khusus</option>
+                            @foreach ($klasters as $klaster)
+                            <option value="{{ $klaster->id }}" {{ old('klasterid') == $klaster->id ? 'selected' : '' }}>
+                                {{ $klaster->nama }}
+                            </option>                                                        @endforeach
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="namaSubKegiatan" class="form-label">Nama</label>
+                        <label for="nama" class="form-label">Nama</label>
                         <input type="text" class="form-control" id="namaSubKegiatan" name="nama" required>
                     </div>
                     <div class="mb-3">
                         <label for="dataDukung" class="form-label">Data Dukung</label>
-                        <input type="file" class="form-control" id="dataDukung" name="data_dukung" accept=".pdf,.doc,.docx,.jpg,.png">
+                        <input type="file" class="form-control" id="dataPendukung" name="dataPendukung" accept=".pdf,.doc,.docx">
                     </div>
                     <div class="mb-3">
                         <label for="keterangan" class="form-label">Keterangan</label>
                         <input type="text" class="form-control" id="keterangan" name="keterangan">
                     </div>
                     <div class="mb-3">
-                        <label for="status" class="form-label">Status</label>
-                        <select class="form-select" id="status" name="status">
-                            <option selected>--- Pilih Status ---</option>
-                            <option value="Aktif">Aktif</option>
-                            <option value="Non-Aktif">Non-Aktif</option>
+                        <label for="kategoriStatus" class="form-label">Status</label>
+                        <select class="form-select" id="kategoriStatus" name="is_active" required>
+                            <option value="" disabled selected>--- Pilih Status ---</option>
+                            <option value="1" {{ old('is_active') == "1" ? 'selected' : '' }}>Aktif</option>
+                            <option value="0" {{ old('is_active') == "0" ? 'selected' : '' }}>Non-Aktif</option>
                         </select>
                     </div>
+                    <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Save changes</button>

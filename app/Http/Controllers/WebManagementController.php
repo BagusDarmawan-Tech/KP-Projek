@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Artikel;
 use App\Models\ForumAnak;
 use App\Models\Galeri;
 use App\Models\Halaman;
@@ -10,6 +11,7 @@ use App\Models\PemantauanUsulan;
 use App\Models\Slider;
 use Illuminate\Http\Request;
 use App\Models\KategoriArtikel;
+use App\Models\SubKegiatan;
 use Illuminate\Support\Facades\Storage;
 
 class WebManagementController extends Controller
@@ -55,9 +57,44 @@ class WebManagementController extends Controller
     }
     //====================================END CRUD SLider
 
+
+    //===========CRUD Sub Kegiatan
     public function subKegiatan() {
-        return view('admin.SubKegiatan'); 
+        $subKegiatans = SubKegiatan::all();
+        $klasters = Klaster::all();
+        return view('admin.SubKegiatan', compact('subKegiatans','klasters'));
     }
+
+    public function storeSubKegiatan(Request $request)
+    {
+        // dd($request->all());
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'klusterid' => 'required|integer', // Sesuai dengan tipe data integer
+            'dataPendukung' => 'required|mimes:pdf,doc,docx|max:10048', // Hanya PDF, DOC, DOCX, max 2MB
+            'keterangan' => 'required|string|max:500',
+            'is_active' => 'required|in:0,1', // Pastikan hanya 0 atau 1 yang diterima
+        ]);
+    
+        // Simpan file ke storage/public/forum-anak
+        $file = $request->file('dataPendukung');
+        $filename = date('Y-m-d-His') . '-' . uniqid() . '.' . $file->getClientOriginalExtension();
+        $path = $file->storeAs('sub-kegiatan', $filename, 'public'); // Disimpan di storage/app/public/sub-kegiatan
+    
+        SubKegiatan::create([
+            'nama' => $request->nama,
+            'klusterid' => $request->klusterid,
+            'keterangan' => $request->keterangan,
+            'dataPendukung' => $path, // Hanya menyimpan path yang benar
+            'is_active' => $request->is_active,
+            'dibuatOleh' => $request->dibuatOleh, // Pastikan dibuatOleh tidak null
+        ]);
+    
+        return redirect()->route('sub-kegiatan')->with('success', 'Kategori berhasil ditambahkan!');
+    }    
+    //===========END CRUD Sub Kegiatan
+
+
 
     //===========CRUD FORUMANAK
     public function forumAnak() {
@@ -163,6 +200,7 @@ class WebManagementController extends Controller
     }
     public function storeKlaster(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'nama' => 'required|string|max:255',
             'gambar' => 'required|mimes:png,jpg,jpeg|max:2048',
@@ -259,7 +297,54 @@ class WebManagementController extends Controller
     }
     //================== END CRUD Halaman 
 
+
+    //================== CRUD Artikel
     public function bagianArtikel() {
-        return view('admin.Artikel'); 
+        $artikels = Artikel::all();
+        $kategoris = KategoriArtikel::all();
+        $klasters = Klaster::all();
+        $subKegiatans = SubKegiatan::all();
+        return view('admin.Artikel', compact('artikels','kategoris','subKegiatans','klasters'));
+
     }
+    public function storeArtikel(Request $request)
+    {
+        // dd($request->all());
+        $request->validate([
+            'judul' => 'required|string|max:255',
+            'slug' => 'required|string|max:100',
+            'tag' => 'required|string|max:255',
+            'gambar' => 'required|mimes:png,jpg,jpeg|max:6048',
+            'subkegiatanid' => 'required|integer',
+            'konten' => 'required|string|max:500',
+            'kategoriartikelid' => 'required|integer',
+            'dibuatOleh' => 'required|string|max:255',
+            'is_active' => 'required|boolean',
+        ]);
+
+        if ($request->hasFile('gambar')) {
+            $photo = $request->file('gambar');
+            $filename = date('Y-m-d-His') . '-' . uniqid() . '.' . $photo->getClientOriginalExtension();
+            $path = $photo->storeAs('artikel', $filename, 'public'); // Simpan di storage/public/artikel
+        } else {
+            return redirect()->back()->with('error', 'Gambar tidak ditemukan');
+        }
+
+        // dd($path);
+        Artikel::create([
+            'judul' => $request->judul,
+            'slug' => $request->slug,
+            'tag' => $request->tag,
+            'gambar' => 'storage/' . $path, 
+            'subkegiatanid' => $request->subkegiatanid,
+            'konten' => $request->konten,
+            'kategoriartikelid' => $request->kategoriartikelid,
+            'dibuatOleh' => $request->dibuatOleh,
+            'is_active' => $request->is_active,
+        ]);
+
+        return redirect()->route('Artikel')->with('success', 'Kategori berhasil ditambahkan!');
+    }
+    //================== END CRUD Artikel
+
 }

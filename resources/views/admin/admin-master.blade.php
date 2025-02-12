@@ -11,6 +11,7 @@
 
   <!-- Favicons -->
   <link rel="shortcut icon" href="{{ asset('favicon.png') }}" type="image/x-icon"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">

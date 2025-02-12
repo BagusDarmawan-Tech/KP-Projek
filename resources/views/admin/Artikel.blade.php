@@ -45,18 +45,20 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($artikels as $artikel)
                         <tr>
-                            <td>1</td>
-                            <td><img src="{{ asset('kids.jpg') }}" alt="Slider Image" width="80"></td>
-                            <td>Judul Halaman</td>
-                            <td>slug-halaman</td>
-                            <td>Admin</td>
-                            <td><span class="badge bg-success">Aktif</span></td>
+                            <td>{{ $loop->iteration }}</td>
+                            <td><img src="{{ asset( $artikel->gambar ) }}" alt="Slider Image" width="80"></td>
+                            <td>{{ $artikel->judul }}</td>
+                            <td>{{ $artikel->slug }}</td>
+                            <td>{{ $artikel->dibuatOleh }}</td>
+                            <td><span class="badge bg-success">{{ $artikel->is_active }}</span></td>
                             <td>
                                 <button class="btn btn-sm btn-primary edit-btn" data-bs-toggle="modal" data-bs-target="#halamanModal" data-judul="Judul Halaman" data-slug="slug-halaman" data-status="Aktif"><i class="bi bi-pencil-square"></i></button>
                                 <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -73,56 +75,73 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form method="POST" action="{{ route('createArtikel') }}" enctype="multipart/form-data">
+                    @csrf 
                     <div class="mb-3">
                         <label for="judul" class="form-label">Judul</label>
-                        <input type="text" class="form-control" id="judul">
+                        <input type="text" class="form-control" id="judul" name="judul" value="{{ old('judul') }}" required>
                     </div>
+                
                     <div class="mb-3">
                         <label for="slug" class="form-label">Slug</label>
-                        <input type="text" class="form-control" id="slug">
+                        <input type="text" class="form-control" id="slug" name="slug" value="{{ old('slug') }}" required>
                     </div>
+                
                     <div class="mb-3">
                         <label for="tag" class="form-label">Tag</label>
-                        <input type="text" class="form-control" id="tag">
+                        <input type="text" class="form-control" id="tag" name="tag" value="{{ old('tag') }}">
                     </div>
+                
                     <div class="mb-3">
                         <label for="gambar" class="form-label">Gambar</label>
-                        <input type="file" class="form-control" id="gambar">
+                        <input type="file" class="form-control" id="gambar" name="gambar" required>
                     </div>
+                
                     <div class="mb-3">
                         <label for="konten" class="form-label">Konten</label>
-                        <textarea class="form-control" id="konten" rows="3"></textarea>
+                        <textarea class="form-control" id="konten" rows="3" name="konten" required>{{ old('konten') }}</textarea>
                     </div>
+                
                     <div class="mb-3">
                         <label for="kategori" class="form-label">Kategori Artikel</label>
-                        <select class="form-select" id="kategori">
-                            <option>-- Pilih Kategori --</option>
+                        <select class="form-select" id="kategori" name="kategoriartikelid" required>
+                            <option value="" disabled selected>-- Pilih Kategori --</option>
+                            @foreach ($kategoris as $kategori)
+                                <option value="{{ $kategori->id }}" {{ old('kategoriartikelid') == $kategori->id ? 'selected' : '' }}>
+                                    {{ $kategori->nama }}
+                                </option>
+                            @endforeach
                         </select>
                     </div>
-                    <div class="mb-3">
-                        <label for="klaster" class="form-label">Kategori Klaster</label>
-                        <select class="form-select" id="klaster">
-                            <option>-- Pilih Klaster --</option>
-                        </select>
-                    </div>
+                
                     <div class="mb-3">
                         <label for="kegiatan" class="form-label">Kategori Kegiatan</label>
-                        <select class="form-select" id="kegiatan">
-                            <option>-- Pilih Kegiatan --</option>
+                        <select class="form-select" id="kegiatan" name="subkegiatanid" required>
+                            <option value="" disabled selected>-- Pilih Kegiatan --</option>
+                            @foreach ($subKegiatans as $subKegiatan)
+                                <option value="{{ $subKegiatan->id }}" {{ old('subkegiatanid') == $subKegiatan->id ? 'selected' : '' }} >
+                                    {{ $subKegiatan->id }}
+                                </option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="status" class="form-label">Status</label>
-                        <input type="checkbox" id="status" checked>
-                        <label for="status">Aktif</label>
+                        <label for="kategoriStatus" class="form-label">Status</label>
+                        <select class="form-select" id="kategoriStatus" name="is_active" required>
+                            <option value="" disabled selected>--- Pilih Status ---</option>
+                            <option value="1" {{ old('is_active') == "1" ? 'selected' : '' }}>Aktif</option>
+                            <option value="0" {{ old('is_active') == "0" ? 'selected' : '' }}>Non-Aktif</option>
+                        </select>
+                    </div>
+                
+                    <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
+                
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+                
         </div>
     </div>
 </div>
