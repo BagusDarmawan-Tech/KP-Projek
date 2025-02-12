@@ -67,7 +67,7 @@ class WebManagementController extends Controller
 
     public function storeSubKegiatan(Request $request)
     {
-        // dd($request->all());
+        //dd($request->all());
         $request->validate([
             'nama' => 'required|string|max:255',
             'klusterid' => 'required|integer', // Sesuai dengan tipe data integer
