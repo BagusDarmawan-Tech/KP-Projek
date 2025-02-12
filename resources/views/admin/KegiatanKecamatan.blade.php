@@ -3,6 +3,8 @@
 @section('main')
 
 <link href="{{ asset('assets/css/tabel.css') }}" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{{ asset('assets/js/hapus.js') }}"></script>
 
 <div class="container mt-5">
     <div class="card shadow-lg border-0 position-relative overflow-hidden mb-4 p-3">
@@ -73,7 +75,7 @@
                 <!-- <h5 class="fw-bold">Daftar Dokumen</h5> -->
                  <br>
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTambahKegiatan">
-                    <i class="bi bi-plus"></i> Tambah kegiatan Kelurahan
+                    <i class="bi bi-plus"></i> Kegiatan Kecamatan 
                 </button>
             </div>
             <div class="table-responsive">
@@ -119,7 +121,10 @@
                             <td><span class="badge bg-success">Aktif</span></td>
                             <td>
                                 <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modaEditKegiatan"><i class="bi bi-pencil-square"></i></button>
-                                <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
+                                <!-- Tombol Hapus dengan konfirmasi -->
+                                <button class="btn btn-sm btn-danger delete-slider">
+                                    <i class="bi bi-trash"></i>
+                                </button>
                             </td>
                         </tr>
                     </tbody>
@@ -129,7 +134,7 @@
     </div>
 </div>
 
-<!-- Modal Tambah Dokumen Kelurahan -->
+<!-- Modal Tambah Dokumen Kecamatan -->
 <div class="modal fade" id="modalTambahKegiatan" tabindex="-1" aria-labelledby="modalTambahKegiatanLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -171,7 +176,7 @@
   </div>
 </div>
 
-<!-- Modal Edit Dokumen Kelurahan -->
+<!-- Modal Edit Dokumen Kecamatan -->
 <div class="modal fade" id="modaEditKegiatan" tabindex="-1" aria-labelledby="modaEditKegiatanLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">

@@ -3,6 +3,8 @@
 @section('main')
 
 <link href="{{ asset('assets/css/tabel.css') }}" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{{ asset('assets/js/hapus.js') }}"></script>
 
 <div class="container mt-5">
     <div class="card shadow-lg border-0 position-relative overflow-hidden mb-4 p-3">
@@ -123,7 +125,7 @@
                                 <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modaEditKegiatan">
                                     <i class="bi bi-pencil-square"></i>
                                 </button>
-                                <button class="btn btn-sm btn-danger">
+                                <button class="btn btn-sm btn-danger delete-slider">
                                     <i class="bi bi-trash"></i>
                                 </button>
                             </td>

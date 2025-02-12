@@ -64,7 +64,7 @@
                         <td>Bagaimana cara untuk menja...</td>
                         <td class="text-danger">Dinsos : ✖ Belum di TL</td>
                         <td><span class="badge bg-success">Ditindak Lanjut</span></td>
-                        <td class="d-flex align-items-center justify-content-center gap-2 py-4">
+                        <td class="d-flex align-items-center justify-content-center gap-2 py-2">
                             <!-- Tombol Tindak Lanjut -->
                             <button class="btn btn-sm rounded-circle" style="background-color: #6A0DAD; width: 36px; height: 36px;"
                                 data-bs-toggle="modal" data-bs-target="#tindakLanjutModal">

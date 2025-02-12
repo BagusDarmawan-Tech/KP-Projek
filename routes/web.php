@@ -25,8 +25,8 @@ use App\Http\Controllers\KecamatanLayakController;
 use App\Http\Controllers\MitraAnakController;
 use App\Http\Controllers\KegiatanArekSuroboyoController;
 use App\Http\Controllers\UsulanKegiatanController;
-use App\Http\Controllers\UserManagement;
 use App\Http\Controllers\DokumenSkCfciController;
+use App\Http\Controllers\UserManagement;
 
 /*
 |--------------------------------------------------------------------------
@@ -190,13 +190,14 @@ Route::middleware('auth')->group(function () {
 //Usulan Kegiatan
 Route::middleware('auth')->group(function () {
     Route::get('/pemantauan-suara', [UsulanKegiatanController::class, 'pemantauansuara'])->name('pemantauan-suara');
-    Route::get('/karya-anak', [UsulanKegiatanController::class, 'karyaAnak'])->name('karya-anak');
+    Route::get('/karya-anak', [UsulanKegiatanController::class, 'karyaanak'])->name('karya-anak');
 });
 
-//Dokumen SK Fas, Cfci dan Kla
+//Dokumen SK FAS, CFCI DAN KLA
 Route::middleware('auth')->group(function () {
     Route::get('/dokumen-skcfci', [DokumenSkCfciController::class, 'dokumenSkCfciKla'])->name('dokumen-skcfci');
 });
+
 
 //CONFIG
 Route::middleware('auth')->group(function () {

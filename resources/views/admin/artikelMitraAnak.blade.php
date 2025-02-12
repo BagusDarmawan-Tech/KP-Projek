@@ -1,6 +1,8 @@
 @extends('admin.admin-master')
 @section('main')
 <link href="{{ asset('assets/css/tabel.css') }}" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{{ asset('assets/js/hapus.js') }}"></script>
 
 <div class="container mt-5">
     <div class="card shadow-lg border-0 position-relative overflow-hidden mb-5">
@@ -54,7 +56,9 @@
                             <td><span class="badge bg-success">Aktif</span></td>
                             <td>
                                 <button class="btn btn-sm btn-primary edit-btn" data-bs-toggle="modal" data-bs-target="#halamanModal" data-judul="Judul Halaman" data-slug="slug-halaman" data-status="Aktif"><i class="bi bi-pencil-square"></i></button>
-                                <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
+                                <button class="btn btn-sm btn-danger delete-slider">
+                                    <i class="bi bi-trash"></i>
+                                </button>
                             </td>
                         </tr>
                     </tbody>

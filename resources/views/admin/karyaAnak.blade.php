@@ -6,6 +6,8 @@
 
 <!-- Tambahkan CSS Kustom -->
 <link href="{{ asset('assets/css/tabel.css') }}" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{{ asset('assets/js/hapus.js') }}"></script>
 
 <style>
     /* untuk "Terverifikasi" */
@@ -72,7 +74,7 @@
                                 </button>
 
                                 <!-- Tombol Hapus -->
-                                <button class="btn btn-sm btn-danger">
+                                <button class="btn btn-sm btn-danger delete-slider">
                                     <i class="bi bi-trash"></i>
                                 </button>
 
