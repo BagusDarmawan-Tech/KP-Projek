@@ -47,18 +47,20 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($forumAnaks as $forumAnak )
                         <tr>
-                            <td>1</td>
-                            <td><img src="{{ asset('kids.jpg') }}" alt="Slider Image" width="80"></td>
-                            <td>Dhian</td>
-                            <td>Magang Kominfo</td>
-                            <td>Dhian</td>
-                            <td><span class="badge bg-success">Aktif</span></td>
+                            <td>{{ $loop->iteration }}</td>
+                            <td><img src="{{ asset($forumAnak->gambar) }}" alt="Slider Image" width="80"></td>
+                            <td>{{ $forumAnak->nama }}</td>
+                            <td>{{ $forumAnak->caption }}</td>
+                            <td>{{ $forumAnak->dibuatOleh }}</td>
+                            <td><span class="badge bg-success">{{ $forumAnak->is_active }}</span></td>
                             <td>
                                 <button class="btn btn-sm btn-primary"><i class="bi bi-pencil-square"></i></button>
                                 <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -75,37 +77,40 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form method="POST" action="{{ route('createForumAnak') }}" enctype="multipart/form-data">
+                    @csrf 
                     <div class="mb-3">
                         <label for="sliderNama" class="form-label">Nama </label>
-                        <input type="text" class="form-control" id="sliderNama">
+                        <input type="text" class="form-control" id="nama" name="nama" value="{{ old('nama') }}" required>
                     </div>
                     <div class="mb-3">
                         <label for="sliderCaption" class="form-label">Caption</label>
-                        <input type="text" class="form-control" id="sliderCaption">
+                        <input type="text" class="form-control" id="sliderCaption"  name="caption" value="{{ old('caption') }}" required>
                     </div>
                     <div class="mb-3">
                         <label for="sliderDeskripsi" class="form-label">Deskripsi</label>
-                        <textarea class="form-control" id="sliderDeskripsi" rows="2"></textarea>
+                        <textarea class="form-control" id="sliderDeskripsi" rows="2"  name="deskripsi" value="{{ old('deskripsi') }}" required></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="sliderGambar" class="form-label">Gambar</label>
-                        <input type="file" class="form-control" id="sliderGambar">
+                        <input type="file" class="form-control" id="sliderGambar"  name="gambar" value="{{ old('gambar') }}" required>
                     </div>
                     <div class="mb-3">
-                        <label for="sliderStatus" class="form-label">Status</label>
-                        <select class="form-select" id="sliderStatus">
-                            <option selected>--- Pilih Status ---</option>
-                            <option value="Aktif">Aktif</option>
-                            <option value="Non-Aktif">Non-Aktif</option>
+                        <label for="kategoriStatus" class="form-label">Status</label>
+                        <select class="form-select" id="kategoriStatus" name="is_active" required>
+                            <option value="" disabled selected>--- Pilih Status ---</option>
+                            <option value="1" {{ old('is_active') == "1" ? 'selected' : '' }}>Aktif</option>
+                            <option value="0" {{ old('is_active') == "0" ? 'selected' : '' }}>Non-Aktif</option>
                         </select>
                     </div>
+                    <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
+            
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
         </div>
     </div>
 </div>

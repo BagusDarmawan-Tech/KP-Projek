@@ -49,19 +49,21 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($klasters as $klaster )
                         <tr>
-                            <td>1</td>
-                            <td><i class="bi bi-file-earmark-text"></i></td>
-                            <td>Artikel</td>
-                            <td>artikel-slug</td>
-                            <td><img src="{{ asset('path/to/image.jpg') }}" alt="Gambar" width="50"></td>
-                            <td>Dhian</td>
-                            <td><span class="badge bg-success">Aktif</span></td>
+                            <td>{{ $loop->iteration }}</td>
+                            <td><i class="{{ $klaster->icon }}"></i></td>
+                            <td>{{ $klaster->nama }}</td>
+                            <td>{{ $klaster->slug }}</td>
+                            <td><img src="{{ asset($klaster->gambar) }}" alt="Gambar" width="50"></td>
+                            <td>{{ $klaster->dibuatOleh }}</td>
+                            <td><span class="badge bg-success">{{ $klaster->is_active }}</span></td>
                             <td>
                                 <button class="btn btn-sm btn-primary"><i class="bi bi-pencil"></i></button>
                                 <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -79,36 +81,40 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form method="POST" action="{{ route('createKlaster') }}" enctype="multipart/form-data">
+                    @csrf
                     <div class="mb-3">
                         <label for="kategoriIcon" class="form-label">Icon</label>
-                        <input type="text" class="form-control" id="kategoriIcon" placeholder="Masukkan Icon">
+                        <input type="text" class="form-control" class="form-control" id="nama" name="icon" value="{{ old('icon') }}" placeholder="Masukkan Icon">
                     </div>
                     <div class="mb-3">
                         <label for="kategoriNama" class="form-label">Nama</label>
-                        <input type="text" class="form-control" id="kategoriNama" placeholder="Masukkan Nama">
+                        <input type="text" class="form-control"  id="nama" name="nama" value="{{ old('nama') }}" placeholder="Masukkan Nama">
                     </div>
                     <div class="mb-3">
                         <label for="kategoriSlug" class="form-label">Slug</label>
-                        <input type="text" class="form-control" id="kategoriSlug" placeholder="Masukkan Slug">
+                        <input type="text" class="form-control" id="slug" id="caption" name="slug" value="{{ old('slug') }}" placeholder="Masukkan Slug">
                     </div>
                     <div class="mb-3">
                         <label for="kategoriGambar" class="form-label">Gambar</label>
-                        <input type="file" class="form-control" id="kategoriGambar">
+                        <input type="file" class="form-control" id="gambar" name="gambar" value="{{ old('gambar') }}">
                     </div>
                     <div class="mb-3">
                         <label for="kategoriStatus" class="form-label">Status</label>
-                        <select class="form-select" id="kategoriStatus">
-                            <option selected>--- Pilih Status ---</option>
-                            <option value="Aktif">Aktif</option>
-                            <option value="Non-Aktif">Non-Aktif</option>
+                        <select class="form-select" id="kategoriStatus" name="is_active" required>
+                            <option value="" disabled selected>--- Pilih Status ---</option>
+                            <option value="1" {{ old('is_active') == "1" ? 'selected' : '' }}>Aktif</option>
+                            <option value="0" {{ old('is_active') == "0" ? 'selected' : '' }}>Non-Aktif</option>
                         </select>
                     </div>
                     </div>
+                    <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
+            
                     <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
                 </form>
             </div>
 

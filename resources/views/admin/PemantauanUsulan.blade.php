@@ -47,13 +47,14 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($usulans as $usulan )
                         <tr>
-                            <td>1</td>
-                            <td>Dinas Kesehatan</td>
-                            <td>Program Gizi Anak</td>
-                            <td>Pemeriksaan Berkala</td>
-                            <td>Program ini bertujuan untuk...</td>
-                            <td><span class="badge bg-success">Aktif</span></td>
+                            <td>{{ $loop->iteration }}</td>
+                            <td> {{ $usulan->user ? $usulan->user->name : 'Tidak ada pengguna' }}</td>
+                            <td> {{ $usulan->user ? $usulan->user->name : 'Tidak ada pengguna' }}</td>
+                            <td>{{ $usulan->namaUsulan }}</td>
+                            <td>{{ $usulan->tindakLanjut }}</td>
+                            <td><span class="badge bg-success">{{ $usulan->is_active }}</span></td>
                             <td>
                                 <button class="btn btn-sm btn-primary edit-btn" 
                                     data-opd="Dinas Kesehatan" 
@@ -66,6 +67,7 @@
                                 <button class="btn btn-sm btn-danger">&#128465;</button>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

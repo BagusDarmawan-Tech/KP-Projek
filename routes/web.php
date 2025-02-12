@@ -110,7 +110,7 @@ Route::get('/KategoriArtikel', [WebManagementController::class, 'kategoriArtikel
 Route::get('/Klaster', [WebManagementController::class, 'Klaster1'])->name('Klaster');
 
 Route::get('/bagianHalaman', [WebManagementController::class, 'BagianHalaman'])->name('Halamandong');
-Route::get('/Artikel', [WebManagementController::class, 'BagianArtikel'])->name('Arrtikel');
+Route::get('/Artikel', [WebManagementController::class, 'BagianArtikel'])->name('Artikel');
 
 
 //Bagian Kelurahan Layak Anak
@@ -138,6 +138,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/createKategoriArtikel', [WebManagementController::class, 'storeKategoriArtikel'])->name('createKategoriArtikel');
     Route::post('/createSlider', [WebManagementController::class, 'storeSlider'])->name('createSlider');
     Route::post('/createPemantauanUsulan', [WebManagementController::class, 'storepemantauanUsulan'])->name('createPemantauanUsulan');
+    Route::post('/createKlaster', [WebManagementController::class, 'storeKlaster'])->name('createKlaster');
+    Route::post('/createHalaman', [WebManagementController::class, 'storeHalaman'])->name('createHalaman');
+    Route::post('/createGaleri', [WebManagementController::class, 'storeGaleri'])->name('createGaleri');
+    Route::post('/createForumAnak', [WebManagementController::class, 'storeForumAnak'])->name('createForumAnak');
 
 });
 

@@ -11,4 +11,9 @@ class PemantauanUsulan extends Model
     protected $table = 'usulan';
 
     protected $fillable = ['namaUsulan', 'userid','tindakLanjut','keterangan','is_active'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'userid');
+    }
 }

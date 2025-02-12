@@ -43,17 +43,19 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($halamans as $halaman )
                         <tr>
-                            <td>1</td>
-                            <td><img src="{{ asset('kids.jpg') }}" alt="Slider Image" width="80"></td>
-                            <td>Judul Halaman</td>
-                            <td>slug-halaman</td>
-                            <td><span class="badge bg-success">Aktif</span></td>
+                            <td>{{ $loop->iteration }}</td>
+                            <td><img src="{{ asset($halaman->gambar) }}" alt="Slider Image" width="80"></td>
+                            <td>{{ $halaman->judul }}</td>
+                            <td>{{ $halaman->slug }}</td>
+                            <td><span class="badge bg-success">{{ $halaman->is_active }}</span></td>
                             <td>
                                 <button class="btn btn-sm btn-primary edit-btn" data-bs-toggle="modal" data-bs-target="#halamanModal" data-judul="Judul Halaman" data-slug="slug-halaman" data-status="Aktif"><i class="bi bi-pencil-square"></i></button>
                                 <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -70,35 +72,40 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form method="POST" action="{{ route('createHalaman') }}" enctype="multipart/form-data">
+                    @csrf 
                     <div class="mb-3">
                         <label for="judul" class="form-label">Judul</label>
-                        <input type="text" class="form-control" id="judul">
+                        <input type="text" class="form-control" id="judul" name="judul" value="{{ old('judul') }}" required>
                     </div>
                     <div class="mb-3">
                         <label for="slug" class="form-label">Slug</label>
-                        <input type="text" class="form-control" id="slug">
+                        <input type="text" class="form-control" id="slug" name="slug" value="{{ old('slug') }}" required>
                     </div>
                     <div class="mb-3">
                         <label for="gambar" class="form-label">Gambar</label>
-                        <input type="file" class="form-control" id="gambar">
+                        <input type="file" class="form-control" id="gambar" name="gambar" value="{{ old('gambar') }}" required>
                     </div>
                     <div class="mb-3">
                         <label for="konten" class="form-label">Konten</label>
-                        <textarea class="form-control" id="konten" rows="3"></textarea>
+                        <textarea class="form-control" id="konten" rows="3" name="konten" value="{{ old('konten') }}" required></textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="status" class="form-label">Status</label>
-                        <select class="form-select" id="status">
-                            <option value="Aktif">Aktif</option>
-                            <option value="Non-Aktif">Non-Aktif</option>
+                        <label for="kategoriStatus" class="form-label">Status</label>
+                        <select class="form-select" id="kategoriStatus" name="is_active" required>
+                            <option value="" disabled selected>--- Pilih Status ---</option>
+                            <option value="1" {{ old('is_active') == "1" ? 'selected' : '' }}>Aktif</option>
+                            <option value="0" {{ old('is_active') == "0" ? 'selected' : '' }}>Non-Aktif</option>
                         </select>
                     </div>
+                    <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
+            
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>

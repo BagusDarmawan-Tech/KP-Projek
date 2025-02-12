@@ -59,7 +59,7 @@
           </a>
         </li>
         <li>
-          <a href="{{route('Arrtikel')}}">
+          <a href="{{route('Artikel')}}">
             <i class="bi bi-circle"></i><span>Artikel</span>
           </a>
         </li>

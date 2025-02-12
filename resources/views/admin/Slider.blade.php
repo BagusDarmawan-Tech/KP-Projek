@@ -50,7 +50,7 @@
                     <tbody>
                         @foreach($sliders as $Slider)
                         <tr>
-                            <td>1</td>
+                            <td>{{ $loop->iteration }}</td>
                             <td><img src="{{ asset($Slider->gambar) }}" alt="Slider Image" width="80"></td>
                             <td>{{ $Slider->nama }}</td>
                             <td>{{ $Slider->caption }}</td>

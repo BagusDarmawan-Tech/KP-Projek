@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ForumAnak;
+use App\Models\Galeri;
+use App\Models\Halaman;
+use App\Models\Klaster;
 use App\Models\PemantauanUsulan;
 use App\Models\Slider;
 use Illuminate\Http\Request;
@@ -55,13 +59,82 @@ class WebManagementController extends Controller
         return view('admin.SubKegiatan'); 
     }
 
+    //===========CRUD FORUMANAK
     public function forumAnak() {
-        return view('admin.ForumAnak'); 
+        $forumAnaks = ForumAnak::all();
+        return view('admin.ForumAnak', compact('forumAnaks'));
     }
 
-    public function galeri() {
-        return view('admin.Galeri'); 
+    public function storeForumAnak(Request $request)
+    {
+        // dd($request->all());
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'caption' => 'required|string|max:255',
+            'gambar' => 'required|mimes:png,jpg,jpeg|max:2048',
+            'deskripsi' => 'required|string|max:500',
+            'is_active' => 'required|boolean',
+        ]);
+
+        if ($request->hasFile('gambar')) {
+            $photo = $request->file('gambar');
+            $filename = date('Y-m-d-His') . '-' . uniqid() . '.' . $photo->getClientOriginalExtension();
+            $path = $photo->storeAs('forum-anak', $filename, 'public'); // Simpan di storage/public/forum-anak
+        } else {
+            return redirect()->back()->with('error', 'Gambar tidak ditemukan');
+        }
+
+        ForumAnak::create([
+            'nama' => $request->nama,
+            'caption' => $request->caption,
+            'deskripsi' => $request->deskripsi,
+            'gambar' => 'storage/' . $path, 
+            'is_active' => $request->is_active,
+            'dibuatOleh' => $request->dibuatOleh
+        ]);
+
+        return redirect()->route('forum-anak')->with('success', 'Kategori berhasil ditambahkan!');
     }
+    //===========CRUD FORUMANAK
+    
+
+    //=============== CRUD Galeri
+    public function galeri() {
+        $galeris = Galeri::all();
+        return view('admin.Galeri', compact('galeris'));
+    }
+
+    public function storeGaleri(Request $request)
+    {
+        // dd($request->all());
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'caption' => 'required|string|max:255',
+            'gambar' => 'required|mimes:png,jpg,jpeg|max:2048',
+            'deskripsi' => 'required|string|max:500',
+            'is_active' => 'required|boolean',
+        ]);
+
+        if ($request->hasFile('gambar')) {
+            $photo = $request->file('gambar');
+            $filename = date('Y-m-d-His') . '-' . uniqid() . '.' . $photo->getClientOriginalExtension();
+            $path = $photo->storeAs('galeri', $filename, 'public'); // Simpan di storage/public/galeri
+        } else {
+            return redirect()->back()->with('error', 'Gambar tidak ditemukan');
+        }
+
+        Galeri::create([
+            'nama' => $request->nama,
+            'caption' => $request->caption,
+            'deskripsi' => $request->deskripsi,
+            'gambar' => 'storage/' . $path, 
+            'is_active' => $request->is_active,
+            'dibuatOleh' => $request->dibuatOleh
+        ]);
+
+        return redirect()->route('galeri')->with('success', 'Kategori berhasil ditambahkan!');
+    }
+     //=================END CRUD Galeri
 
     //=================CRUD KategoriArtikel
     public function kategoriArtikel() {
@@ -80,17 +153,51 @@ class WebManagementController extends Controller
 
         return redirect()->route('kategoriArtikel')->with('success', 'Kategori berhasil ditambahkan!');
     }
-
     //============================END CRUD KategoriArtikel
 
-    
+    //================= CRUD klaster
     public function klaster1() {
-        return view('admin.Klaster'); 
+        $klasters = Klaster::all();
+        return view('admin.Klaster', compact('klasters'));
+       
     }
+    public function storeKlaster(Request $request)
+    {
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'gambar' => 'required|mimes:png,jpg,jpeg|max:2048',
+            'icon' => 'required|string|max:30',
+            'slug' => 'required|string|max:100',
+            'is_active' => 'required|boolean',
+        ]);
+
+        if ($request->hasFile('gambar')) {
+            $photo = $request->file('gambar');
+            $filename = date('Y-m-d-His') . '-' . uniqid() . '.' . $photo->getClientOriginalExtension();
+            $path = $photo->storeAs('klaster', $filename, 'public'); // Simpan di storage/public/klaster
+        } else {
+            return redirect()->back()->with('error', 'Gambar tidak ditemukan');
+        }
+
+        // dd($path);
+        Klaster::create([
+            'nama' => $request->nama,
+            'icon' => $request->icon,
+            'slug' => $request->slug,
+            'gambar' => 'storage/' . $path, 
+            'is_active' => $request->is_active,
+            'dibuatOleh' => $request->dibuatOleh
+        ]);
+
+        return redirect()->route('Klaster')->with('success', 'Kategori berhasil ditambahkan!');
+    }
+     //=================END CRUD klaster
+
 
      //=================CRUD PemantauanUsulan
     public function pemantauanUsulan() {
-        return view('admin.PemantauanUsulan'); 
+        $usulans = PemantauanUsulan::all();
+        return view('admin.PemantauanUsulan',compact(('usulans'))); 
     }
 
     public function storepemantauanUsulan(Request $request)
@@ -114,9 +221,43 @@ class WebManagementController extends Controller
     }
      //=================END CRUD PemantauanUsulan
 
+
+     //=================CRUD Halaman
     public function bagianHalaman() {
-        return view('admin.HalamanWebMan'); 
+        $halamans = Halaman::all();
+        return view('admin.HalamanWebMan',compact(('halamans'))); 
     }
+    public function storeHalaman(Request $request)
+    {
+        $request->validate([
+            'judul' => 'required|string|max:255',
+            'gambar' => 'required|mimes:png,jpg,jpeg|max:2048',
+            'konten' => 'required|string|max:500',
+            'slug' => 'required|string|max:100',
+            'is_active' => 'required|boolean',
+        ]);
+
+        if ($request->hasFile('gambar')) {
+            $photo = $request->file('gambar');
+            $filename = date('Y-m-d-His') . '-' . uniqid() . '.' . $photo->getClientOriginalExtension();
+            $path = $photo->storeAs('halaman', $filename, 'public'); // Simpan di storage/public/halaman
+        } else {
+            return redirect()->back()->with('error', 'Gambar tidak ditemukan');
+        }
+
+        // dd($path);
+        Halaman::create([
+            'judul' => $request->judul,
+            'konten' => $request->konten,
+            'slug' => $request->slug,
+            'gambar' => 'storage/' . $path, 
+            'is_active' => $request->is_active,
+            'dibuatOleh' => $request->dibuatOleh
+        ]);
+
+        return redirect()->route('Halamandong')->with('success', 'Kategori berhasil ditambahkan!');
+    }
+    //================== END CRUD Halaman 
 
     public function bagianArtikel() {
         return view('admin.Artikel'); 
