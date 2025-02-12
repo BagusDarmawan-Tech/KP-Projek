@@ -5,11 +5,10 @@
 <link href="{{ asset('assets/css/tabel.css') }}" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-
 <div class="container mt-5">
     <div class="card shadow-lg border-0 position-relative overflow-hidden mb-4 p-3">
         <div class="card-body">
-            <h4 class="fw-bold mb-3 text-center">Dokumen Kelurahan</h4>
+            <h4 class="fw-bold mb-3 text-center">Dokumen Pisa</h4>
             <div class="row">
                 <div class="col-md-6 ">
                     <label for="userEntri" class="form-label">User Entri</label>
@@ -60,9 +59,9 @@
             </div>
             <div class="row mt-3">
                 <div class="col-md-6">
-                    <button class="btn btn-primary" id="btnCari" style="width: 150px;">
+                    <!-- <button class="btn btn-primary" id="btnCari" style="width: 150px;">
                         <i class="bi bi-search"></i> Cari
-                    </button>
+                    </button> -->
                 </div>
             </div>
             </div>
@@ -74,7 +73,7 @@
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h5 class="fw-bold">Daftar Dokumen</h5>
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#dokumenKelurahanModal">
-                    <i class="bi bi-plus"></i> Dokumen Kelurahan
+                    <i class="bi bi-plus"></i> Dokumen Pisa
                 </button>
             </div>
             <div class="table-responsive">
@@ -100,8 +99,7 @@
                             <td><span class="badge bg-success">Aktif</span></td>
                             <td>
                                 <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editDokumenModal"><i class="bi bi-pencil-square"></i></button>
-                                <button class="btn btn-sm btn-danger delete-slider"><i class="bi bi-trash"></i> </button>
-                            </td>
+                                <button class="btn btn-sm btn-danger delete-slider"><i class="bi bi-trash"></i> </button>                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -115,7 +113,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="dokumenKelurahanModalLabel">Tambah Dokumen Kelurahan Baru</h5>
+                <h5 class="modal-title" id="dokumenKelurahanModalLabel">Tambah Dokumen Pisa Baru</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -161,7 +159,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editDokumenModalLabel">Edit Dokumen Kelurahan</h5>
+                <h5 class="modal-title" id="editDokumenModalLabel">Edit Dokumen Pisa</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -229,5 +227,6 @@
     });
 
 </script>
+
 
 @endsection

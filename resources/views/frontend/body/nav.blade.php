@@ -1,3 +1,10 @@
+
+<style>
+.header {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow lembut */
+}
+</style>
+
 <header id="header" class="header d-flex align-items-center sticky-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
@@ -109,8 +116,10 @@
            <!-- Halaman Mitra Anak  -->
            <li class="dropdown"><a href="#"><span>Mitra Anak</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="{{route('HalamanArtikel')}}">Artikel</a></li>
+              <li><a href="{{route('HArtikelMitra')}}">Artikel Mitra Anak</a></li>
+              <li><a href="{{route('HKegiatanMitra')}}">Kegiatan Mitra Anak</a></li>
           </ul>
+         
             <!-- Selesai Mitra Anak -->
 
           <li><a href="{{ route('login') }}">Login</a></li>

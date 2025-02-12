@@ -1,6 +1,7 @@
 @extends('frontend.user-main')
 
 @section('content')
+
     <!-- Hero Section -->
     <section id="hero" class="hero section">
 
@@ -9,10 +10,6 @@
           <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center" data-aos="fade-up">
            <center> <h1>SELAMAT DATANG DI WEBSITE SITALAS</h1></center>
           
-            <!-- <div class="d-flex">
-              <a href="#about" class="btn-get-started">Get Started</a>
-              <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
-            </div> -->
           </div>
           <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="100">
             <img src="{{asset('assets/img/hero-img.png')}}" class="img-fluid animated" alt="">
@@ -22,6 +19,65 @@
       </div>
 
     </section><!-- /Hero Section -->
+
+
+    
+    <!-- bagian Carosel -->
+    <style>
+  /* Atur ukuran gambar carousel */
+  .carousel-inner img {
+    width: 100%; /* Gambar akan menyesuaikan lebar container */
+    height: 500px; /* Tinggi tetap */
+    object-fit: cover; /* Memastikan gambar tidak terdistorsi */
+  }
+</style>
+
+<section>
+  <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active" data-bs-interval="5000">
+        <img src="kids.jpg" class="d-block w-100" alt="First Slide">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>First Slide Label</h5>
+          <p>Some representative placeholder content for the first slide.</p>
+        </div>
+      </div>
+      <div class="carousel-item" data-bs-interval="5000">
+        <img src="https://via.placeholder.com/800x400?text=Second+Slide" class="d-block w-100" alt="Second Slide">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Second Slide Label</h5>
+          <p>Some representative placeholder content for the second slide.</p>
+        </div>
+      </div>
+      <div class="carousel-item" data-bs-interval="5000">
+        <img src="https://via.placeholder.com/800x400?text=Third+Slide" class="d-block w-100" alt="Third Slide">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Third Slide Label</h5>
+          <p>Some representative placeholder content for the third slide.</p>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</section>
+
+
+    <!-- batas selesesai -->
+
+
+
     <!-- Testimonials Section -->
     <section id="testimonials" class="testimonials section light-background">
 
@@ -132,6 +188,23 @@
       </div>
 
     </section><!-- /Testimonials Section -->
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <!-- About Section -->
     <section id="about" class="about section">
 

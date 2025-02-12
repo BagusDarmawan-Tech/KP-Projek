@@ -1,6 +1,7 @@
 @extends('admin.admin-master')
 @section('main')
 <link href="{{ asset('assets/css/tabel.css') }}" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <div class="container mt-5">
     <div class="card shadow-lg border-0 position-relative overflow-hidden mb-5"> 
@@ -59,8 +60,8 @@
                             <td>{{ $klaster->dibuatOleh }}</td>
                             <td><span class="badge bg-success">{{ $klaster->is_active }}</span></td>
                             <td>
-                                <button class="btn btn-sm btn-primary"><i class="bi bi-pencil"></i></button>
-                                <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
+                            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#EditModal"><i class="bi bi-pencil-square"></i></button>
+                            <button class="btn btn-sm btn-danger delete-slider"><i class="bi bi-trash"></i> </button>
                             </td>
                         </tr>
                         @endforeach
@@ -122,10 +123,110 @@
     </div>
 </div>
 
+<!-- Modal edit -->
+<div class="modal fade" id="EditModal" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="kategoriModalLabel">Edit Klaster</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="kategoriIcon" class="form-label">Icon</label>
+                        <input type="text" class="form-control" id="kategoriIcon" placeholder="Masukkan Icon">
+                    </div>
+                    <div class="mb-3">
+                        <label for="kategoriNama" class="form-label">Nama</label>
+                        <input type="text" class="form-control" id="kategoriNama" placeholder="Masukkan Nama">
+                    </div>
+                    <div class="mb-3">
+                        <label for="kategoriSlug" class="form-label">Slug</label>
+                        <input type="text" class="form-control" id="kategoriSlug" placeholder="Masukkan Slug">
+                    </div>
+                    <div class="mb-3">
+                        <label for="kategoriGambar" class="form-label">Gambar</label>
+                        <input type="file" class="form-control" id="kategoriGambar">
+                    </div>
+                    <div class="mb-3">
+                        <label for="kategoriStatus" class="form-label">Status</label>
+                        <select class="form-select" id="kategoriStatus">
+                            <option selected>--- Pilih Status ---</option>
+                            <option value="Aktif">Aktif</option>
+                            <option value="Non-Aktif">Non-Aktif</option>
+                        </select>
+                    </div>
+                    </div>
+                    <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Modal delete -->
+<div class="modal fade" id="deleteMenuModal" tabindex="-1" aria-labelledby="deleteMenuModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteMenuModalLabel">Hapus Menu</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Apakah Anda yakin ingin menghapus menu ini?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bagian delete -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".delete-slider").forEach(button => {
+            button.addEventListener("click", function () {
+                Swal.fire({
+                    title: "<b>Apakah Anda Yakin!</b>",
+                    text: "Akan Menghapus Data ini!",
+                    icon: "question",
+                    showCancelButton: true,
+                    confirmButtonColor: "#d33",
+                    cancelButtonColor: "#6c757d",
+                    confirmButtonText: "CONFIRM",
+                    cancelButtonText: "CANCEL",
+                    customClass: {
+                        title: 'fw-bold',
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: "Dihapus!",
+                            text: "Data telah berhasil dihapus.",
+                            icon: "success"
+                        });
+                    }
+                });
+            });
+        });
+    });
+
+    </script>
+
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         var kategoriModal = new bootstrap.Modal(document.getElementById("kategoriModal"));
     });
 </script>
+
+
 
 @endsection

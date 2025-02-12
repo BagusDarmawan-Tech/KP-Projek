@@ -22,12 +22,12 @@
           </a>
         </li>
         <li>
-          <a href="components-accordion.html">
+          <a href="{{route('HalamanRole')}}">
             <i class="bi bi-circle"></i><span>Role Management</span>
           </a>
         </li>
         <li>
-          <a href="components-badges.html">
+          <a href="{{route('HalamanConfigurasi')}}">
             <i class="bi bi-circle"></i><span>Configurasi App</span>
           </a>
         </li>
@@ -54,7 +54,7 @@
       </a>
       <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
-          <a href="forms-elements.html">
+          <a href="{{route('MenuManagement')}}">
             <i class="bi bi-circle"></i><span>Menu Management</span>
           </a>
         </li>
@@ -137,7 +137,7 @@
           </a>
         </li>
         <li>
-          <a href="charts-apexcharts.html">
+          <a href="{{route('Kegiatankelurahan')}}">
             <i class="bi bi-circle"></i><span>Kegiatan Kelurahan</span>
           </a>
         </li>
@@ -168,12 +168,12 @@
       </a>
       <ul id="icons" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
-          <a href="icons-bootstrap.html">
+          <a href="{{route('DokumenLayakAnak')}}">
             <i class="bi bi-circle"></i><span>Dokumen PISA</span>
           </a>
         </li>
         <li>
-          <a href="icons-remix.html">
+          <a href="{{route('KegiatanLayakanak')}}">
             <i class="bi bi-circle"></i><span>Kegiatan PISA</span>
           </a>
         </li>
@@ -188,7 +188,7 @@
     </li>
 
     <li class="nav-item">
-      <a class="nav-link collapsed" href="#">
+      <a class="nav-link collapsed" href="{{route('KegiatanForumSurabaya')}}">
         <i class="bi bi-journal-text"></i>
         <span>Kegiatan Forum Anak Surabaya</span>
       </a>

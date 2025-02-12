@@ -1,6 +1,7 @@
 @extends('admin.admin-master')
 @section('main')
 <link href="{{ asset('assets/css/tabel.css') }}" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <div class="container mt-5">
     <div class="card shadow-lg border-0 position-relative overflow-hidden mb-5">
@@ -56,15 +57,9 @@
                             <td>{{ $usulan->tindakLanjut }}</td>
                             <td><span class="badge bg-success">{{ $usulan->is_active }}</span></td>
                             <td>
-                                <button class="btn btn-sm btn-primary edit-btn" 
-                                    data-opd="Dinas Kesehatan" 
-                                    data-usulan="Pemeriksaan Berkala" 
-                                    data-tindak="Program ini bertujuan untuk..."
-                                    data-keterangan="Peraturan terkait kesehatan anak"
-                                    data-status="Aktif">
-                                    &#9998;
-                                </button>
-                                <button class="btn btn-sm btn-danger">&#128465;</button>
+                                <button class="btn btn-sm btn-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editPemantauanModal" data-judul="Judul Halaman" data-slug="slug-halaman" data-status="Aktif"><i class="bi bi-pencil-square"></i></button>
+                                <button class="btn btn-sm btn-danger delete-slider"><i class="bi bi-trash"></i> </button>
+
                             </td>
                         </tr>
                         @endforeach
@@ -116,24 +111,12 @@
             <div class="modal-body">
                 <form>
                     <div class="mb-3">
-                        <label for="editNamaOPD" class="form-label">Nama OPD</label>
+                        <label for="editNamaOPD" class="form-label">Tindak Lanjut</label>
                         <select class="form-select" id="editNamaOPD">
                             <option selected>--- Pilih OPD ---</option>
                             <option value="Dinas Kesehatan">Dinas Kesehatan</option>
                             <option value="Dinas Pendidikan">Dinas Pendidikan</option>
                         </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editNamaUsulan" class="form-label">Nama Usulan</label>
-                        <input type="text" class="form-control" id="editNamaUsulan">
-                    </div>
-                    <div class="mb-3">
-                        <label for="editTindakLanjut" class="form-label">Tindak Lanjut</label>
-                        <textarea class="form-control" id="editTindakLanjut" rows="2"></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editKeterangan" class="form-label">Keterangan</label>
-                        <textarea class="form-control" id="editKeterangan" rows="2"></textarea>
                     </div>
                     <div class="mb-3 d-flex align-items-center">
                         <label class="form-label me-2">Status</label>
@@ -151,6 +134,38 @@
         </div>
     </div>
 </div>
+
+<!-- Bagian delete -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".delete-slider").forEach(button => {
+            button.addEventListener("click", function () {
+                Swal.fire({
+                    title: "<b>Apakah Anda Yakin!</b>",
+                    text: "Akan Menghapus Data ini!",
+                    icon: "question",
+                    showCancelButton: true,
+                    confirmButtonColor: "#d33",
+                    cancelButtonColor: "#6c757d",
+                    confirmButtonText: "CONFIRM",
+                    cancelButtonText: "CANCEL",
+                    customClass: {
+                        title: 'fw-bold',
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: "Dihapus!",
+                            text: "Data telah berhasil dihapus.",
+                            icon: "success"
+                        });
+                    }
+                });
+            });
+        });
+    });
+
+</script>
 
 <script>
 document.querySelectorAll(".edit-btn").forEach(button => {

@@ -2,17 +2,17 @@
 @section('main')
 <link href="{{ asset('assets/css/tabel.css') }}" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 <div class="container mt-5">
     <div class="card shadow-lg border-0 position-relative overflow-hidden mb-5"> 
         <div class="card-body mt-4">
             <div class="text-center mb-4">
-                <h4 class="fw-bold">Kategori Artikel</h4>
+                <h4 class="fw-bold">Configurasi APP</h4>
             </div>
+            
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <div></div> <!-- Spacer -->
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kategoriModal">
-                    + Kategori Artikel
+                    + Tambah COnfigurasi APP
                 </button>
             </div>
 
@@ -39,101 +39,97 @@
                     <thead class="table-primary">
                         <tr>
                             <th>No</th>
-                            <th>Nama Kategori</th>
-                            <th>Dibuat Oleh</th>
-                            <th>Status</th>
+                            <th>Nama</th>
+                            <th>Detail</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($kategori_artikel as $kategori)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $kategori->nama }}</td>
-                            <td>{{ $kategori->dibuatOleh }}</td>
-                            <td>{{ $kategori->is_active }}</td>
+                            <td>1</td>
+                            <td><i class="bi bi-file-earmark-text"></i></td>
+                            <td>Artikel</td>
                             <td>
-                            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editMenuModal"><i class="bi bi-pencil-square"></i></button>
-                            <button class="btn btn-sm btn-danger delete-slider"><i class="bi bi-trash"></i> </button>
+                            <button class="btn btn-sm btn-primary edit-btn" data-bs-toggle="modal" data-bs-target="#EditModal"data-status="Aktif"><i class="bi bi-pencil-square"></i></button>
+                                <button class="btn btn-sm btn-danger delete-slider"><i class="bi bi-trash"></i> </button>
                             </td>
                         </tr>
-                        @endforeach
                     </tbody>
                 </table>
-                
             </div>
         </div>
     </div>
 </div>
 
-<!-- Modal Tambah Kategori Artikel -->
+
+<!-- Modal Tambah connfig -->
 <div class="modal fade" id="kategoriModal" tabindex="-1" aria-labelledby="kategoriModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="kategoriModalLabel">Tambah Kategori Artikel Baru</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form method="POST" action="{{ route('createKategoriArtikel') }}">
-                    @csrf    
-                    <div class="mb-3">
-                        <label for="nama" class="form-label">Nama</label>
-                        <input type="text" class="form-control" id="nama" name="nama" value="{{ old('nama') }}" required>
-                    </div>
-            
-                    <div class="mb-3">
-                        <label for="kategoriStatus" class="form-label">Status</label>
-                        <select class="form-select" id="kategoriStatus" name="is_active" required>
-                            <option value="" disabled selected>--- Pilih Status ---</option>
-                            <option value="1" {{ old('is_active') == "1" ? 'selected' : '' }}>Aktif</option>
-                            <option value="0" {{ old('is_active') == "0" ? 'selected' : '' }}>Non-Aktif</option>
-                        </select>
-                    </div>
-            
-                    <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
-            
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                    </div>
-                </form>
-            </div>
-            
-        </div>
-    </div>
-</div>
-
-<!-- Modal Edit Menu -->
-<div class="modal fade" id="editMenuModal" tabindex="-1" aria-labelledby="editMenuModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editMenuModalLabel">Edit Menu Kategori Artikel</h5>
+                <h5 class="modal-title" id="kategoriModalLabel">Tambah Configurasi APP</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form>
                     <div class="mb-3">
-                        <label for="editMenuName" class="form-label">Nama</label>
-                        <input type="text" class="form-control" id="editMenuName" placeholder="Masukkan nama menu">
+                        <label for="kategoriNama" class="form-label">Nama</label>
+                        <input type="text" class="form-control" id="kategoriNama" placeholder="Masukkan Nama">
                     </div>
-                    <div class="mb-3 form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="editMenuStatus">
-                        <label class="form-check-label" for="editMenuStatus">Aktif</label>
+                    <div class="mb-3">
+                        <label for="kategoriSlug" class="form-label">Detail</label>
+                        <input type="text" class="form-control" id="kategoriSlug" placeholder="Masukkan Detail">
                     </div>
+                  <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
                 </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Update changes</button>
-            </div>
+
         </div>
     </div>
 </div>
 
-<!-- Bagian Delete Menu -->
+<!-- bagian edit -->
+<div class="modal fade" id="EditModal" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="kategoriModalLabel">Tambah Configurasi APP</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="kategoriNama" class="form-label">Nama</label>
+                        <input type="text" class="form-control" id="kategoriNama" placeholder="Masukkan Nama">
+                    </div>
+                    <div class="mb-3">
+                        <label for="kategoriSlug" class="form-label">Detail</label>
+                        <input type="text" class="form-control" id="kategoriSlug" placeholder="Masukkan Detail">
+                    </div>
+                  <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var kategoriModal = new bootstrap.Modal(document.getElementById("kategoriModal"));
+    });
+</script>
+
+<!-- bagian delete -->
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll(".delete-slider").forEach(button => {
@@ -163,12 +159,7 @@
         });
     });
 
-    </script>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var kategoriModal = new bootstrap.Modal(document.getElementById("kategoriModal"));
-    });
 </script>
+
 
 @endsection

@@ -16,7 +16,10 @@ use App\Http\Controllers\KelurahanLayakAnakController;
 
 use App\Http\Controllers\SuaraAnakController;
 use App\Http\Controllers\KotaLayakAnakController;
-
+use App\Http\Controllers\PusatInformasiSahabatController;
+use App\Http\Controllers\KegiatanForumArekSurabayaController;
+use App\Http\Controllers\ConfigController;
+use App\Http\Controllers\MitraAnakController;
 
 use App\Http\Controllers\WebManagementController;
 use App\Http\Controllers\KecamatanLayakController;
@@ -48,6 +51,7 @@ Route::get('/CFCI/SK-Kecamatan', [CFCIController::class, 'Ckecamatan'])->name('C
 
 // BATAS SELESAI Route halaman CFCI
 
+
 // ROUTE HALAMAN GALERI
 Route::get('/Galeri-Kota-Layak-Anak', [GaleriController::class, 'galeriKotaLayakAnak'])->name('galeri-kota-layakanak');
 Route::get('/Galeri-Anak', [GaleriController::class, 'GaleriAnak'])->name('GaleriAnak');
@@ -55,15 +59,12 @@ Route::get('/Galeri-Anak', [GaleriController::class, 'GaleriAnak'])->name('Galer
 
 
 // BATAS HALAMAN FORUM ANAK 
-
 Route::get('/skkec', [forumanakController::class, 'skkec'])->name('Skkecam');
 Route::get('/skkel', [forumanakController::class, 'skkel'])->name('Skkel');
 Route::get('/pemantauananak', [forumanakController::class, 'pemantauananak'])->name('pemantauananak');
 Route::get('/kegareksby', [forumanakController::class, 'kegareksby'])->name('kegareksby');
 Route::get('/kegiatan-forum-anak-kelurahan', [forumanakController::class, 'kegiatanforumanakkelurahan'])->name('kegiatanforumanakkelurahan');
 Route::get('/kegiatan-forum-anak-kecamatan', [forumanakController::class, 'kegiatanforumanakkecamatan'])->name('kegiatanforumanakkecamatan');
-
-
 // ROUTE HALAMAN FORUM ANAK
 
 // HALAMAN BAGIAN KLASTER
@@ -83,21 +84,24 @@ Route::get('/kegiatan-kecamatan-layak-anak', [KotaLayakAnakController::class, 'k
 Route::get('/kegiatan-kelurahan-layak-anak', [KotaLayakAnakController::class, 'kegiatankelurahanlayakanak'])->name('kegiatankelurahanlayakanak');
 // BATAS HALAMAN BAGIAN KOTA LAYAK ANAK
 
-// HALAMAN BAGIAN PISA
 
-// BATAS HALAMAN PISA
+// HALAMAN BAGIAN PISA
 Route::get('/dokumenPisa', [pisaController::class, 'dokumenPisa'])->name('HalamanPisa');
 Route::get('/KegiatanPisa', [pisaController::class, 'KegiatanPisa'])->name('KegiatanPisa');
+
+// BATAS HALAMAN PISA
 
 // HALAMAN BAGIAN SUARA ANAK
 Route::get('/PantauSuaraAnak', [SuaraAnakController::class, 'PsuaraAnak'])->name('suaraanak');
 Route::get('/KaryaAnak', [SuaraAnakController::class, 'karyaAnak'])->name('KaryaAnak');
 
-// BATAS HALAMAN BAGIAN SUARA ANAK
 
-// HALAMAN BAGIAN MITRA ANAK
+// HALAMAN MITRA ANAK
+Route::get('/HalamanArtikelMitra', [MitraAnakController::class, 'ArtikelMitra'])->name('HArtikelMitra');
+Route::get('/HalamanKegiatanMitra', [MitraAnakController::class, 'KegiatanMitra'])->name('HKegiatanMitra');
 
-// BATAS HALAMAN BAGIAN MITRA ANAK
+
+
 
 //Landing Page
 Route::get('/', function () {return view('frontend.content.landing-page');})->name('content');
@@ -106,6 +110,7 @@ Route::get('/', function () {return view('frontend.content.landing-page');})->na
 //=======================  Backend  =============================//
 
 // bagian WebManagement
+Route::get('/HalamanMenuManagement', [WebManagementController::class, 'ManagementMenu'])->name('MenuManagement');
 Route::get('/KategoriArtikel', [WebManagementController::class, 'kategoriArtikel'])->name('kategoriArtikel');
 Route::get('/Klaster', [WebManagementController::class, 'Klaster1'])->name('Klaster');
 
@@ -114,8 +119,22 @@ Route::get('/Artikel', [WebManagementController::class, 'BagianArtikel'])->name(
 
 
 //Bagian Kelurahan Layak Anak
-Route::get('/KelurahanLayakAnak', [KelurahanLayakAnakController::class, 'HalamanDokumen'])->name('HalamanDokument');
-// 
+Route::get('/KelurahanLayakAnak', [KelurahanLayakAnakController::class, 'HalamanDokumenLayakAnak'])->name('HalamanDokument');
+Route::get('/KegiatanLayakAnak', [KelurahanLayakAnakController::class, 'KegiatanKelurahanAnak'])->name('Kegiatankelurahan');
+
+
+// Halaman Pusat Informasi Sahabat Anak
+Route::get('/HalamananDokumenPisa', [PusatInformasiSahabatController::class, 'HalamanDokumen'])->name('DokumenLayakAnak');
+Route::get('/HalamananKegiatanPisa', [PusatInformasiSahabatController::class, 'HalamanKegiatan'])->name('KegiatanLayakanak');
+
+// Halaman Kegiatan Forum Anak surabaya
+Route::get('/HalamanForumAnakaSurabaya', [KegiatanForumArekSurabayaController::class, 'HalamanForum'])->name('KegiatanForumSurabaya');
+
+// Halaman Config
+Route::get('/HalamanRoleManagement', [ConfigController::class, 'RoleManagementt'])->name('HalamanRole');
+Route::get('/HalamanConfigurasiAPP', [ConfigController::class, 'ConfigurasiAPP'])->name('HalamanConfigurasi');
+
+
 
 
 //Backend autentikasi 

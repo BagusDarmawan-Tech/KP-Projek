@@ -6,8 +6,14 @@ use Illuminate\Http\Request;
 
 class KelurahanLayakAnakController extends Controller
 {
-    public function HalamanDokumen() {
+    public function HalamanDokumenLayakAnak() {
         return view('admin.dokumenKelurahan'); 
     }
+
+
+    public function KegiatanKelurahanAnak() {
+        return view('admin.KegiatanKelurahan'); 
+    }
+
     
 }

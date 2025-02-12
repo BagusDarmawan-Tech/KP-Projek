@@ -347,4 +347,9 @@ class WebManagementController extends Controller
     }
     //================== END CRUD Artikel
 
+
+    public function ManagementMenu() {
+        return view('admin.MenuManagement'); 
+    }
+
 }
