@@ -7,7 +7,7 @@
 <div class="container mt-5">
     <div class="card shadow-lg border-0 position-relative overflow-hidden mb-4 p-3">
         <div class="card-body">
-            <h4 class="fw-bold mb-3 text-center">Dokumen Kecamatan</h4>
+            <h4 class="fw-bold mb-3 text-center">Dokumen SK Fas, CFCI Dan KLA</h4>
             <div class="row">
                 <div class="col-md-6 ">
                     <label for="userEntri" class="form-label">User Entri</label>
@@ -69,13 +69,13 @@
 
     <div class="card shadow-lg border-0 position-relative overflow-hidden p-3">
         <div class="card-body">
-        <div class="d-flex justify-content-end mb-1">
+        <div class="d-flex justify-content-end mb-3">
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#dokumenKelurahanModal">
-                    <i class="bi bi-plus"></i> Dokumen Kecamatan
+                    <i class="bi bi-plus"></i> Dokumen SK Fas, CFCI Dan KLA
                 </button>
             </div>
-    </div>
-            <!-- Kontrol Tampilkan & Cari -->
+
+    <!-- Kontrol Tampilkan & Cari -->
     <div class="row mb-3 align-items-center">
                 <div class="col-md-6">
                     <label for="showEntries" class="form-label me-2">Show</label>
@@ -91,6 +91,7 @@
                     <input type="text" id="searchInput" class="form-control form-control-sm d-inline-block" placeholder="Search..." style="width: 200px;">
                 </div>
             </div>
+            
             <div class="table-responsive">
                 <table class="table table-hover table-bordered align-middle text-center">
                     <thead class="table-primary">
@@ -129,7 +130,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="dokumenKelurahanModalLabel">Tambah Dokumen Kecamatan Baru</h5>
+                <h5 class="modal-title" id="dokumenKelurahanModalLabel">Tambah Dokumen SK Fas, CFCI Dan KLA Baru</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -137,9 +138,9 @@
                     <label class="form-label">Kegiatan</label>
                     <select class="form-select" name="kegiatan">
                         <option selected>--- Pilih Kategori ---</option>
-                        <option value="SK">SK</option>
-                        <option value="RPA">RPA</option>
-                        <option value="SK-FAS">SK-FAS</option>
+                        <option value="SK">SK CFCI</option>
+                        <option value="RPA">SK FAS Kota</option>
+                        <option value="SK-FAS">SK Kota Layak Anak</option>
                     </select>
                 </div>
                 <div class="mb-3">
@@ -175,7 +176,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editDokumenModalLabel">Edit Dokumen Kecamatan</h5>
+                <h5 class="modal-title" id="editDokumenModalLabel">Edit Dokumen SK Fas, CFCI Dan KLA</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -183,9 +184,9 @@
                     <label class="form-label">Kegiatan</label>
                     <select class="form-select" name="kegiatan">
                         <option selected>--- Pilih Kategori ---</option>
-                        <option value="SK">SK</option>
-                        <option value="RPA">RPA</option>
-                        <option value="SK-FAS">SK-FAS</option>
+                        <option value="SK">SK CFCI</option>
+                        <option value="RPA">SK FAS Kota</option>
+                        <option value="SK-FAS">SK Kota Layak Anak</option>
                     </select>
                 </div>
                 <div class="mb-3">

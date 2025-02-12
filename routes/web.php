@@ -23,7 +23,11 @@ use App\Http\Controllers\MitraAnakController;
 
 use App\Http\Controllers\WebManagementController;
 use App\Http\Controllers\KecamatanLayakController;
+use App\Http\Controllers\MitraAnakController;
+use App\Http\Controllers\KegiatanArekSuroboyoController;
+use App\Http\Controllers\UsulanKegiatanController;
 use App\Http\Controllers\UserManagement;
+use App\Http\Controllers\DokumenSkCfciController;
 
 /*
 |--------------------------------------------------------------------------
@@ -169,9 +173,31 @@ Route::middleware('auth')->group(function () {
 //Kecamatan Layak Anak
 Route::middleware('auth')->group(function () {
     Route::get('/dokumen-kec', [KecamatanLayakController::class, 'dokumenkec'])->name('dokumen-kec');
-    
+    Route::get('/kegiatan-kecamatan', [KecamatanLayakController::class, 'kegiatanKecamatan'])->name('kegiatan-kecamatan');
 });
 
+//Mitra Anak
+Route::middleware('auth')->group(function () {
+    Route::get('/kegiatan-cfci', [MitraAnakController::class, 'kegiatanCfci'])->name('kegiatan-cfci');
+    Route::get('/artikel-mitraanak', [MitraAnakController::class, 'artikelmitraanak'])->name('artikel-mitraanak');
+    Route::get('/kegiatan-mitra', [MitraAnakController::class, 'kegiatanMitraAnak'])->name('kegiatan-mitra');
+});
+
+//Kegiatan Arek Suroboyo
+Route::middleware('auth')->group(function () {
+    Route::get('/kegiatan-arek', [KegiatanArekSuroboyoController::class, 'kegiatanarek'])->name('kegiatan-arek');
+});
+
+//Usulan Kegiatan
+Route::middleware('auth')->group(function () {
+    Route::get('/pemantauan-suara', [UsulanKegiatanController::class, 'pemantauansuara'])->name('pemantauan-suara');
+    Route::get('/karya-anak', [UsulanKegiatanController::class, 'karyaAnak'])->name('karya-anak');
+});
+
+//Dokumen SK Fas, Cfci dan Kla
+Route::middleware('auth')->group(function () {
+    Route::get('/dokumen-skcfci', [DokumenSkCfciController::class, 'dokumenSkCfciKla'])->name('dokumen-skcfci');
+});
 
 //CONFIG
 Route::middleware('auth')->group(function () {

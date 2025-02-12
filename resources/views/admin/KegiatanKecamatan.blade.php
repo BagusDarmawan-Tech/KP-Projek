@@ -7,7 +7,7 @@
 <div class="container mt-5">
     <div class="card shadow-lg border-0 position-relative overflow-hidden mb-4 p-3">
         <div class="card-body">
-            <h4 class="fw-bold mb-3 text-center">Dokumen Kecamatan</h4>
+            <h4 class="fw-bold mb-3 text-center">Kegiatan Kecamatan</h4>
             <div class="row">
                 <div class="col-md-6 ">
                     <label for="userEntri" class="form-label">User Entri</label>
@@ -69,14 +69,19 @@
 
     <div class="card shadow-lg border-0 position-relative overflow-hidden p-3">
         <div class="card-body">
-        <div class="d-flex justify-content-end mb-1">
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#dokumenKelurahanModal">
-                    <i class="bi bi-plus"></i> Dokumen Kecamatan
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <!-- <h5 class="fw-bold">Daftar Dokumen</h5> -->
+                 <br>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTambahKegiatan">
+                    <i class="bi bi-plus"></i> Tambah kegiatan Kelurahan
                 </button>
             </div>
-    </div>
-            <!-- Kontrol Tampilkan & Cari -->
-    <div class="row mb-3 align-items-center">
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered align-middle text-center">
+                    <thead class="table-primary">
+
+                       <!-- Kontrol Tampilkan & Cari -->
+            <div class="row mb-3 align-items-center">
                 <div class="col-md-6">
                     <label for="showEntries" class="form-label me-2">Show</label>
                     <select id="showEntries" class="form-select form-select-sm d-inline-block" style="width: 80px;">
@@ -91,14 +96,14 @@
                     <input type="text" id="searchInput" class="form-control form-control-sm d-inline-block" placeholder="Search..." style="width: 200px;">
                 </div>
             </div>
-            <div class="table-responsive">
-                <table class="table table-hover table-bordered align-middle text-center">
-                    <thead class="table-primary">
+            
+            <!-- Tombol Tambah Artikel di atas -->           
+
                         <tr>
                             <th>No</th>
-                            <th>Jenis Dokumen</th>
-                            <th>Nama Dokumen</th>
-                            <th>Data Dukung</th>
+                            <th>Gambar</th>
+                            <th>Nama</th>
+                            <th>Keterangan</th>
                             <th>Dibuat Oleh</th>
                             <th>Status</th>
                             <th>Actions</th>
@@ -113,7 +118,7 @@
                             <td>Ema</td>
                             <td><span class="badge bg-success">Aktif</span></td>
                             <td>
-                                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editDokumenModal"><i class="bi bi-pencil-square"></i></button>
+                                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modaEditKegiatan"><i class="bi bi-pencil-square"></i></button>
                                 <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
                             </td>
                         </tr>
@@ -125,91 +130,85 @@
 </div>
 
 <!-- Modal Tambah Dokumen Kelurahan -->
-<div class="modal fade" id="dokumenKelurahanModal" tabindex="-1" aria-labelledby="dokumenKelurahanModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="dokumenKelurahanModalLabel">Tambah Dokumen Kecamatan Baru</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="mb-3">
-                    <label class="form-label">Kegiatan</label>
-                    <select class="form-select" name="kegiatan">
-                        <option selected>--- Pilih Kategori ---</option>
-                        <option value="SK">SK</option>
-                        <option value="RPA">RPA</option>
-                        <option value="SK-FAS">SK-FAS</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Nama</label>
-                    <input type="text" class="form-control" name="nama">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Data Dukung</label>
-                    <input type="file" class="form-control" name="data_dukung">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Keterangan</label>
-                    <textarea class="form-control" name="keterangan"></textarea>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Status</label>
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="status" checked>
-                        <label class="form-check-label" for="status">Aktif</label>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
+<div class="modal fade" id="modalTambahKegiatan" tabindex="-1" aria-labelledby="modalTambahKegiatanLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fw-bold" id="modalTambahKegiatanLabel">Tambah Kegiatan Kecamatan Baru</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="namaKegiatan" class="form-label fw-semibold">Nama</label>
+            <input type="text" class="form-control" id="namaKegiatan" placeholder="Masukkan nama kegiatan">
+          </div>
+          <div class="mb-3">
+            <label for="tanggalKegiatan" class="form-label fw-semibold">Tanggal Kegiatan</label>
+            <input type="date" class="form-control" id="tanggalKegiatan">
+          </div>
+          <div class="mb-3">
+            <label for="gambarKegiatan" class="form-label fw-semibold">Gambar</label>
+            <input type="file" class="form-control" id="gambarKegiatan" accept="image/*" onchange="previewImage(event)">
+            <img id="preview" src="#" alt="Preview" class="img-fluid mt-2 d-none" style="max-height: 200px;">
+          </div>
+          <div class="mb-3">
+            <label for="keteranganKegiatan" class="form-label fw-semibold">Keterangan</label>
+            <textarea class="form-control" id="keteranganKegiatan" rows="3" placeholder="Tambahkan keterangan kegiatan"></textarea>
+          </div>
+          <div class="mb-3 switch-container">
+            <label class="form-label fw-semibold">Status</label>
+            <input class="form-check-input ms-3" type="checkbox" id="statusKegiatan" checked>
+            <label for="statusKegiatan" class="fw-semibold text-primary">Aktif</label>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
     </div>
+  </div>
 </div>
 
 <!-- Modal Edit Dokumen Kelurahan -->
-<div class="modal fade" id="editDokumenModal" tabindex="-1" aria-labelledby="editDokumenModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editDokumenModalLabel">Edit Dokumen Kecamatan</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="mb-3">
-                    <label class="form-label">Kegiatan</label>
-                    <select class="form-select" name="kegiatan">
-                        <option selected>--- Pilih Kategori ---</option>
-                        <option value="SK">SK</option>
-                        <option value="RPA">RPA</option>
-                        <option value="SK-FAS">SK-FAS</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Nama</label>
-                    <input type="text" class="form-control" name="nama">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Data Dukung</label>
-                    <input type="file" class="form-control" name="data_dukung">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Keterangan</label>
-                    <textarea class="form-control" name="keterangan"></textarea>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Status</label>
-                    <input type="checkbox" class="form-check-input" id="statusEdit" checked>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
+<div class="modal fade" id="modaEditKegiatan" tabindex="-1" aria-labelledby="modaEditKegiatanLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modaEditKegiatan">Edit Kegiatan Kecamatan</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="namaKegiatan" class="form-label">Nama</label>
+            <input type="text" class="form-control" id="namaKegiatan">
+          </div>
+          <div class="mb-3">
+            <label for="tanggalKegiatan" class="form-label">Tanggal Kegiatan</label>
+            <input type="date" class="form-control" id="tanggalKegiatan">
+          </div>
+          <div class="mb-3">
+            <label for="gambarKegiatan" class="form-label">Gambar</label>
+            <input type="file" class="form-control" id="gambarKegiatan" accept="image/*" onchange="previewImage(event)">
+            <img id="preview" src="#" alt="Preview" class="img-fluid mt-2 d-none" style="max-height: 200px;">
+          </div>
+          <div class="mb-3">
+            <label for="keteranganKegiatan" class="form-label">Keterangan</label>
+            <textarea class="form-control" id="keteranganKegiatan" rows="3"></textarea>
+          </div>
+          <div class="mb-3 form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="statusKegiatan" checked>
+            <label class="form-check-label" for="statusKegiatan">Aktif</label>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
     </div>
+  </div>
 </div>
 @endsection

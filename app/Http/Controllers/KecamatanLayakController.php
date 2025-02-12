@@ -13,4 +13,11 @@ class KecamatanLayakController extends Controller
        
         return view('admin.DokumenKecamatan'); 
     }
+    public function kegiatanKecamatan() {
+        
+        // $documents = Rpa::paginate(10);
+
+       
+        return view('admin.KegiatanKecamatan'); 
+    }
 }

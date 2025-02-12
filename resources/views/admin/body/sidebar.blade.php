@@ -119,8 +119,8 @@
           </a>
         </li>
         <li>
-          <a href="tables-data.html">
-            <i class="bi bi-circle"></i><span>Dokumen Kecamatan</span>
+          <a href="{{route('kegiatan-kecamatan')}}">
+            <i class="bi bi-circle"></i><span>Kegiatan Kecamatan</span>
           </a>
         </li>
       </ul>
@@ -150,13 +150,18 @@
       </a>
       <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
-          <a href="icons-bootstrap.html">
-            <i class="bi bi-circle"></i><span>Kegiatan CFGI</span>
+          <a href="{{route('kegiatan-cfci')}}">
+            <i class="bi bi-circle"></i><span>Kegiatan CFCI</span>
           </a>
         </li>
         <li>
-          <a href="icons-remix.html">
+          <a href="{{route('artikel-mitraanak')}}">
             <i class="bi bi-circle"></i><span>Artikel Anak</span>
+          </a>
+        </li>
+        <li>
+          <a href="{{route('kegiatan-mitra')}}">
+            <i class="bi bi-circle"></i><span>Kegiatan Mitra Anak</span>
           </a>
         </li>
       </ul>
@@ -181,7 +186,7 @@
     </li><!-- End Icons Nav -->
 
     <li class="nav-item">
-      <a class="nav-link collapsed" href="#">
+      <a class="nav-link collapsed" href="{{route('kegiatan-arek')}}">
         <i class="bi bi-journal-text"></i>
         <span>Kegiatan Arek Suroboyo</span>
       </a>
@@ -199,16 +204,23 @@
       </a>
       <ul id="usulan-kegiatan" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
-          <a href="icons-bootstrap.html">
+          <a href="{{route('pemantauan-suara')}}">
             <i class="bi bi-circle"></i><span>Pemantauan Suara Anak</span>
           </a>
         </li>
         <li>
-          <a href="icons-remix.html">
+          <a href="{{route('karya-anak')}}">
             <i class="bi bi-circle"></i><span>Karya</span>
           </a>
         </li>
       </ul>
+    </li><!-- End Icons Nav -->
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="{{ route('dokumen-skcfci') }}">
+        <i class="bi bi-folder"></i>
+        <span>Dokumen SK FAS, CFCI Dan KLA</span>
+      </a>
     </li><!-- End Icons Nav -->
 
     <li class="nav-heading">Pages</li>
