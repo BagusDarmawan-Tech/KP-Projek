@@ -74,7 +74,8 @@
                     <i class="bi bi-plus"></i> Dokumen SK Fas, CFCI Dan KLA
                 </button>
             </div>
-
+    </div>
+    
     <!-- Kontrol Tampilkan & Cari -->
     <div class="row mb-3 align-items-center">
                 <div class="col-md-6">
@@ -91,7 +92,7 @@
                     <input type="text" id="searchInput" class="form-control form-control-sm d-inline-block" placeholder="Search..." style="width: 200px;">
                 </div>
             </div>
-            
+
             <div class="table-responsive">
                 <table class="table table-hover table-bordered align-middle text-center">
                     <thead class="table-primary">
