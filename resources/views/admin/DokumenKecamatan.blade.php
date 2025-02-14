@@ -65,107 +65,109 @@
                     </button>
                 </div>
             </div>
-            </div>
         </div>
     </div>
 
     <div class="card shadow-lg border-0 position-relative overflow-hidden p-3">
         <div class="card-body">
-        <div class="d-flex justify-content-end mb-1">
+            <div class="d-flex justify-content-end mb-1">
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#dokumenKelurahanModal">
                     <i class="bi bi-plus"></i> Dokumen Kecamatan
                 </button>
             </div>
-    </div>
-            <!-- Kontrol Tampilkan & Cari -->
-    <div class="row mb-3 align-items-center">
-                <div class="col-md-6">
-                    <label for="showEntries" class="form-label me-2">Show</label>
-                    <select id="showEntries" class="form-select form-select-sm d-inline-block" style="width: 80px;">
-                        <option value="10">10</option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                    </select>
-                    entries
-                </div>
-                <div class="col-md-6 text-end">
-                    <input type="text" id="searchInput" class="form-control form-control-sm d-inline-block" placeholder="Search..." style="width: 200px;">
-                </div>
+        </div>
+        <!-- Kontrol Tampilkan & Cari -->
+        <div class="row mb-3 align-items-center">
+            <div class="col-md-6">
+                <label for="showEntries" class="form-label me-2">Show</label>
+                <select id="showEntries" class="form-select form-select-sm d-inline-block" style="width: 80px;">
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+                entries
             </div>
-            <div class="table-responsive">
-                <table class="table table-hover table-bordered align-middle text-center">
-                    <thead class="table-primary">
-                        <tr>
-                            <th>No</th>
-                            <th>Jenis Dokumen</th>
-                            <th>Nama Dokumen</th>
-                            <th>Data Dukung</th>
-                            <th>Dibuat Oleh</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>SK FAS</td>
-                            <td>SK FAS Kecamatan Simokerto</td>
-                            <td><a href="#" class="text-primary">Lihat</a></td>
-                            <td>Ema</td>
-                            <td><span class="badge bg-success">Aktif</span></td>
-                            <td>
-                                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editDokumenModal"><i class="bi bi-pencil-square"></i></button>
-                               <!-- Tombol Hapus dengan konfirmasi -->
-                               <button class="btn btn-sm btn-danger delete-slider">
-                                    <i class="bi bi-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="col-md-6 text-end">
+                <input type="text" id="searchInput" class="form-control form-control-sm d-inline-block" placeholder="Search..." style="width: 200px;">
             </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered align-middle text-center">
+                <thead class="table-primary">
+                    <tr>
+                        <th>No</th>
+                        <th>Jenis Dokumen</th>
+                        <th>Nama Dokumen</th>
+                        <th>Data Dukung</th>
+                        <th>Dibuat Oleh</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>SK FAS</td>
+                        <td>SK FAS Kecamatan Simokerto</td>
+                        <td><a href="#" class="text-primary">Lihat</a></td>
+                        <td>Ema</td>
+                        <td><span class="badge bg-success">Aktif</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editDokumenModal"><i class="bi bi-pencil-square"></i></button>
+                            <button class="btn btn-sm btn-danger delete-slider">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
 
-<!-- Modal Tambah Dokumen Kelcamatan -->
+<!-- Modal Tambah Dokumen Kecamatan -->
 <div class="modal fade" id="dokumenKelurahanModal" tabindex="-1" aria-labelledby="dokumenKelurahanModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="dokumenKelurahanModalLabel">Tambah Dokumen Kecamatan Baru</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
+        <div class="modal-header d-flex flex-column align-items-center">
+            <h5 class="modal-title fw-bold text-center mb-0" id="dokumenKelurahanModalLabel">
+                Tambah Dokumen Kecamatan Baru
+            </h5>
+            <button type="button" class="btn-close position-absolute end-0 top-0" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
             <div class="modal-body">
-                <div class="mb-3">
-                    <label class="form-label">Kegiatan</label>
-                    <select class="form-select" name="kegiatan">
-                        <option selected>--- Pilih Kategori ---</option>
-                        <option value="SK">SK</option>
-                        <option value="RPA">RPA</option>
-                        <option value="SK-FAS">SK-FAS</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Nama</label>
-                    <input type="text" class="form-control" name="nama">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Data Dukung</label>
-                    <input type="file" class="form-control" name="data_dukung">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Keterangan</label>
-                    <textarea class="form-control" name="keterangan"></textarea>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Status</label>
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="status" checked>
-                        <label class="form-check-label" for="status">Aktif</label>
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label">Kegiatan</label>
+                        <select class="form-select" name="kegiatan">
+                            <option selected>--- Pilih Kategori ---</option>
+                            <option value="SK">SK</option>
+                            <option value="RPA">RPA</option>
+                            <option value="SK-FAS">SK-FAS</option>
+                        </select>
                     </div>
-                </div>
+                    <div class="mb-3">
+                        <label class="form-label">Nama</label>
+                        <input type="text" class="form-control" name="nama">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Data Dukung</label>
+                        <input type="file" class="form-control" name="data_dukung">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Keterangan</label>
+                        <textarea class="form-control" name="keterangan"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Status</label>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="status" checked>
+                            <label class="form-check-label" for="status">Aktif</label>
+                        </div>
+                    </div>
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -175,40 +177,42 @@
     </div>
 </div>
 
-<!-- Modal Edit Dokumen Kelurahan -->
+<!-- Modal Edit Dokumen Kecamatan -->
 <div class="modal fade" id="editDokumenModal" tabindex="-1" aria-labelledby="editDokumenModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editDokumenModalLabel">Edit Dokumen Kecamatan</h5>
+            <div class="modal-header d-flex flex-column align-items-center">
+                <h5 class="modal-title fw-bold text-center" id="editDokumenModalLabel">Edit Dokumen Kecamatan</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="mb-3">
-                    <label class="form-label">Kegiatan</label>
-                    <select class="form-select" name="kegiatan">
-                        <option selected>--- Pilih Kategori ---</option>
-                        <option value="SK">SK</option>
-                        <option value="RPA">RPA</option>
-                        <option value="SK-FAS">SK-FAS</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Nama</label>
-                    <input type="text" class="form-control" name="nama">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Data Dukung</label>
-                    <input type="file" class="form-control" name="data_dukung">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Keterangan</label>
-                    <textarea class="form-control" name="keterangan"></textarea>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Status</label>
-                    <input type="checkbox" class="form-check-input" id="statusEdit" checked>
-                </div>
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label">Kegiatan</label>
+                        <select class="form-select" name="kegiatan">
+                            <option selected>--- Pilih Kategori ---</option>
+                            <option value="SK">SK</option>
+                            <option value="RPA">RPA</option>
+                            <option value="SK-FAS">SK-FAS</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Nama</label>
+                        <input type="text" class="form-control" name="nama">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Data Dukung</label>
+                        <input type="file" class="form-control" name="data_dukung">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Keterangan</label>
+                        <textarea class="form-control" name="keterangan"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Status</label>
+                        <input type="checkbox" class="form-check-input" id="statusEdit" checked>
+                    </div>
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

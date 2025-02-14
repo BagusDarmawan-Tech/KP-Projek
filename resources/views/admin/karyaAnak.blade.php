@@ -33,7 +33,7 @@
         <div class="row mb-3">
             <div class="col-md-12 d-flex justify-content-end">
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambahKaryaModal">
-                    + Tambah Karya Anak Baru
+                    + Karya Anak Baru
                 </button>
             </div>
         </div>
@@ -101,8 +101,8 @@
 <div class="modal fade" id="tambahKaryaModal" tabindex="-1" aria-labelledby="tambahKaryaModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="tambahKaryaModalLabel">Tambah Karya Anak Baru</h5>
+            <div class="modal-header d-flex flex-column align-items-center">
+            <h5 class="modal-title fw-bold text-center mb-0" id="tambahKaryaModalLabel">Tambah Karya Anak Baru</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -139,8 +139,8 @@
 <div class="modal fade" id="editKaryaModal" tabindex="-1" aria-labelledby="editKaryaModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editKaryaModalLabel">Edit Karya Anak</h5>
+            <div class="modal-header d-flex flex-column align-items-center">
+            <h5 class="modal-title fw-bold text-center mb-0" id="editKaryaModalLabel">Edit Karya Anak</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

@@ -1,4 +1,4 @@
-@extends('admin.admin-master') 
+@extends('admin.admin-master')
 
 @section('main')
 <link href="{{ asset('assets/css/tabel.css') }}" rel="stylesheet">
@@ -32,16 +32,24 @@
                         </tr>
                     </thead>
                     <tbody>
-
-                        @foreach ($forumAnaks as $forumAnak )
-                        <tr>
+                        @foreach ($forumAnaks as $forumAnak)
+                        <tr 
+                            data-id="{{ $forumAnak->id }}" 
+                            data-nama="{{ $forumAnak->nama }}" 
+                            data-caption="{{ $forumAnak->caption }}"
+                            data-deskripsi="{{ $forumAnak->deskripsi }}"
+                            data-gambar="{{ $forumAnak->gambar }}"
+                            data-status="{{ $forumAnak->is_active }}">
                             <td>{{ $loop->iteration }}</td>
                             <td><img src="{{ asset($forumAnak->gambar) }}" alt="Slider Image" width="80"></td>
                             <td>{{ $forumAnak->nama }}</td>
                             <td>{{ $forumAnak->caption }}</td>
                             <td>{{ $forumAnak->dibuatOleh }}</td>
-                            <td><span class="badge bg-success">{{ $forumAnak->is_active }}</span></td>
-
+                            <td>
+                                <span class="badge {{ $forumAnak->is_active ? 'bg-success' : 'bg-danger' }}">
+                                    {{ $forumAnak->is_active ? 'Aktif' : 'Non-Aktif' }}
+                                </span>
+                            </td>
                             <td>
                                 <!-- Button Edit Modal -->
                                 <button class="btn btn-sm btn-primary btn-edit" data-bs-toggle="modal" data-bs-target="#editModal">
@@ -75,19 +83,18 @@
                     <div class="mb-3">
                         <label for="sliderNama" class="form-label">Nama </label>
                         <input type="text" class="form-control" id="nama" name="nama" value="{{ old('nama') }}" required>
-
                     </div>
                     <div class="mb-3">
                         <label for="sliderCaption" class="form-label">Caption</label>
-                        <input type="text" class="form-control" id="sliderCaption"  name="caption" value="{{ old('caption') }}" required>
+                        <input type="text" class="form-control" id="sliderCaption" name="caption" value="{{ old('caption') }}" required>
                     </div>
                     <div class="mb-3">
                         <label for="sliderDeskripsi" class="form-label">Deskripsi</label>
-                        <textarea class="form-control" id="sliderDeskripsi" rows="2"  name="deskripsi" value="{{ old('deskripsi') }}" required></textarea>
+                        <textarea class="form-control" id="sliderDeskripsi" rows="2" name="deskripsi" value="{{ old('deskripsi') }}" required></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="sliderGambar" class="form-label">Gambar</label>
-                        <input type="file" class="form-control" id="sliderGambar"  name="gambar" value="{{ old('gambar') }}" required>
+                        <input type="file" class="form-control" id="sliderGambar" name="gambar" value="{{ old('gambar') }}" required>
                     </div>
                     <div class="mb-3">
                         <label for="kategoriStatus" class="form-label">Status</label>
@@ -98,13 +105,12 @@
                         </select>
                     </div>
                     <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
-            
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
+            </div>
         </div>
     </div>
 </div>
@@ -118,35 +124,38 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                    <input type="hidden" id="editId" name="id">
                     <div class="mb-3">
                         <label for="editNama" class="form-label">Nama</label>
-                        <input type="text" class="form-control" id="editNama">
+                        <input type="text" class="form-control" id="editNama" name="nama" required>
                     </div>
                     <div class="mb-3">
                         <label for="editCaption" class="form-label">Caption</label>
-                        <input type="text" class="form-control" id="editCaption">
+                        <input type="text" class="form-control" id="editCaption" name="caption" required>
                     </div>
                     <div class="mb-3">
                         <label for="editDeskripsi" class="form-label">Deskripsi</label>
-                        <textarea class="form-control" id="editDeskripsi" rows="2"></textarea>
+                        <textarea class="form-control" id="editDeskripsi" name="deskripsi" rows="2" required></textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="editGambar" class="form-label">Gambar</label>
-                        <input type="file" class="form-control" id="editGambar">
+                        <label for="editGambar" class="form-label">Edit Gambar</label>
+                        <div class="mb-2">
+                            <img id="previewGambar" src="" alt="Gambar Saat Ini" width="100" class="rounded border">
+                        </div>
+                        <input type="file" class="form-control" id="editGambar" name="gambar">
+                        <small class="text-muted">Biarkan kosong jika tidak ingin mengubah gambar.</small>
                     </div>
                     <div class="mb-3">
                         <label for="editStatus" class="form-label">Status</label>
-                        <select class="form-select" id="editStatus">
-                            <option value="Aktif">Aktif</option>
-                            <option value="Non-Aktif">Non-Aktif</option>
+                        <select class="form-select" id="editStatus" name="is_active" required>
+                            <option value="1">Aktif</option>
+                            <option value="0">Non-Aktif</option>
                         </select>
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
             </div>
         </div>
     </div>
@@ -158,54 +167,54 @@
 
         editButtons.forEach(button => {
             button.addEventListener('click', function () {
-                // Get the data from the selected row
                 const row = button.closest('tr');
-                const nama = row.getAttribute('data-nama');
-                const caption = row.getAttribute('data-caption');
-                const deskripsi = row.getAttribute('data-deskripsi');
-                const gambar = row.getAttribute('data-gambar');
-                const status = row.getAttribute('data-status');
-                
-                // Fill the modal with the data
-                document.getElementById("editNama").value = nama;
-                document.getElementById("editCaption").value = caption;
-                document.getElementById("editDeskripsi").value = deskripsi;
-                document.getElementById("editStatus").value = status;
-                
-                // Optional: Show image preview if available
-                if (gambar) {
-                    document.getElementById("editGambar").value = gambar; // In a real case, you may want to show the current image in a preview.
-                }
 
-                // Show the modal
-                new bootstrap.Modal(document.getElementById("editModal")).show();
+                document.getElementById("editId").value = row.getAttribute('data-id') || "";
+                document.getElementById("editNama").value = row.getAttribute('data-nama') || "";
+                document.getElementById("editCaption").value = row.getAttribute('data-caption') || "";
+                document.getElementById("editDeskripsi").value = row.getAttribute('data-deskripsi') || "";
+                document.getElementById("editStatus").value = row.getAttribute('data-status') || "1";
+
+                const gambarUrl = row.getAttribute('data-gambar') || "";
+                const previewGambar = document.getElementById("previewGambar");
+                previewGambar.src = gambarUrl ? `{{ asset('') }}${gambarUrl}` : "{{ asset('default.jpg') }}";
             });
         });
-    });
-</script>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll(".delete-slider").forEach(button => {
             button.addEventListener("click", function () {
+                const row = button.closest('tr');
+                const forumId = row.getAttribute('data-id');
+
                 Swal.fire({
-                    title: "<b>Apakah Anda Yakin!</b>",
-                    text: "Akan Menghapus Data ini!",
-                    icon: "question",
+                    title: "<b>Apakah Anda Yakin?</b>",
+                    text: "Data ini akan dihapus secara permanen.",
+                    icon: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#d33",
                     cancelButtonColor: "#6c757d",
-                    confirmButtonText: "CONFIRM",
-                    cancelButtonText: "CANCEL",
-                    customClass: {
-                        title: 'fw-bold',
-                    }
+                    confirmButtonText: "Hapus",
+                    cancelButtonText: "Batal",
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        Swal.fire({
-                            title: "Dihapus!",
-                            text: "Data telah berhasil dihapus.",
-                            icon: "success"
+                        fetch(`/forum-anak/${forumId}`, {
+                            method: 'DELETE',
+                            headers: {
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                'Content-Type': 'application/json',
+                            },
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                Swal.fire("Dihapus!", "Data berhasil dihapus.", "success")
+                                    .then(() => location.reload());
+                            } else {
+                                Swal.fire("Error!", "Terjadi kesalahan saat menghapus data.", "error");
+                            }
+                        })
+                        .catch(error => {
+                            Swal.fire("Error!", "Tidak dapat terhubung ke server.", "error");
                         });
                     }
                 });
@@ -213,5 +222,4 @@
         });
     });
 </script>
-
 @endsection

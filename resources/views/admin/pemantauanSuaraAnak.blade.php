@@ -16,7 +16,7 @@
         <div class="row mb-3">
             <div class="col-md-12 d-flex justify-content-end">
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambahPemantauanModal">
-                    + Tambah Pemantauan
+                    + Pemantauan Suara Anak
                 </button>
             </div>
         </div>
@@ -38,7 +38,6 @@
             </div>
         </div>
 
-        <!-- Tabel -->
         <div class="table-responsive">
             <table class="table table-hover table-bordered align-middle text-center">
                 <thead class="table-primary">
@@ -97,12 +96,13 @@
     </div>
 </div>
 
+
 <!-- Modal Tambah Pemantauan -->
 <div class="modal fade" id="tambahPemantauanModal" tabindex="-1" aria-labelledby="tambahPemantauanModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="tambahPemantauanModalLabel">Tambah Pemantauan Baru</h5>
+            <div class="modal-header d-flex flex-column align-items-center">
+            <h5 class="modal-title fw-bold text-center mb-0" id="tambahPemantauanModalLabel">Tambah Pemantauan Baru</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -131,9 +131,8 @@
 <div class="modal fade" id="tindakLanjutModal" tabindex="-1" aria-labelledby="tindakLanjutModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-
-                <h5 class="modal-title" id="tindakLanjutModalLabel">Tindak Lanjut </h5>
+            <div class="modal-header d-flex flex-column align-items-center">
+            <h5 class="modal-title fw-bold text-center mb-0" id="tindakLanjutModalLabel">Tindak Lanjut </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

@@ -81,8 +81,8 @@
 <div class="modal fade" id="halamanModal" tabindex="-1" aria-labelledby="halamanModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="halamanModalLabel">Tambah Kegiatan Arek Suroboyo Baru</h5>
+            <div class="modal-header d-flex flex-column align-items-center">
+                <h5 class="modal-title fw-bold text-center mb-0" id="halamanModalLabel">Kegiatan Arek Suroboyo Baru</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -125,4 +125,36 @@
     </div>
 </div>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Event listener untuk tombol edit
+        const editButtons = document.querySelectorAll(".edit-btn");
+
+        editButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                const judul = this.getAttribute("data-judul");
+                const slug = this.getAttribute("data-slug");
+                const status = this.getAttribute("data-status");
+
+                // Set nilai form di modal
+                document.getElementById("judul").value = judul;
+                document.getElementById("slug").value = slug;
+                document.getElementById("sliderStatus").value = status;
+                document.getElementById("halamanModalLabel").textContent = "Edit Kegiatan Arek Suroboyo";
+            });
+        });
+
+        // Reset modal ketika ditutup
+        const halamanModal = document.getElementById("halamanModal");
+        halamanModal.addEventListener("hidden.bs.modal", function () {
+            document.getElementById("judul").value = "";
+            document.getElementById("slug").value = "";
+            document.getElementById("tag").value = "";
+            document.getElementById("gambar").value = "";
+            document.getElementById("konten").value = "";
+            document.getElementById("sliderStatus").value = "Aktif";
+            document.getElementById("halamanModalLabel").textContent = "Kegiatan Arek Suroboyo Baru";
+        });
+    });
+</script>
 @endsection

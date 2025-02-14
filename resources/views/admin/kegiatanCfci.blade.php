@@ -11,7 +11,7 @@
             </div>
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <div></div>
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kegiatanModal">+ Tambah Kegiatan</button> 
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kegiatanModal">+ Kegiatan CFCI</button> 
             </div>
 
             <div class="table-responsive">
@@ -55,8 +55,8 @@
 <div class="modal fade" id="kegiatanModal" tabindex="-1" aria-labelledby="kegiatanModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="kegiatanModalLabel">Tambah Kegiatan CFCI Baru</h5>
+            <div class="modal-header d-flex flex-column align-items-center">
+                <h5 class="modal-title fw-bold text-center mb-0" id="kegiatanModalLabel">Tambah Kegiatan CFCI Baru</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -99,8 +99,8 @@
 <div class="modal fade" id="editKegiatanModal" tabindex="-1" aria-labelledby="editKegiatanModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editKegiatanModalLabel">Edit Kegiatan CFCI</h5>
+            <div class="modal-header d-flex flex-column align-items-center">
+                <h5 class="modal-title fw-bold text-center mb-0" id="editKegiatanModalLabel">Edit Kegiatan CFCI</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
