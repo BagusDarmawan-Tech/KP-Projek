@@ -127,7 +127,7 @@
                   
                   <!-- Profile Information -->
                   <div class="card p-3 mb-3 border border-primary shadow-sm">
-                    <h6 class="text-dark">Profile Information</h6>
+                    <h3 class="text-dark">Profile Information</h3>
                     <p>Update your account's profile information and email address.</p>
                     <label class="form-label">Name</label>
                     <input type="text" class="form-control" value="{{ Auth::user()->name }}">
@@ -137,8 +137,8 @@
                   </div>
 
                   <!-- Update Password -->
-                  <div class="card p-3 mb-3 border border-warning shadow-sm">
-                    <h6 class="text-dark">Update Password</h6>
+                  <div class="card p-3 mb-3 border border-primary shadow-sm">
+                    <h3 class="text-dark">Update Password</h3>
                     <p>Ensure your account is using a long, random password to stay secure.</p>
 
                     <label class="form-label">Current Password</label>
@@ -169,8 +169,8 @@
                   </div>
 
                   <!-- Delete Account -->
-                  <div class="card p-3 border border-danger shadow-sm">
-                    <h6 class="text-dark">Delete Account</h6>
+                  <div class="card p-3 border border-primary shadow-sm">
+                    <h3 class="text-dark">Delete Account</h3>
                     <p>Once your account is deleted, all of its resources and data will be permanently deleted.</p>
                     <button class="btn btn-danger w-100">Delete Account</button>
                   </div>

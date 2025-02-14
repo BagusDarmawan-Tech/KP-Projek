@@ -69,9 +69,8 @@
 <div class="modal fade" id="menuModal" tabindex="-1" aria-labelledby="menuModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="menuModalLabel">Tambah Menu Management Baru</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header d-flex justify-content-center w-100 ">
+                <h5 class="modal-title fw-bold text-center" id="menuModalLabel">Tambah Menu Management Baru</h5>
             </div>
             <div class="modal-body">
                 <form>
@@ -83,26 +82,27 @@
                         <label for="menuParent" class="form-label">Parent</label>
                         <select id="menuParent" class="form-select">
                             <option>--- Pilih Parent ---</option>
-                            <!-- Tambahkan opsi sesuai kebutuhan -->
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="menuModule" class="form-label">Modul</label>
                         <select id="menuModule" class="form-select">
                             <option>--- Pilih Modul ---</option>
-                            <!-- Tambahkan opsi sesuai kebutuhan -->
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="menuLink" class="form-label">Link</label>
                         <select id="menuLink" class="form-select">
                             <option>--- Pilih Link ---</option>
-                            <!-- Tambahkan opsi sesuai kebutuhan -->
                         </select>
                     </div>
-                    <div class="mb-3 form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="menuStatus">
-                        <label class="form-check-label" for="menuStatus">Aktif</label>
+                    <div class="mb-3">
+                        <label for="status" class="form-label">Status</label>
+                        <select class="form-select" id="status" name="status">
+                            <!-- <option selected>--- Pilih Status ---</option> -->
+                            <option value="Aktif">Aktif</option>
+                            <option value="Non-Aktif">Non-Aktif</option>
+                        </select>
                     </div>
                 </form>
             </div>
@@ -114,15 +114,12 @@
     </div>
 </div>
 
-
-
 <!-- Modal Edit Menu -->
-<div class="modal fade" id="editMenuModal" tabindex="-1" aria-labelledby="editMenuModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editMenuModal" tabindex="-1" aria-labelledby="editMenuModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editMenuModalLabel">Edit Menu Management</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header d-flex justify-content-center w-100 ">
+                <h5 class="modal-title fw-bold text-center" id="menuModalLabel">Edit Menu Management Baru</h5>
             </div>
             <div class="modal-body">
                 <form>
@@ -151,9 +148,13 @@
                             <!-- Tambahkan opsi sesuai kebutuhan -->
                         </select>
                     </div>
-                    <div class="mb-3 form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="editMenuStatus">
-                        <label class="form-check-label" for="editMenuStatus">Aktif</label>
+                    <div class="mb-3">
+                        <label for="status" class="form-label">Status</label>
+                        <select class="form-select" id="status" name="status">
+                            <!-- <option selected>--- Pilih Status ---</option> -->
+                            <option value="Aktif">Aktif</option>
+                            <option value="Non-Aktif">Non-Aktif</option>
+                        </select>
                     </div>
                 </form>
             </div>

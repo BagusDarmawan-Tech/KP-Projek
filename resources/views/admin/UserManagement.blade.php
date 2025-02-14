@@ -106,9 +106,6 @@
             </div>
         </div>
 
-
-
-
         <!-- Tabel -->
         <div class="table-responsive">
             <table class="table table-hover table-bordered align-middle text-center">
@@ -131,8 +128,8 @@
                         <td>{{ $person->getRoleNames()->implode(', ') }}</td>
                         <td>-</td>
                         <td>
-                            <button class="btn btn-sm btn-primary"><i class="bi bi-pencil-square"></i></button>
-                            <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
+                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#EditKegiatanManModal"><i class="bi bi-pencil-square"></i></button>
+                                <button class="btn btn-sm btn-danger delete-slider"><i class="bi bi-trash"></i> </button>
                         </td>
                     </tr>
                     @endforeach
@@ -144,14 +141,12 @@
 
 <!-- Modal Tambah Sub Kegiatan -->
 <div class="modal fade" id="subKegiatanModal" tabindex="-1" aria-labelledby="subKegiatanModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="subKegiatanModalLabel">Tambah User</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header d-flex justify-content-center w-100 ">
+                <h5 class="modal-title fw-bold text-center" id="subKegiatanModalLabel">Tambah User</h5>
             </div>
-                <div class="modal-body">
-                    
+            <div class="modal-body">
                 <form method="POST" action="{{ route('register') }}">
                 @csrf    
                     <div class="mb-3">
@@ -194,7 +189,72 @@
                     <div class="mb-3">
                         <label for="status" class="form-label">Status</label>
                         <select class="form-select" id="status" name="status">
-                            <option selected>--- Pilih Status ---</option>
+                            <!-- <option selected>--- Pilih Status ---</option> -->
+                            <option value="Aktif">Aktif</option>
+                            <option value="Non-Aktif">Non-Aktif</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">{{ __('Register') }}</button>
+                </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Edit Kegiatan -->
+<div class="modal fade" id="EditKegiatanManModal" tabindex="-1" aria-labelledby="EditKegiatanManModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header d-flex justify-content-center w-100 ">
+                <h5 class="modal-title fw-bold text-center" id="EditKegiatanManModalLabel">Edit Menu User</h5>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{{ route('register') }}">
+                @csrf    
+                    <div class="mb-3">
+                        <label class="form-label" for="name" :value="__('Name')">Nama</label>
+                        <input type="text" class="form-control"  id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')"  required>
+                        <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Role</label>
+                        <select class="form-select" name="role" required>
+                            <option selected disabled>--- Pilih Role ---</option>
+                            <option value="developer">Developer</option>
+                            <option value="admin">Admin</option>
+                            <option value="opd">OPD</option>
+                            <option value="user">User</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="email" :value="__('Email')">Email</label>
+                        <input type="email" class="form-control" name="email" :value="old('email')" required>
+                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="password" :value="__('Password')">Password</label>
+                        <input id="password" name="password" type="password" class="form-control" required autocomplete="new-password">
+                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="password_confirmation" :value="__('Confirm Password')">Confirm Password</label>
+                        <input id="password_confirmation" class="form-control"
+                        type="password"
+                        name="password_confirmation" required autocomplete="new-password">
+                        <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="status" class="form-label">Status</label>
+                        <select class="form-select" id="status" name="status">
+                            <!-- <option selected>--- Pilih Status ---</option> -->
                             <option value="Aktif">Aktif</option>
                             <option value="Non-Aktif">Non-Aktif</option>
                         </select>
@@ -208,5 +268,6 @@
         </div>
     </div>
 </div>
+
 
 @endsection

@@ -60,6 +60,7 @@
                             <td>{{ $Slider->dibuatOleh }}</td>
                             <td><span class="badge bg-success">{{ $Slider->is_active ? 'Aktif' : 'Non-Aktif' }}</span></td>
                             <td>
+                                <!-- Bagian buttom edit -->
                                 <button class="btn btn-sm btn-primary edit-slider" 
                                     data-id="{{ $Slider->id }}" 
                                     data-nama="{{ $Slider->nama }}" 
@@ -68,12 +69,9 @@
                                     data-gambar="{{ asset($Slider->gambar) }}" 
                                     data-status="{{ $Slider->is_active }}"
                                     data-bs-toggle="modal" data-bs-target="#editSliderModal">
-                                    <i class="bi bi-pencil-square"></i>
-                                </button>
+                                    <i class="bi bi-pencil-square"></i></button>
                                 <!-- Tombol Hapus dengan konfirmasi -->
-                                <button class="btn btn-sm btn-danger delete-slider">
-                                    <i class="bi bi-trash"></i>
-                                </button>
+                                <button class="btn btn-sm btn-danger delete-slider"><i class="bi bi-trash"></i></button>
                             </td>
                         </tr>
                         @endforeach
@@ -86,13 +84,13 @@
 
 <!-- Modal Tambah Slider -->
 <div class="modal fade" id="sliderModal" tabindex="-1" aria-labelledby="sliderModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="sliderModalLabel">Tambah Slider Baru</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header d-flex justify-content-center w-100 ">
+                <h5 class="modal-title fw-bold text-center" id="sliderModalLabel">Tambah Menu Slider Baru</h5>
             </div>
             <div class="modal-body">
+                <form>
                 <form method="POST" action="{{ route('createSlider') }}" enctype="multipart/form-data">
                     @csrf 
                     <div class="mb-3">
@@ -119,11 +117,13 @@
                         </select>
                     </div>
                     <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                    </div>
+            </div>
+                    <div class="modal-footer border-top pt-3 d-flex justify-content-end"> <!-- Tambahan border-top dan padding -->
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
+            </div>
                 </form>
+
             </div>
         </div>
     </div>
@@ -133,11 +133,11 @@
 <div class="modal fade" id="editSliderModal" tabindex="-1" aria-labelledby="editSliderModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editSliderModalLabel">Edit Slider</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header d-flex justify-content-center w-100 ">
+                <h5 class="modal-title fw-bold text-center" id="editSliderModalLabel">Edit Menu SLider</h5>
             </div>
-            <div class="modal-body"> 
+            <div class="modal-body">
+                <form>
                     <input type="hidden" name="id" id="editSliderId">
                     <div class="mb-3">
                         <label class="form-label">Nama</label>
@@ -154,7 +154,7 @@
                     <div class="mb-3">
                         <label class="form-label">Gambar</label>
                         <input type="file" class="form-control" name="gambar">
-                        <img id="editGambarPreview" src="" alt="Preview" class="mt-2" width="100">
+                        <!-- <img id="editGambarPreview" src="" alt="Preview" class="mt-2" width="100"> -->
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Status</label>
@@ -163,10 +163,13 @@
                             <option value="0">Non-Aktif</option>
                         </select>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Update</button>
                     </div>
+                    <div class="modal-footer border-top pt-3 d-flex justify-content-end"> <!-- Tambahan border-top dan padding -->
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
+            </div>
+                </form>
+
             </div>
         </div>
     </div>

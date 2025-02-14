@@ -70,11 +70,11 @@
 <div class="modal fade" id="kategoriModal" tabindex="-1" aria-labelledby="kategoriModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="kategoriModalLabel">Tambah Kategori Artikel Baru</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header d-flex justify-content-center w-100 ">
+                <h5 class="modal-title fw-bold text-center" id="kategoriModalLabel">Tambah Menu Kategori Baru</h5>
             </div>
             <div class="modal-body">
+                <form>
                 <form method="POST" action="{{ route('createKategoriArtikel') }}">
                     @csrf    
                     <div class="mb-3">
@@ -85,7 +85,7 @@
                     <div class="mb-3">
                         <label for="kategoriStatus" class="form-label">Status</label>
                         <select class="form-select" id="kategoriStatus" name="is_active" required>
-                            <option value="" disabled selected>--- Pilih Status ---</option>
+                            <!-- <option value="" disabled selected>--- Pilih Status ---</option> -->
                             <option value="1" {{ old('is_active') == "1" ? 'selected' : '' }}>Aktif</option>
                             <option value="0" {{ old('is_active') == "0" ? 'selected' : '' }}>Non-Aktif</option>
                         </select>
@@ -109,19 +109,23 @@
 <div class="modal fade" id="editMenuModal" tabindex="-1" aria-labelledby="editMenuModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editMenuModalLabel">Edit Menu Kategori Artikel</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header d-flex justify-content-center w-100 ">
+                <h5 class="modal-title fw-bold text-center" id="editMenuModalLabel">Edit Menu KategoriArtikel</h5>
             </div>
+    
             <div class="modal-body">
                 <form>
                     <div class="mb-3">
                         <label for="editMenuName" class="form-label">Nama</label>
                         <input type="text" class="form-control" id="editMenuName" placeholder="Masukkan nama menu">
                     </div>
-                    <div class="mb-3 form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="editMenuStatus">
-                        <label class="form-check-label" for="editMenuStatus">Aktif</label>
+                    <div class="mb-3">
+                        <label for="kategoriStatus" class="form-label">Status</label>
+                        <select class="form-select" id="kategoriStatus" name="is_active" required>
+                            <!-- <option value="" disabled selected>--- Pilih Status ---</option> -->
+                            <option value="1" {{ old('is_active') == "1" ? 'selected' : '' }}>Aktif</option>
+                            <option value="0" {{ old('is_active') == "0" ? 'selected' : '' }}>Non-Aktif</option>
+                        </select>
                     </div>
                 </form>
             </div>

@@ -52,7 +52,7 @@
                             <td>{{ $halaman->slug }}</td>
                             <td><span class="badge bg-success">{{ $halaman->is_active }}</span></td>
                             <td>
-                                <button class="btn btn-sm btn-primary edit-btn" data-bs-toggle="modal" data-bs-target="#halamanModal" data-judul="Judul Halaman" data-slug="slug-halaman" data-status="Aktif"><i class="bi bi-pencil-square"></i></button>
+                                <button class="btn btn-sm btn-primary edit-btn" data-bs-toggle="modal" data-bs-target="#halamanEditModal" data-judul="Judul Halaman" data-slug="slug-halaman" data-status="Aktif"><i class="bi bi-pencil-square"></i></button>
                                 <button class="btn btn-sm btn-danger delete-slider"><i class="bi bi-trash"></i> </button>
                             </td>
                         </tr>
@@ -64,13 +64,60 @@
     </div>
 </div>
 
-<!-- Modal Tambah/Edit Halaman -->
+<!-- Modal Tambah -->
 <div class="modal fade" id="halamanModal" tabindex="-1" aria-labelledby="halamanModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="halamanModalLabel">Tambah Halaman Baru</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header d-flex justify-content-center w-100 ">
+                <h5 class="modal-title fw-bold text-center" id="menuModalLabel">Tambah Menu Halaman Baru</h5>
+            </div>
+            <div class="modal-body">
+
+                <form method="POST" action="{{ route('createHalaman') }}" enctype="multipart/form-data">
+                    @csrf 
+                    <div class="mb-3">
+                        <label for="judul" class="form-label">Judul</label>
+                        <input type="text" class="form-control" id="judul" name="judul" value="{{ old('judul') }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="slug" class="form-label">Slug</label>
+                        <input type="text" class="form-control" id="slug" name="slug" value="{{ old('slug') }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="gambar" class="form-label">Gambar</label>
+                        <input type="file" class="form-control" id="gambar" name="gambar" value="{{ old('gambar') }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="konten" class="form-label">Konten</label>
+                        <textarea class="form-control" id="konten" rows="3" name="konten" value="{{ old('konten') }}" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="kategoriStatus" class="form-label">Status</label>
+                        <select class="form-select" id="kategoriStatus" name="is_active" required>
+                            <option value="" disabled selected>--- Pilih Status ---</option>
+                            <option value="1" {{ old('is_active') == "1" ? 'selected' : '' }}>Aktif</option>
+                            <option value="0" {{ old('is_active') == "0" ? 'selected' : '' }}>Non-Aktif</option>
+                        </select>
+                    </div>
+                    <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
+                    </div>
+                    <div class="modal-footer border-top pt-3 d-flex justify-content-end"> <!-- Tambahan border-top dan padding -->
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
+            </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Edit -->
+<div class="modal fade" id="halamanEditModal" tabindex="-1" aria-labelledby="halamanEditModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header d-flex justify-content-center w-100 ">
+                <h5 class="modal-title fw-bold text-center" id="menuModalLabel">Edit Menu Halaman</h5>
             </div>
             <div class="modal-body">
                 <form method="POST" action="{{ route('createHalaman') }}" enctype="multipart/form-data">
@@ -100,30 +147,33 @@
                         </select>
                     </div>
                     <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
-            
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-
-                        <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
+                    <div class="modal-footer border-top pt-3 d-flex justify-content-end"> <!-- Tambahan border-top dan padding -->
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
+            </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
 
-<script>
+
+
+
+
+<!-- <script>
     document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll(".edit-btn").forEach(button => {
             button.addEventListener("click", function () {
-                document.getElementById("halamanModalLabel").textContent = "Edit Halaman";
+                // document.getElementById("halamanModalLabel").textContent = "Edit Halaman";
                 document.getElementById("judul").value = this.getAttribute("data-judul");
                 document.getElementById("slug").value = this.getAttribute("data-slug");
                 document.getElementById("status").value = this.getAttribute("data-status");
             });
         });
     });
-</script>
+</script> -->
 
 
 <!-- Halaman Delete -->

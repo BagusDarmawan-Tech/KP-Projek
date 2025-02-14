@@ -12,7 +12,7 @@
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <div></div> <!-- Spacer -->
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kategoriModal">
-                    + Tambah COnfigurasi APP
+                    + Tambah Configurasi APP
                 </button>
             </div>
 
@@ -64,11 +64,10 @@
 
 <!-- Modal Tambah connfig -->
 <div class="modal fade" id="kategoriModal" tabindex="-1" aria-labelledby="kategoriModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="kategoriModalLabel">Tambah Configurasi APP</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header d-flex justify-content-center w-100 ">
+                <h5 class="modal-title fw-bold text-center" id="kategoriModalLabel">Tambah Menu Configurasi APP</h5>
             </div>
             <div class="modal-body">
                 <form>
@@ -93,13 +92,13 @@
 
 <!-- bagian edit -->
 <div class="modal fade" id="EditModal" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="kategoriModalLabel">Tambah Configurasi APP</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header d-flex justify-content-center w-100 ">
+                <h5 class="modal-title fw-bold text-center" id="EditModalLabel">Edit Menu Configurasi APP</h5>
             </div>
             <div class="modal-body">
+
                 <form>
                     <div class="mb-3">
                         <label for="kategoriNama" class="form-label">Nama</label>
