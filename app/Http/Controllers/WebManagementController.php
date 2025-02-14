@@ -143,7 +143,7 @@ class WebManagementController extends Controller
 
     public function storeGaleri(Request $request)
     {
-        // dd($request->all());
+        //dd($request->all());
         $request->validate([
             'nama' => 'required|string|max:255',
             'caption' => 'required|string|max:255',

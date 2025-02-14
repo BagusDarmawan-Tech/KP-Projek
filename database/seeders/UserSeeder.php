@@ -15,59 +15,13 @@ class UserSeeder extends Seeder
     {
         
         $admin = User::create([
-            'name'  => 'admin',
-            'email'  => 'admin@gmail.com',
+            'name'  => 'develop',
+            'email'  => 'develop@gmail.com',
             'password'  => bcrypt('12345')
 
         ]);
-        $admin->assignRole('admin');
+        $admin->assignRole('developer');
 
-        $user = User::create([
-            'name'  => 'user',
-            'email'  => 'user@gmail.com',
-            'password'  => bcrypt('12345')
-
-        ]);
-        $user->assignRole('user');
-
-        $OPD = User::create([
-            'name'  => 'OPD',
-            'email'  => 'OPD@gmail.com',
-            'password'  => bcrypt('12345')
-
-        ]);
-        $OPD->assignRole('OPD');
-
-        $kecamatan = User::create([
-            'name'  => 'kecamatan',
-            'email'  => 'kecamatan@gmail.com',
-            'password'  => bcrypt('12345')
-
-        ]);
-        $kecamatan->assignRole('kecamatan');
-
-        $kelurahan = User::create([
-            'name'  => 'kelurahan',
-            'email'  => '@gmail.com',
-            'password'  => bcrypt('12345')
-
-        ]);
-        $kelurahan->assignRole('kelurahan');
-
-        $cfci = User::create([
-            'name'  => 'cfci',
-            'email'  => 'cfci@gmail.com',
-            'password'  => bcrypt('12345')
-
-        ]);
-        $cfci->assignRole('cfci');
-
-        $fas = User::create([
-            'name'  => 'fas',
-            'email'  => 'fas@gmail.com',
-            'password'  => bcrypt('12345')
-
-        ]);
-        $fas->assignRole('fas');
+        
     }
 }
