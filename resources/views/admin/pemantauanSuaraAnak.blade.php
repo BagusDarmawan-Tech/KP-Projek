@@ -55,15 +55,27 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($suaras as $index => $suara)
                     <tr>
-                        <td>1</td>
-                        <td>KLA-2025-023</td>
-                        <td class="text-nowrap">07 Februari 2025 08:54</td>
-                        <td>Dinsos</td>
-                        <td>Bagaimana cara untuk...</td>
-                        <td>Bagaimana cara untuk menja...</td>
-                        <td class="text-danger">Dinsos : ✖ Belum di TL</td>
-                        <td><span class="badge bg-success">Ditindak Lanjut</span></td>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $suara->nomorSuara }}</td>
+                        <td class="text-nowrap">{{ $suara->tanggal }}</td>
+                        <td>{{ $suara->pemohon }}</td>
+                        <td>{{ $suara->perihal }}</td>
+                        <td>{{ $suara->deskripsi}}</td>
+                        @if(is_null($suara->tindakLanjut))
+                            <td class="text-danger">Dinsos : ✖ Belum di TL</td>
+                        @else
+                        <td class="text-danger">Dinsos : ✅  Sudah di TL</td>
+                        @endif
+                           
+                        <td>
+                            @if(is_null($suara->tindakLanjut))
+                                <span class="badge bg-warning">Tindak Lanjut</span>
+                            @else
+                                <span class="badge bg-success">Sudah Tindak Lanjut</span>
+                            @endif
+                        </td>
                         <td class="d-flex align-items-center justify-content-center gap-2 py-2">
                             <!-- Tombol Tindak Lanjut -->
                             <button class="btn btn-sm rounded-circle" style="background-color: #6A0DAD; width: 36px; height: 36px;"
@@ -78,6 +90,7 @@
                             </button>
                         </td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -93,6 +106,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <form method="POST" action="{{ route('createPemantauanSuara') }}" >
+                    @csrf 
                 <div class="mb-3">
                     <label class="form-label">Perihal</label>
                     <input type="text" class="form-control" name="perihal" required placeholder="Masukkan perihal">
@@ -101,11 +116,13 @@
                     <label class="form-label">Deskripsi</label>
                     <textarea class="form-control" name="deskripsi" rows="3" required placeholder="Masukkan deskripsi"></textarea>
                 </div>
+                <input type="hidden" name="pemohon" value="{{ Auth::user()->name }}">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary">Simpan</button>
             </div>
+        </form>
         </div>
     </div>
 </div>
@@ -117,27 +134,29 @@
             <div class="modal-header">
 
                 <h5 class="modal-title" id="tindakLanjutModalLabel">Tindak Lanjut </h5>
-
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <form method="POST" action="{{ route('createTindakLanjut') }}" >
+                    @csrf 
                 <div class="mb-3">
                     <label class="form-label">Tindak Lanjut</label>
-                    <textarea class="form-control" name="tindak_lanjut" rows="3" required placeholder="Masukkan tindak lanjut"></textarea>
+                    <textarea class="form-control" name="tindakLanjut" rows="3" required placeholder="Masukkan tindak lanjut"></textarea>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Tanggal Tindak Lanjut</label>
-                    <input type="datetime-local" class="form-control" name="tanggal_tindak_lanjut" required>
+                    <input type="datetime-local" class="form-control" name="tanggalTindakLanjut" required>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Upload Foto</label>
-                    <input type="file" class="form-control" name="foto" accept=".jpg, .png">
+                    <input type="file" class="form-control" name="file" accept=".pdf, .doc, .docx">
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                 <button type="submit" class="btn btn-primary">Simpan</button>
             </div>
+            </form>
         </div>
     </div>
 </div>
@@ -160,5 +179,4 @@
         </div>
     </div>
 </div>
-
 @endsection

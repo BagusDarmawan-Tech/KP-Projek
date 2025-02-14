@@ -110,18 +110,27 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>SK FAS</td>
-                            <td>SK FAS Kecamatan Simokerto</td>
-                            <td><a href="#" class="text-primary">Lihat</a></td>
-                            <td>Ema</td>
-                            <td><span class="badge bg-success">Aktif</span></td>
+                      @foreach($kegiatans as $index => $kegiatan)
+                      <tr>
+                          <td>{{ $loop->iteration }}</td>
+                          <td><img src="{{ asset($kegiatan->gambar) }}" alt="Kegiatan CFCI" width="80"></td>
+                          <td>{{ $kegiatan->nama }}</td>
+                            <td>{{ $kegiatan->keterangan }}</td>
+                            <td>{{ $kegiatan->dibuatOleh }}</td>
+                            <td>
+                              @if($kegiatan->is_active == 0)
+                              <span class="badge bg-warning">Non Aktif</span>
+                              @else
+                                  <span class="badge bg-success">Aktif</span>
+                              @endif
+
+                            </td>
                             <td>
                                 <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modaEditKegiatan"><i class="bi bi-pencil-square"></i></button>
                                 <button class="btn btn-sm btn-danger delete-slider"><i class="bi bi-trash"></i> </button>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -138,35 +147,34 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form>
+        <form method="POST" action="{{ route('createForumAnakSurabaya') }}" enctype="multipart/form-data">
+          @csrf 
           <div class="mb-3">
             <label for="namaKegiatan" class="form-label fw-semibold">Nama</label>
-            <input type="text" class="form-control" id="namaKegiatan" placeholder="Masukkan nama kegiatan">
-          </div>
-          <div class="mb-3">
-            <label for="tanggalKegiatan" class="form-label fw-semibold">Tanggal Kegiatan</label>
-            <input type="date" class="form-control" id="tanggalKegiatan">
+            <input type="text" name="nama" class="form-control" id="namaKegiatan" placeholder="Masukkan nama kegiatan">
           </div>
           <div class="mb-3">
             <label for="gambarKegiatan" class="form-label fw-semibold">Gambar</label>
-            <input type="file" class="form-control" id="gambarKegiatan" accept="image/*" onchange="previewImage(event)">
+            <input name="gambar" type="file" class="form-control" id="gambarKegiatan" accept="image/*" onchange="previewImage(event)">
             <img id="preview" src="#" alt="Preview" class="img-fluid mt-2 d-none" style="max-height: 200px;">
           </div>
           <div class="mb-3">
             <label for="keteranganKegiatan" class="form-label fw-semibold">Keterangan</label>
-            <textarea class="form-control" id="keteranganKegiatan" rows="3" placeholder="Tambahkan keterangan kegiatan"></textarea>
+            <textarea class="form-control" name="keterangan" id="keteranganKegiatan" rows="3" placeholder="Tambahkan keterangan kegiatan"></textarea>
           </div>
-          <div class="mb-3 switch-container">
-            <label class="form-label fw-semibold">Status</label>
-            <input class="form-check-input ms-3" type="checkbox" id="statusKegiatan" checked>
-            <label for="statusKegiatan" class="fw-semibold text-primary">Aktif</label>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+          <div class="mb-3">
+            <label class="form-label">Status</label>
+            <select class="form-select" name="is_active" required>
+                <option value="1">Aktif</option>
+                <option value="0">Non-Aktif</option>
+            </select>
+        </div>
+        <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Simpan</button>
+        </div>
+    </form>
     </div>
   </div>
 </div>
@@ -198,16 +206,19 @@
             <label for="keteranganKegiatan" class="form-label">Keterangan</label>
             <textarea class="form-control" id="keteranganKegiatan" rows="3"></textarea>
           </div>
-          <div class="mb-3 form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="statusKegiatan" checked>
-            <label class="form-check-label" for="statusKegiatan">Aktif</label>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+          <div class="mb-3">
+            <label class="form-label">Status</label>
+            <select class="form-select" name="is_active" required>
+                <option value="1">Aktif</option>
+                <option value="0">Non-Aktif</option>
+            </select>
+        </div>
+        <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Simpan</button>
+        </div>
+    </form>
     </div>
   </div>
 </div>

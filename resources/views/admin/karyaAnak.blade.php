@@ -55,17 +55,22 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($karyas as $index => $karya)
                     <tr>
-                        <td>1</td>
-                        <td class="text-nowrap">06 Februari 2025 01:24</td>
-                        <td>kecamatan_wonocolo</td>
-                        <td>Tes</td>
-                        <td>Tes...</td>
-                        <td>Tes</td>
-                        <td><img src="{{ asset('kids.jpg') }}" width="60"></td>
+                        <td>{{ $loop->iteration }}</td>
+                        <td class="text-nowrap">{{ $karya->tanggal }}</td>
+                        <td>{{ $karya->pemohon }}</td>
+                        <td>{{ $karya->kreator }}</td>
+                        <td>{{ $karya->judul }}</td>
+                        <td>{{ $karya->deskripsi }}</td>
+                        <td><img src="{{ asset($karya->gambar) }}" width="60"></td>
                         <td>
-                            <span class="badge bg-success">Terverifikasi</span>
-                        </td>
+                            @if($karya->status == 0)
+                                <span class="badge bg-warning">Proses Verifikasi</span>
+                            @else
+                                <span class="badge bg-success">Terverifikasi</span>
+                            @endif
+                        </td>                        
                         <td>
                             <div class="d-flex align-items-center justify-content-center gap-1 py-1" style="min-height: 38px;">
                                 <!-- Tombol Edit -->
@@ -84,8 +89,8 @@
                                 </button>
                             </div>
                         </td>
-
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -101,26 +106,30 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+            <form method="POST" action="{{ route('createKaryaAnak') }}" enctype="multipart/form-data">
+                    @csrf 
                 <div class="mb-3">
                     <label class="form-label">Kreator</label>
-                    <input type="text" class="form-control" required placeholder="Masukkan nama kreator">
+                    <input type="text" name="kreator" class="form-control" required placeholder="Masukkan nama kreator">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Judul</label>
-                    <input type="text" class="form-control" required placeholder="Masukkan judul">
+                    <input type="text" name="judul" class="form-control" required placeholder="Masukkan judul">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Deskripsi</label>
-                    <textarea class="form-control" rows="3" required placeholder="Masukkan deskripsi"></textarea>
+                    <textarea class="form-control" name="deskripsi" rows="3" required placeholder="Masukkan deskripsi"></textarea>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Upload Foto</label>
-                    <input type="file" class="form-control" accept=".jpg, .png">
+                    <input type="file" name="gambar" class="form-control" accept=".jpg, .png">
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                <button type="submit" class="btn btn-primary">Simpan</button>
+                <input type="hidden" name="pemohon" value="{{ Auth::user()->name }}">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
             </div>
         </div>
     </div>

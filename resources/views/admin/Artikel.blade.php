@@ -120,7 +120,7 @@
                             <option value="" disabled selected>-- Pilih Kegiatan --</option>
                             @foreach ($subKegiatans as $subKegiatan)
                                 <option value="{{ $subKegiatan->id }}" {{ old('subkegiatanid') == $subKegiatan->id ? 'selected' : '' }} >
-                                    {{ $subKegiatan->id }}
+                                    {{ $subKegiatan->nama }}
                                 </option>
                             @endforeach
                         </select>

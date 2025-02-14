@@ -28,13 +28,14 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($cfcis as $index => $cfci)
                         <tr>
-                            <td>1</td>
-                            <td><img src="{{ asset('kids.jpg') }}" alt="Kegiatan CFCI" width="80"></td>
-                            <td>Dhian</td>
-                            <td>Magang Kominfo</td>
-                            <td>Pelatihan digital untuk anak muda</td>
-                            <td><span class="badge bg-success">Aktif</span></td>
+                            <td>{{ $loop->iteration }}</td>
+                            <td><img src="{{ asset($cfci->gambar) }}" alt="Kegiatan CFCI" width="80"></td>
+                            <td>{{ $cfci->nama }}</td>
+                            <td>{{ $cfci->caption }}</td>
+                            <td>{{ $cfci->deskripsi }}</td>
+                            <td><span class="badge bg-success">{{ $cfci->is_active }}</span></td>
                             <td>
                                 <button class="btn btn-sm btn-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editKegiatanModal"><i class="bi bi-pencil-square"></i></button>
                                 <button class="btn btn-sm btn-danger delete-slider">
@@ -42,6 +43,7 @@
                                 </button>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -58,37 +60,37 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form method="POST" action="{{ route('createMitraCfci') }}" enctype="multipart/form-data">
+                    @csrf 
                     <div class="mb-3">
                         <label for="nama" class="form-label">Nama</label>
-                        <input type="text" class="form-control" id="nama">
+                        <input type="text" class="form-control" id="nama" name="nama">
                     </div>
                     <div class="mb-3">
                         <label for="caption" class="form-label">Caption</label>
-                        <input type="text" class="form-control" id="caption">
+                        <input type="text" class="form-control" id="caption" name="caption">
                     </div>
                     <div class="mb-3">
                         <label for="deskripsi" class="form-label">Deskripsi</label>
-                        <textarea class="form-control" id="deskripsi" rows="3"></textarea>
+                        <textarea class="form-control" id="deskripsi" rows="3" name="deskripsi"></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="gambar" class="form-label">Gambar</label>
-                        <input type="file" class="form-control" id="gambar">
+                        <input type="file" class="form-control" id="gambar" name="gambar">
                     </div>
                     <div class="mb-3">
-                        <label for="status" class="form-label">Status</label>
-                        <select class="form-select" id="status">
-                            <option selected>--- Pilih Status ---</option>
-                            <option value="Aktif">Aktif</option>
-                            <option value="Non-Aktif">Non-Aktif</option>
+                        <label class="form-label">Status</label>
+                        <select class="form-select" name="is_active" required>
+                            <option value="1">Aktif</option>
+                            <option value="0">Non-Aktif</option>
                         </select>
                     </div>
+                    <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
         </div>
     </div>
 </div>

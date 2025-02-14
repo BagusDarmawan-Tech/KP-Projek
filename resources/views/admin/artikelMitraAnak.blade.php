@@ -47,13 +47,14 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($artikels as $index => $artikel)
                         <tr>
-                            <td>1</td>
-                            <td><img src="{{ asset('kids.jpg') }}" alt="Slider Image" width="80"></td>
-                            <td>Judul Halaman</td>
-                            <td>slug-halaman</td>
-                            <td>Admin</td>
-                            <td><span class="badge bg-success">Aktif</span></td>
+                            <td>{{ $loop->iteration }}</td>
+                            <td><img src="{{ asset($artikel->gambar) }}" alt="Slider Image" width="80"></td>
+                            <td> {{ $artikel->kategori ? $artikel->kategori->nama : 'Tidak ada kategori' }}</td>
+                            <td>{{ $artikel->slug }}</td>
+                            <td>{{ $artikel->dibuatOleh}}</td>
+                            <td><span class="badge bg-success">{{ $artikel->is_active }}</span></td>
                             <td>
                                 <button class="btn btn-sm btn-primary edit-btn" data-bs-toggle="modal" data-bs-target="#halamanModal" data-judul="Judul Halaman" data-slug="slug-halaman" data-status="Aktif"><i class="bi bi-pencil-square"></i></button>
                                 <button class="btn btn-sm btn-danger delete-slider">
@@ -61,6 +62,7 @@
                                 </button>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -77,49 +79,50 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form method="POST" action="{{ route('createArtikelMitra') }}" enctype="multipart/form-data">
+                    @csrf 
+
                     <div class="mb-3">
                         <label for="judul" class="form-label">Judul</label>
-                        <input type="text" class="form-control" id="judul">
+                        <input type="text" class="form-control" id="judul" name="judul" required>
                     </div>
                     <div class="mb-3">
                         <label for="slug" class="form-label">Slug</label>
-                        <input type="text" class="form-control" id="slug">
+                        <input type="text" class="form-control" id="slug" name="slug" required>
                     </div>
                     <div class="mb-3">
                         <label for="kategori" class="form-label">Kategori Artikel</label>
-                        <select class="form-select" id="kategori">
-                            <option>-- Pilih Kategori --</option>
-                            <option value="Artikel Mitra Anak">Artikel Mitra Anak</option>
-
+                        <select class="form-select" id="kategori" name="kategoriartikelid">
+                            @foreach ($kategoris as $kategori )
+                                <option value="{{ $kategori->id }}">{{ $kategori->nama }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="tag" class="form-label">Tag</label>
-                        <input type="text" class="form-control" id="tag">
+                        <input type="text" class="form-control" id="tag" name="tag">
                     </div>
                     <div class="mb-3">
                         <label for="gambar" class="form-label">Gambar</label>
-                        <input type="file" class="form-control" id="gambar">
+                        <input type="file" class="form-control" id="gambar" name="gambar">
                     </div>
                     <div class="mb-3">
                         <label for="konten" class="form-label">Konten</label>
-                        <textarea class="form-control" id="konten" rows="3"></textarea>
+                        <textarea class="form-control" id="konten" rows="3" name="konten"></textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="sliderStatus" class="form-label">Status</label>
-                        <select class="form-select" id="sliderStatus">
-                            <option selected>--- Pilih Status ---</option>
-                            <option value="Aktif">Aktif</option>
-                            <option value="Non-Aktif">Non-Aktif</option>
+                        <label class="form-label">Status</label>
+                        <select class="form-select" name="is_active" required>
+                            <option value="1">Aktif</option>
+                            <option value="0">Non-Aktif</option>
                         </select>
                     </div>
+                    <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
         </div>
     </div>
 </div>

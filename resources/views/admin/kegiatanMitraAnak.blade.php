@@ -79,7 +79,7 @@
                 </button>
             </div>
             <div class="table-responsive">
-                <table class="table table-hover table-bordered align-middle text-center">
+          <table class="table table-hover table-bordered align-middle text-center">
                     <thead class="table-primary">
 
                        <!-- Kontrol Tampilkan & Cari -->
@@ -100,7 +100,6 @@
             </div>
             
             <!-- Tombol Tambah Artikel di atas -->           
-
                         <tr>
                             <th>No</th>
                             <th>Gambar</th>
@@ -112,15 +111,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
+                      @foreach($mitras as $index => $mitra)
+                      <tr>
+                          <td>{{ $loop->iteration }}</td>
                             <td>
-                                <img src="{{ asset('kids.jpg') }}" alt="Gambar" style="width: 50px; height: 50px; object-fit: cover;">
+                                <img src="{{ asset($mitra->gambar) }}" alt="Gambar" style="width: 50px; height: 50px; object-fit: cover;">
                             </td>
-                            <td>SK FAS Kecamatan Simokerto</td>
-                            <td><a href="#" class="text-primary">Lihat</a></td>
-                            <td>Ema</td>
-                            <td><span class="badge bg-success">Aktif</span></td>
+                            <td>{{ $mitra->nama }}</td>
+                            <td><a href="#" class="text-primary">{{ $mitra->deskripsi }}</a></td>
+                            <td>{{ $mitra->dibuatOleh }}</td>
+                            <td><span class="badge bg-success">{{ $mitra->is_active }}</span></td>
                             <td>
                                 <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modaEditKegiatan">
                                     <i class="bi bi-pencil-square"></i>
@@ -129,7 +129,8 @@
                                     <i class="bi bi-trash"></i>
                                 </button>
                             </td>
-                        </tr>
+                        </tr>                            
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -146,35 +147,38 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form>
+        <form method="POST" action="{{ route('createKegiatanMitraAnak') }}" enctype="multipart/form-data">
+          @csrf
           <div class="mb-3">
             <label for="namaKegiatan" class="form-label fw-semibold">Nama</label>
-            <input type="text" class="form-control" id="namaKegiatan" placeholder="Masukkan nama kegiatan">
+            <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan nama kegiatan">
           </div>
           <div class="mb-3">
-            <label for="tanggalKegiatan" class="form-label fw-semibold">Tanggal Kegiatan</label>
-            <input type="date" class="form-control" id="tanggalKegiatan">
+            <label for="keteranganKegiatan" class="form-label fw-semibold">Deskripsi</label>
+            <textarea class="form-control" id="keteranganKegiatan" rows="3" name="deskripsi" placeholder="Tambahkan keterangan kegiatan"></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="keteranganKegiatan" class="form-label fw-semibold">Caption</label>
+            <textarea class="form-control" id="keteranganKegiatan" rows="3" name="caption" placeholder="Tambahkan keterangan kegiatan"></textarea>
           </div>
           <div class="mb-3">
             <label for="gambarKegiatan" class="form-label fw-semibold">Gambar</label>
-            <input type="file" class="form-control" id="gambarKegiatan" accept="image/*" onchange="previewImage(event)">
+            <input type="file" class="form-control" name="gambar" id="gambarKegiatan" accept="image/*" onchange="previewImage(event)">
             <img id="preview" src="#" alt="Preview" class="img-fluid mt-2 d-none" style="max-height: 200px;">
           </div>
           <div class="mb-3">
-            <label for="keteranganKegiatan" class="form-label fw-semibold">Keterangan</label>
-            <textarea class="form-control" id="keteranganKegiatan" rows="3" placeholder="Tambahkan keterangan kegiatan"></textarea>
-          </div>
-          <div class="mb-3 switch-container">
-            <label class="form-label fw-semibold">Status</label>
-            <input class="form-check-input ms-3" type="checkbox" id="statusKegiatan" checked>
-            <label for="statusKegiatan" class="fw-semibold text-primary">Aktif</label>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+            <label class="form-label">Status</label>
+            <select class="form-select" name="is_active" required>
+                <option value="1">Aktif</option>
+                <option value="0">Non-Aktif</option>
+            </select>
+        </div>
+        <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Simpan</button>
+        </div>
+    </form>
     </div>
   </div>
 </div>

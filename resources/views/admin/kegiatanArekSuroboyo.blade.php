@@ -39,28 +39,37 @@
                         <tr>
                             <th>No</th>
                             <th>Gambar</th>
-                            <th>Nama Kategori</th>
                             <th>Judul</th>
+                            <th>Slug</th>
+                            <th>Tag</th>
                             <th>Dibuat Oleh</th>
                             <th>Status</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($kegiatans as $index => $kegiatan)
                         <tr>
-                            <td>1</td>
-                            <td><img src="{{ asset('kids.jpg') }}" alt="Slider Image" width="80"></td>
-                            <td>Judul Halaman</td>
-                            <td>slug-halaman</td>
-                            <td>Admin</td>
-                            <td><span class="badge bg-success">Aktif</span></td>
+                            <td>{{ $loop->iteration }}</td>
+                            <td><img src="{{ asset($kegiatan->gambar) }}" alt="Slider Image" width="80"></td>
+                            <td>{{ $kegiatan->judul }}</td>
+                            <td>{{ $kegiatan->slug }}</td>
+                            <td>{{ $kegiatan->tag }}</td>
+                            <td>{{ $kegiatan->dibuatOleh }}</td>
                             <td>
+                                @if($kegiatan->is_active == 0)
+                                    <span class="badge bg-warning">Non Aktif</span>
+                                @else
+                                    <span class="badge bg-success">Aktif</span>
+                                @endif
+                            </td>                               <td>
                                 <button class="btn btn-sm btn-primary edit-btn" data-bs-toggle="modal" data-bs-target="#halamanModal" data-judul="Judul Halaman" data-slug="slug-halaman" data-status="Aktif"><i class="bi bi-pencil-square"></i></button>
                                 <button class="btn btn-sm btn-danger delete-slider">
                                     <i class="bi bi-trash"></i>
                                 </button>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -77,41 +86,41 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form method="POST" action="{{ route('createKegiatanArekSuroboyo') }}" enctype="multipart/form-data">
+                    @csrf 
                     <div class="mb-3">
                         <label for="judul" class="form-label">Judul</label>
-                        <input type="text" class="form-control" id="judul">
+                        <input name="judul" type="text" class="form-control" id="judul">
                     </div>
                     <div class="mb-3">
                         <label for="slug" class="form-label">Slug</label>
-                        <input type="text" class="form-control" id="slug">
+                        <input type="text" name="slug" class="form-control" id="slug">
                     </div>
                     <div class="mb-3">
                         <label for="tag" class="form-label">Tag</label>
-                        <input type="text" class="form-control" id="tag">
+                        <input type="text" name="tag" class="form-control" id="tag">
                     </div>
                     <div class="mb-3">
                         <label for="gambar" class="form-label">Gambar</label>
-                        <input type="file" class="form-control" id="gambar">
+                        <input type="file" name="gambar" class="form-control" id="gambar">
                     </div>
                     <div class="mb-3">
                         <label for="konten" class="form-label">Konten</label>
-                        <textarea class="form-control" id="konten" rows="3"></textarea>
+                        <textarea class="form-control" name="konten" id="konten" rows="3"></textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="sliderStatus" class="form-label">Status</label>
-                        <select class="form-select" id="sliderStatus">
-                            <option selected>--- Pilih Status ---</option>
-                            <option value="Aktif">Aktif</option>
-                            <option value="Non-Aktif">Non-Aktif</option>
+                        <label class="form-label">Status</label>
+                        <select class="form-select" name="is_active" required>
+                            <option value="1">Aktif</option>
+                            <option value="0">Non-Aktif</option>
                         </select>
                     </div>
+                    <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
         </div>
     </div>
 </div>

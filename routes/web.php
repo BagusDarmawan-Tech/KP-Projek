@@ -131,7 +131,12 @@ Route::get('/HalamananDokumenPisa', [PusatInformasiSahabatController::class, 'Ha
 Route::get('/HalamananKegiatanPisa', [PusatInformasiSahabatController::class, 'HalamanKegiatan'])->name('KegiatanLayakanak');
 
 // Halaman Kegiatan Forum Anak surabaya
-Route::get('/HalamanForumAnakaSurabaya', [KegiatanForumArekSurabayaController::class, 'HalamanForum'])->name('KegiatanForumSurabaya');
+Route::middleware('auth')->group(function () {
+    Route::get('/HalamanForumAnakaSurabaya', [KegiatanForumArekSurabayaController::class, 'HalamanForum'])->name('KegiatanForumSurabaya');
+
+    //tambah
+    Route::post('/createForumAnakSurabaya', [KegiatanForumArekSurabayaController::class, 'storeForumAnakSurabaya'])->name('createForumAnakSurabaya');
+});
 
 // Halaman Config
 Route::get('/HalamanRoleManagement', [ConfigController::class, 'RoleManagementt'])->name('HalamanRole');
@@ -180,17 +185,32 @@ Route::middleware('auth')->group(function () {
     Route::get('/kegiatan-cfci', [MitraAnakController::class, 'kegiatanCfci'])->name('kegiatan-cfci');
     Route::get('/artikel-mitraanak', [MitraAnakController::class, 'artikelmitraanak'])->name('artikel-mitraanak');
     Route::get('/kegiatan-mitra', [MitraAnakController::class, 'kegiatanMitraAnak'])->name('kegiatan-mitra');
+
+    //Tambah
+    Route::post('/createKegiatanMitraAnak', [MitraAnakController::class, 'storeKegiatanMitraAnak'])->name('createKegiatanMitraAnak');
+    Route::post('/createMitraCfci', [MitraAnakController::class, 'storeKegiatanCfci'])->name('createMitraCfci');
+    Route::post('/createArtikelMitra', [MitraAnakController::class, 'storeArtikelMitra'])->name('createArtikelMitra');
+
 });
 
 //Kegiatan Arek Suroboyo
 Route::middleware('auth')->group(function () {
     Route::get('/kegiatan-arek', [KegiatanArekSuroboyoController::class, 'kegiatanarek'])->name('kegiatan-arek');
+
+    //tambah
+    Route::post('/createKegiatanArekSuroboyo', [KegiatanArekSuroboyoController::class, 'storeKegiatanArekSuroboyo'])->name('createKegiatanArekSuroboyo');
 });
 
 //Usulan Kegiatan
 Route::middleware('auth')->group(function () {
     Route::get('/pemantauan-suara', [UsulanKegiatanController::class, 'pemantauansuara'])->name('pemantauan-suara');
     Route::get('/karya-anak', [UsulanKegiatanController::class, 'karyaanak'])->name('karya-anak');
+
+    //Tambah data
+    Route::post('/createPemantauanSuara', [UsulanKegiatanController::class, 'storePemantauanSuara'])->name('createPemantauanSuara');
+    Route::post('/createTindakLanjut', [UsulanKegiatanController::class, 'storeTindakLanjut'])->name('createTindakLanjut');
+    Route::post('/createKaryaAnak', [UsulanKegiatanController::class, 'storeKaryaAnak'])->name('createKaryaAnak');
+
 });
 
 //Dokumen SK FAS, CFCI DAN KLA
