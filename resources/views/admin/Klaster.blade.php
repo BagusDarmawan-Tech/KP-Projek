@@ -81,7 +81,6 @@
                 <h5 class="modal-title fw-bold text-center" id="kategoriModalLabel">Tambah Menu Klaster Baru</h5>
             </div>
             <div class="modal-body">
-                <form>
                 <form method="POST" action="{{ route('createKlaster') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">

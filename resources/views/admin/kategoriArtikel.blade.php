@@ -74,7 +74,7 @@
                 <h5 class="modal-title fw-bold text-center" id="kategoriModalLabel">Tambah Menu Kategori Baru</h5>
             </div>
             <div class="modal-body">
-                <form>
+    
                 <form method="POST" action="{{ route('createKategoriArtikel') }}">
                     @csrf    
                     <div class="mb-3">

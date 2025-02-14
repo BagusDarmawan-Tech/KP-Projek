@@ -69,15 +69,15 @@
 
 <!-- Modal Tambah Galeri -->
 <div class="modal fade" id="sliderModal" tabindex="-1" aria-labelledby="sliderModalLabel" aria-hidden="true">
-<div class="modal-dialog">
+    <div class="modal-dialog">
         <div class="modal-content">
-
-            <div class="modal-header d-flex justify-content-center w-100 ">
-                <h5 class="modal-title fw-bold text-center" id="menuModalLabel">Tambah Menu Galeri</h5>
-            </div>
-            <div class="modal-body">
-                <form method="POST" action="{{ route('createGaleri') }}" enctype="multipart/form-data">
-                    @csrf
+            <form method="POST" action="{{ route('createGaleri') }}" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title" id="sliderModalLabel">Tambah Galeri Baru</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
                     <div class="mb-3">
                         <label for="nama" class="form-label">Nama</label>
                         <input type="text" class="form-control" id="nama" name="nama" required>
@@ -88,11 +88,11 @@
                     </div>
                     <div class="mb-3">
                         <label for="deskripsi" class="form-label">Deskripsi</label>
-                        <input type="text" class="form-control" id="deskripsi" name="ddeskripsi" required>
+                        <input type="text" class="form-control" id="deskripsi" name="deskripsi" required>
                     </div>
                     <div class="mb-3">
                         <label for="gambar" class="form-label">Gambar</label>
-                        <input type="file" class="form-control" id="gambar" name="gambar" required>
+                        <input type="file" class="form-control" id="gambar" name="gambar" accept="image/*" required>
                     </div>
                     <div class="mb-3">
                         <label for="status" class="form-label">Status</label>
@@ -103,26 +103,27 @@
                         </select>
                     </div>
                     <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
-                    </div>
-                    <div class="modal-footer border-top pt-3 d-flex justify-content-end"> <!-- Tambahan border-top dan padding -->
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Simpan</button>
-            </div>
-                </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+
 
 <!-- Modal Edit Galeri -->
 <div class="modal fade" id="editGaleriModal" tabindex="-1" aria-labelledby="editGaleriModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-
-            <div class="modal-header d-flex justify-content-center w-100 ">
-                <h5 class="modal-title fw-bold text-center" id="menuModalLabel">Edit Menu Galeri</h5>
-            </div>
-            <div class="modal-body">
-             <form>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editGaleriModalLabel">Edit Galeri</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="editId" name="id">
                     <div class="mb-3">
                         <label for="editNama" class="form-label">Nama</label>
                         <input type="text" class="form-control" id="editNama" name="nama" required>
@@ -147,13 +148,11 @@
                             <option value="0">Non-Aktif</option>
                         </select>
                     </div>
-
-                    </div>
-                    <div class="modal-footer border-top pt-3 d-flex justify-content-end"> <!-- Tambahan border-top dan padding -->
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Simpan</button>
-            </div>
-                </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
         </div>
     </div>
 </div>

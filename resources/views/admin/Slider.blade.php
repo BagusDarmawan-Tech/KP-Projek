@@ -90,7 +90,6 @@
                 <h5 class="modal-title fw-bold text-center" id="sliderModalLabel">Tambah Menu Slider Baru</h5>
             </div>
             <div class="modal-body">
-                <form>
                 <form method="POST" action="{{ route('createSlider') }}" enctype="multipart/form-data">
                     @csrf 
                     <div class="mb-3">
