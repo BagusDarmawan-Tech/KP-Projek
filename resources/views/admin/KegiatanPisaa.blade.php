@@ -132,13 +132,12 @@
 
 <!-- Modal Tambah Dokumen Kelurahan -->
 <div class="modal fade" id="modalTambahKegiatan" tabindex="-1" aria-labelledby="modalTambahKegiatanLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title fw-bold" id="modalTambahKegiatanLabel">Tambah Kegiatan Pisa</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
+<div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header d-flex justify-content-center w-100 ">
+                <h5 class="modal-title fw-bold text-center" id="modalTambahKegiatanLabel">Tambah Menu Kegiatan Pisa Baru</h5>
+            </div>
+            <div class="modal-body">
         <form>
           <div class="mb-3">
             <label for="namaKegiatan" class="form-label fw-semibold">Nama</label>
@@ -157,11 +156,13 @@
             <label for="keteranganKegiatan" class="form-label fw-semibold">Keterangan</label>
             <textarea class="form-control" id="keteranganKegiatan" rows="3" placeholder="Tambahkan keterangan kegiatan"></textarea>
           </div>
-          <div class="mb-3 switch-container">
-            <label class="form-label fw-semibold">Status</label>
-            <input class="form-check-input ms-3" type="checkbox" id="statusKegiatan" checked>
-            <label for="statusKegiatan" class="fw-semibold text-primary">Aktif</label>
-          </div>
+          <div class="mb-3">
+                        <label for="editStatus" class="form-label">Status</label>
+                        <select class="form-select" id="editStatus">
+                            <option selected>Aktif</option>
+                            <option value="Non-Aktif">Non-Aktif</option>
+                        </select>
+                    </div>
         </form>
       </div>
       <div class="modal-footer">
@@ -174,14 +175,13 @@
 
 <!-- Modal Edit Dokumen Kelurahan -->
 <div class="modal fade" id="modaEditKegiatan" tabindex="-1" aria-labelledby="modaEditKegiatanLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modaEditKegiatan">Edit Kegiatan Pisa</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form>
+<div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header d-flex justify-content-center w-100 ">
+                <h5 class="modal-title fw-bold text-center" id="modaEditKegiatanLabel">Edit Menu Kegiatan Pisa</h5>
+            </div>
+            <div class="modal-body">
+      <form>
           <div class="mb-3">
             <label for="namaKegiatan" class="form-label">Nama</label>
             <input type="text" class="form-control" id="namaKegiatan">
@@ -199,10 +199,13 @@
             <label for="keteranganKegiatan" class="form-label">Keterangan</label>
             <textarea class="form-control" id="keteranganKegiatan" rows="3"></textarea>
           </div>
-          <div class="mb-3 form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="statusKegiatan" checked>
-            <label class="form-check-label" for="statusKegiatan">Aktif</label>
-          </div>
+          <div class="mb-3">
+                        <label for="editStatus" class="form-label">Status</label>
+                        <select class="form-select" id="editStatus">
+                            <option selected>Aktif</option>
+                            <option value="Non-Aktif">Non-Aktif</option>
+                        </select>
+                    </div>
         </form>
       </div>
       <div class="modal-footer">

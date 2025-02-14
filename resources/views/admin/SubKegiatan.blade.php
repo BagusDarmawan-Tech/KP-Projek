@@ -63,8 +63,8 @@
                                 <td>{{ $subKegiatan->dibuatOleh }}</td>
                                 <td><span class="badge bg-success">{{ $subKegiatan->is_active }}</span></td>
                                 <td>
-                                    <button class="btn btn-sm btn-primary"><i class="bi bi-pencil-square"></i></button>
-                                    <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
+                                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#EditMenu"><i class="bi bi-pencil-square"></i></button>
+                                <button class="btn btn-sm btn-danger delete-slider"><i class="bi bi-trash"></i></button>
                                 </td>
                             </tr>
                         @endforeach
@@ -80,12 +80,10 @@
 <div class="modal fade" id="subKegiatanModal" tabindex="-1" aria-labelledby="subKegiatanModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="subKegiatanModalLabel">Tambah Sub Kegiatan Baru</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header d-flex justify-content-center w-100 ">
+                <h5 class="modal-title fw-bold text-center" id="menuModalLabel">Tambah Sub Kegiatan</h5>
             </div>
             <div class="modal-body">
-
                 <form method="POST" action="{{ route('createSubKegiatan') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
@@ -119,10 +117,11 @@
                         </select>
                     </div>
                     <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                    </div>
+                </div>
+                    <div class="modal-footer border-top pt-3 d-flex justify-content-end"> <!-- Tambahan border-top dan padding -->
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
+            </div>
                 </form>
             </div>
         </div>
@@ -130,15 +129,15 @@
 </div>
 
 
-<!-- Modal Tambah Sub Kegiatan -->
+<!-- Modal Edit Sub Kegiatan -->
 <div class="modal fade" id="EditMenu" tabindex="-1" aria-labelledby="EditMenuLabel" aria-hidden="true">
-    <div class="modal-dialog">
+        <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="subKegiatanModalLabel">Tambah Sub Kegiatan Baru</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header d-flex justify-content-center w-100 ">
+                <h5 class="modal-title fw-bold text-center" id="menuModalLabel">Edit Menu Sub Kegiatan</h5>
             </div>
             <div class="modal-body">
+
 
                     @csrf
                     <div class="mb-3">
@@ -173,10 +172,11 @@
                             <option value="Non-Aktif">Non-Aktif</option>
                         </select>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
                     </div>
+                    <div class="modal-footer border-top pt-3 d-flex justify-content-end"> <!-- Tambahan border-top dan padding -->
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
                 </form>
             </div>
         </div>

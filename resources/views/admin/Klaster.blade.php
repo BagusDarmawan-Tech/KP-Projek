@@ -77,9 +77,8 @@
 <div class="modal fade" id="kategoriModal" tabindex="-1" aria-labelledby="kategoriModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="kategoriModalLabel">Tambah Klaster Baru</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header d-flex justify-content-center w-100 ">
+                <h5 class="modal-title fw-bold text-center" id="kategoriModalLabel">Tambah Menu Klaster Baru</h5>
             </div>
             <div class="modal-body">
                 <form method="POST" action="{{ route('createKlaster') }}" enctype="multipart/form-data">
@@ -96,10 +95,12 @@
                         <label for="kategoriSlug" class="form-label">Slug</label>
                         <input type="text" class="form-control" id="slug" id="caption" name="slug" value="{{ old('slug') }}" placeholder="Masukkan Slug">
                     </div>
+
                     <div class="mb-3">
                         <label for="kategoriGambar" class="form-label">Gambar</label>
                         <input type="file" class="form-control" id="gambar" name="gambar" value="{{ old('gambar') }}">
                     </div>
+                    
                     <div class="mb-3">
                         <label for="kategoriStatus" class="form-label">Status</label>
                         <select class="form-select" id="kategoriStatus" name="is_active" required>
@@ -127,9 +128,8 @@
 <div class="modal fade" id="EditModal" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="kategoriModalLabel">Edit Klaster</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header d-flex justify-content-center w-100 ">
+                <h5 class="modal-title fw-bold text-center" id="EditModalLabel">Edit Menu Klaster</h5>
             </div>
             <div class="modal-body">
                 <form>

@@ -181,6 +181,7 @@ class WebManagementController extends Controller
 
     public function storeKategoriArtikel(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'nama' => 'required|string|max:255|unique:kategori_artikel,nama',
             'is_active' => 'required|boolean',

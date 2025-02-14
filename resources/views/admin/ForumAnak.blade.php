@@ -52,13 +52,8 @@
                             </td>
                             <td>
                                 <!-- Button Edit Modal -->
-                                <button class="btn btn-sm btn-primary btn-edit" data-bs-toggle="modal" data-bs-target="#editModal">
-                                    <i class="bi bi-pencil-square"></i>
-                                </button>
-                                <!-- Tombol Hapus dengan konfirmasi -->
-                                <button class="btn btn-sm btn-danger delete-slider">
-                                    <i class="bi bi-trash"></i>
-                                </button>
+                                <button class="btn btn-sm btn-primary edit-btn" data-bs-toggle="modal" data-bs-target="#HalamaneditModal" data-judul="Judul Halaman" data-slug="slug-halaman" data-status="Aktif"><i class="bi bi-pencil-square"></i></button>
+                                <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i></button>
                             </td>
                         </tr>
                         @endforeach
@@ -71,13 +66,13 @@
 
 <!-- Modal Tambah Forum Anak -->
 <div class="modal fade" id="sliderModal" tabindex="-1" aria-labelledby="sliderModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="sliderModalLabel">Tambah Forum Anak Baru</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header d-flex justify-content-center w-100 ">
+                <h5 class="modal-title fw-bold text-center" id="menuModalLabel">Tambah Menu Forum Anak Baru</h5>
             </div>
             <div class="modal-body">
+
                 <form method="POST" action="{{ route('createForumAnak') }}" enctype="multipart/form-data">
                     @csrf 
                     <div class="mb-3">
@@ -105,10 +100,11 @@
                         </select>
                     </div>
                     <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
+                    <div class="modal-footer border-top pt-3 d-flex justify-content-end"> <!-- Tambahan border-top dan padding -->
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
+            </div>
                 </form>
             </div>
         </div>
@@ -116,12 +112,11 @@
 </div>
 
 <!-- Modal Edit Forum Anak -->
-<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal fade" id="HalamaneditModal" tabindex="-1" aria-labelledby="HalamaneditModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">Edit Forum Anak</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header d-flex justify-content-center w-100 ">
+                <h5 class="modal-title fw-bold text-center" id="menuModalLabel">Edit Menu Forum Anak</h5>
             </div>
             <div class="modal-body">
                     <input type="hidden" id="editId" name="id">
@@ -151,12 +146,14 @@
                             <option value="1">Aktif</option>
                             <option value="0">Non-Aktif</option>
                         </select>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                    </div>
+
+                        </div>
+                        </div>
+                        <div class="modal-footer border-top pt-3 d-flex justify-content-end"> <!-- Tambahan border-top dan padding -->
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
             </div>
+                </form>
         </div>
     </div>
 </div>

@@ -72,11 +72,10 @@
 
 <!-- Modal Tambah Usulan -->
 <div class="modal fade" id="pemantauanModal" tabindex="-1" aria-labelledby="pemantauanModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Tambah Pemantauan Usulan Anak Baru</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header d-flex justify-content-center w-100 ">
+                <h5 class="modal-title fw-bold text-center" id="menuModalLabel">Tambah Menu Pemantauan Usulan Anak</h5>
             </div>
             <div class="modal-body">
                 <form method="POST" action="{{ route('createPemantauanUsulan') }}" >
@@ -102,11 +101,10 @@
 
 <!-- Modal Edit Usulan -->
 <div class="modal fade" id="editPemantauanModal" tabindex="-1" aria-labelledby="editPemantauanModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Edit Pemantauan Usulan Anak</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header d-flex justify-content-center w-100 ">
+                <h5 class="modal-title fw-bold text-center" id="menuModalLabel">Edit Pemantauan Usulan Anak</h5>
             </div>
             <div class="modal-body">
                 <form>

@@ -73,7 +73,7 @@
         <div class="card-body">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h5 class="fw-bold">Daftar Dokumen</h5>
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#dokumenKelurahanModal">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#TambahDokumenModal">
                     <i class="bi bi-plus"></i> Dokumen Kelurahan
                 </button>
             </div>
@@ -110,13 +110,12 @@
     </div>
 </div>
 
-<!-- Modal Tambah Dokumen Kelurahan -->
-<div class="modal fade" id="dokumenKelurahanModal" tabindex="-1" aria-labelledby="dokumenKelurahanModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<!-- Modal Tambahan Dokumen Kelurahan -->
+<div class="modal fade" id="TambahDokumenModal" tabindex="-1" aria-labelledby="TambahDokumenModalLabel" aria-hidden="true">
+<div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="dokumenKelurahanModalLabel">Tambah Dokumen Kelurahan Baru</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header d-flex justify-content-center w-100 ">
+                <h5 class="modal-title fw-bold text-center" id="TambahDokumenModalLabel">Tambah Menu Dokumen Kelurahan Baru</h5>
             </div>
             <div class="modal-body">
                 <div class="mb-3">
@@ -142,10 +141,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Status</label>
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="status" checked>
-                        <label class="form-check-label" for="status">Aktif</label>
-                    </div>
+                    <input type="checkbox" class="form-check-input" id="statusEdit" checked>
                 </div>
             </div>
             <div class="modal-footer">
@@ -156,13 +152,13 @@
     </div>
 </div>
 
+
 <!-- Modal Edit Dokumen Kelurahan -->
 <div class="modal fade" id="editDokumenModal" tabindex="-1" aria-labelledby="editDokumenModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editDokumenModalLabel">Edit Dokumen Kelurahan</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header d-flex justify-content-center w-100 ">
+                <h5 class="modal-title fw-bold text-center" id="editDokumenModalLabel">Edit Menu Dokumen Kelurahan</h5>
             </div>
             <div class="modal-body">
                 <div class="mb-3">

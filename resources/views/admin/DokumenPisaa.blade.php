@@ -72,7 +72,7 @@
         <div class="card-body">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h5 class="fw-bold">Daftar Dokumen</h5>
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#dokumenKelurahanModal">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#DokumenPisaModal">
                     <i class="bi bi-plus"></i> Dokumen Pisa
                 </button>
             </div>
@@ -109,12 +109,11 @@
 </div>
 
 <!-- Modal Tambah Dokumen Kelurahan -->
-<div class="modal fade" id="dokumenKelurahanModal" tabindex="-1" aria-labelledby="dokumenKelurahanModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal fade" id="DokumenPisaModal" tabindex="-1" aria-labelledby="DokumenPisaModalLabel" aria-hidden="true">
+<div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="dokumenKelurahanModalLabel">Tambah Dokumen Pisa Baru</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header d-flex justify-content-center w-100 ">
+                <h5 class="modal-title fw-bold text-center" id="DokumenPisaModalLabel">Tambah Dokumen Pisa Baru</h5>
             </div>
             <div class="modal-body">
                 <div class="mb-3">
@@ -156,11 +155,10 @@
 
 <!-- Modal Edit Dokumen Kelurahan -->
 <div class="modal fade" id="editDokumenModal" tabindex="-1" aria-labelledby="editDokumenModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editDokumenModalLabel">Edit Dokumen Pisa</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header d-flex justify-content-center w-100 ">
+                <h5 class="modal-title fw-bold text-center" id="editDokumenModalLabel">Edit Menu Dokumen Pisa</h5>
             </div>
             <div class="modal-body">
                 <div class="mb-3">
