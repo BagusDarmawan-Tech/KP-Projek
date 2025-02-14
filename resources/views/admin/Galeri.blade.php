@@ -88,11 +88,11 @@
                     </div>
                     <div class="mb-3">
                         <label for="deskripsi" class="form-label">Deskripsi</label>
-                        <input type="text" class="form-control" id="deskripsi" name="ddeskripsi" required>
+                        <input type="text" class="form-control" id="deskripsi" name="deskripsi" required>
                     </div>
                     <div class="mb-3">
                         <label for="gambar" class="form-label">Gambar</label>
-                        <input type="file" class="form-control" id="gambar" name="gambar" required>
+                        <input type="file" class="form-control" id="gambar" name="gambar" accept="image/*" required>
                     </div>
                     <div class="mb-3">
                         <label for="status" class="form-label">Status</label>
@@ -112,6 +112,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- Modal Edit Galeri -->
 <div class="modal fade" id="editGaleriModal" tabindex="-1" aria-labelledby="editGaleriModalLabel" aria-hidden="true">
