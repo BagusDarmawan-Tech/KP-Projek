@@ -18,7 +18,7 @@
 
             <!-- Tabel -->
             <div class="table-responsive">
-                <table class="table table-hover table-bordered align-middle text-center">
+                <table class="table table-hover table-bordered align-middle text-center"  id="myTable">
                     <thead class="table-primary">
                         <tr>
                             <th>No</th>

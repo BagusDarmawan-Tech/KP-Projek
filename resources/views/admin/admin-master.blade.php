@@ -8,6 +8,8 @@
   <title>Dashboard</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
+  <link rel="stylesheet" href="//cdn.datatables.net/2.2.2/css/dataTables.dataTables.min.css">
+
 
   <!-- Favicons -->
   <link rel="shortcut icon" href="{{ asset('favicon.png') }}" type="image/x-icon"/>
@@ -151,6 +153,16 @@
 
   <!-- Template Main JS File -->
   <script src="{{ asset('assets/js/main-bagus.js' ) }}"></script>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+  <script src="//cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
+  <script>
+    $(document).ready(function(){
+
+        $('#myTable').DataTable();
+    })
+</script>
+
 
 </body>
 

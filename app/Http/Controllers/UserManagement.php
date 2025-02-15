@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class UserManagement extends Controller
 {
     public function UserManagement() {
-        $user = User::latest()->paginate(10);
+        $user = User::all();
         return view('admin.UserManagement', compact('user'));
     }   
 }

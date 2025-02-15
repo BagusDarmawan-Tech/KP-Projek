@@ -12,27 +12,10 @@
                 <div></div> <!-- Spacer -->
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#halamanTambahModal">+ Tambahkan Artikel</button> 
             </div>
-
-            <!-- Kontrol Tampilkan & Cari -->
-            <div class="row mb-3 align-items-center">
-                <div class="col-md-6">
-                    <label for="showEntries" class="form-label me-2">Show</label>
-                    <select id="showEntries" class="form-select form-select-sm d-inline-block" style="width: 80px;">
-                        <option value="10">10</option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                    </select>
-                    entries
-                </div>
-                <div class="col-md-6 text-end">
-                    <input type="text" id="searchInput" class="form-control form-control-sm d-inline-block" placeholder="Search..." style="width: 200px;">
-                </div>
-            </div>
             
             <!-- Tombol Tambah Artikel di atas -->
             <div class="table-responsive">
-                <table class="table table-hover table-bordered align-middle text-center">
+                <table class="table table-hover table-bordered align-middle text-center"  id="myTable">
                     <thead class="table-primary">
                         <tr>
                             <th>No</th>
