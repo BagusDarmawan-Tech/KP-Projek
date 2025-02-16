@@ -120,7 +120,13 @@
                             <td>{{ $mitra->nama }}</td>
                             <td><a href="#" class="text-primary">{{ $mitra->deskripsi }}</a></td>
                             <td>{{ $mitra->dibuatOleh }}</td>
-                            <td><span class="badge bg-success">{{ $mitra->is_active }}</span></td>
+                            <td>
+                              @if($mitra->is_active == 0)
+                              <span class="badge bg-warning">Non Aktif</span>
+                              @else
+                                  <span class="badge bg-success">Aktif</span>
+                              @endif
+                            </td>
                             <td>
                                 <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modaEditKegiatan">
                                     <i class="bi bi-pencil-square"></i>

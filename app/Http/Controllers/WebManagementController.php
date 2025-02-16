@@ -58,6 +58,15 @@ class WebManagementController extends Controller
     //====================================END CRUD SLider
 
 
+
+
+
+
+
+
+
+
+
     //===========CRUD Sub Kegiatan
     public function subKegiatan() {
         $subKegiatans = SubKegiatan::all();
@@ -70,13 +79,12 @@ class WebManagementController extends Controller
         //dd($request->all());
         $request->validate([
             'nama' => 'required|string|max:255',
-            'klusterid' => 'required|integer', // Sesuai dengan tipe data integer
-            'dataPendukung' => 'required|mimes:pdf,doc,docx|max:10048', // Hanya PDF, DOC, DOCX, max 2MB
+            'klusterid' => 'required|integer', 
+            'dataPendukung' => 'required|mimes:pdf,doc,docx|max:10048', 
             'keterangan' => 'required|string|max:500',
-            'is_active' => 'required|in:0,1', // Pastikan hanya 0 atau 1 yang diterima
+            'is_active' => 'required|in:0,1', 
         ]);
     
-        // Simpan file ke storage/public/forum-anak
         $file = $request->file('dataPendukung');
         $filename = date('Y-m-d-His') . '-' . uniqid() . '.' . $file->getClientOriginalExtension();
         $path = $file->storeAs('sub-kegiatan', $filename, 'public'); // Disimpan di storage/app/public/sub-kegiatan
@@ -85,14 +93,22 @@ class WebManagementController extends Controller
             'nama' => $request->nama,
             'klusterid' => $request->klusterid,
             'keterangan' => $request->keterangan,
-            'dataPendukung' => $path, // Hanya menyimpan path yang benar
+            'dataPendukung' => $path,
             'is_active' => $request->is_active,
-            'dibuatOleh' => $request->dibuatOleh, // Pastikan dibuatOleh tidak null
+            'dibuatOleh' => $request->dibuatOleh, 
         ]);
     
         return redirect()->route('sub-kegiatan')->with('success', 'Kategori berhasil ditambahkan!');
     }    
     //===========END CRUD Sub Kegiatan
+
+
+
+
+
+
+
+
 
 
 
@@ -135,6 +151,18 @@ class WebManagementController extends Controller
     //===========CRUD FORUMANAK
     
 
+
+
+
+
+
+
+
+
+
+
+
+
     //=============== CRUD Galeri
     public function galeri() {
         $galeris = Galeri::all();
@@ -173,9 +201,16 @@ class WebManagementController extends Controller
     }
      //=================END CRUD Galeri
 
+
+
+
+
+
+
+
     //=================CRUD KategoriArtikel
     public function kategoriArtikel() {
-        $kategori_artikel = KategoriArtikel::latest()->paginate(10);
+        $kategori_artikel = KategoriArtikel::all();
         return view('admin.KategoriArtikel', compact('kategori_artikel'));
     }   
 
@@ -186,12 +221,56 @@ class WebManagementController extends Controller
             'nama' => 'required|string|max:255|unique:kategori_artikel,nama',
             'is_active' => 'required|boolean',
             'dibuatOleh' => 'required|string|max:255',
+        ],[
+            'nama.unique' => 'Nama kategori sudah digunakan, silakan pilih yang lain.',
         ]);
         KategoriArtikel::create($request->all());
 
         return redirect()->route('kategoriArtikel')->with('success', 'Kategori berhasil ditambahkan!');
     }
+
+    public function updateKategoriArtikel(Request $request, $id)
+    {
+    $request->validate([
+        'nama' => 'required|string|max:255|unique:kategori_artikel,nama,' . $id,
+        'is_active' => 'required|boolean',
+        'dibuatOleh' => 'required|string|max:255',
+    ], [
+        'nama.unique' => 'Nama kategori sudah digunakan, silakan pilih yang lain.',
+    ]);
+
+    $kategori = KategoriArtikel::findOrFail($id);
+
+    $kategori->update($request->all());
+
+    return redirect()->route('kategoriArtikel')->with('success', 'Kategori berhasil diperbarui!');
+    }
+
+
+    public function destroy($id)
+    {
+        $kategori = KategoriArtikel::findOrFail($id);
+        $kategori->delete();
+    
+        return response()->json([
+            'success' => true,
+            'message' => 'Kategori berhasil dihapus!'
+        ]);
+    }
+    
+
     //============================END CRUD KategoriArtikel
+
+
+
+
+
+
+
+
+
+
+
 
     //================= CRUD klaster
     public function klaster1() {
@@ -302,7 +381,7 @@ class WebManagementController extends Controller
     //================== CRUD Artikel
     public function bagianArtikel() {
         $artikels = Artikel::all();
-        $kategoris = KategoriArtikel::all();
+        $kategoris = KategoriArtikel::where('is_active', true)->get();
         $klasters = Klaster::all();
         $subKegiatans = SubKegiatan::all();
         return view('admin.Artikel', compact('artikels','kategoris','subKegiatans','klasters'));

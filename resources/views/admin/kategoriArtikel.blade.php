@@ -35,10 +35,21 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $kategori->nama }}</td>
                             <td>{{ $kategori->dibuatOleh }}</td>
-                            <td>{{ $kategori->is_active }}</td>
                             <td>
-                            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editMenuModal"><i class="bi bi-pencil-square"></i></button>
-                            <button class="btn btn-sm btn-danger delete-slider"><i class="bi bi-trash"></i> </button>
+                                @if($kategori->is_active == 0)
+                                <span class="badge bg-warning">Non Aktif</span>
+                                @else
+                                    <span class="badge bg-success">Aktif</span>
+                                @endif
+                            </td>
+                            <td>
+                                <button class="btn btn-sm btn-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editMenuModal" 
+                                    data-id="{{ $kategori->id }}" 
+                                    data-nama="{{ $kategori->nama }}" 
+                                    data-status="{{ $kategori->is_active }}">
+                                    <i class="bi bi-pencil-square"></i>
+                                </button>                           
+                                <button class="btn btn-sm btn-danger delete-slider"><i class="bi bi-trash"></i> </button>
                             </td>
                         </tr>
                         @endforeach
@@ -57,8 +68,24 @@
             <div class="modal-header d-flex justify-content-center w-100 ">
                 <h5 class="modal-title fw-bold text-center" id="kategoriModalLabel">Tambah Menu Kategori Baru</h5>
             </div>
-            <div class="modal-body">
-    
+            <div class="modal-body"> 
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function () {
+                            var kategoriModal = new bootstrap.Modal(document.getElementById('kategoriModal'), {
+                            });
+                            kategoriModal.show();
+                        });
+                    </script>
+                @endif
+            
                 <form method="POST" action="{{ route('createKategoriArtikel') }}">
                     @csrf    
                     <div class="mb-3">
@@ -84,42 +111,79 @@
                     </div>
                 </form>
             </div>
-            
         </div>
     </div>
 </div>
 
-<!-- Modal Edit Menu -->
-<div class="modal fade" id="editMenuModal" tabindex="-1" aria-labelledby="editMenuModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header d-flex justify-content-center w-100 ">
-                <h5 class="modal-title fw-bold text-center" id="editMenuModalLabel">Edit Menu KategoriArtikel</h5>
+<!-- Modal Sukses -->
+@if(session('success'))
+<!-- Modal Sukses -->
+<div class="modal fade show d-block" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 rounded">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title" id="successModalLabel">
+                    <i class="bi bi-check-circle"></i> Berhasil!
+                </h5>
             </div>
-    
-            <div class="modal-body">
-                <form>
-                    <div class="mb-3">
-                        <label for="editMenuName" class="form-label">Nama</label>
-                        <input type="text" class="form-control" id="editMenuName" placeholder="Masukkan nama menu">
-                    </div>
-                    <div class="mb-3">
-                        <label for="kategoriStatus" class="form-label">Status</label>
-                        <select class="form-select" id="kategoriStatus" name="is_active" required>
-                            <!-- <option value="" disabled selected>--- Pilih Status ---</option> -->
-                            <option value="1" {{ old('is_active') == "1" ? 'selected' : '' }}>Aktif</option>
-                            <option value="0" {{ old('is_active') == "0" ? 'selected' : '' }}>Non-Aktif</option>
-                        </select>
-                    </div>
-                </form>
+            <div class="modal-body text-center">
+                <p class="text-muted mb-0">{{ session('success') }}</p>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Update changes</button>
+            <div class="modal-footer justify-content-center">
+                <a href="{{ route('kategoriArtikel') }}" class="btn btn-success px-4">
+                    OK
+                </a>
             </div>
         </div>
     </div>
 </div>
+@endif
+
+
+
+{{-- END Modal Succes --}}
+
+<!-- Modal Edit Menu -->
+<!-- Modal Edit Menu -->
+<div class="modal fade" id="editMenuModal" tabindex="-1" aria-labelledby="editMenuModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header d-flex justify-content-center w-100">
+                <h5 class="modal-title fw-bold text-center" id="editMenuModalLabel">Edit Kategori Artikel</h5>
+            </div>
+    
+            <div class="modal-body">
+                <form id="editForm" method="POST">
+                    @csrf
+                    @method('PUT') <!-- Gunakan method PUT untuk update -->
+
+                    <input type="hidden" id="editId" name="id"> <!-- Menyimpan ID Kategori -->
+
+                    <div class="mb-3">
+                        <label for="editNama" class="form-label">Nama</label>
+                        <input type="text" class="form-control" id="editNama" name="nama" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="editStatus" class="form-label">Status</label>
+                        <select class="form-select" id="editStatus" name="is_active" required>
+                            <option value="1">Aktif</option>
+                            <option value="0">Non-Aktif</option>
+                        </select>
+                    </div>
+                    
+                    <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" form="editForm">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <!-- Bagian Delete Menu -->
 <script>
@@ -150,12 +214,43 @@
             });
         });
     });
-
     </script>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         var kategoriModal = new bootstrap.Modal(document.getElementById("kategoriModal"));
+    });
+</script>
+
+
+<!-- Script untuk Menampilkan Modal Jika Ada Pesan Sukses -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        @if(session('success'))
+            var successModal = new bootstrap.Modal(document.getElementById('successModal'));
+            successModal.show();
+        @endif
+    });
+</script>
+
+
+<!-- Script untuk Mengisi Data ke Modal -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll(".edit-btn").forEach(button => {
+            button.addEventListener("click", function() {
+                let id = this.getAttribute("data-id");
+                let nama = this.getAttribute("data-nama");
+                let status = this.getAttribute("data-status");
+
+                document.getElementById("editId").value = id;
+                document.getElementById("editNama").value = nama;
+                document.getElementById("editStatus").value = status;
+
+                // Set action form update sesuai ID kategori
+                document.getElementById("editForm").action = `/kategori-artikel/update/${id}`;
+            });
+        });
     });
 </script>
 

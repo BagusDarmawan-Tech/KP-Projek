@@ -77,7 +77,7 @@
                 </button>
             </div>
             <div class="table-responsive">
-                <table class="table table-hover table-bordered align-middle text-center">
+                <table class="table table-hover table-bordered align-middle text-center" id="myTable">
                     <thead class="table-primary">
                         <tr>
                             <th>No</th>
@@ -90,17 +90,25 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($dokumens as $index => $dokumen)
                         <tr>
-                            <td>1</td>
-                            <td>SK FAS</td>
-                            <td>SK FAS Kecamatan Simokerto</td>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $dokumen->jenisSurat }}</td>
+                            <td>{{ $dokumen->nama }}</td>
                             <td><a href="#" class="text-primary">Lihat</a></td>
-                            <td>Ema</td>
-                            <td><span class="badge bg-success">Aktif</span></td>
+                            <td>{{ $dokumen->dibuatOleh }}</td>
+                            <td>
+                                @if($dokumen->is_active == 0)
+                                <span class="badge bg-warning">Non Aktif</span>
+                                @else
+                                    <span class="badge bg-success">Aktif</span>
+                                @endif
+                            </td>
                             <td>
                                 <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editDokumenModal"><i class="bi bi-pencil-square"></i></button>
                                 <button class="btn btn-sm btn-danger delete-slider"><i class="bi bi-trash"></i> </button>                            </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -116,22 +124,23 @@
                 <h5 class="modal-title fw-bold text-center" id="DokumenPisaModalLabel">Tambah Dokumen Pisa Baru</h5>
             </div>
             <div class="modal-body">
+            <form method="POST" action="{{ route('createDokumenPisa') }}" enctype="multipart/form-data">
+                    @csrf 
                 <div class="mb-3">
                     <label class="form-label">Kegiatan</label>
-                    <select class="form-select" name="kegiatan">
-                        <option selected>--- Pilih Kategori ---</option>
-                        <option value="SK">SK</option>
-                        <option value="RPA">RPA</option>
-                        <option value="SK-FAS">SK-FAS</option>
+                    <select class="form-select" name="jenisSurat">
+                        @foreach($surats as $index => $surat)
+                        <option value="{{ $surat->nama }}">{{ $surat->nama }}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Nama</label>
+                    <label class="form-label" name="nama">Nama Surat</label>
                     <input type="text" class="form-control" name="nama">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Data Dukung</label>
-                    <input type="file" class="form-control" name="data_dukung">
+                    <label class="form-label">File</label>
+                    <input type="file" class="form-control" name="dataPendukung">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Keterangan</label>
@@ -140,15 +149,18 @@
                 <div class="mb-3">
                     <label class="form-label">Status</label>
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="status" checked>
+                        <input type="hidden" name="is_active" value="0"> <!-- Fallback jika checkbox tidak dicentang -->
+                        <input class="form-check-input" type="checkbox" id="status" name="is_active" value="1" checked>
                         <label class="form-check-label" for="status">Aktif</label>
                     </div>
-                </div>
+                </div>            
             </div>
+            <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
             </div>
+        </form>
         </div>
     </div>
 </div>

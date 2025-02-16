@@ -112,23 +112,21 @@ Route::get('/', function () {return view('frontend.content.landing-page');})->na
 
 //=======================  Backend  =============================//
 
-// bagian WebManagement
-Route::get('/HalamanMenuManagement', [WebManagementController::class, 'ManagementMenu'])->name('MenuManagement');
-Route::get('/KategoriArtikel', [WebManagementController::class, 'kategoriArtikel'])->name('kategoriArtikel');
-Route::get('/Klaster', [WebManagementController::class, 'Klaster1'])->name('Klaster');
-
-Route::get('/bagianHalaman', [WebManagementController::class, 'BagianHalaman'])->name('Halamandong');
-Route::get('/Artikel', [WebManagementController::class, 'BagianArtikel'])->name('Artikel');
-
-
 //Bagian Kelurahan Layak Anak
 Route::get('/KelurahanLayakAnak', [KelurahanLayakAnakController::class, 'HalamanDokumenLayakAnak'])->name('HalamanDokument');
 Route::get('/KegiatanLayakAnak', [KelurahanLayakAnakController::class, 'KegiatanKelurahanAnak'])->name('Kegiatankelurahan');
 
 
 // Halaman Pusat Informasi Sahabat Anak
-Route::get('/HalamananDokumenPisa', [PusatInformasiSahabatController::class, 'HalamanDokumen'])->name('DokumenLayakAnak');
-Route::get('/HalamananKegiatanPisa', [PusatInformasiSahabatController::class, 'HalamanKegiatan'])->name('KegiatanLayakanak');
+Route::middleware('auth')->group(function () {
+    Route::get('/HalamananDokumenPisa', [PusatInformasiSahabatController::class, 'HalamanDokumen'])->name('DokumenLayakAnak');
+    Route::get('/HalamananKegiatanPisa', [PusatInformasiSahabatController::class, 'HalamanKegiatan'])->name('KegiatanLayakanak');
+
+    // Tambah
+    Route::post('/createDokumenPisa', [PusatInformasiSahabatController::class, 'storeDokumenPisa'])->name('createDokumenPisa');
+    Route::post('/createKegiatanPisa', [PusatInformasiSahabatController::class, 'storeKegiatanPisa'])->name('createKegiatanPisa');
+
+});
 
 // Halaman Kegiatan Forum Anak surabaya
 Route::middleware('auth')->group(function () {
@@ -139,9 +137,10 @@ Route::middleware('auth')->group(function () {
 });
 
 // Halaman Config
-Route::get('/HalamanRoleManagement', [ConfigController::class, 'RoleManagementt'])->name('HalamanRole');
-Route::get('/HalamanConfigurasiAPP', [ConfigController::class, 'ConfigurasiAPP'])->name('HalamanConfigurasi');
-
+Route::middleware('auth')->group(function () {
+    Route::get('/HalamanRoleManagement', [ConfigController::class, 'RoleManagementt'])->name('HalamanRole');
+    Route::get('/HalamanConfigurasiAPP', [ConfigController::class, 'ConfigurasiAPP'])->name('HalamanConfigurasi');
+});
 
 
 
@@ -160,7 +159,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/galeri', [WebManagementController::class, 'galeri'])->name('galeri');
     Route::get('/forum-anak', [WebManagementController::class, 'forumanak'])->name('forum-anak');
     Route::get('/PemantauanUsulan', [WebManagementController::class, 'PemantauanUsulan'])->name('PemantauanUsulanAnak');
-
+    Route::get('/HalamanMenuManagement', [WebManagementController::class, 'ManagementMenu'])->name('MenuManagement');
+    Route::get('/KategoriArtikel', [WebManagementController::class, 'kategoriArtikel'])->name('kategoriArtikel');
+    Route::get('/Klaster', [WebManagementController::class, 'Klaster1'])->name('Klaster');
+    Route::get('/bagianHalaman', [WebManagementController::class, 'BagianHalaman'])->name('Halamandong');
+    Route::get('/Artikel', [WebManagementController::class, 'BagianArtikel'])->name('Artikel');
     //Tambah data
     Route::post('/createKategoriArtikel', [WebManagementController::class, 'storeKategoriArtikel'])->name('createKategoriArtikel');
     Route::post('/createSlider', [WebManagementController::class, 'storeSlider'])->name('createSlider');
@@ -171,6 +174,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/createForumAnak', [WebManagementController::class, 'storeForumAnak'])->name('createForumAnak');
     Route::post('/createSubKegiatan', [WebManagementController::class, 'storeSubKegiatan'])->name('createSubKegiatan');
     Route::post('/createArtikel', [WebManagementController::class, 'storeArtikel'])->name('createArtikel');
+
+    //Edit data
+    Route::put('/kategori-artikel/update/{id}', [WebManagementController::class, 'updateKategoriArtikel'])->name('updateKategoriArtikel');
+
+    //Delete data
+    Route::delete('/kategori-artikel/{id}', [WebManagementController::class, 'destroy'])->name('deleteKategoriArtikel');
 
 });
 

@@ -35,7 +35,13 @@
                             <td><img src="{{ asset($halaman->gambar) }}" alt="Slider Image" width="80"></td>
                             <td>{{ $halaman->judul }}</td>
                             <td>{{ $halaman->slug }}</td>
-                            <td><span class="badge bg-success">{{ $halaman->is_active }}</span></td>
+                            <td>
+                                @if($halaman->is_active == 0)
+                                <span class="badge bg-warning">Non Aktif</span>
+                                @else
+                                    <span class="badge bg-success">Aktif</span>
+                                @endif
+                            </td>
                             <td>
                                 <button class="btn btn-sm btn-primary edit-btn" data-bs-toggle="modal" data-bs-target="#halamanEditModal" data-judul="Judul Halaman" data-slug="slug-halaman" data-status="Aktif"><i class="bi bi-pencil-square"></i></button>
                                 <button class="btn btn-sm btn-danger delete-slider"><i class="bi bi-trash"></i> </button>

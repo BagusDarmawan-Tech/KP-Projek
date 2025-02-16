@@ -35,7 +35,13 @@
                             <td>{{ $cfci->nama }}</td>
                             <td>{{ $cfci->caption }}</td>
                             <td>{{ $cfci->deskripsi }}</td>
-                            <td><span class="badge bg-success">{{ $cfci->is_active }}</span></td>
+                            <td>
+                                @if($cfci->is_active == 0)
+                                <span class="badge bg-warning">Non Aktif</span>
+                                @else
+                                    <span class="badge bg-success">Aktif</span>
+                                @endif
+                            </td>
                             <td>
                                 <button class="btn btn-sm btn-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editKegiatanModal"><i class="bi bi-pencil-square"></i></button>
                                 <button class="btn btn-sm btn-danger delete-slider">

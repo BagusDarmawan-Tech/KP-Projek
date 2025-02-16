@@ -38,7 +38,13 @@
                             <td> {{ $artikel->kategori ? $artikel->kategori->nama : 'Tidak ada kategori' }}</td>
                             <td>{{ $artikel->slug }}</td>
                             <td>{{ $artikel->dibuatOleh}}</td>
-                            <td><span class="badge bg-success">{{ $artikel->is_active }}</span></td>
+                            <td>
+                                @if($artikel->is_active == 0)
+                                <span class="badge bg-warning">Non Aktif</span>
+                                @else
+                                    <span class="badge bg-success">Aktif</span>
+                                @endif
+                            </td>
                             <td>
                                 <button class="btn btn-sm btn-primary edit-btn" data-bs-toggle="modal" data-bs-target="#halamanModal" data-judul="Judul Halaman" data-slug="slug-halaman" data-status="Aktif"><i class="bi bi-pencil-square"></i></button>
                                 <button class="btn btn-sm btn-danger delete-slider">

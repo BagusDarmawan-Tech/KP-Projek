@@ -41,7 +41,13 @@
                             <td>{{ $klaster->slug }}</td>
                             <td><img src="{{ asset($klaster->gambar) }}" alt="Gambar" width="50"></td>
                             <td>{{ $klaster->dibuatOleh }}</td>
-                            <td><span class="badge bg-success">{{ $klaster->is_active }}</span></td>
+                            <td>
+                                @if($klaster->is_active == 0)
+                                <span class="badge bg-warning">Non Aktif</span>
+                                @else
+                                    <span class="badge bg-success">Aktif</span>
+                                @endif
+                            </td>
                             <td>
                             <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#EditModal"><i class="bi bi-pencil-square"></i></button>
                             <button class="btn btn-sm btn-danger delete-slider"><i class="bi bi-trash"></i> </button>
