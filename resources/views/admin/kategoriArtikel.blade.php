@@ -4,6 +4,15 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <div class="container mt-5">
+                   @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
     <div class="card shadow-lg border-0 position-relative overflow-hidden mb-5"> 
         <div class="card-body mt-4">
             <div class="text-center mb-4">
@@ -77,13 +86,6 @@
                         @endforeach
                     </ul>
                 </div>
-                    <script>
-                        document.addEventListener("DOMContentLoaded", function () {
-                            var kategoriModal = new bootstrap.Modal(document.getElementById('kategoriModal'), {
-                            });
-                            kategoriModal.show();
-                        });
-                    </script>
                 @endif
             
                 <form method="POST" action="{{ route('createKategoriArtikel') }}">

@@ -29,10 +29,21 @@ class WebManagementController extends Controller
         $request->validate([
             'nama' => 'required|string|max:255',
             'caption' => 'required|string|max:500',
-            'deskripsi' => 'required|string',
+            'deskripsi' => 'required|string|max:500',
             'gambar' => 'required|mimes:png,jpg,jpeg|max:2048',
             'is_active' => 'required|boolean',
             'dibuatOleh' => 'required|string|max:255',
+        ],[
+            'nama.required' => 'Nama wajib diisi.',
+            'nama.max' => 'Nama maksimal 255 karakter.',
+            
+            'caption.required' => 'Caption wajib diisi.',
+            'caption.max' => 'Caption maksimal 500 karakter.',
+            
+            'gambar.required' => 'Gambar wajib diunggah.',
+            'gambar.mimes' => 'Gambar harus berformat PNG, JPG, atau JPEG.',
+            'gambar.max' => 'Ukuran gambar maksimal 2 MB.',
+            
         ]);
     
         
@@ -55,6 +66,64 @@ class WebManagementController extends Controller
     
         return redirect()->route('slider')->with('success', 'Slider berhasil ditambahkan!');
     }
+
+    public function updateSlider(Request $request, $id)
+    {
+        // dd($request->all());
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'caption' => 'required|string|max:500',
+            'deskripsi' => 'required|string',
+            'gambar' => 'nullable|mimes:png,jpg,jpeg|max:2048',
+            'is_active' => 'required|in:0,1',
+        ], [
+            'nama.unique' => 'Nama kategori sudah digunakan, silakan pilih yang lain.',
+            'nama.required' => 'Nama wajib diisi.',
+            'nama.max' => 'Nama maksimal 255 karakter.',
+            
+            'caption.required' => 'Caption wajib diisi.',
+            'caption.max' => 'Caption maksimal 500 karakter.',
+            
+            'gambar.required' => 'Gambar wajib diunggah.',
+            'gambar.mimes' => 'Gambar harus berformat PNG, JPG, atau JPEG.',
+            'gambar.max' => 'Ukuran gambar maksimal 2 MB.',
+        ]);
+    
+        $slider = Slider::findOrFail($id);
+    
+        // Simpan data baru
+        $data = [
+            'nama' => $request->nama,
+            'caption' => $request->caption,
+            'deskripsi' => $request->deskripsi,
+            'is_active' => $request->is_active,
+        ];
+    
+        // Jika ada gambar baru
+        if ($request->hasFile('gambar')) {
+            // Hapus gambar lama jika ada
+            if ($slider->gambar) {
+                // Hapus gambar berdasarkan path lengkap yang disimpan di database
+                if (Storage::exists(str_replace('storage/', 'public/', $slider->gambar))) {
+                    Storage::delete(str_replace('storage/', 'public/', $slider->gambar));
+                }
+            }
+            // Simpan gambar baru dengan nama format "YYYY-MM-DD-nama-baru.jpg"
+            $photo = $request->file('gambar');
+            $gambarName = date('Y-m-d-His') . '-' . uniqid() . '.' . $photo->getClientOriginalExtension();
+            $photo->storeAs('slider', $gambarName, 'public');
+            $path = $photo->storeAs('slider', $gambarName, 'public');
+
+            // Simpan nama gambar baru ke database
+            $data['gambar'] = 'storage/' . $path;
+        }
+    
+        // Update slider
+        $slider->update($data);
+    
+        return redirect()->route('slider')->with('success', 'Slider berhasil diperbarui!');
+    }
+    
     //====================================END CRUD SLider
 
 
@@ -68,7 +137,8 @@ class WebManagementController extends Controller
 
 
     //===========CRUD Sub Kegiatan
-    public function subKegiatan() {
+    public function subKegiatan() 
+    {
         $subKegiatans = SubKegiatan::all();
         $klasters = Klaster::all();
         return view('admin.SubKegiatan', compact('subKegiatans','klasters'));
@@ -80,9 +150,20 @@ class WebManagementController extends Controller
         $request->validate([
             'nama' => 'required|string|max:255',
             'klusterid' => 'required|integer', 
-            'dataPendukung' => 'required|mimes:pdf,doc,docx|max:10048', 
+            'dataPendukung' => 'required|mimes:pdf|max:10048', 
             'keterangan' => 'required|string|max:500',
             'is_active' => 'required|in:0,1', 
+        ],[
+            'nama.required' => 'Nama wajib diisi.',
+            'nama.max' => 'Nama maksimal 255 karakter.',
+            
+            'keterangan.required' => 'Keterangan wajib diisi.',
+            'keterangan.max' => 'Keterangan maksimal 500 karakter.',
+            
+            'dataPendukung.required' => 'Data Pendukung wajib diunggah.',
+            'dataPendukung.mimes' => 'Data Pendukung harus berformat PDF, DOC, atau DOCX.',
+            'dataPendukung.max' => 'Ukuran Data Pendukung maksimal 10 MB.',
+            
         ]);
     
         $file = $request->file('dataPendukung');
@@ -100,6 +181,58 @@ class WebManagementController extends Controller
     
         return redirect()->route('sub-kegiatan')->with('success', 'Kategori berhasil ditambahkan!');
     }    
+
+    public function updateSubKegiatan(Request $request, $id)
+    {
+        // dd($request->all());
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'klusterid' => 'required|integer', 
+            'dataPendukung' => 'mimes:pdf|max:10048', 
+            'keterangan' => 'required|string|max:500',
+            'is_active' => 'required|in:0,1', 
+        ],[
+            'nama.required' => 'Nama wajib diisi.',
+            'nama.max' => 'Nama maksimal 255 karakter.',
+            
+            'keterangan.required' => 'Keterangan wajib diisi.',
+            'keterangan.max' => 'Keterangan maksimal 500 karakter.',
+        
+            'dataPendukung.mimes' => 'Data Pendukung harus berformat PDF, DOC, atau DOCX.',
+            'dataPendukung.max' => 'Ukuran Data Pendukung maksimal 10 MB.',
+            
+        ]);
+    
+        $kegiatan = SubKegiatan::findOrFail($id);
+    
+        // Simpan data baru
+        $data = [
+            'nama' => $request->nama,
+            'klusterid' => $request->klusterid,
+            'keterangan' => $request->keterangan,
+            'is_active' => $request->is_active,
+        ];
+    
+        // Jika ada gambar baru
+        // Jika ada file baru
+        if ($request->hasFile('dataPendukung')) {
+            // Hapus file lama
+            if ($kegiatan->dataPendukung && Storage::exists('public/' . $kegiatan->dataPendukung)) {
+                Storage::delete('public/' . $kegiatan->dataPendukung);
+            }
+
+            // Simpan file baru
+            $file = $request->file('dataPendukung');
+            $fileName = date('Y-m-d-His') . '-' . uniqid() . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs('public/data_pendukung', $fileName);
+            $data['dataPendukung'] = 'data_pendukung/' . $fileName;
+        }
+    
+        // Update kegiatan
+        $kegiatan->update($data);
+    
+        return redirect()->route('sub-kegiatan')->with('success', 'Sub Kegiatan berhasil diperbarui!');
+    }
     //===========END CRUD Sub Kegiatan
 
 
@@ -127,6 +260,20 @@ class WebManagementController extends Controller
             'gambar' => 'required|mimes:png,jpg,jpeg|max:2048',
             'deskripsi' => 'required|string|max:500',
             'is_active' => 'required|boolean',
+        ],[
+            'nama.required' => 'Nama wajib diisi.',
+            'nama.max' => 'Nama maksimal 255 karakter.',
+            
+            'caption.required' => 'Caption wajib diisi.',
+            'caption.max' => 'Caption maksimal 500 karakter.',
+
+            'deskripsi.required' => 'Deskripsi wajib diisi.',
+            'deskripsi.max' => 'Deskripsi maksimal 500 karakter.',
+            
+            'gambar.required' => 'gambar wajib diunggah.',
+            'gambar.mimes' => 'Gambar harus berformat JPG, PNG, atau JPEG.',
+            'gambar.max' => 'Ukuran gambar maksimal 2 MB.',
+            
         ]);
 
         if ($request->hasFile('gambar')) {
@@ -147,6 +294,66 @@ class WebManagementController extends Controller
         ]);
 
         return redirect()->route('forum-anak')->with('success', 'Kategori berhasil ditambahkan!');
+    }
+
+    public function updateForumAnak(Request $request, $id)
+    {
+        // dd($request->all());
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'caption' => 'required|string|max:255',
+            'gambar' => 'mimes:png,jpg,jpeg|max:2048',
+            'deskripsi' => 'required|string|max:500',
+            'is_active' => 'required|boolean',
+        ],[
+            'nama.required' => 'Nama wajib diisi.',
+            'nama.max' => 'Nama maksimal 255 karakter.',
+            
+            'caption.required' => 'Caption wajib diisi.',
+            'caption.max' => 'Caption maksimal 500 karakter.',
+
+            'deskripsi.required' => 'Deskripsi wajib diisi.',
+            'deskripsi.max' => 'Deskripsi maksimal 500 karakter.',
+            
+            
+            'gambar.mimes' => 'Gambar harus berformat JPG, PNG, atau JPEG.',
+            'gambar.max' => 'Ukuran gambar maksimal 2 MB.',
+            
+        ]);
+    
+        $forum = ForumAnak::findOrFail($id);
+    
+        // Simpan data baru
+        $data = [
+            'nama' => $request->nama,
+            'caption' => $request->caption,
+            'deskripsi' => $request->deskripsi,
+            'is_active' => $request->is_active,
+        ];
+    
+        // Jika ada gambar baru
+        if ($request->hasFile('gambar')) {
+            // Hapus gambar lama jika ada
+            if ($forum->gambar) {
+                // Hapus gambar berdasarkan path lengkap yang disimpan di database
+                if (Storage::exists(str_replace('storage/', 'public/', $forum->gambar))) {
+                    Storage::delete(str_replace('storage/', 'public/', $forum->gambar));
+                }
+            }
+            // Simpan gambar baru dengan nama format "YYYY-MM-DD-nama-baru.jpg"
+            $photo = $request->file('gambar');
+            $gambarName = date('Y-m-d-His') . '-' . uniqid() . '.' . $photo->getClientOriginalExtension();
+            $photo->storeAs('slider', $gambarName, 'public');
+            $path = $photo->storeAs('slider', $gambarName, 'public');
+
+            // Simpan nama gambar baru ke database
+            $data['gambar'] = 'storage/' . $path;
+        }
+    
+        // Update slider
+        $forum->update($data);
+    
+        return redirect()->route('forum-anak')->with('success', 'Forum Anak berhasil diperbarui!');
     }
     //===========CRUD FORUMANAK
     
@@ -178,6 +385,17 @@ class WebManagementController extends Controller
             'gambar' => 'required|mimes:png,jpg,jpeg|max:2048',
             'deskripsi' => 'required|string|max:500',
             'is_active' => 'required|boolean',
+        ],[
+            'nama.required' => 'Nama wajib diisi.',
+            'nama.max' => 'Nama maksimal 255 karakter.',
+            
+            'caption.required' => 'Caption wajib diisi.',
+            'caption.max' => 'Caption maksimal 500 karakter.',
+            
+            'gambar.required' => 'Gambar wajib diunggah.',
+            'gambar.mimes' => 'Gambar harus berformat JPG, PNG, atau JPEG.',
+            'gambar.max' => 'Ukuran gambar maksimal 2 MB.',
+            
         ]);
 
         if ($request->hasFile('gambar')) {
@@ -198,6 +416,62 @@ class WebManagementController extends Controller
         ]);
 
         return redirect()->route('galeri')->with('success', 'Kategori berhasil ditambahkan!');
+    }
+
+    public function updateGaleri(Request $request, $id)
+    {
+        // dd($request->all());
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'caption' => 'required|string|max:255',
+            'gambar' => 'mimes:png,jpg,jpeg|max:2048',
+            'deskripsi' => 'required|string|max:500',
+            'is_active' => 'required|boolean',
+        ],[
+            'nama.required' => 'Nama wajib diisi.',
+            'nama.max' => 'Nama maksimal 255 karakter.',
+            
+            'caption.required' => 'Caption wajib diisi.',
+            'caption.max' => 'Caption maksimal 500 karakter.',
+            
+            'gambar.mimes' => 'Gambar harus berformat JPG, PNG, atau JPEG.',
+            'gambar.max' => 'Ukuran gambar maksimal 2 MB.',
+            
+        ]);
+
+        $galeri = Galeri::findOrFail($id);
+    
+        // Simpan data baru
+        $data = [
+            'nama' => $request->nama,
+            'caption' => $request->caption,
+            'deskripsi' => $request->deskripsi,
+            'is_active' => $request->is_active,
+        ];
+    
+        // Jika ada gambar baru
+        if ($request->hasFile('gambar')) {
+            // Hapus gambar lama jika ada
+            if ($galeri->gambar) {
+                // Hapus gambar berdasarkan path lengkap yang disimpan di database
+                if (Storage::exists(str_replace('storage/', 'public/', $galeri->gambar))) {
+                    Storage::delete(str_replace('storage/', 'public/', $galeri->gambar));
+                }
+            }
+            // Simpan gambar baru dengan nama format "YYYY-MM-DD-nama-baru.jpg"
+            $photo = $request->file('gambar');
+            $gambarName = date('Y-m-d-His') . '-' . uniqid() . '.' . $photo->getClientOriginalExtension();
+            $photo->storeAs('galeri', $gambarName, 'public');
+            $path = $photo->storeAs('galeri', $gambarName, 'public');
+
+            // Simpan nama gambar baru ke database
+            $data['gambar'] = 'storage/' . $path;
+        }
+    
+        // Update slider
+        $galeri->update($data);
+    
+        return redirect()->route('galeri')->with('success', 'Galeri Anak berhasil diperbarui!');
     }
      //=================END CRUD Galeri
 
@@ -282,11 +556,26 @@ class WebManagementController extends Controller
     {
         // dd($request->all());
         $request->validate([
-            'nama' => 'required|string|max:255',
+            'nama' => 'required|string|max:255|unique:kategori_artikel,nama',
             'gambar' => 'required|mimes:png,jpg,jpeg|max:2048',
             'icon' => 'required|string|max:30',
             'slug' => 'required|string|max:100',
             'is_active' => 'required|boolean',
+        ],[
+            'nama.unique' => 'Nama Klaster ini sudah digunakan, silakan pilih yang lain.',
+            'nama.required' => 'Nama wajib diisi.',
+            'nama.max' => 'Nama maksimal 255 karakter.',
+
+            'icon.required' => 'icon wajib diisi.',
+            'icon.max' => 'icon maksimal 30 karakter.',
+
+            'slug.required' => 'slug wajib diisi.',
+            'slug.max' => 'slug maksimal 100 karakter.',
+            
+            'gambar.required' => 'gambar wajib diunggah.',
+            'gambar.mimes' => 'Dat Pendukung harus berformat JPG, PNG, atau JPEG.',
+            'gambar.max' => 'Ukuran gambar maksimal 2 MB.',
+            
         ]);
 
         if ($request->hasFile('gambar')) {
@@ -309,6 +598,67 @@ class WebManagementController extends Controller
 
         return redirect()->route('Klaster')->with('success', 'Kategori berhasil ditambahkan!');
     }
+
+    
+    public function updateKlaster(Request $request, $id)
+    {
+        // dd($request->all());
+        $request->validate([
+            'nama' => 'required|string|max:255|unique:kategori_artikel,nama',
+            'gambar' => 'mimes:png,jpg,jpeg|max:2048',
+            'icon' => 'required|string|max:30',
+            'slug' => 'required|string|max:100',
+            'is_active' => 'required|boolean',
+        ],[
+            'nama.unique' => 'Nama Klaster ini sudah digunakan, silakan pilih yang lain.',
+            'nama.required' => 'Nama wajib diisi.',
+            'nama.max' => 'Nama maksimal 255 karakter.',
+
+            'icon.required' => 'icon wajib diisi.',
+            'icon.max' => 'icon maksimal 30 karakter.',
+
+            'slug.required' => 'slug wajib diisi.',
+            'slug.max' => 'slug maksimal 100 karakter.',
+            
+            'gambar.mimes' => 'Dat Pendukung harus berformat JPG, PNG, atau JPEG.',
+            'gambar.max' => 'Ukuran gambar maksimal 2 MB.',
+            
+        ]);
+    
+        $klaster = Klaster::findOrFail($id);
+    
+        // Simpan data baru
+        $data = [
+            'nama' => $request->nama,
+            'icon' => $request->icon,
+            'slug' => $request->slug,
+            'is_active' => $request->is_active,
+        ];
+    
+        // Jika ada gambar baru
+        if ($request->hasFile('gambar')) {
+            // Hapus gambar lama jika ada
+            if ($klaster->gambar) {
+                // Hapus gambar berdasarkan path lengkap yang disimpan di database
+                if (Storage::exists(str_replace('storage/', 'public/', $klaster->gambar))) {
+                    Storage::delete(str_replace('storage/', 'public/', $klaster->gambar));
+                }
+            }
+            // Simpan gambar baru dengan nama format "YYYY-MM-DD-nama-baru.jpg"
+            $photo = $request->file('gambar');
+            $gambarName = date('Y-m-d-His') . '-' . uniqid() . '.' . $photo->getClientOriginalExtension();
+            $photo->storeAs('klaster', $gambarName, 'public');
+            $path = $photo->storeAs('klaster', $gambarName, 'public');
+
+            // Simpan nama gambar baru ke database
+            $data['gambar'] = 'storage/' . $path;
+        }
+    
+        // Update slider
+        $klaster->update($data);
+    
+        return redirect()->route('Klaster')->with('success', 'Klaster berhasil diperbarui!');
+    }
      //=================END CRUD klaster
 
 
@@ -323,6 +673,14 @@ class WebManagementController extends Controller
         $request->validate([
             'namaUsulan' => 'required|string|max:255',
             'keterangan' => 'required|string|max:500',
+        ],
+        [
+            'namaUsulan.required' => 'Nama Usulan wajib diisi.',
+            'namaUsulan.max' => 'Nama Usulan maksimal 255 karakter.',
+            
+            'keterangan.required' => 'Keterangan wajib diisi.',
+            'keterangan.max' => 'Keterangan maksimal 500 karakter.'
+            
         ]);
 
         $is_active = 1;
@@ -336,6 +694,42 @@ class WebManagementController extends Controller
         ]);
 
         return redirect()->route('PemantauanUsulanAnak')->with('success', 'Kategori berhasil ditambahkan!');
+    }
+
+    public function updatePemantauanUsulan(Request $request, $id)
+    {
+        // dd($request->all());
+        $request->validate([
+            'namaUsulan' => 'required|string|max:255',
+            'keterangan' => 'required|string|max:500',
+            'tindakLanjut' => 'required',
+            'is_active' => 'required',
+        ],
+        [
+            'namaUsulan.required' => 'Nama Usulan wajib diisi.',
+            'namaUsulan.max' => 'Nama Usulan maksimal 255 karakter.',
+            
+            'keterangan.required' => 'Keterangan wajib diisi.',
+            'keterangan.max' => 'Keterangan maksimal 500 karakter.',
+            
+            'tindakLanjut.required' => 'Harus ada',
+            'is_active.required' => 'Harus ada'
+        ]);
+
+        $usulan = PemantauanUsulan::findOrFail($id);
+    
+        // Simpan data baru
+        $data = [
+            'namaUsulan' => $request->namaUsulan,
+            'keterangan' => $request->keterangan,
+            'tindakLanjut' => $request->tindakLanjut,
+            'is_active' => $request->is_active,
+        ];
+
+        // Update 
+        $usulan->update($data);
+    
+        return redirect()->route('galeri')->with('success', 'Usulan berhasil diperbarui!');
     }
      //=================END CRUD PemantauanUsulan
 
@@ -353,6 +747,21 @@ class WebManagementController extends Controller
             'konten' => 'required|string|max:500',
             'slug' => 'required|string|max:100',
             'is_active' => 'required|boolean',
+        ],
+        [
+            'judul.required' => 'judul wajib diisi.',
+            'judul.max' => 'judul maksimal 255 karakter.',
+            
+            'konten.required' => 'konten wajib diisi.',
+            'konten.max' => 'konten maksimal 500 karakter.',
+            
+            'slug.required' => 'slug wajib diisi.',
+            'slug.max' => 'slug maksimal 500 karakter.',
+            
+            'gambar.required' => 'gambar wajib diunggah.',
+            'gambar.mimes' => 'Dat Pendukung harus berformat JPG, PNG, atau JPEG.',
+            'gambar.max' => 'Ukuran gambar maksimal 2 MB.',
+            
         ]);
 
         if ($request->hasFile('gambar')) {
@@ -375,6 +784,66 @@ class WebManagementController extends Controller
 
         return redirect()->route('Halamandong')->with('success', 'Kategori berhasil ditambahkan!');
     }
+
+    public function updateHalaman(Request $request, $id)
+    {
+        // dd($request->all());
+        $request->validate([
+            'judul' => 'required|string|max:255',
+            'gambar' => 'mimes:png,jpg,jpeg|max:2048',
+            'konten' => 'required|string|max:500',
+            'slug' => 'required|string|max:100',
+            'is_active' => 'required|boolean',
+        ],
+        [
+            'judul.required' => 'judul wajib diisi.',
+            'judul.max' => 'judul maksimal 255 karakter.',
+            
+            'konten.required' => 'konten wajib diisi.',
+            'konten.max' => 'konten maksimal 500 karakter.',
+            
+            'slug.required' => 'slug wajib diisi.',
+            'slug.max' => 'slug maksimal 500 karakter.',
+            
+            'gambar.mimes' => 'Gambar harus berformat JPG, PNG, atau JPEG.',
+            'gambar.max' => 'Ukuran gambar maksimal 2 MB.',
+            
+        ]);
+    
+        $halaman = Halaman::findOrFail($id);
+    
+        // Simpan data baru
+        $data = [
+            'judul' => $request->judul,
+            'konten' => $request->konten,
+            'slug' => $request->slug,
+            'is_active' => $request->is_active,
+        ];
+    
+        // Jika ada gambar baru
+        if ($request->hasFile('gambar')) {
+            // Hapus gambar lama jika ada
+            if ($halaman->gambar) {
+                // Hapus gambar berdasarkan path lengkap yang disimpan di database
+                if (Storage::exists(str_replace('storage/', 'public/', $halaman->gambar))) {
+                    Storage::delete(str_replace('storage/', 'public/', $halaman->gambar));
+                }
+            }
+            // Simpan gambar baru dengan nama format "YYYY-MM-DD-nama-baru.jpg"
+            $photo = $request->file('gambar');
+            $gambarName = date('Y-m-d-His') . '-' . uniqid() . '.' . $photo->getClientOriginalExtension();
+            $photo->storeAs('slider', $gambarName, 'public');
+            $path = $photo->storeAs('slider', $gambarName, 'public');
+
+            // Simpan nama gambar baru ke database
+            $data['gambar'] = 'storage/' . $path;
+        }
+    
+        // Update slider
+        $halaman->update($data);
+    
+        return redirect()->route('Halamandong')->with('success', 'Halaman berhasil diperbarui!');
+    }
     //================== END CRUD Halaman 
 
 
@@ -394,13 +863,32 @@ class WebManagementController extends Controller
             'judul' => 'required|string|max:255',
             'slug' => 'required|string|max:100',
             'tag' => 'required|string|max:255',
-            'gambar' => 'required|mimes:png,jpg,jpeg|max:6048',
+            'gambar' => 'required|mimes:png,jpg,jpeg|max:2048',
             'subkegiatanid' => 'required|integer',
             'konten' => 'required|string|max:500',
             'kategoriartikelid' => 'required|integer',
             'dibuatOleh' => 'required|string|max:255',
             'is_active' => 'required|boolean',
-        ]);
+        ],
+        [
+            'judul.required' => 'judul wajib diisi.',
+            'judul.max' => 'judul maksimal 255 karakter.',
+            
+            'konten.required' => 'konten wajib diisi.',
+            'konten.max' => 'konten maksimal 500 karakter.',
+            
+            'slug.required' => 'slug wajib diisi.',
+            'slug.max' => 'slug maksimal 100 karakter.',
+
+            'tag.required' => 'tag wajib diisi.',
+            'tag.max' => 'tag maksimal 100 karakter.',
+            
+            'gambar.required' => 'Gambar wajib diunggah.',
+            'gambar.mimes' => 'Gambar harus berformat JPG, PNG, atau JPEG.',
+            'gambar.max' => 'Ukuran gambar maksimal 2 MB.',
+            
+        ]
+    );
 
         if ($request->hasFile('gambar')) {
             $photo = $request->file('gambar');
@@ -424,6 +912,76 @@ class WebManagementController extends Controller
         ]);
 
         return redirect()->route('Artikel')->with('success', 'Kategori berhasil ditambahkan!');
+    }
+
+    public function updateArtikel(Request $request, $id)
+    {
+        // dd($request->all());
+        $request->validate([
+            'judul' => 'required|string|max:255',
+            'slug' => 'required|string|max:100',
+            'tag' => 'required|string|max:255',
+            'gambar' => 'mimes:png,jpg,jpeg|max:2048',
+            'subkegiatanid' => 'required|integer',
+            'konten' => 'required|string|max:500',
+            'kategoriartikelid' => 'required|integer',
+            'is_active' => 'required|boolean',
+        ],
+        [
+            'judul.required' => 'judul wajib diisi.',
+            'judul.max' => 'judul maksimal 255 karakter.',
+            
+            'konten.required' => 'konten wajib diisi.',
+            'konten.max' => 'konten maksimal 500 karakter.',
+            
+            'slug.required' => 'slug wajib diisi.',
+            'slug.max' => 'slug maksimal 100 karakter.',
+
+            'tag.required' => 'tag wajib diisi.',
+            'tag.max' => 'tag maksimal 100 karakter.',
+            
+            'gambar.mimes' => 'Gambar harus berformat JPG, PNG, atau JPEG.',
+            'gambar.max' => 'Ukuran gambar maksimal 2 MB.',
+            
+        ]
+    );
+    
+        $artikel = Artikel::findOrFail($id);
+    
+        // Simpan data baru
+        $data = [
+            'judul' => $request->judul,
+            'konten' => $request->konten,
+            'slug' => $request->slug,
+            'tag' => $request->tag,
+            'subkegiatanid' => $request->subkegiatanid,
+            'kategoriartikelid' => $request->kategoriartikelid,
+            'is_active' => $request->is_active,
+        ];
+    
+        // Jika ada gambar baru
+        if ($request->hasFile('gambar')) {
+            // Hapus gambar lama jika ada
+            if ($artikel->gambar) {
+                // Hapus gambar berdasarkan path lengkap yang disimpan di database
+                if (Storage::exists(str_replace('storage/', 'public/', $artikel->gambar))) {
+                    Storage::delete(str_replace('storage/', 'public/', $artikel->gambar));
+                }
+            }
+            // Simpan gambar baru dengan nama format "YYYY-MM-DD-nama-baru.jpg"
+            $photo = $request->file('gambar');
+            $gambarName = date('Y-m-d-His') . '-' . uniqid() . '.' . $photo->getClientOriginalExtension();
+            $photo->storeAs('artikel', $gambarName, 'public');
+            $path = $photo->storeAs('artikel', $gambarName, 'public');
+
+            // Simpan nama gambar baru ke database
+            $data['gambar'] = 'storage/' . $path;
+        }
+    
+        // Update slider
+        $artikel->update($data);
+    
+        return redirect()->route('Artikel')->with('success', 'Artikel berhasil diperbarui!');
     }
     //================== END CRUD Artikel
 

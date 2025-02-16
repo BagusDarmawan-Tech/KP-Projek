@@ -4,6 +4,15 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <div class="container mt-5">
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
     <div class="card shadow-lg border-0 position-relative overflow-hidden mb-5"> 
         <div class="card-body mt-4">
             <div class="text-center mb-4">
@@ -33,7 +42,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($klasters as $klaster )
+                        @foreach ($klasters as $klaster)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td><i class="{{ $klaster->icon }}"></i></td>
@@ -45,15 +54,27 @@
                                 @if($klaster->is_active == 0)
                                 <span class="badge bg-warning">Non Aktif</span>
                                 @else
-                                    <span class="badge bg-success">Aktif</span>
+                                <span class="badge bg-success">Aktif</span>
                                 @endif
                             </td>
                             <td>
-                            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#EditModal"><i class="bi bi-pencil-square"></i></button>
-                            <button class="btn btn-sm btn-danger delete-slider"><i class="bi bi-trash"></i> </button>
+                                <button class="btn btn-sm btn-primary edit-klaster"
+                                    data-id="{{ $klaster->id }}"
+                                    data-nama="{{ $klaster->nama }}"
+                                    data-icon="{{ $klaster->icon }}"
+                                    data-slug="{{ $klaster->slug }}"
+                                    data-gambar="{{ asset($klaster->gambar) }}"
+                                    data-is_active="{{ $klaster->is_active }}"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#EditModal">
+                                    <i class="bi bi-pencil-square"></i>
+                                </button>
+                        
+                                <button class="btn btn-sm btn-danger delete-klaster"><i class="bi bi-trash"></i></button>
                             </td>
                         </tr>
                         @endforeach
+                        
                     </tbody>
                 </table>
             </div>
@@ -70,6 +91,15 @@
                 <h5 class="modal-title fw-bold text-center" id="kategoriModalLabel">Tambah Menu Klaster Baru</h5>
             </div>
             <div class="modal-body">
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
                 <form method="POST" action="{{ route('createKlaster') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
@@ -117,45 +147,52 @@
 <div class="modal fade" id="EditModal" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header d-flex justify-content-center w-100 ">
-                <h5 class="modal-title fw-bold text-center" id="EditModalLabel">Edit Menu Klaster</h5>
+            <div class="modal-header">
+                <h5 class="modal-title" id="EditModalLabel">Edit Klaster</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form id="editKlasterForm" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+
+                    <input type="hidden" id="editId" name="id">
+
                     <div class="mb-3">
-                        <label for="kategoriIcon" class="form-label">Icon</label>
-                        <input type="text" class="form-control" id="kategoriIcon" placeholder="Masukkan Icon">
+                        <label class="form-label">Nama</label>
+                        <input type="text" class="form-control" id="editNama" name="nama" required>
                     </div>
                     <div class="mb-3">
-                        <label for="kategoriNama" class="form-label">Nama</label>
-                        <input type="text" class="form-control" id="kategoriNama" placeholder="Masukkan Nama">
+                        <label class="form-label">Icon</label>
+                        <input type="text" class="form-control" id="editIcon" name="icon" required>
                     </div>
                     <div class="mb-3">
-                        <label for="kategoriSlug" class="form-label">Slug</label>
-                        <input type="text" class="form-control" id="kategoriSlug" placeholder="Masukkan Slug">
+                        <label class="form-label">Slug</label>
+                        <input type="text" class="form-control" id="editSlug" name="slug" required>
                     </div>
                     <div class="mb-3">
-                        <label for="kategoriGambar" class="form-label">Gambar</label>
-                        <input type="file" class="form-control" id="kategoriGambar">
+                        <label class="form-label">Gambar</label>
+                        <input type="file" class="form-control" id="editGambar" name="gambar">
+                        <img id="previewGambar" src="" alt="Preview" width="100">
                     </div>
                     <div class="mb-3">
-                        <label for="kategoriStatus" class="form-label">Status</label>
-                        <select class="form-select" id="kategoriStatus">
-                            <option selected>--- Pilih Status ---</option>
-                            <option value="Aktif">Aktif</option>
-                            <option value="Non-Aktif">Non-Aktif</option>
+                        <label class="form-label">Status</label>
+                        <select class="form-select" id="editIsActive" name="is_active" required>
+                            <option value="1">Aktif</option>
+                            <option value="0">Non-Aktif</option>
                         </select>
                     </div>
-                    </div>
+
                     <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                    </div>
                 </form>
             </div>
-
         </div>
     </div>
+</div>
+
 </div>
 
 <!-- Modal delete -->
@@ -176,6 +213,34 @@
         </div>
     </div>
 </div>
+
+
+{{-- <update --}}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".edit-klaster").forEach(button => {
+            button.addEventListener("click", function () {
+                let id = this.getAttribute("data-id");
+                let nama = this.getAttribute("data-nama");
+                let icon = this.getAttribute("data-icon");
+                let slug = this.getAttribute("data-slug");
+                let gambar = this.getAttribute("data-gambar");
+                let isActive = this.getAttribute("data-is_active");
+
+                document.getElementById("editId").value = id;
+                document.getElementById("editNama").value = nama;
+                document.getElementById("editIcon").value = icon;
+                document.getElementById("editSlug").value = slug;
+                document.getElementById("editIsActive").value = isActive;
+                document.getElementById("previewGambar").src = gambar;
+
+                // Atur action form agar mengarah ke URL update dengan ID
+                document.getElementById("editKlasterForm").action = `/klaster/update/${id}`;
+            });
+        });
+    });
+</script>
+
 
 <!-- Bagian delete -->
 <script>

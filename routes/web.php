@@ -164,6 +164,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/Klaster', [WebManagementController::class, 'Klaster1'])->name('Klaster');
     Route::get('/bagianHalaman', [WebManagementController::class, 'BagianHalaman'])->name('Halamandong');
     Route::get('/Artikel', [WebManagementController::class, 'BagianArtikel'])->name('Artikel');
+
     //Tambah data
     Route::post('/createKategoriArtikel', [WebManagementController::class, 'storeKategoriArtikel'])->name('createKategoriArtikel');
     Route::post('/createSlider', [WebManagementController::class, 'storeSlider'])->name('createSlider');
@@ -177,6 +178,14 @@ Route::middleware('auth')->group(function () {
 
     //Edit data
     Route::put('/kategori-artikel/update/{id}', [WebManagementController::class, 'updateKategoriArtikel'])->name('updateKategoriArtikel');
+    Route::put('/slider/update/{id}', [WebManagementController::class, 'updateSlider'])->name('updateSlider');
+    Route::put('/klaster/update/{id}', [WebManagementController::class, 'updateKlaster'])->name('updateKlaster');
+    Route::put('/halaman/update/{id}', [WebManagementController::class, 'updateHalaman'])->name('updateHalaman');
+    Route::put('/forumAnak/update/{id}', [WebManagementController::class, 'updateForumAnak'])->name('updateForumAnak');
+    Route::put('/galeri/update/{id}', [WebManagementController::class, 'updateGaleri'])->name('updateGaleri');
+    Route::put('/subKegiatan/update/{id}', [WebManagementController::class, 'updateSubKegiatan'])->name('updateSubKegiatan');
+    Route::put('/artikel/update/{id}', [WebManagementController::class, 'updateArtikel'])->name('updateArtikel');
+
 
     //Delete data
     Route::delete('/kategori-artikel/{id}', [WebManagementController::class, 'destroy'])->name('deleteKategoriArtikel');

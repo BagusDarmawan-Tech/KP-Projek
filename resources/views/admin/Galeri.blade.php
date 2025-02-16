@@ -4,6 +4,15 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <div class="container mt-5">
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
     <div class="card shadow-lg border-0 position-relative overflow-hidden mb-5"> 
         <div class="card-body mt-4">
             <div class="text-center mb-4">
@@ -34,32 +43,37 @@
                         @foreach ($galeris as $galeri)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td><img src="{{ asset($galeri->gambar) }}" alt="Slider Image" width="80"></td>
+                            <td><img src="{{ asset($galeri->gambar) }}" alt="Gambar Galeri" width="80"></td>
                             <td class="nama">{{ $galeri->nama }}</td>
                             <td class="caption">{{ $galeri->caption }}</td>
                             <td>{{ $galeri->dibuatOleh }}</td>
                             <td>
-                                <span class="badge {{ $galeri->is_active ? 'bg-success' : 'bg-secondary' }}">
+                                <span class="badge {{ $galeri->is_active ? 'bg-success' : 'bg-danger' }}">
                                     {{ $galeri->is_active ? 'Aktif' : 'Non-Aktif' }}
                                 </span>
                             </td>
                             <td>
                                 <!-- Button Edit Modal -->
-                                <button class="btn btn-sm btn-primary btn-edit" 
-                                    data-id="{{ $galeri->id }}" 
-                                    data-nama="{{ $galeri->nama }}" 
-                                    data-caption="{{ $galeri->caption }}" 
+                                <button class="btn btn-sm btn-primary btn-edit"
+                                    data-id="{{ $galeri->id }}"
+                                    data-nama="{{ $galeri->nama }}"
+                                    data-caption="{{ $galeri->caption }}"
+                                    data-deskripsi="{{ $galeri->deskripsi }}"
                                     data-gambar="{{ asset($galeri->gambar) }}"
-                                    data-status="{{ $galeri->is_active }}">
+                                    data-status="{{ $galeri->is_active }}"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#GaleriEditModal">
                                     <i class="bi bi-pencil-square"></i>
                                 </button>
-                                <!-- Tombol Hapus dengan konfirmasi -->
+                        
+                                <!-- Tombol Hapus -->
                                 <button class="btn btn-sm btn-danger delete-slider" data-id="{{ $galeri->id }}">
                                     <i class="bi bi-trash"></i>
                                 </button>
                             </td>
                         </tr>
                         @endforeach
+                        
                     </tbody>
                 </table>
             </div>
@@ -71,6 +85,15 @@
 <div class="modal fade" id="sliderModal" tabindex="-1" aria-labelledby="sliderModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
             <form method="POST" action="{{ route('createGaleri') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-header">
@@ -115,32 +138,41 @@
 
 
 <!-- Modal Edit Galeri -->
-<div class="modal fade" id="editGaleriModal" tabindex="-1" aria-labelledby="editGaleriModalLabel" aria-hidden="true">
+<div class="modal fade" id="GaleriEditModal" tabindex="-1" aria-labelledby="GaleriEditModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editGaleriModalLabel">Edit Galeri</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
+            <div class="modal-header d-flex justify-content-center w-100">
+                <h5 class="modal-title fw-bold text-center" id="GaleriEditModalLabel">Edit Galeri</h5>
+            </div>
+            <div class="modal-body">
+                <form id="editGaleriForm" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+
                     <input type="hidden" id="editId" name="id">
+
                     <div class="mb-3">
                         <label for="editNama" class="form-label">Nama</label>
                         <input type="text" class="form-control" id="editNama" name="nama" required>
                     </div>
+
                     <div class="mb-3">
                         <label for="editCaption" class="form-label">Caption</label>
                         <input type="text" class="form-control" id="editCaption" name="caption" required>
                     </div>
                     <div class="mb-3">
-                        <label for="editDeskripsi" class="form-label">Deskripsi</label>
-                        <input type="text" class="form-control" id="editDeskripsi" name="caption" required>
+                        <label class="form-label">Deskripsi</label>
+                        <textarea class="form-control" name="deskripsi" id="editDeskripsi" required></textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="editGambar" class="form-label">Gambar</label>
+                        <label for="editGambar" class="form-label">Edit Gambar</label>
+                        <div class="mb-2">
+                            <img id="previewGambar" src="" alt="Gambar Saat Ini" width="100" class="rounded border">
+                        </div>
                         <input type="file" class="form-control" id="editGambar" name="gambar">
-                        <img id="editPreviewGambar" src="" alt="Preview Gambar" width="100" class="mt-2">
+                        <small class="text-muted">Biarkan kosong jika tidak ingin mengubah gambar.</small>
                     </div>
+
                     <div class="mb-3">
                         <label for="editStatus" class="form-label">Status</label>
                         <select class="form-select" id="editStatus" name="is_active" required>
@@ -148,73 +180,42 @@
                             <option value="0">Non-Aktif</option>
                         </select>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
-                </div>
+
+                    <div class="modal-footer border-top pt-3 d-flex justify-content-end">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
 
+
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    // Tombol Edit
-    document.querySelectorAll('.btn-edit').forEach((btn) => {
-        btn.addEventListener('click', function () {
-            const id = this.dataset.id;
-            const nama = this.dataset.nama;
-            const caption = this.dataset.caption;
-            const deskripsi = this.dataset.deskripsi;
-            const gambar = this.dataset.gambar;
-            const status = this.dataset.status;
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".btn-edit").forEach(button => {
+            button.addEventListener("click", function () {
+                let id = this.getAttribute("data-id");
+                let nama = this.getAttribute("data-nama");
+                let caption = this.getAttribute("data-caption");
+                let gambar = this.getAttribute("data-gambar");
+                let status = this.getAttribute("data-status");
+                let deskripsi = this.getAttribute("data-deskripsi");
 
-            document.querySelector('#editId').value = id;
-            document.querySelector('#editNama').value = nama;
-            document.querySelector('#editCaption').value = caption;
-            document.querySelector('#editDeskripsi').value = deskripsi;
-            document.querySelector('#editPreviewGambar').src = gambar;
-            document.querySelector('#editStatus').value = status;
+                document.getElementById("editId").value = id;
+                document.getElementById("editNama").value = nama;
+                document.getElementById("editCaption").value = caption;
+                document.getElementById("previewGambar").src = gambar;
+                document.getElementById("editStatus").value = status;
+                document.getElementById("editDeskripsi").value = deskripsi;
 
-            const editModal = new bootstrap.Modal(document.getElementById('editGaleriModal'));
-            editModal.show();
-        });
-    });
-
-    // Tombol Hapus
-    document.querySelectorAll(".delete-slider").forEach(button => {
-        button.addEventListener("click", function () {
-            const id = this.dataset.id;
-
-            Swal.fire({
-                title: "<b>Apakah Anda Yakin?</b>",
-                text: "Data ini akan dihapus!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#d33",
-                cancelButtonColor: "#6c757d",
-                confirmButtonText: "Hapus",
-                cancelButtonText: "Batal"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    fetch(`/galeri/${id}`, {
-                        method: "DELETE",
-                        headers: {
-                            "X-CSRF-TOKEN": "{{ csrf_token() }}"
-                        }
-                    }).then(response => {
-                        if (response.ok) {
-                            Swal.fire("Berhasil!", "Data telah dihapus.", "success")
-                                .then(() => location.reload());
-                        } else {
-                            Swal.fire("Gagal!", "Terjadi kesalahan.", "error");
-                        }
-                    });
-                }
+                // Atur form agar mengarah ke URL update yang benar
+                document.getElementById("editGaleriForm").action = `/galeri/update/${id}`;
             });
         });
     });
-});
 </script>
+
 
 @endsection

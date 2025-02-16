@@ -3,6 +3,15 @@
 <link href="{{ asset('assets/css/tabel.css') }}" rel="stylesheet">
 
 <div class="container mt-5">
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
     <div class="card shadow-lg border-0 position-relative overflow-hidden mb-5">
         <div class="card-body mt-4">
             <div class="text-center mb-4">
@@ -31,23 +40,41 @@
                         @foreach ($artikels as $artikel)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td><img src="{{ asset( $artikel->gambar ) }}" alt="Slider Image" width="80"></td>
+                            <td><img src="{{ asset($artikel->gambar) }}" alt="Artikel Image" width="80"></td>
                             <td>{{ $artikel->judul }}</td>
                             <td>{{ $artikel->slug }}</td>
                             <td>{{ $artikel->dibuatOleh }}</td>
                             <td>
                                 @if($artikel->is_active == 0)
-                                <span class="badge bg-warning">Non Aktif</span>
+                                    <span class="badge bg-warning">Non Aktif</span>
                                 @else
                                     <span class="badge bg-success">Aktif</span>
                                 @endif
                             </td>
                             <td>
-                                <button class="btn btn-sm btn-primary edit-btn" data-bs-toggle="modal" data-bs-target="#halamanModal" data-judul="Judul Halaman" data-slug="slug-halaman" data-status="Aktif"><i class="bi bi-pencil-square"></i></button>
-                                <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i></button>
-                                </td>
+                                <button class="btn btn-sm btn-primary edit-btn" 
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#halamanModal"
+                                    data-id="{{ $artikel->id }}"
+                                    data-judul="{{ $artikel->judul }}"
+                                    data-slug="{{ $artikel->slug }}"
+                                    data-tag="{{ $artikel->tag }}"
+                                    data-konten="{{ $artikel->konten }}"
+                                    data-gambar="{{ asset($artikel->gambar) }}"
+                                    data-status="{{ $artikel->is_active }}"
+                                    data-kategoriartikelid="{{ $artikel->kategoriartikelid }}"
+                                    data-subkegiatanid="{{ $artikel->subkegiatanid }}">
+                                    <i class="bi bi-pencil-square"></i>
+                                </button>
+                                
+                        
+                                <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteMenuModal">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </td>
                         </tr>
                         @endforeach
+                        
                     </tbody>
                 </table>
             </div>
@@ -63,6 +90,15 @@
                 <h5 class="modal-title fw-bold text-center" id="menuModalLabel">Tambah Menu Artikel Baru</h5>
             </div>
             <div class="modal-body">
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
                 <form method="POST" action="{{ route('createArtikel') }}" enctype="multipart/form-data">
                     @csrf 
                     <div class="mb-3">
@@ -93,7 +129,7 @@
                     <div class="mb-3">
                         <label for="kategori" class="form-label">Kategori Artikel</label>
                         <select class="form-select" id="kategori" name="kategoriartikelid" required>
-                            <!-- <option value="" disabled selected>-- Pilih Kategori --</option> -->
+                           <option value="" disabled selected>-- Pilih Kategori --</option> 
                             @foreach ($kategoris as $kategori)
                                 <option value="{{ $kategori->id }}" {{ old('kategoriartikelid') == $kategori->id ? 'selected' : '' }}>
                                     {{ $kategori->nama }}
@@ -135,82 +171,90 @@
 </div>
 
 <!-- Modal Edit -->
+<!-- Modal Edit Artikel -->
 <div class="modal fade" id="halamanModal" tabindex="-1" aria-labelledby="halamanModalLabel" aria-hidden="true">
-<div class="modal-dialog">
+    <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header d-flex justify-content-center w-100 ">
-                <h5 class="modal-title fw-bold text-center" id="menuModalLabel">Edit Menu Artikel Baru</h5>
+            <div class="modal-header">
+                <h5 class="modal-title" id="halamanModalLabel">Edit Artikel</h5>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('createArtikel') }}" enctype="multipart/form-data">
-                    @csrf 
+                <form id="editArtikelForm" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+
+                    <input type="hidden" id="editId" name="id">
+
                     <div class="mb-3">
-                        <label for="judul" class="form-label">Judul</label>
-                        <input type="text" class="form-control" id="judul" name="judul" value="{{ old('judul') }}" required>
+                        <label for="editJudul" class="form-label">Judul</label>
+                        <input type="text" class="form-control" id="editJudul" name="judul" required>
                     </div>
-                
+
                     <div class="mb-3">
-                        <label for="slug" class="form-label">Slug</label>
-                        <input type="text" class="form-control" id="slug" name="slug" value="{{ old('slug') }}" required>
+                        <label for="editSlug" class="form-label">Slug</label>
+                        <input type="text" class="form-control" id="editSlug" name="slug" required>
                     </div>
-                
+
                     <div class="mb-3">
-                        <label for="tag" class="form-label">Tag</label>
-                        <input type="text" class="form-control" id="tag" name="tag" value="{{ old('tag') }}">
+                        <label for="editTag" class="form-label">Tag</label>
+                        <input type="text" class="form-control" id="editTag" name="tag" required>
                     </div>
-                
+
                     <div class="mb-3">
-                        <label for="gambar" class="form-label">Gambar</label>
-                        <input type="file" class="form-control" id="gambar" name="gambar" required>
+                        <label class="form-label">Konten</label>
+                        <textarea class="form-control" name="konten" id="editKonten" required></textarea>
                     </div>
-                
+
                     <div class="mb-3">
-                        <label for="konten" class="form-label">Konten</label>
-                        <textarea class="form-control" id="konten" rows="3" name="konten" required>{{ old('konten') }}</textarea>
+                        <label for="editGambar" class="form-label">Gambar</label>
+                        <div class="mb-2">
+                            <img id="previewGambar" src="#" alt="Preview Gambar" class="img-thumbnail" width="100">
+                        </div>
+                        <input type="file" class="form-control" id="editGambar" name="gambar">
+                        <small class="text-muted">Biarkan kosong jika tidak ingin mengubah gambar.</small>
                     </div>
-                
+
                     <div class="mb-3">
-                        <label for="kategori" class="form-label">Kategori Artikel</label>
-                        <select class="form-select" id="kategori" name="kategoriartikelid" required>
-                            <!-- <option value="" disabled selected>-- Pilih Kategori --</option> -->
+                        <label for="editKategori" class="form-label">Kategori Artikel</label>
+                        <select class="form-select" id="editKategori" name="kategoriartikelid" required>
                             @foreach ($kategoris as $kategori)
-                                <option value="{{ $kategori->id }}" {{ old('kategoriartikelid') == $kategori->id ? 'selected' : '' }}>
+                                <option value="{{ $kategori->id }}">
                                     {{ $kategori->nama }}
                                 </option>
                             @endforeach
                         </select>
                     </div>
-                
+
                     <div class="mb-3">
-                        <label for="kegiatan" class="form-label">Kategori Kegiatan</label>
-                        <select class="form-select" id="kegiatan" name="subkegiatanid" required>
-                            <option value="" disabled selected>-- Pilih Kegiatan --</option>
+                        <label for="editKegiatan" class="form-label">Kategori Kegiatan</label>
+                        <select class="form-select" id="editKegiatan" name="subkegiatanid" required>
                             @foreach ($subKegiatans as $subKegiatan)
-                                <option value="{{ $subKegiatan->id }}" {{ old('subkegiatanid') == $subKegiatan->id ? 'selected' : '' }} >
-                                    {{ $subKegiatan->id }}
+                                <option value="{{ $subKegiatan->id }}">
+                                    {{ $subKegiatan->nama }}
                                 </option>
                             @endforeach
                         </select>
                     </div>
+
                     <div class="mb-3">
-                        <label for="kategoriStatus" class="form-label">Status</label>
-                        <select class="form-select" id="kategoriStatus" name="is_active" required>
-                            <option value="" disabled selected>--- Pilih Status ---</option>
-                            <option value="1" {{ old('is_active') == "1" ? 'selected' : '' }}>Aktif</option>
-                            <option value="0" {{ old('is_active') == "0" ? 'selected' : '' }}>Non-Aktif</option>
+                        <label for="editStatus" class="form-label">Status</label>
+                        <select class="form-select" id="editStatus" name="is_active" required>
+                            <option value="1">Aktif</option>
+                            <option value="0">Non Aktif</option>
                         </select>
                     </div>
-                    <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
-                    </div>
-                    <div class="modal-footer border-top pt-3 d-flex justify-content-end"> <!-- Tambahan border-top dan padding -->
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Simpan</button>
-            </div>
-                </form>
 
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
+
+
 
 
 <!-- Modal Delete Menu -->
@@ -234,15 +278,36 @@
 
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        document.querySelectorAll(".edit-btn").forEach(button => {
-            button.addEventListener("click", function () {
-                document.getElementById("halamanModalLabel").textContent = "Edit Artikel";
-                document.getElementById("judul").value = this.getAttribute("data-judul");
-                document.getElementById("slug").value = this.getAttribute("data-slug");
-                document.getElementById("status").checked = this.getAttribute("data-status") === "Aktif";
-            });
+   document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".edit-btn").forEach(button => {
+        button.addEventListener("click", function () {
+            let id = this.getAttribute("data-id");
+            let judul = this.getAttribute("data-judul");
+            let slug = this.getAttribute("data-slug");
+            let tag = this.getAttribute("data-tag");
+            let konten = this.getAttribute("data-konten");
+            let gambar = this.getAttribute("data-gambar");
+            let status = this.getAttribute("data-status");
+            let kategoriartikelid = this.getAttribute("data-kategoriartikelid");
+            let subkegiatanid = this.getAttribute("data-subkegiatanid");
+
+            // Set nilai form dalam modal
+            document.getElementById("editId").value = id;
+            document.getElementById("editJudul").value = judul;
+            document.getElementById("editSlug").value = slug;
+            document.getElementById("editTag").value = tag;
+            document.getElementById("editKonten").value = konten;
+            document.getElementById("editKategori").value = kategoriartikelid;
+            document.getElementById("editKegiatan").value = subkegiatanid;
+            document.getElementById("editStatus").value = status;
+
+            // Set preview gambar
+            document.getElementById("previewGambar").src = gambar;
+
+            // Set action form ke URL update yang sesuai
+            document.getElementById("editArtikelForm").action = `/artikel/update/${id}`;
         });
     });
+});
 </script>
 @endsection

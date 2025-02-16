@@ -4,6 +4,15 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <div class="container mt-5">
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
     <div class="card shadow-lg border-0 position-relative overflow-hidden mb-5">
         <div class="card-body mt-4">
             <div class="text-center mb-4">
@@ -37,17 +46,29 @@
                             <td>{{ $halaman->slug }}</td>
                             <td>
                                 @if($halaman->is_active == 0)
-                                <span class="badge bg-warning">Non Aktif</span>
+                                    <span class="badge bg-warning">Non Aktif</span>
                                 @else
                                     <span class="badge bg-success">Aktif</span>
                                 @endif
                             </td>
                             <td>
-                                <button class="btn btn-sm btn-primary edit-btn" data-bs-toggle="modal" data-bs-target="#halamanEditModal" data-judul="Judul Halaman" data-slug="slug-halaman" data-status="Aktif"><i class="bi bi-pencil-square"></i></button>
+                                <button class="btn btn-sm btn-primary edit-btn"
+                                    data-id="{{ $halaman->id }}"
+                                    data-judul="{{ $halaman->judul }}"
+                                    data-slug="{{ $halaman->slug }}"
+                                    data-gambar="{{ asset($halaman->gambar) }}"
+                                    data-konten="{{ $halaman->konten}}"
+                                    data-status="{{ $halaman->is_active }}"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#halamanEditModal">
+                                    <i class="bi bi-pencil-square"></i>
+                                </button>
+                        
                                 <button class="btn btn-sm btn-danger delete-slider"><i class="bi bi-trash"></i> </button>
                             </td>
                         </tr>
                         @endforeach
+                        
                     </tbody>
                 </table>
             </div>
@@ -63,7 +84,15 @@
                 <h5 class="modal-title fw-bold text-center" id="menuModalLabel">Tambah Menu Halaman Baru</h5>
             </div>
             <div class="modal-body">
-
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
                 <form method="POST" action="{{ route('createHalaman') }}" enctype="multipart/form-data">
                     @csrf 
                     <div class="mb-3">
@@ -105,66 +134,85 @@
 
 <!-- Modal Edit -->
 <div class="modal fade" id="halamanEditModal" tabindex="-1" aria-labelledby="halamanEditModalLabel" aria-hidden="true">
-<div class="modal-dialog">
+    <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header d-flex justify-content-center w-100 ">
-                <h5 class="modal-title fw-bold text-center" id="menuModalLabel">Edit Menu Halaman</h5>
+            <div class="modal-header">
+                <h5 class="modal-title" id="halamanEditModalLabel">Edit Halaman</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('createHalaman') }}" enctype="multipart/form-data">
-                    @csrf 
+                <form id="editHalamanForm" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+
+                    <input type="hidden" id="editId" name="id">
+
                     <div class="mb-3">
-                        <label for="judul" class="form-label">Judul</label>
-                        <input type="text" class="form-control" id="judul" name="judul" value="{{ old('judul') }}" required>
+                        <label class="form-label">Judul</label>
+                        <input type="text" class="form-control" id="editJudul" name="judul" required>
                     </div>
                     <div class="mb-3">
-                        <label for="slug" class="form-label">Slug</label>
-                        <input type="text" class="form-control" id="slug" name="slug" value="{{ old('slug') }}" required>
+                        <label class="form-label">Slug</label>
+                        <input type="text" class="form-control" id="editSlug" name="slug" required>
                     </div>
                     <div class="mb-3">
-                        <label for="gambar" class="form-label">Gambar</label>
-                        <input type="file" class="form-control" id="gambar" name="gambar" value="{{ old('gambar') }}" required>
+                        <label class="form-label">Gambar</label>
+                        <input type="file" class="form-control" id="editGambar" name="gambar">
+                        <img id="previewGambar" src="" alt="Preview" width="100">
                     </div>
                     <div class="mb-3">
-                        <label for="konten" class="form-label">Konten</label>
-                        <textarea class="form-control" id="konten" rows="3" name="konten" value="{{ old('konten') }}" required></textarea>
+                        <label class="form-label">Konten</label>
+                        <textarea class="form-control" name="konten" id="editKonten" required></textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="kategoriStatus" class="form-label">Status</label>
-                        <select class="form-select" id="kategoriStatus" name="is_active" required>
-                            <option value="" disabled selected>--- Pilih Status ---</option>
-                            <option value="1" {{ old('is_active') == "1" ? 'selected' : '' }}>Aktif</option>
-                            <option value="0" {{ old('is_active') == "0" ? 'selected' : '' }}>Non-Aktif</option>
+                        <label class="form-label">Status</label>
+                        <select class="form-select" id="editStatus" name="is_active" required>
+                            <option value="1">Aktif</option>
+                            <option value="0">Non-Aktif</option>
                         </select>
                     </div>
-                    <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                     </div>
-                    <div class="modal-footer border-top pt-3 d-flex justify-content-end"> <!-- Tambahan border-top dan padding -->
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Simpan</button>
-            </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
 
+</div>
 
 
 
 
-<!-- <script>
+
+<script>
     document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll(".edit-btn").forEach(button => {
             button.addEventListener("click", function () {
-                // document.getElementById("halamanModalLabel").textContent = "Edit Halaman";
-                document.getElementById("judul").value = this.getAttribute("data-judul");
-                document.getElementById("slug").value = this.getAttribute("data-slug");
-                document.getElementById("status").value = this.getAttribute("data-status");
+                let id = this.getAttribute("data-id");
+                let judul = this.getAttribute("data-judul");
+                let slug = this.getAttribute("data-slug");
+                let gambar = this.getAttribute("data-gambar");
+                let status = this.getAttribute("data-status");
+                let konten = this.getAttribute("data-konten");
+
+                document.getElementById("editId").value = id;
+                document.getElementById("editJudul").value = judul;
+                document.getElementById("editSlug").value = slug;
+                document.getElementById("editStatus").value = status;
+                document.getElementById("editKonten").value = konten;
+                document.getElementById("previewGambar").src = gambar;
+
+                // Atur action form agar mengarah ke URL update dengan ID
+                document.getElementById("editHalamanForm").action = `/halaman/update/${id}`;
             });
         });
     });
-</script> -->
+</script>
+
 
 
 <!-- Halaman Delete -->

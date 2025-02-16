@@ -4,6 +4,15 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <div class="container mt-5">
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
     <div class="card shadow-lg border-0 position-relative overflow-hidden mb-5">
         <div class="card-body mt-4">
             <div class="text-center mb-4">
@@ -61,6 +70,15 @@
                 <h5 class="modal-title fw-bold text-center" id="menuModalLabel">Tambah Menu Pemantauan Usulan Anak</h5>
             </div>
             <div class="modal-body">
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
                 <form method="POST" action="{{ route('createPemantauanUsulan') }}" >
                     @csrf 
                     <input type="hidden" name="userid" value="{{ Auth::user()->id }}">

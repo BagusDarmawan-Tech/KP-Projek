@@ -5,6 +5,15 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <div class="container mt-5">
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
     <div class="card shadow-lg border-0 position-relative overflow-hidden mb-5"> 
         <div class="card-body mt-4">
             <div class="text-center mb-4">
@@ -33,13 +42,7 @@
                     </thead>
                     <tbody>
                         @foreach ($forumAnaks as $forumAnak)
-                        <tr 
-                            data-id="{{ $forumAnak->id }}" 
-                            data-nama="{{ $forumAnak->nama }}" 
-                            data-caption="{{ $forumAnak->caption }}"
-                            data-deskripsi="{{ $forumAnak->deskripsi }}"
-                            data-gambar="{{ $forumAnak->gambar }}"
-                            data-status="{{ $forumAnak->is_active }}">
+                        <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td><img src="{{ asset($forumAnak->gambar) }}" alt="Slider Image" width="80"></td>
                             <td>{{ $forumAnak->nama }}</td>
@@ -52,11 +55,29 @@
                             </td>
                             <td>
                                 <!-- Button Edit Modal -->
-                                <button class="btn btn-sm btn-primary edit-btn" data-bs-toggle="modal" data-bs-target="#HalamaneditModal" data-judul="Judul Halaman" data-slug="slug-halaman" data-status="Aktif"><i class="bi bi-pencil-square"></i></button>
-                                <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i></button>
+                                <button class="btn btn-sm btn-primary edit-btn"
+                                    data-id="{{ $forumAnak->id }}"
+                                    data-nama="{{ $forumAnak->nama }}"
+                                    data-caption="{{ $forumAnak->caption }}"
+                                    data-gambar="{{ asset($forumAnak->gambar) }}"
+                                    data-status="{{ $forumAnak->is_active }}"
+                                    data-deskripsi="{{ $forumAnak->deskripsi }}"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#HalamaneditModal">
+                                    <i class="bi bi-pencil-square"></i>
+                                </button>
+                        
+                                <!-- Button Delete Modal -->
+                                <button class="btn btn-sm btn-danger delete-btn"
+                                    data-id="{{ $forumAnak->id }}"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#deleteMenuModal">
+                                    <i class="bi bi-trash"></i>
+                                </button>
                             </td>
                         </tr>
                         @endforeach
+                        
                     </tbody>
                 </table>
             </div>
@@ -72,7 +93,15 @@
                 <h5 class="modal-title fw-bold text-center" id="menuModalLabel">Tambah Menu Forum Anak Baru</h5>
             </div>
             <div class="modal-body">
-
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
                 <form method="POST" action="{{ route('createForumAnak') }}" enctype="multipart/form-data">
                     @csrf 
                     <div class="mb-3">
@@ -113,24 +142,30 @@
 
 <!-- Modal Edit Forum Anak -->
 <div class="modal fade" id="HalamaneditModal" tabindex="-1" aria-labelledby="HalamaneditModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+    <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header d-flex justify-content-center w-100 ">
-                <h5 class="modal-title fw-bold text-center" id="menuModalLabel">Edit Menu Forum Anak</h5>
+            <div class="modal-header d-flex justify-content-center w-100">
+                <h5 class="modal-title fw-bold text-center" id="HalamaneditModalLabel">Edit Forum Anak</h5>
             </div>
             <div class="modal-body">
+                <form id="editHalamanForm" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+
                     <input type="hidden" id="editId" name="id">
+
                     <div class="mb-3">
                         <label for="editNama" class="form-label">Nama</label>
                         <input type="text" class="form-control" id="editNama" name="nama" required>
                     </div>
+
                     <div class="mb-3">
                         <label for="editCaption" class="form-label">Caption</label>
                         <input type="text" class="form-control" id="editCaption" name="caption" required>
                     </div>
                     <div class="mb-3">
-                        <label for="editDeskripsi" class="form-label">Deskripsi</label>
-                        <textarea class="form-control" id="editDeskripsi" name="deskripsi" rows="2" required></textarea>
+                        <label class="form-label">Deskripsi</label>
+                        <textarea class="form-control" name="deskripsi" id="editDeskripsi" required></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="editGambar" class="form-label">Edit Gambar</label>
@@ -140,23 +175,50 @@
                         <input type="file" class="form-control" id="editGambar" name="gambar">
                         <small class="text-muted">Biarkan kosong jika tidak ingin mengubah gambar.</small>
                     </div>
+
                     <div class="mb-3">
                         <label for="editStatus" class="form-label">Status</label>
                         <select class="form-select" id="editStatus" name="is_active" required>
                             <option value="1">Aktif</option>
                             <option value="0">Non-Aktif</option>
                         </select>
+                    </div>
 
-                        </div>
-                        </div>
-                        <div class="modal-footer border-top pt-3 d-flex justify-content-end"> <!-- Tambahan border-top dan padding -->
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Simpan</button>
-            </div>
+                    <div class="modal-footer border-top pt-3 d-flex justify-content-end">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
                 </form>
+            </div>
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".edit-btn").forEach(button => {
+            button.addEventListener("click", function () {
+                let id = this.getAttribute("data-id");
+                let nama = this.getAttribute("data-nama");
+                let caption = this.getAttribute("data-caption");
+                let gambar = this.getAttribute("data-gambar");
+                let status = this.getAttribute("data-status");
+                let deskripsi = this.getAttribute("data-deskripsi");
+
+                document.getElementById("editId").value = id;
+                document.getElementById("editNama").value = nama;
+                document.getElementById("editCaption").value = caption;
+                document.getElementById("previewGambar").src = gambar;
+                document.getElementById("editStatus").value = status;
+                document.getElementById("editDeskripsi").value = deskripsi;
+
+                // Atur form agar mengarah ke URL update yang benar
+                document.getElementById("editHalamanForm").action = `/forumAnak/update/${id}`;
+            });
+        });
+    });
+</script>
+
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
