@@ -52,12 +52,12 @@
            
           <li class="dropdown"><a href="#"><span>Klaster</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li class="dropdown"><a href="{{route('haksipil')}}"><span>Hak Sipil dan Kebebabasan</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-              <li class="dropdown"><a href="{{route('kelembagaan')}}"><span>Kelembagaan</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a> 
-              <li class="dropdown"><a href="{{route('kesehatan-dasar')}}"><span>Kesehatan Dasar dan kesejahteraan</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-              <li class="dropdown"><a href="{{route('lingkungan-keluarga')}}"><span>Lingkungan Kelurga dan Pengasuhan Alternatif</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-              <li class="dropdown"><a href="{{route('pendidikan-pemanfaatan')}}"><span>Pendidikan, Pemanfaatan Waktu Luang dan Kegiatan Budaya</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-              <li class="dropdown"><a href="{{route('perlindungan-khusus')}}"><span>Perlindungan Khusus</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <li><a href="{{route('haksipil')}}">Hak Sipil dan Kebebabasan</a>
+              <li><a href="{{route('kelembagaan')}}">Kelembagaan</a> 
+              <li><a href="{{route('kesehatan-dasar')}}">Kesehatan Dasar dan kesejahteraan</a>
+              <li><a href="{{route('lingkungan-keluarga')}}">Lingkungan Kelurga dan Pengasuhan Alternatif</a>
+              <li><a href="{{route('pendidikan-pemanfaatan')}}">Pendidikan, Pemanfaatan Waktu Luang dan Kegiatan Budaya</a>
+              <li><a href="{{route('perlindungan-khusus')}}">Perlindungan Khusus</a>
             </ul>
 
            <!-- selesai bagian Halaman Klaster  -->

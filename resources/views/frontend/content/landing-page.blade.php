@@ -12,7 +12,7 @@
           
           </div>
           <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="100">
-            <img src="{{asset('assets/img/hero-img.png')}}" class="img-fluid animated" alt="">
+            <img src="{{asset('assets/img/hero-img.jpg')}}" class="img-fluid animated" alt="">
           </div>
           <div>
         </div>
@@ -32,49 +32,10 @@
   }
 </style>
 
-<section>
-  <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
-    <div class="carousel-inner">
-      <div class="carousel-item active" data-bs-interval="5000">
-        <img src="kids.jpg" class="d-block w-100" alt="First Slide">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>First Slide Label</h5>
-          <p>Some representative placeholder content for the first slide.</p>
-        </div>
-      </div>
-      <div class="carousel-item" data-bs-interval="5000">
-        <img src="https://via.placeholder.com/800x400?text=Second+Slide" class="d-block w-100" alt="Second Slide">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Second Slide Label</h5>
-          <p>Some representative placeholder content for the second slide.</p>
-        </div>
-      </div>
-      <div class="carousel-item" data-bs-interval="5000">
-        <img src="https://via.placeholder.com/800x400?text=Third+Slide" class="d-block w-100" alt="Third Slide">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Third Slide Label</h5>
-          <p>Some representative placeholder content for the third slide.</p>
-        </div>
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
-</section>
 
 
-    <!-- batas selesesai -->
+
+    <!-- batas selesesai -->  
 
 
 
@@ -189,22 +150,6 @@
 
     </section><!-- /Testimonials Section -->
  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <!-- About Section -->
     <section id="about" class="about section">
 
@@ -216,28 +161,56 @@
 
       <div class="container">
 
-        <div class="row gy-4">
-          <div class="col-lg-6 position-relative align-self-start" data-aos="fade-up" data-aos-delay="100">
-            <img src="assets/img/about.png" class="img-fluid" alt="">
-            <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox pulsating-play-btn"></a>
-          </div>
-          <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="200">
-            <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
-            <p class="fst-italic">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
-            </p>
-            <ul>
-              <li><i class="bi bi-check2-all"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></li>
-              <li><i class="bi bi-check2-all"></i> <span>Duis aute irure dolor in reprehenderit in voluptate velit.</span></li>
-              <li><i class="bi bi-check2-all"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</span></li>
-            </ul>
-            <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident
-            </p>
-          </div>
+      <div class="row gy-4">
+  <div class="col-lg-6 position-relative align-self-start" data-aos="fade-up" data-aos-delay="100">
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="{{asset('assets/img/hero-img.jpg')}}" class="d-block w-100" alt="Slide 1">
         </div>
+        <div class="carousel-item">
+          <img src="{{asset('assets/img/hero-img.jpg')}}" class="d-block w-100" alt="Slide 2">
+        </div>
+        <div class="carousel-item">
+          <img src="{{asset('assets/img/hero-img.jpg')}}" class="d-block w-100" alt="Slide 3">
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+  <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="200">
+    <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
+    <p class="fst-italic">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+      magna aliqua.
+    </p>
+    <ul>
+      <li><i class="bi bi-check2-all"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></li>
+      <li><i class="bi bi-check2-all"></i> <span>Duis aute irure dolor in reprehenderit in voluptate velit.</span></li>
+      <li><i class="bi bi-check2-all"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</span></li>
+    </ul>
+    <p>
+      Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident
+    </p>
+  </div>
+</div>
+
+
+
+
 
       </div>
 
@@ -352,7 +325,6 @@
       <div class="container section-title" data-aos="fade-up">
         <span>BERITA DAN ARTKEL SITALAS</span>
         <h2>BERITA DAN ARTKEL SITALAS</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
       </div><!-- End Section Title -->
 
       <div class="container">
@@ -361,27 +333,27 @@
 
           <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
             <li data-filter="*" class="filter-active">All</li>
-            <li data-filter=".filter-app">Kesehatan Anak</li>
-            <li data-filter=".filter-product">Kegiatan Arek Surabaya</li>
-            <li data-filter=".filter-branding">Perlindungan Anak</li>
-            <li data-filter=".filter-books">Teknologi dan Enovasi</li>
+            <li data-filter=".filter-Kesehatan">Kesehatan Anak</li>
+            <li data-filter=".filter-Kegiatan">Kegiatan Arek Surabaya</li>
+            <li data-filter=".filter-Perlindungan">Perlindungan Anak</li>
+            <li data-filter=".filter-Teknologi">Teknologi dan Enovasi</li>
           </ul><!-- End Portfolio Filters -->
 
           <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
 
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app text-center">
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-Kesehatan text-center">
               <img src="assets/img/portfolio/app-1.jpg" class="img-fluid" alt="">
               <div class="portfolio-info text-center">
                 <h4>App 1</h4>
                 <p>Lorem ipsum, dolor sit amet consectetur</p>
-                <a href="assets/img/portfolio/app-1.jpg" title="App 1" data-gallery="portfolio-gallery-app"
+                <a href="assets/img/portfolio/app-1.jpg" title="App 1" data-gallery="portfolio-gallery-Kesehatan"
                 class="glightbox preview-link" 
                 data-description="abcdefghij"><i class="bi bi-zoom-in"></i></a>
                 <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
               </div>
             </div><!-- End Portfolio Item -->
 
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-Kegiatan">
               <img src="{{ asset('assets/img/portfolio/product-1.jpg')}}" class="img-fluid" alt="">
               <div class="portfolio-info">
                 <h4>Product 1</h4>
@@ -392,7 +364,7 @@
               </div>
             </div><!-- End Portfolio Item -->
 
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-Perlindungan">
               <img src="{{ asset('assets/img/portfolio/branding-1.jpg')}}" class="img-fluid" alt="">
               <div class="portfolio-info">
                 <h4>Branding 1</h4>
@@ -402,7 +374,7 @@
               </div>
             </div><!-- End Portfolio Item -->
 
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-Teknologi">
               <img src="assets/img/portfolio/books-1.jpg" class="img-fluid" alt="">
               <div class="portfolio-info">
                 <h4>Books 1</h4>
@@ -412,17 +384,17 @@
               </div>
             </div><!-- End Portfolio Item -->
 
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-Kesehatan">
               <img src="assets/img/portfolio/app-2.jpg" class="img-fluid" alt="">
               <div class="portfolio-info">
                 <h4>App 2</h4>
                 <p>Lorem ipsum, dolor sit amet consectetur</p>
-                <a href="assets/img/portfolio/app-2.jpg" title="App 2" data-gallery="portfolio-gallery-app" class="glightbox preview-link" data-description="abcdefghijklyou"><i class="bi bi-zoom-in"></i></a>
+                <a href="assets/img/portfolio/app-2.jpg" title="App 2" data-gallery="portfolio-gallery-Kesehatan" class="glightbox preview-link" data-description="abcdefghijklyou"><i class="bi bi-zoom-in"></i></a>
                 <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
               </div>
             </div><!-- End Portfolio Item -->
 
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-Kegiatan">
               <img src="assets/img/portfolio/product-2.jpg" class="img-fluid" alt="">
               <div class="portfolio-info">
                 <h4>Product 2</h4>
@@ -432,7 +404,7 @@
               </div>
             </div><!-- End Portfolio Item -->
 
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-Perlindungan">
               <img src="assets/img/portfolio/branding-2.jpg" class="img-fluid" alt="">
               <div class="portfolio-info">
                 <h4>Branding 2</h4>
@@ -442,7 +414,7 @@
               </div>
             </div><!-- End Portfolio Item -->
 
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-Teknologi">
               <img src="assets/img/portfolio/books-2.jpg" class="img-fluid" alt="">
               <div class="portfolio-info">
                 <h4>Books 2</h4>
@@ -452,17 +424,17 @@
               </div>
             </div><!-- End Portfolio Item -->
 
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-Kesehatan">
               <img src="assets/img/portfolio/app-3.jpg" class="img-fluid" alt="">
               <div class="portfolio-info">
                 <h4>App 3</h4>
                 <p>Lorem ipsum, dolor sit amet consectetur</p>
-                <a href="assets/img/portfolio/app-3.jpg" title="App 3" data-gallery="portfolio-gallery-app" class="glightbox preview-link" data-description="abcdefghijklyou"><i class="bi bi-zoom-in"></i></a>
+                <a href="assets/img/portfolio/app-3.jpg" title="App 3" data-gallery="portfolio-gallery-Kesehatan" class="glightbox preview-link" data-description="abcdefghijklyou"><i class="bi bi-zoom-in"></i></a>
                 <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
               </div>
             </div><!-- End Portfolio Item -->
 
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-Kegiatan">
               <img src="assets/img/portfolio/product-3.jpg" class="img-fluid" alt="">
               <div class="portfolio-info">
                 <h4>Product 3</h4>
@@ -472,7 +444,7 @@
               </div>
             </div><!-- End Portfolio Item -->
 
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-Perlindungan">
               <img src="assets/img/portfolio/branding-3.jpg" class="img-fluid" alt="">
               <div class="portfolio-info">
                 <h4>Branding 3</h4>
@@ -482,7 +454,7 @@
               </div>
             </div><!-- End Portfolio Item -->
 
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books ">
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-Teknologi">
               <img src="assets/img/portfolio/books-3.jpg" class="img-fluid" alt="">
               <div class="portfolio-info">
                 <h4>Books 3</h4>

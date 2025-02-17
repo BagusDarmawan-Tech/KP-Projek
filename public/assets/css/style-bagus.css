@@ -609,7 +609,7 @@ h6 {
   padding: 20px;
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: #aab7cf transparent;
+  scrollbar-color: #aab7cf transparent; 
   box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
   background-color: #fff;
 }
@@ -703,15 +703,18 @@ h6 {
   background: #fff;
 }
 
+/* bagian warna icon  */
 .sidebar-nav .nav-link.collapsed i {
   color: #899bbd;
 }
 
+/* Bagian hover font */
 .sidebar-nav .nav-link:hover {
   color: #4154f1;
   background: #f6f9ff;
 }
 
+/* Bagian hover icon */
 .sidebar-nav .nav-link:hover i {
   color: #4154f1;
 }
@@ -731,6 +734,7 @@ h6 {
   list-style: none;
 }
 
+/* bagian warna font submenu */
 .sidebar-nav .nav-content a {
   display: flex;
   align-items: center;
@@ -749,6 +753,7 @@ h6 {
   border-radius: 50%;
 }
 
+/* bagian submenu font */
 .sidebar-nav .nav-content a:hover,
 .sidebar-nav .nav-content a.active {
   color: #4154f1;
