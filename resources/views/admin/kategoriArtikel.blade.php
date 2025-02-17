@@ -4,7 +4,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <div class="container mt-5">
-                   @if ($errors->any())
+                @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
                         @foreach ($errors->all() as $error)
@@ -13,6 +13,14 @@
                     </ul>
                 </div>
                 @endif
+                @if(session('success'))
+                <div class="alert alert-success">
+                    <ul>
+                            <li>{{ session('success') }}</li>
+                    </ul>
+                </div>
+                @endif
+
     <div class="card shadow-lg border-0 position-relative overflow-hidden mb-5"> 
         <div class="card-body mt-4">
             <div class="text-center mb-4">
@@ -117,35 +125,9 @@
     </div>
 </div>
 
-<!-- Modal Sukses -->
-@if(session('success'))
-<!-- Modal Sukses -->
-<div class="modal fade show d-block" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0 rounded">
-            <div class="modal-header bg-success text-white">
-                <h5 class="modal-title" id="successModalLabel">
-                    <i class="bi bi-check-circle"></i> Berhasil!
-                </h5>
-            </div>
-            <div class="modal-body text-center">
-                <p class="text-muted mb-0">{{ session('success') }}</p>
-            </div>
-            <div class="modal-footer justify-content-center">
-                <a href="{{ route('kategoriArtikel') }}" class="btn btn-success px-4">
-                    OK
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-@endif
-
-
 
 {{-- END Modal Succes --}}
 
-<!-- Modal Edit Menu -->
 <!-- Modal Edit Menu -->
 <div class="modal fade" id="editMenuModal" tabindex="-1" aria-labelledby="editMenuModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -160,7 +142,6 @@
                     @method('PUT') <!-- Gunakan method PUT untuk update -->
 
                     <input type="hidden" id="editId" name="id"> <!-- Menyimpan ID Kategori -->
-
                     <div class="mb-3">
                         <label for="editNama" class="form-label">Nama</label>
                         <input type="text" class="form-control" id="editNama" name="nama" required>

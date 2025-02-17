@@ -12,6 +12,14 @@
         </ul>
     </div>
     @endif
+
+                    @if(session('success'))
+                <div class="alert alert-success">
+                    <ul>
+                            <li>{{ session('success') }}</li>
+                    </ul>
+                </div>
+                @endif
     <div class="card shadow-lg border-0 position-relative overflow-hidden mb-5">
         <div class="card-body mt-4">
             <div class="text-center mb-4">
@@ -81,7 +89,6 @@
         </div>
     </div>
 </div>
-<
 <!-- Modal Tambah -->
 <div class="modal fade" id="halamanTambahModal" tabindex="-1" aria-labelledby="halamanTambahModalLabel" aria-hidden="true">
 <div class="modal-dialog">
@@ -99,6 +106,7 @@
                     </ul>
                 </div>
                 @endif
+
                 <form method="POST" action="{{ route('createArtikel') }}" enctype="multipart/form-data">
                     @csrf 
                     <div class="mb-3">
@@ -243,8 +251,7 @@
                             <option value="0">Non Aktif</option>
                         </select>
                     </div>
-
-                    <div class="modal-footer">
+                    <div class="modal-footer border-top pt-3 d-flex justify-content-end"> <!-- Tambahan border-top dan padding -->
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>

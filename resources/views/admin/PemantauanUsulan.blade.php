@@ -13,6 +13,14 @@
         </ul>
     </div>
     @endif
+
+    @if(session('success'))
+    <div class="alert alert-success">
+        <ul>
+                <li>{{ session('success') }}</li>
+        </ul>
+    </div>
+    @endif
     <div class="card shadow-lg border-0 position-relative overflow-hidden mb-5">
         <div class="card-body mt-4">
             <div class="text-center mb-4">
@@ -47,9 +55,22 @@
                             <td> {{ $usulan->user ? $usulan->user->name : 'Tidak ada pengguna' }}</td>
                             <td>{{ $usulan->namaUsulan }}</td>
                             <td>{{ $usulan->tindakLanjut }}</td>
-                            <td><span class="badge bg-success">{{ $usulan->is_active }}</span></td>
                             <td>
-                                <button class="btn btn-sm btn-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editPemantauanModal" data-judul="Judul Halaman" data-slug="slug-halaman" data-status="Aktif"><i class="bi bi-pencil-square"></i></button>
+                                @if($usulan->is_active == 0)
+                                <span class="badge bg-warning">Non Aktif</span>
+                                @else
+                                    <span class="badge bg-success">Aktif</span>
+                                @endif
+                            </td>
+                            <td>
+                                <button class="btn btn-sm btn-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editPemantauanModal" 
+                                    data-id="{{ $usulan->id }}" 
+                                    data-namaUsulan="{{ $usulan->namaUsulan }}" 
+                                    data-keterangan="{{ $usulan->keterangan }}" 
+                                    data-status="{{ $usulan->is_active }}"
+                                    data-tindakLanjut="{{ $usulan->tindakLanjut }}">
+                                    <i class="bi bi-pencil-square"></i>
+                                </button>                                  
                                 <button class="btn btn-sm btn-danger delete-slider"><i class="bi bi-trash"></i> </button>
 
                             </td>
@@ -108,27 +129,43 @@
                 <h5 class="modal-title fw-bold text-center" id="menuModalLabel">Edit Pemantauan Usulan Anak</h5>
             </div>
             <div class="modal-body">
-                <form>
-                    <div class="mb-3">
-                        <label for="editNamaOPD" class="form-label">Tindak Lanjut</label>
-                        <select class="form-select" id="editNamaOPD">
-                            <option selected>--- Pilih OPD ---</option>
-                            <option value="Dinas Kesehatan">Dinas Kesehatan</option>
-                            <option value="Dinas Pendidikan">Dinas Pendidikan</option>
-                        </select>
-                    </div>
-                    <div class="mb-3 d-flex align-items-center">
-                        <label class="form-label me-2">Status</label>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="editStatus">
-                            <label class="form-check-label" for="editStatus">Aktif</label>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+<form id="editForm" method="POST">
+    @csrf
+    @method('PUT')
+    <input type="hidden" id="editId" name="id"> <!-- Tambahkan input hidden untuk ID -->
+    
+    <div class="mb-3">
+        <label for="editTindakLanjut" class="form-label">Tindak Lanjut</label>
+        <select class="form-select" id="editTindakLanjut" name="tindakLanjut">
+            <option value="Diproses">Diproses</option>
+            <option value="Telah Diproses">Telah Diproses</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="editNamaUsulan" class="form-label">Nama Usulan</label>
+        <input type="text" class="form-control" id="editNamaUsulan" name="namaUsulan">
+    </div>
+
+    <div class="mb-3">
+        <label for="editKeterangan" class="form-label">Keterangan</label>
+        <textarea class="form-control" id="editKeterangan" rows="2" name="keterangan"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label for="editStatus" class="form-label">Status</label>
+        <select class="form-select" id="editStatus" name="is_active" required>
+            <option value="1">Aktif</option>
+            <option value="0">Non-Aktif</option>
+        </select>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+    </div>
+</form>
+
             </div>
         </div>
     </div>
@@ -166,17 +203,29 @@
 
 </script>
 
+<!-- Script untuk Mengisi Data ke Modal -->
 <script>
-document.querySelectorAll(".edit-btn").forEach(button => {
-    button.addEventListener("click", function () {
-        document.getElementById("editNamaOPD").value = this.dataset.opd;
-        document.getElementById("editNamaUsulan").value = this.dataset.usulan;
-        document.getElementById("editTindakLanjut").value = this.dataset.tindak;
-        document.getElementById("editKeterangan").value = this.dataset.keterangan;
-        document.getElementById("editStatus").checked = this.dataset.status === "Aktif";
-        new bootstrap.Modal(document.getElementById("editPemantauanModal")).show();
+    document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll(".edit-btn").forEach(button => {
+        button.addEventListener("click", function() {
+            let id = this.getAttribute("data-id");
+            let namaUsulan = this.getAttribute("data-namaUsulan");
+            let keterangan = this.getAttribute("data-keterangan");
+            let tindakLanjut = this.getAttribute("data-tindakLanjut");
+            let status = this.getAttribute("data-status");
+
+            document.getElementById("editId").value = id;
+            document.getElementById("editNamaUsulan").value = namaUsulan;
+            document.getElementById("editTindakLanjut").value = tindakLanjut;
+            document.getElementById("editKeterangan").value = keterangan;
+            document.getElementById("editStatus").checked = status === "1"; // Pastikan status diubah ke boolean
+
+            // Set action form update sesuai ID
+            document.getElementById("editForm").action = `/pemantauan/update/${id}`;
+        });
     });
 });
+
 </script>
 
 @endsection

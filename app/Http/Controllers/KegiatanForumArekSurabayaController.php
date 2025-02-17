@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\ForumAnakSurabaya;
+use Illuminate\Support\Facades\Storage;
 
 
 class KegiatanForumArekSurabayaController extends Controller
@@ -23,7 +24,18 @@ class KegiatanForumArekSurabayaController extends Controller
             'gambar' => 'required|mimes:png,jpg,jpeg|max:2048',
             'keterangan' => 'required|string|max:500',
             'is_active' => 'required|boolean',
+        ],[
+            'nama.required' => 'Nama wajib diisi.',
+            'nama.max' => 'Nama maksimal 255 karakter.',
+
+            'keterangan.required' => 'keterangan wajib diisi.',
+            'keterangan.max' => 'konten maksimal 500 karakter.',
+            
+            'gambar.required' => 'gambar wajib diunggah.',
+            'gambar.mimes' => 'Gambar harus berformat JPG, PNG, atau JPEG.',
+            'gambar.max' => 'Ukuran gambar maksimal 6 MB.',
         ]);
+
 
         if ($request->hasFile('gambar')) {
             $photo = $request->file('gambar');
@@ -47,6 +59,60 @@ class KegiatanForumArekSurabayaController extends Controller
         return redirect()->route('KegiatanForumSurabaya')->with('success', 'Kategori berhasil ditambahkan!');
     }
 
+    public function updateHalamanForum(Request $request, $id)
+    {
+        // dd($request->all());
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'keterangan' => 'required|string|max:500',
+            'gambar' => 'mimes:png,jpg,jpeg|max:6048',
+        ],[
+            'nama.required' => 'Nama wajib diisi.',
+            'nama.max' => 'Nama maksimal 255 karakter.',
 
+            'keterangan.required' => 'konten wajib diisi.',
+            'keterangan.max' => 'konten maksimal 500 karakter.',
+            
+            'gambar.mimes' => 'Gambar harus berformat JPG, PNG, atau JPEG.',
+            'gambar.max' => 'Ukuran gambar maksimal 6 MB.',
+            
+        ]);
     
+        $artikel = ForumAnakSurabaya::findOrFail($id);
+
+        $tanggal = Carbon::now()->toDateString();
+    
+        // Simpan data baru
+        $data = [
+            'nama' => $request->nama,
+            'keterangan' => $request->keterangan,
+            'is_active' => $request->is_active,
+            'tanggal' => $tanggal
+        ];
+    
+        // Jika ada gambar baru
+        if ($request->hasFile('gambar')) {
+            // Hapus gambar lama jika ada
+            if ($artikel->gambar) {
+                // Hapus gambar berdasarkan path lengkap yang disimpan di database
+                if (Storage::exists(str_replace('storage/', 'public/', $artikel->gambar))) {
+                    Storage::delete(str_replace('storage/', 'public/', $artikel->gambar));
+                }
+            }
+            // Simpan gambar baru dengan nama format "YYYY-MM-DD-nama-baru.jpg"
+            $photo = $request->file('gambar');
+            $gambarName = date('Y-m-d-His') . '-' . uniqid() . '.' . $photo->getClientOriginalExtension();
+            $photo->storeAs('artikel', $gambarName, 'public');
+            $path = $photo->storeAs('artikel', $gambarName, 'public');
+
+            // Simpan nama gambar baru ke database
+            $data['gambar'] = 'storage/' . $path;
+        }
+    
+        // Update slider
+        $artikel->update($data);
+    
+        return redirect()->route('KegiatanForumSurabaya')->with('success', 'Artikel Anak berhasil diperbarui!');
+    }
 }
+

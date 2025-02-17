@@ -134,6 +134,10 @@ Route::middleware('auth')->group(function () {
 
     //tambah
     Route::post('/createForumAnakSurabaya', [KegiatanForumArekSurabayaController::class, 'storeForumAnakSurabaya'])->name('createForumAnakSurabaya');
+
+    //update
+    Route::put('/halamanForum/update/{id}', [KegiatanForumArekSurabayaController::class, 'updateHalamanForum'])->name('updateHalamanForum');
+
 });
 
 // Halaman Config
@@ -185,6 +189,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/galeri/update/{id}', [WebManagementController::class, 'updateGaleri'])->name('updateGaleri');
     Route::put('/subKegiatan/update/{id}', [WebManagementController::class, 'updateSubKegiatan'])->name('updateSubKegiatan');
     Route::put('/artikel/update/{id}', [WebManagementController::class, 'updateArtikel'])->name('updateArtikel');
+    Route::put('/pemantauan/update/{id}', [WebManagementController::class, 'updatePemantauanUsulan'])->name('updatePemantauaUsulan');
 
 
     //Delete data
@@ -209,6 +214,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/createMitraCfci', [MitraAnakController::class, 'storeKegiatanCfci'])->name('createMitraCfci');
     Route::post('/createArtikelMitra', [MitraAnakController::class, 'storeArtikelMitra'])->name('createArtikelMitra');
 
+    //Update Data
+    Route::put('/artikelMitra/update/{id}', [MitraAnakController::class, 'updateArtikelMitra'])->name('updateArtikelMitra');
+    Route::put('/kegiatanMitra/update/{id}', [MitraAnakController::class, 'updateKegiatanMitra'])->name('updatekegiatanMitra');
+    Route::put('/update/{id}', [MitraAnakController::class, 'update'])->name('updateCfci');
 });
 
 //Kegiatan Arek Suroboyo
@@ -217,6 +226,10 @@ Route::middleware('auth')->group(function () {
 
     //tambah
     Route::post('/createKegiatanArekSuroboyo', [KegiatanArekSuroboyoController::class, 'storeKegiatanArekSuroboyo'])->name('createKegiatanArekSuroboyo');
+    
+    //update
+    Route::put('/KegiatanArekSuroboyo/update/{id}', [KegiatanArekSuroboyoController::class, 'updateKegiatanArekSuroboyo'])->name('updateKegiatanArekSuroboyo');
+
 });
 
 //Usulan Kegiatan
@@ -228,6 +241,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/createPemantauanSuara', [UsulanKegiatanController::class, 'storePemantauanSuara'])->name('createPemantauanSuara');
     Route::post('/createTindakLanjut', [UsulanKegiatanController::class, 'storeTindakLanjut'])->name('createTindakLanjut');
     Route::post('/createKaryaAnak', [UsulanKegiatanController::class, 'storeKaryaAnak'])->name('createKaryaAnak');
+
+    //update
+    Route::put('/karya-anak/update/{id}', [UsulanKegiatanController::class, 'updateKaryaAnak'])->name('updateKaryaAnak');
 
 });
 

@@ -66,6 +66,22 @@
             </div>
         </div>
     </div>
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+    @if(session('success'))
+    <div class="alert alert-success">
+        <ul>
+                <li>{{ session('success') }}</li>
+        </ul>
+    </div>
+    @endif
 
     <div class="card shadow-lg border-0 position-relative overflow-hidden p-3">
         <div class="card-body">
@@ -106,7 +122,14 @@
 
                             </td>
                             <td>
-                                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modaEditKegiatan"><i class="bi bi-pencil-square"></i></button>
+                                <button class="btn btn-sm btn-primary edit-forum" data-bs-toggle="modal" data-bs-target="#modaEditKegiatan"
+                                    data-id="{{ $kegiatan->id }}" 
+                                    data-nama="{{ $kegiatan->nama }}" 
+                                    data-keterangan="{{ $kegiatan->keterangan }}" 
+                                    data-gambar="{{ asset($kegiatan->gambar) }}" 
+                                    data-status="{{ $kegiatan->is_active }}">
+                                    <i class="bi bi-pencil-square"></i>
+                                </button>
                                 <button class="btn btn-sm btn-danger delete-slider"><i class="bi bi-trash"></i> </button>
                             </td>
                         </tr>
@@ -157,6 +180,7 @@
     </div>
   </div>
 </div>
+</div>
 
 <!-- Modal Edit Dokumen Kelurahan -->
 <div class="modal fade" id="modaEditKegiatan" tabindex="-1" aria-labelledby="modaEditKegiatanLabel" aria-hidden="true">
@@ -166,40 +190,66 @@
                 <h5 class="modal-title fw-bold text-center" id="modaEditKegiatanLabel">Edit Menu Kegiatan Forum Arek Surabaya</h5>
             </div>
             <div class="modal-body">
-        <form>
-          <div class="mb-3">
-            <label for="namaKegiatan" class="form-label">Nama</label>
-            <input type="text" class="form-control" id="namaKegiatan">
-          </div>
-          <div class="mb-3">
-            <label for="tanggalKegiatan" class="form-label">Tanggal Kegiatan</label>
-            <input type="date" class="form-control" id="tanggalKegiatan">
-          </div>
-          <div class="mb-3">
-            <label for="gambarKegiatan" class="form-label">Gambar</label>
-            <input type="file" class="form-control" id="gambarKegiatan" accept="image/*" onchange="previewImage(event)">
-            <img id="preview" src="#" alt="Preview" class="img-fluid mt-2 d-none" style="max-height: 200px;">
-          </div>
-          <div class="mb-3">
-            <label for="keteranganKegiatan" class="form-label">Keterangan</label>
-            <textarea class="form-control" id="keteranganKegiatan" rows="3"></textarea>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Status</label>
-            <select class="form-select" name="is_active" required>
-                <option value="1">Aktif</option>
-                <option value="0">Non-Aktif</option>
-            </select>
-        </div>
-        <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Simpan</button>
-        </div>
-    </form>
+                <form id="editFormForum" method="POST" action="" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+                <div class="mb-3">
+                    <label for="namaKegiatan" class="form-label">Nama</label>
+                    <input type="text" class="form-control" id="editNamaKegiatan" name="nama">
+                </div>
+                <div class="mb-3">
+                    <label for="editGambar" class="form-label">Gambar</label>
+                    <div class="mb-2">
+                        <img id="previewGambar" src="#" alt="Preview Gambar" class="img-thumbnail" width="100">
+                    </div>
+                    <input type="file" class="form-control" id="editGambar" name="gambar">
+                    <small class="text-muted">Biarkan kosong jika tidak ingin mengubah gambar.</small>
+                </div>
+                <div class="mb-3">
+                    <label for="keteranganKegiatan" class="form-label">Keterangan</label>
+                    <textarea class="form-control" name="keterangan" id="editKeterangan" rows="3"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Status</label>
+                    <select class="form-select" id="editStatus" name="is_active" required>
+                        <option value="1">Aktif</option>
+                        <option value="0">Non-Aktif</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
     </div>
   </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.querySelectorAll(".edit-forum").forEach(button => {
+        button.addEventListener("click", function () {
+          let id = this.getAttribute("data-id");
+          let nama = this.getAttribute("data-nama");
+          let keterangan = this.getAttribute("data-keterangan");
+          let gambar = this.getAttribute("data-gambar");
+          let status = this.getAttribute("data-status");
+  
+          // Set nilai form dalam modal
+          document.getElementById("editNamaKegiatan").value = nama;
+          document.getElementById("editKeterangan").value = keterangan;
+          document.getElementById("editStatus").value = status;
+  
+          // Set preview gambar
+          document.getElementById("previewGambar").src = gambar;
+          document.getElementById("previewGambar").classList.remove("d-none");
+  
+          // Set action form ke URL update yang sesuai
+          document.getElementById("editFormForum").action = `/halamanForum/update/${id}`;
+        });
+      });
+    });
+  </script>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {

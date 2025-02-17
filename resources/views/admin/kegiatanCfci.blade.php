@@ -4,6 +4,22 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="{{ asset('assets/js/hapus.js') }}"></script>
 <div class="container mt-5">
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+    @if(session('success'))
+    <div class="alert alert-success">
+        <ul>
+                <li>{{ session('success') }}</li>
+        </ul>
+    </div>
+    @endif
     <div class="card shadow-lg border-0 position-relative overflow-hidden mb-5">
         <div class="card-body mt-4">
             <div class="text-center mb-4">
@@ -43,7 +59,15 @@
                                 @endif
                             </td>
                             <td>
-                                <button class="btn btn-sm btn-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editKegiatanModal"><i class="bi bi-pencil-square"></i></button>
+                                <button class="btn btn-sm btn-primary edit-cfci" data-bs-toggle="modal" data-bs-target="#editKegiatanModal" 
+                                    data-id="{{ $cfci->id }}" 
+                                    data-nama="{{ $cfci->nama }}" 
+                                    data-caption="{{ $cfci->caption }}" 
+                                    data-deskripsi="{{ $cfci->deskripsi }}"
+                                    data-gambar="{{ asset($cfci->gambar) }}" 
+                                    data-status="{{ $cfci->is_active }}">
+                                    <i class="bi bi-pencil-square"></i>
+                                </button>                                 
                                 <button class="btn btn-sm btn-danger delete-slider">
                                     <i class="bi bi-trash"></i>
                                 </button>
@@ -100,6 +124,7 @@
         </div>
     </div>
 </div>
+</div>
 
 <!-- Modal Edit Kegiatan -->
 <div class="modal fade" id="editKegiatanModal" tabindex="-1" aria-labelledby="editKegiatanModalLabel" aria-hidden="true">
@@ -110,39 +135,71 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form action="" id="editFormCfci" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
                     <div class="mb-3">
-                        <label for="editNama" class="form-label">Nama</label>
-                        <input type="text" class="form-control" id="editNama" >
+                        <label for="editNamaKegiatan" class="form-label">Nama</label>
+                        <input type="text" class="form-control" id="editNamaKegiatan" name="nama" required>
                     </div>
                     <div class="mb-3">
                         <label for="editCaption" class="form-label">Caption</label>
-                        <input type="text" class="form-control" id="editCaption" >
+                        <input type="text" class="form-control" id="editCaption" name="caption" required>
                     </div>
                     <div class="mb-3">
                         <label for="editDeskripsi" class="form-label">Deskripsi</label>
-                        <textarea class="form-control" id="editDeskripsi" rows="3"></textarea>
+                        <textarea class="form-control" id="editDeskripsi" name="deskripsi" rows="3" required></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="editGambar" class="form-label">Gambar</label>
-                        <input type="file" class="form-control" id="editGambar">
-                        <small class="text-muted">Tidak ada file yang dipilih</small>
+                        <div class="mb-2">
+                            <img id="previewGambar" src="#" alt="Preview Gambar" class="img-thumbnail" width="100">
+                        </div>
+                        <input type="file" class="form-control" id="editGambar" name="gambar">
+                        <small class="text-muted">Biarkan kosong jika tidak ingin mengubah gambar.</small>
                     </div>
                     <div class="mb-3">
-                        <label for="editStatus" class="form-label">Status</label>
-                        <select class="form-select" id="editStatus">
-                            <option value="Aktif" selected>Aktif</option>
-                            <option value="Non-Aktif">Non-Aktif</option>
+                        <label class="form-label">Status</label>
+                        <select class="form-select" id="editStatus" name="is_active" required>
+                            <option value="1">Aktif</option>
+                            <option value="0">Non-Aktif</option>
                         </select>
                     </div>
-                </form>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer border-top pt-3 d-flex justify-content-end"> <!-- Tambahan border-top dan padding -->
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
             </div>
-        </div>
+        </form>
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.querySelectorAll(".edit-cfci").forEach(button => {
+        button.addEventListener("click", function () {
+          let id = this.getAttribute("data-id");
+          let nama = this.getAttribute("data-nama");
+          let deskripsi = this.getAttribute("data-deskripsi");
+          let gambar = this.getAttribute("data-gambar");
+          let status = this.getAttribute("data-status");
+          let caption = this.getAttribute("data-caption");
+  
+          // Set nilai form dalam modal
+          document.getElementById("editNamaKegiatan").value = nama;
+          document.getElementById("editDeskripsi").value = deskripsi;
+          document.getElementById("editStatus").value = status;
+          document.getElementById("editCaption").value = caption;
+  
+          // Set preview gambar
+          document.getElementById("previewGambar").src = gambar;
+          document.getElementById("previewGambar").classList.remove("d-none");
+  
+          // Set action form ke URL update yang sesuai
+          document.getElementById("editFormCfci").action = `/update/${id}`;
+        });
+      });
+    });
+  </script>
 
 @endsection

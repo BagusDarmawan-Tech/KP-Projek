@@ -23,6 +23,22 @@
     }
 </style>
 
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+@if(session('success'))
+<div class="alert alert-success">
+    <ul>
+            <li>{{ session('success') }}</li>
+    </ul>
+</div>
+@endif
 <div class="card shadow-lg border-0 position-relative overflow-hidden mb-5">
     <div class="card-body mt-4">
         <div class="text-center mb-4">
@@ -74,7 +90,14 @@
                         <td>
                             <div class="d-flex align-items-center justify-content-center gap-1 py-1" style="min-height: 38px;">
                                 <!-- Tombol Edit -->
-                                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editKaryaModal">
+                                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editKaryaModal"
+                                data-id="{{ $karya->id }}" 
+                                data-judul="{{ $karya->judul }}" 
+                                data-tag="{{ $karya->tag }}" 
+                                data-slug="{{ $karya->slug }}" 
+                                data-konten="{{ $karya->konten }}" 
+                                data-gambar="{{ asset($karya->gambar) }}" 
+                                data-status="{{ $karya->is_active }}">
                                     <i class="bi bi-pencil"></i>
                                 </button>
 
@@ -189,4 +212,38 @@
     </div>
 </div>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".edit-arekSuroboyo").forEach(button => {
+            button.addEventListener("click", function () {
+                let id = this.getAttribute("data-id");
+                let judul = this.getAttribute("data-judul");
+                let slug = this.getAttribute("data-slug");
+                let tag = this.getAttribute("data-tag");
+                let konten = this.getAttribute("data-konten");
+                let gambar = this.getAttribute("data-gambar");
+                let status = this.getAttribute("data-status");
+
+                // Set nilai form dalam modal
+                document.getElementById("editJudul").value = judul;
+                document.getElementById("editSlug").value = slug;
+                document.getElementById("editTag").value = tag;
+                document.getElementById("editKonten").value = konten;
+                document.getElementById("editStatus").value = status; // Pastikan select memiliki id="editStatus"
+
+                // Set preview gambar
+                let previewGambar = document.getElementById("previewGambar");
+                if (gambar) {
+                    previewGambar.src = gambar;
+                    previewGambar.classList.remove("d-none");
+                } else {
+                    previewGambar.classList.add("d-none");
+                }
+
+                // Set action form ke URL update yang sesuai
+                document.getElementById("editFormSuroboyo").action = `/KegiatanArekSuroboyo/update/${id}`;
+            });
+        });
+    });
+</script>
 @endsection

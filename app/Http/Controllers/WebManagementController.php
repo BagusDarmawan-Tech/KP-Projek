@@ -693,7 +693,7 @@ class WebManagementController extends Controller
             'tindakLanjut' => $tindakLanjut
         ]);
 
-        return redirect()->route('PemantauanUsulanAnak')->with('success', 'Kategori berhasil ditambahkan!');
+        return redirect()->route('PemantauanUsulanAnak')->with('success', 'Usulan berhasil ditambahkan!');
     }
 
     public function updatePemantauanUsulan(Request $request, $id)
@@ -729,7 +729,7 @@ class WebManagementController extends Controller
         // Update 
         $usulan->update($data);
     
-        return redirect()->route('galeri')->with('success', 'Usulan berhasil diperbarui!');
+        return redirect()->route('PemantauanUsulanAnak')->with('success', 'Usulan berhasil diperbarui!');
     }
      //=================END CRUD PemantauanUsulan
 

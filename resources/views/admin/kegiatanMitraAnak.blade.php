@@ -68,7 +68,22 @@
             </div>
         </div>
     </div>
-
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+    @if(session('success'))
+    <div class="alert alert-success">
+        <ul>
+                <li>{{ session('success') }}</li>
+        </ul>
+    </div>
+    @endif
     <div class="card shadow-lg border-0 position-relative overflow-hidden p-3">
         <div class="card-body">
             <div class="d-flex justify-content-between align-items-center mb-3">
@@ -104,7 +119,7 @@
                             <th>No</th>
                             <th>Gambar</th>
                             <th>Nama</th>
-                            <th>Keterangan</th>
+                            <th>Deskripsi</th>
                             <th>Dibuat Oleh</th>
                             <th>Status</th>
                             <th>Actions</th>
@@ -118,7 +133,7 @@
                                 <img src="{{ asset($mitra->gambar) }}" alt="Gambar" style="width: 50px; height: 50px; object-fit: cover;">
                             </td>
                             <td>{{ $mitra->nama }}</td>
-                            <td><a href="#" class="text-primary">{{ $mitra->deskripsi }}</a></td>
+                            <td>{{ $mitra->deskripsi }}</td>
                             <td>{{ $mitra->dibuatOleh }}</td>
                             <td>
                               @if($mitra->is_active == 0)
@@ -128,9 +143,17 @@
                               @endif
                             </td>
                             <td>
-                                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modaEditKegiatan">
-                                    <i class="bi bi-pencil-square"></i>
-                                </button>
+                              <button class="btn btn-sm btn-primary edit-mitra"
+                                data-bs-toggle="modal" 
+                                data-bs-target="#editArtikelModal" 
+                                data-id="{{ $mitra->id }}"
+                                data-nama="{{ $mitra->nama }}"
+                                data-deskripsi="{{ $mitra->deskripsi }}"
+                                data-caption="{{ $mitra->caption }}"
+                                data-gambar="{{ asset($mitra->gambar) }}"
+                                data-status="{{ $mitra->is_active }}">
+                                <i class="bi bi-pencil-square"></i>
+                              </button>
                                 <button class="btn btn-sm btn-danger delete-slider">
                                     <i class="bi bi-trash"></i>
                                 </button>
@@ -156,7 +179,7 @@
         <form method="POST" action="{{ route('createKegiatanMitraAnak') }}" enctype="multipart/form-data">
           @csrf
           <div class="mb-3">
-            <label for="namaKegiatan" class="form-label fw-semibold">Nama</label>
+            <label for="namaKegiatan" class="form-label fw-semibold">Namqqqa</label>
             <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan nama kegiatan">
           </div>
           <div class="mb-3">
@@ -188,49 +211,85 @@
     </div>
   </div>
 </div>
+</div>
 
-<!-- Modal Edit Dokumen Kelurahan -->
-<div class="modal fade" id="modaEditKegiatan" tabindex="-1" aria-labelledby="modaEditKegiatanLabel" aria-hidden="true">
+<!-- Modal Edit Artikel -->
+<div class="modal fade" id="editArtikelModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content">
-     <div class="modal-header d-flex flex-column align-items-center">
-        <h5 class="modal-title fw-bold" id="modaEditKegiatan">Edit Kegiatan Mitra Anak</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title">Edit Artikel</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+              <form id="editFormMitra" method="POST" action="" enctype="multipart/form-data">
+                  @csrf
+                  @method('PUT')
+                  <input type="hidden" id="editId" name="id">
+
+                  <div class="mb-3">
+                      <label for="editJudul" class="form-label">Nama</label>
+                      <input type="text" class="form-control" id="editNamaKegiatan" name="nama" required>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Deskripsi</label>
+                    <textarea class="form-control" name="deskripsi" id="editDeskripsi" name="deskripsi" required></textarea>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Caption</label>
+                    <textarea class="form-control" name="caption" id="editCaption" name="caption" required></textarea>
+                  </div>
+                  <div class="mb-3">
+                      <label for="editGambar" class="form-label">Gambar</label>
+                      <div class="mb-2">
+                          <img id="previewGambar" src="#" alt="Preview Gambar" class="img-thumbnail" width="100">
+                      </div>
+                      <input type="file" class="form-control" id="editGambar" name="gambar">
+                      <small class="text-muted">Biarkan kosong jika tidak ingin mengubah gambar.</small>
+                  </div>
+                  <div class="mb-3">
+                      <label class="form-label">Status</label>
+                      <select class="form-select" id="editStatus" name="is_active" required>
+                          <option value="1">Aktif</option>
+                          <option value="0">Non-Aktif</option>
+                      </select>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary">Simpan</button>
+                  </div>
+              </form>
+          </div>
       </div>
-      <div class="modal-body">
-        <form>
-          <div class="mb-3">
-            <label for="namaKegiatan" class="form-label">Nama</label>
-            <input type="text" class="form-control" id="namaKegiatan">
-          </div>
-          <div class="mb-3">
-            <label for="tanggalKegiatan" class="form-label">Tanggal Kegiatan</label>
-            <input type="date" class="form-control" id="tanggalKegiatan">
-          </div>
-          <div class="mb-3">
-            <label for="gambarKegiatan" class="form-label">Gambar</label>
-            <input type="file" class="form-control" id="gambarKegiatan" accept="image/*" onchange="previewImage(event)">
-            <img id="preview" src="#" alt="Preview" class="img-fluid mt-2 d-none" style="max-height: 200px;">
-          </div>
-          <div class="mb-3">
-            <label for="keteranganKegiatan" class="form-label">Keterangan</label>
-            <textarea class="form-control" id="keteranganKegiatan" rows="3"></textarea>
-          </div>
-          <div class="mb-3">
-                        <label for="status" class="form-label">Status</label>
-                        <select class="form-select" id="status">
-                            <!-- <option selected>--- Pilih Status ---</option> -->
-                            <option value="Aktif">Aktif</option>
-                            <option value="Non-Aktif">Non-Aktif</option>
-                        </select>
-           </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
   </div>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".edit-mitra").forEach(button => {
+      button.addEventListener("click", function () {
+        let id = this.getAttribute("data-id");
+        let nama = this.getAttribute("data-nama");
+        let deskripsi = this.getAttribute("data-deskripsi");
+        let gambar = this.getAttribute("data-gambar");
+        let status = this.getAttribute("data-status");
+        let caption = this.getAttribute("data-caption");
+
+        // Set nilai form dalam modal
+        document.getElementById("editNamaKegiatan").value = nama;
+        document.getElementById("editDeskripsi").value = deskripsi;
+        document.getElementById("editStatus").value = status;
+        document.getElementById("editCaption").value = caption;
+
+        // Set preview gambar
+        document.getElementById("previewGambar").src = gambar;
+        document.getElementById("previewGambar").classList.remove("d-none");
+
+        // Set action form ke URL update yang sesuai
+        document.getElementById("editFormMitra").action = `/kegiatanMitra/update/${id}`;
+      });
+    });
+  });
+</script>
+
 @endsection

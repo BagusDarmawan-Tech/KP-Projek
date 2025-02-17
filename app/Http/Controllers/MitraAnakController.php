@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ArtikelMitraAnak;
-use App\Models\KategoriArtikel;
 use App\Models\KegiatanCfci;
-use App\Models\KegiatanMitraAnak;
 use Illuminate\Http\Request;
+use App\Models\KategoriArtikel;
+use App\Models\ArtikelMitraAnak;
+use App\Models\KegiatanMitraAnak;
+use Illuminate\Support\Facades\Storage;
 
 class MitraAnakController extends Controller
 {
@@ -28,6 +29,20 @@ class MitraAnakController extends Controller
             'gambar' => 'required|mimes:png,jpg,jpeg|max:6048',
             'dibuatOleh' => 'required|string|max:255',
             'is_active' => 'required|boolean',
+        ],[
+            'nama.required' => 'Nama wajib diisi.',
+            'nama.max' => 'Nama maksimal 255 karakter.',
+
+            'deskripsi.required' => 'deskripsi wajib diisi.',
+            'deskripsi.max' => 'deskripsi maksimal 500 karakter.',
+
+            'caption.required' => 'caption wajib diisi.',
+            'caption.max' => 'caption maksimal 500 karakter.',
+            
+            'gambar.required' => 'Gambar wajib diunggah.',
+            'gambar.mimes' => 'Gambar harus berformat JPG, PNG, atau JPEG.',
+            'gambar.max' => 'Ukuran gambar maksimal 6 MB.',
+            
         ]);
 
         if ($request->hasFile('gambar')) {
@@ -50,6 +65,65 @@ class MitraAnakController extends Controller
 
         return redirect()->route('kegiatan-cfci')->with('success', 'Kategori berhasil ditambahkan!');
     }
+
+    public function update(Request $request, $id)
+    {
+        // dd($request->all());
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'caption' => 'required|string|max:500',
+            'deskripsi' => 'required|string|max:500',
+            'gambar' => 'mimes:png,jpg,jpeg|max:6048',
+            'is_active' => 'required|boolean',
+        ],[
+            'nama.required' => 'Nama wajib diisi.',
+            'nama.max' => 'Nama maksimal 255 karakter.',
+
+            'deskripsi.required' => 'deskripsi wajib diisi.',
+            'deskripsi.max' => 'deskripsi maksimal 500 karakter.',
+
+            'caption.required' => 'caption wajib diisi.',
+            'caption.max' => 'caption maksimal 500 karakter.',
+            
+            'gambar.mimes' => 'Gambar harus berformat JPG, PNG, atau JPEG.',
+            'gambar.max' => 'Ukuran gambar maksimal 6 MB.',
+            
+        ]);
+    
+        $kegiatan = KegiatanCfci::findOrFail($id);
+    
+        // Simpan data baru
+        $data = [
+            'nama' => $request->nama,
+            'deskripsi' => $request->deskripsi,
+            'caption' => $request->caption,
+            'is_active' => $request->is_active,
+        ];
+    
+        // Jika ada gambar baru
+        if ($request->hasFile('gambar')) {
+            // Hapus gambar lama jika ada
+            if ($kegiatan->gambar) {
+                // Hapus gambar berdasarkan path lengkap yang disimpan di database
+                if (Storage::exists(str_replace('storage/', 'public/', $kegiatan->gambar))) {
+                    Storage::delete(str_replace('storage/', 'public/', $kegiatan->gambar));
+                }
+            }
+            // Simpan gambar baru dengan nama format "YYYY-MM-DD-nama-baru.jpg"
+            $photo = $request->file('gambar');
+            $gambarName = date('Y-m-d-His') . '-' . uniqid() . '.' . $photo->getClientOriginalExtension();
+            $photo->storeAs('kegiatan-cfci', $gambarName, 'public');
+            $path = $photo->storeAs('kegiatan-cfci', $gambarName, 'public');
+
+            // Simpan nama gambar baru ke database
+            $data['gambar'] = 'storage/' . $path;
+        }
+    
+        // Update slider
+        $kegiatan->update($data);
+    
+        return redirect()->route('kegiatan-cfci')->with('success', 'kegiatan-cfci berhasil diperbarui!');
+    }
 // ================================ END CRUD Kegiatan CFCI
 
 
@@ -71,6 +145,20 @@ class MitraAnakController extends Controller
             'konten' => 'required|string|max:500',
             'gambar' => 'required|mimes:png,jpg,jpeg|max:6048',
             'is_active' => 'required|boolean',
+        ],[
+            'judul.required' => 'Nama wajib diisi.',
+            'judul.max' => 'Nama maksimal 255 karakter.',
+
+            'konten.required' => 'konten wajib diisi.',
+            'konten.max' => 'konten maksimal 500 karakter.',
+
+            'slug.required' => 'slug wajib diisi.',
+            'slug.max' => 'slug maksimal 100 karakter.',
+            
+            'gambar.required' => 'gambar wajib diunggah.',
+            'gambar.mimes' => 'Dat Pendukung harus berformat JPG, PNG, atau JPEG.',
+            'gambar.max' => 'Ukuran gambar maksimal 6 MB.',
+            
         ]);
 
         if ($request->hasFile('gambar')) {
@@ -93,7 +181,69 @@ class MitraAnakController extends Controller
             'is_active' => $request->is_active,
         ]);
 
-        return redirect()->route('artikel-mitraanak')->with('success', 'Kategori berhasil ditambahkan!');
+        return redirect()->route('artikel-mitraanak')->with('success', 'Artikel Anak berhasil ditambahkan!');
+    }
+
+    public function updateArtikelMitra(Request $request, $id)
+    {
+        // dd($request->all());
+        $request->validate([
+            'judul' => 'required|string|max:255',
+            'slug' => 'required|string|max:255',
+            'tag' => 'required|string|max:255',
+            'konten' => 'required|string|max:500',
+            'gambar' => 'mimes:png,jpg,jpeg|max:6048',
+            'is_active' => 'required|boolean',
+        ],[
+            'judul.required' => 'Nama wajib diisi.',
+            'judul.max' => 'Nama maksimal 255 karakter.',
+
+            'konten.required' => 'konten wajib diisi.',
+            'konten.max' => 'konten maksimal 500 karakter.',
+
+            'slug.required' => 'slug wajib diisi.',
+            'slug.max' => 'slug maksimal 100 karakter.',
+            
+            'gambar.mimes' => 'Gambar harus berformat JPG, PNG, atau JPEG.',
+            'gambar.max' => 'Ukuran gambar maksimal 6 MB.',
+            
+        ]);
+    
+        $artikel = ArtikelMitraAnak::findOrFail($id);
+    
+        // Simpan data baru
+        $data = [
+            'judul' => $request->judul,
+            'tag' => $request->tag,
+            'konten' => $request->konten,
+            'slug' => $request->slug,
+            'is_active' => $request->is_active,
+            'kategoriartikelid' => $request->kategoriartikelid,
+        ];
+    
+        // Jika ada gambar baru
+        if ($request->hasFile('gambar')) {
+            // Hapus gambar lama jika ada
+            if ($artikel->gambar) {
+                // Hapus gambar berdasarkan path lengkap yang disimpan di database
+                if (Storage::exists(str_replace('storage/', 'public/', $artikel->gambar))) {
+                    Storage::delete(str_replace('storage/', 'public/', $artikel->gambar));
+                }
+            }
+            // Simpan gambar baru dengan nama format "YYYY-MM-DD-nama-baru.jpg"
+            $photo = $request->file('gambar');
+            $gambarName = date('Y-m-d-His') . '-' . uniqid() . '.' . $photo->getClientOriginalExtension();
+            $photo->storeAs('artikel', $gambarName, 'public');
+            $path = $photo->storeAs('artikel', $gambarName, 'public');
+
+            // Simpan nama gambar baru ke database
+            $data['gambar'] = 'storage/' . $path;
+        }
+    
+        // Update slider
+        $artikel->update($data);
+    
+        return redirect()->route('artikel-mitraanak')->with('success', 'Artikel Anak berhasil diperbarui!');
     }
       //========================END CRUD ArtikelMitra ANAK 
 
@@ -116,6 +266,23 @@ class MitraAnakController extends Controller
             'gambar' => 'required|mimes:png,jpg,jpeg|max:6048',
             'dibuatOleh' => 'required|string|max:255',
             'is_active' => 'required|boolean',
+        ],[
+            'nama.required' => 'Nama wajib diisi.',
+            'nama.max' => 'Nama maksimal 255 karakter.',
+
+            'deskripsi.required' => 'deskripsi wajib diisi.',
+            'deskripsi.max' => 'deskripsi maksimal 500 karakter.',
+
+            'caption.required' => 'caption wajib diisi.',
+            'caption.max' => 'caption maksimal 500 karakter.',
+
+            'slug.required' => 'slug wajib diisi.',
+            'slug.max' => 'slug maksimal 100 karakter.',
+            
+            'gambar.required' => 'gambar wajib diunggah.',
+            'gambar.mimes' => 'Dat Pendukung harus berformat JPG, PNG, atau JPEG.',
+            'gambar.max' => 'Ukuran gambar maksimal 6 MB.',
+            
         ]);
 
         if ($request->hasFile('gambar')) {
@@ -137,6 +304,66 @@ class MitraAnakController extends Controller
         ]);
 
         return redirect()->route('kegiatan-mitra')->with('success', 'Kategori berhasil ditambahkan!');
+    }
+
+    public function updateKegiatanMitra(Request $request, $id)
+    {
+        // dd($request->all());
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'caption' => 'required|string|max:500',
+            'deskripsi' => 'required|string|max:500',
+            'gambar' => 'mimes:png,jpg,jpeg|max:6048',
+            'is_active' => 'required|boolean',
+        ],[
+            'nama.required' => 'Nama wajib diisi.',
+            'nama.max' => 'Nama maksimal 255 karakter.',
+
+            'deskripsi.required' => 'deskripsi wajib diisi.',
+            'deskripsi.max' => 'deskripsi maksimal 500 karakter.',
+
+            'caption.required' => 'caption wajib diisi.',
+            'caption.max' => 'caption maksimal 500 karakter.',
+
+
+            'gambar.mimes' => 'Gambar harus berformat JPG, PNG, atau JPEG.',
+            'gambar.max' => 'Ukuran gambar maksimal 6 MB.',
+            
+        ]);
+    
+        $kegiatan_mitra_anak = KegiatanMitraAnak::findOrFail($id);
+    
+        // Simpan data baru
+        $data = [
+            'nama' => $request->nama,
+            'deskripsi' => $request->deskripsi,
+            'caption' => $request->caption,
+            'is_active' => $request->is_active,
+        ];
+    
+        // Jika ada gambar baru
+        if ($request->hasFile('gambar')) {
+            // Hapus gambar lama jika ada
+            if ($kegiatan_mitra_anak->gambar) {
+                // Hapus gambar berdasarkan path lengkap yang disimpan di database
+                if (Storage::exists(str_replace('storage/', 'public/', $kegiatan_mitra_anak->gambar))) {
+                    Storage::delete(str_replace('storage/', 'public/', $kegiatan_mitra_anak->gambar));
+                }
+            }
+            // Simpan gambar baru dengan nama format "YYYY-MM-DD-nama-baru.jpg"
+            $photo = $request->file('gambar');
+            $gambarName = date('Y-m-d-His') . '-' . uniqid() . '.' . $photo->getClientOriginalExtension();
+            $photo->storeAs('kegiatan_mitra_anak', $gambarName, 'public');
+            $path = $photo->storeAs('kegiatan_mitra_anak', $gambarName, 'public');
+
+            // Simpan nama gambar baru ke database
+            $data['gambar'] = 'storage/' . $path;
+        }
+    
+        // Update slider
+        $kegiatan_mitra_anak->update($data);
+    
+        return redirect()->route('kegiatan-mitra')->with('success', 'Kegiatan Mitra Anak berhasil diperbarui!');
     }
   //======================== END CRUD KEGIATAN MITRA ANAK 
 
