@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PemantauanUsulan;
 use Carbon\Carbon;
 use App\Models\KaryaAnak;
 use App\Models\SuaraAnak;
@@ -44,6 +45,97 @@ class UsulanKegiatanController extends Controller
         return redirect()->route('pemantauan-suara')->with('success', 'Kategori berhasil ditambahkan!');
     }
 
+    public function updatePemantauanSuara(Request $request, $id)
+    {
+        // dd($request->all());
+        $request->validate([
+            'perihal' => 'required|string|max:500',
+            'deskripsi' => 'required|string|max:500'
+        ],[
+            'perihal.required' => 'perihal wajib diisi.',
+            'perihal.max' => 'perihal maksimal 500 karakter.',
+
+            'deskripsi.required' => 'deskripsi wajib diisi.',
+            'deskripsi.max' => 'deskripsi maksimal 500 karakter.',
+            
+        ]);
+    
+        $karya = SuaraAnak::findOrFail($id);
+
+    
+        // Simpan data baru
+        $data = [
+            'perihal' => $request->perihal,
+            'deskripsi' => $request->deskripsi,
+        ];
+    
+        // Update slider
+        $karya->update($data);
+    
+        return redirect()->route('pemantauan-suara')->with('success', 'Usulan berhasil diperbarui!');
+    }
+    public function updateTindakLanjut(Request $request, $id)
+    {
+        // dd($request->all());
+        $request->validate([
+            'tindakLanjut' => 'required|string|max:500',
+            'tanggalTindakLanjut' => 'required|date',
+            'file' => 'nullable|mimes:pdf|max:10048'
+        ], [
+            'tindakLanjut.required' => 'Tindak lanjut wajib diisi.',
+            'tindakLanjut.max' => 'Tindak lanjut maksimal 500 karakter.',
+        
+            'tanggalTindakLanjut.required' => 'Tanggal tindak lanjut wajib diisi.',
+            'tanggalTindakLanjut.date' => 'Format tanggal tindak lanjut tidak valid.',
+        
+            'file.mimes' => 'Data pendukung harus berupa file PDF.',
+            'file.max' => 'Ukuran data pendukung maksimal 10MB.'
+        ]);
+        
+    
+        $dokumen = SuaraAnak::findOrFail($id);
+    
+        // Simpan data baru
+        $data = [
+            'tindakLanjut' => $request->tindakLanjut,
+            'tanggalTindakLanjut' => $request->tanggalTindakLanjut,
+        ];
+    
+        // Jika ada gambar baru
+        // Jika ada file baru
+        if ($request->hasFile('file')) {
+            // Hapus file lama
+            if ($dokumen->file && Storage::exists('public/' . $dokumen->file)) {
+                Storage::delete('public/' . $dokumen->file);
+            }
+
+            // Simpan file baru
+            $file = $request->file('file');
+            $fileName = date('Y-m-d-His') . '-' . uniqid() . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs('public/suara-anak', $fileName);
+            $data['file'] = 'suara-anak/' . $fileName;
+        }
+    
+        // Update dokumen
+        $dokumen->update($data);
+    
+        return redirect()->route('pemantauan-suara')->with('success', 'Suara anak berhasil ditindak Lanjut!');
+    }
+
+    public function updateVerifikasiUsulan(Request $request, $id)
+    {
+        // dd($request->all());
+        $suara = SuaraAnak::findOrFail($id);
+        $data = [
+            'is_active' => $request->is_active,
+        ];
+        // dd($suara);
+        $suara->update($data);
+        // dd($suara);
+    
+        return redirect()->route('pemantauan-suara')->with('success', 'Suara Anak berhasil diverifikasi!');
+
+    }
     
     public function storeTindakLanjut(Request $request)
     {
@@ -82,6 +174,20 @@ class UsulanKegiatanController extends Controller
         return view('admin.karyaAnak',compact(('karyas'))); 
     }
 
+    
+    public function verifikasiKaryaAnak(Request $request, $id)
+    {
+        // dd($request->all());
+        $karya = KaryaAnak::findOrFail($id);
+        $data = [
+            'status' => $request->status,
+        ];
+
+        $karya->update($data);
+    
+        return redirect()->route('karya-anak')->with('success', 'Karya Anak berhasil diverifikasi!');
+
+    }
     public function storeKaryaAnak(Request $request)
     {
         // dd($request->all());
@@ -114,7 +220,7 @@ class UsulanKegiatanController extends Controller
             return redirect()->back()->with('error', 'Gambar tidak ditemukan');
         }
         $tanggal = Carbon::now()->toDateString();
-        $status = 0;
+        $status = NULL;
         KaryaAnak::create([
             'kreator' => $request->kreator,
             'judul' => $request->judul,
@@ -130,66 +236,60 @@ class UsulanKegiatanController extends Controller
     
     public function updateKaryaAnak(Request $request, $id)
     {
-       // dd($request->all());
-       $request->validate([
-        'judul' => 'required|string|max:255',
-        'tag' => 'required|string|max:255',
-        'slug' => 'required|string|max:255',
-        'gambar' => 'mimes:png,jpg,jpeg|max:2048',
-        'konten' => 'required|string|max:500',
-    ],[
-        'judul.required' => 'judul wajib diisi.',
-        'judul.max' => 'judul maksimal 255 karakter.',
+        // dd($request->all());
+        $request->validate([
+            'kreator' => 'required|string|max:255',
+            'judul' => 'required|string|max:255',
+            'gambar' => 'mimes:png,jpg,jpeg|max:2048',
+            'deskripsi' => 'required|string|max:500'
+        ],[
+            'judul.required' => 'judul wajib diisi.',
+            'judul.max' => 'judul maksimal 255 karakter.',
 
-        'tag.required' => 'tag wajib diisi.',
-        'tag.max' => 'tag maksimal 255 karakter.',
+            'kreator.required' => 'kreator wajib diisi.',
+            'kreator.max' => 'kreator maksimal 255 karakter.',
 
-        'slug.required' => 'slug wajib diisi.',
-        'slug.max' => 'slug maksimal 255 karakter.',
-
-        'konten.required' => 'konten wajib diisi.',
-        'konten.max' => 'konten maksimal 500 karakter.',
-
-        'gambar.mimes' => 'Gambar harus berformat JPG, PNG, atau JPEG.',
-        'gambar.max' => 'Ukuran gambar maksimal 6 MB.',
-        
-    ]);
+            'deskripsi.required' => 'deskripsi wajib diisi.',
+            'deskripsi.max' => 'deskripsi maksimal 500 karakter.',
+            
+            'gambar.mimes' => 'Gambar harus berformat JPG, PNG, atau JPEG.',
+            'gambar.max' => 'Ukuran gambar maksimal 6 MB.',
+            
+        ]);
     
-        $kegiatan = KaryaAnak::findOrFail($id);
+        $karya = KaryaAnak::findOrFail($id);
 
     
         // Simpan data baru
         $data = [
             'judul' => $request->judul,
-            'tag' => $request->tag,
-            'slug' => $request->slug,
-            'konten' => $request->konten,
-            'is_active' => $request->is_active
+            'kreator' => $request->kreator,
+            'deskripsi' => $request->deskripsi,
         ];
     
         // Jika ada gambar baru
         if ($request->hasFile('gambar')) {
             // Hapus gambar lama jika ada
-            if ($kegiatan->gambar) {
+            if ($karya->gambar) {
                 // Hapus gambar berdasarkan path lengkap yang disimpan di database
-                if (Storage::exists(str_replace('storage/', 'public/', $kegiatan->gambar))) {
-                    Storage::delete(str_replace('storage/', 'public/', $kegiatan->gambar));
+                if (Storage::exists(str_replace('storage/', 'public/', $karya->gambar))) {
+                    Storage::delete(str_replace('storage/', 'public/', $karya->gambar));
                 }
             }
             // Simpan gambar baru dengan nama format "YYYY-MM-DD-nama-baru.jpg"
             $photo = $request->file('gambar');
             $gambarName = date('Y-m-d-His') . '-' . uniqid() . '.' . $photo->getClientOriginalExtension();
-            $photo->storeAs('kegiatan-arek-suroboyo', $gambarName, 'public');
-            $path = $photo->storeAs('kegiatan-arek-suroboyo', $gambarName, 'public');
+            $photo->storeAs('karya-anak', $gambarName, 'public');
+            $path = $photo->storeAs('karya-anak', $gambarName, 'public');
 
             // Simpan nama gambar baru ke database
             $data['gambar'] = 'storage/' . $path;
         }
     
         // Update slider
-        $kegiatan->update($data);
+        $karya->update($data);
     
-        return redirect()->route('kegiatan-arek')->with('success', 'Artikel Anak berhasil diperbarui!');
+        return redirect()->route('karya-anak')->with('success', 'Karya Anak berhasil diperbarui!');
     }
 // =================================END CRUD Karya Anak
 

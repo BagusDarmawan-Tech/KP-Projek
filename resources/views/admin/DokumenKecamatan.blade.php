@@ -7,6 +7,22 @@
 <script src="{{ asset('assets/js/hapus.js') }}"></script>
 
 <div class="container mt-5">
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+    @if(session('success'))
+    <div class="alert alert-success">
+        <ul>
+                <li>{{ session('success') }}</li>
+        </ul>
+    </div>
+    @endif
     <div class="card shadow-lg border-0 position-relative overflow-hidden mb-4 p-3">
         <div class="card-body">
             <h4 class="fw-bold mb-3 text-center">Dokumen Kecamatan</h4>
@@ -76,29 +92,14 @@
                 </button>
             </div>
         </div>
-        <!-- Kontrol Tampilkan & Cari -->
-        <div class="row mb-3 align-items-center">
-            <div class="col-md-6">
-                <label for="showEntries" class="form-label me-2">Show</label>
-                <select id="showEntries" class="form-select form-select-sm d-inline-block" style="width: 80px;">
-                    <option value="10">10</option>
-                    <option value="25">25</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                </select>
-                entries
-            </div>
-            <div class="col-md-6 text-end">
-                <input type="text" id="searchInput" class="form-control form-control-sm d-inline-block" placeholder="Search..." style="width: 200px;">
-            </div>
-        </div>
+
         <div class="table-responsive">
-            <table class="table table-hover table-bordered align-middle text-center">
+            <table class="table table-hover table-bordered align-middle text-center" id="myTable">
                 <thead class="table-primary">
                     <tr>
                         <th>No</th>
                         <th>Jenis Dokumen</th>
-                        <th>Nama Dokumen</th>
+                        <th>Kecamatan</th>
                         <th>Data Dukung</th>
                         <th>Dibuat Oleh</th>
                         <th>Status</th>
@@ -106,20 +107,31 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($dokumens as $index => $dokumen)
                     <tr>
-                        <td>1</td>
-                        <td>SK FAS</td>
-                        <td>SK FAS Kecamatan Simokerto</td>
-                        <td><a href="#" class="text-primary">Lihat</a></td>
-                        <td>Ema</td>
-                        <td><span class="badge bg-success">Aktif</span></td>
+                        <td>{{ $loop->iteration }}</td>
+                        <td> {{ $dokumen->surat ? $dokumen->surat->nama : 'Tidak ada pengguna' }}</td>
+                        <td> {{ $dokumen->kecamatan ? $dokumen->kecamatan->nama : 'Tidak ada pengguna' }}</td>
                         <td>
+                            <a href="{{ asset('storage/' . $dokumen->dataPendukung) }}" target="_blank">
+                                <i class="fas fa-file-pdf text-danger fa-2x"></i>
+                            </a>
+                        </td>
+                        <td>{{ $dokumen->dibuatOleh }}</td>
+                        <td>
+                            @if($dokumen->is_active == 0)
+                            <span class="badge bg-warning">Non Aktif</span>
+                            @else
+                                <span class="badge bg-success">Aktif</span>
+                            @endif
+                        </td>                        <td>
                             <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editDokumenModal"><i class="bi bi-pencil-square"></i></button>
                             <button class="btn btn-sm btn-danger delete-slider">
                                 <i class="bi bi-trash"></i>
                             </button>
                         </td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -138,23 +150,37 @@
         </div>
 
             <div class="modal-body">
-                <form>
+                <form method="POST" action="{{ route('createDokumenKecamatan') }}" enctype="multipart/form-data">
+                    @csrf 
                     <div class="mb-3">
-                        <label class="form-label">Kegiatan</label>
-                        <select class="form-select" name="kegiatan">
-                            <option selected>--- Pilih Kategori ---</option>
-                            <option value="SK">SK</option>
-                            <option value="RPA">RPA</option>
-                            <option value="SK-FAS">SK-FAS</option>
+                        <label for="kegiatan" class="form-label">Kecamatan</label>
+                        <select class="form-select" id="kegiatan" name="kecamatanid" required>
+                            <option value="" disabled selected>-- Pilih Kecamatan --</option>
+                            @foreach ($kecamatans as $kecamatan)
+                                <option value="{{ $kecamatan->id }}" {{ old('subkegiatanid') == $kecamatan->id ? 'selected' : '' }} >
+                                    {{ $kecamatan->nama }}
+                                </option>
+                            @endforeach
                         </select>
-                    </div>
+                     </div>
+                    <div class="mb-3">
+                        <label for="kegiatan" class="form-label">Jenis Surat</label>
+                        <select class="form-select" id="kegiatan" name="jenis_suratid" required>
+                            <option value="" disabled selected>-- Pilih Surat --</option>
+                            @foreach ($surats as $surat)
+                                <option value="{{ $surat->id }}" {{ old('subkegiatanid') == $surat->id ? 'selected' : '' }} >
+                                    {{ $surat->nama }}
+                                </option>
+                            @endforeach
+                        </select>
+                     </div>
                     <div class="mb-3">
                         <label class="form-label">Nama</label>
                         <input type="text" class="form-control" name="nama">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Data Dukung</label>
-                        <input type="file" class="form-control" name="data_dukung">
+                        <input type="file" class="form-control" name="dataPendukung">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Keterangan</label>
@@ -163,16 +189,21 @@
                     <div class="mb-3">
                         <label class="form-label">Status</label>
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="status" checked>
+                            <!-- Hidden input sebagai fallback jika checkbox tidak dicentang -->
+                            <input type="hidden" name="is_active" value="0">
+                            
+                            <input class="form-check-input" name="is_active" type="checkbox" id="status" value="1" checked>
                             <label class="form-check-label" for="status">Aktif</label>
                         </div>
                     </div>
-                </form>
+                
             </div>
+            <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary">Save changes</button>
             </div>
+        </form>
         </div>
     </div>
 </div>

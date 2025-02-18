@@ -21,7 +21,7 @@ class KegiatanForumArekSurabayaController extends Controller
         // dd($request->all());
         $request->validate([
             'nama' => 'required|string|max:255',
-            'gambar' => 'required|mimes:png,jpg,jpeg|max:2048',
+            'gambar' => 'required|mimes:png,jpg,jpeg|max:6048',
             'keterangan' => 'required|string|max:500',
             'is_active' => 'required|boolean',
         ],[

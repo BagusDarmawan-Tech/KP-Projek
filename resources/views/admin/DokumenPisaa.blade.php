@@ -68,6 +68,22 @@
         </div>
     </div>
 
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+    @if(session('success'))
+    <div class="alert alert-success">
+        <ul>
+                <li>{{ session('success') }}</li>
+        </ul>
+    </div>
+    @endif
     <div class="card shadow-lg border-0 position-relative overflow-hidden p-3">
         <div class="card-body">
             <div class="d-flex justify-content-between align-items-center mb-3">
@@ -95,7 +111,11 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $dokumen->jenisSurat }}</td>
                             <td>{{ $dokumen->nama }}</td>
-                            <td><a href="#" class="text-primary">Lihat</a></td>
+                            <td>
+                                <a href="{{ asset('storage/' . $dokumen->dataPendukung) }}" target="_blank">
+                                    <i class="fas fa-file-pdf text-danger fa-2x"></i>
+                                </a>
+                            </td>
                             <td>{{ $dokumen->dibuatOleh }}</td>
                             <td>
                                 @if($dokumen->is_active == 0)
@@ -105,7 +125,18 @@
                                 @endif
                             </td>
                             <td>
-                                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editDokumenModal"><i class="bi bi-pencil-square"></i></button>
+                                <button class="btn btn-sm btn-primary btn-edit-dokumen"
+                                    data-id="{{ $dokumen->id }}"
+                                    data-nama="{{ $dokumen->nama }}"
+                                    data-file="{{ asset('storage/' . $dokumen->dataPendukung) }}"
+                                    data-status="{{ $dokumen->is_active }}"
+                                    data-jenisSurat="{{ $dokumen->jenisSurat }}"
+                                    data-keterangan="{{ $dokumen->keterangan }}"
+                                    data-status="{{ $dokumen->is_active }}"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#editDokumenModal">
+                                    <i class="bi bi-pencil-square"></i>
+                                </button>
                                 <button class="btn btn-sm btn-danger delete-slider"><i class="bi bi-trash"></i> </button>                            </td>
                         </tr>
                         @endforeach
@@ -127,7 +158,7 @@
             <form method="POST" action="{{ route('createDokumenPisa') }}" enctype="multipart/form-data">
                     @csrf 
                 <div class="mb-3">
-                    <label class="form-label">Kegiatan</label>
+                    <label class="form-label">Jenis Surat</label>
                     <select class="form-select" name="jenisSurat">
                         @foreach($surats as $index => $surat)
                         <option value="{{ $surat->nama }}">{{ $surat->nama }}</option>
@@ -173,39 +204,78 @@
                 <h5 class="modal-title fw-bold text-center" id="editDokumenModalLabel">Edit Menu Dokumen Pisa</h5>
             </div>
             <div class="modal-body">
-                <div class="mb-3">
-                    <label class="form-label">Kegiatan</label>
-                    <select class="form-select" name="kegiatan">
-                        <option selected>--- Pilih Kategori ---</option>
-                        <option value="SK">SK</option>
-                        <option value="RPA">RPA</option>
-                        <option value="SK-FAS">SK-FAS</option>
-                    </select>
+                <form id="editDokumenForm" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+                    <input type="hidden" id="editId" name="id">
+                    <div class="mb-3">
+                        <label class="form-label">Jenis Surat</label>
+                        <select class="form-select" name="jenisSurat" id="editJenisSurat">
+                            @foreach($surats as $index => $surat)
+                            <option value="{{ $surat->nama }}">{{ $surat->nama }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Nama</label>
+                        <input type="text" class="form-control" name="nama" id="editNama">
+                    </div>
+                    <div class="mb-3">
+                        <label for="editFile" class="form-label">Edit File Data Pendukung</label>
+                        <div class="mb-2">
+                            <a id="previewFile" href="#" target="_blank" class="btn btn-secondary btn-sm">Lihat File Saat Ini</a>
+                        </div>
+                        <input type="file" class="form-control" id="editFile" name="dataPendukung">
+                        <small class="text-muted">Biarkan kosong jika tidak ingin mengubah file.</small>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Keterangan</label>
+                        <textarea class="form-control" name="keterangan" id="editKeterangan"></textarea>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="editStatus" class="form-label">Status</label>
+                        <select class="form-select" id="editStatus" name="is_active" required>
+                            <option value="1">Aktif</option>
+                            <option value="0">Non-Aktif</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label">Nama</label>
-                    <input type="text" class="form-control" name="nama">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label">Data Dukung</label>
-                    <input type="file" class="form-control" name="data_dukung">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Keterangan</label>
-                    <textarea class="form-control" name="keterangan"></textarea>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Status</label>
-                    <input type="checkbox" class="form-check-input" id="statusEdit" checked>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
-            </div>
+            </form>
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".btn-edit-dokumen").forEach(button => {
+        button.addEventListener("click", function () {
+            let id = this.getAttribute("data-id");
+            let nama = this.getAttribute("data-nama");
+            let jenisSurat = this.getAttribute("data-jenisSurat");
+            let file = this.getAttribute("data-file");
+            let status = this.getAttribute("data-status");
+            let keterangan = this.getAttribute("data-keterangan");
+
+            document.getElementById("editId").value = id;
+            document.getElementById("editNama").value = nama;
+            document.getElementById("editJenisSurat").value = jenisSurat;
+            document.getElementById("previewFile").href = file;
+            document.getElementById("editStatus").value = status;
+            document.getElementById("editKeterangan").value = keterangan;
+
+            // Pastikan action form mengarah ke URL update yang benar
+            document.getElementById("editDokumenForm").action = `/DokumenPisa/update/${id}`;
+         
+        });
+    });
+});
+
+</script>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {

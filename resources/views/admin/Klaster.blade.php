@@ -13,6 +13,13 @@
         </ul>
     </div>
     @endif
+    @if(session('success'))
+    <div class="alert alert-success">
+        <ul>
+                <li>{{ session('success') }}</li>
+        </ul>
+    </div>
+    @endif
     <div class="card shadow-lg border-0 position-relative overflow-hidden mb-5"> 
         <div class="card-body mt-4">
             <div class="text-center mb-4">
@@ -171,9 +178,12 @@
                         <input type="text" class="form-control" id="editSlug" name="slug" required>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Gambar</label>
+                        <label for="editGambar" class="form-label">Gambar</label>
+                        <div class="mb-2">
+                            <img id="previewGambar" src="#" alt="Preview Gambar" class="img-thumbnail" width="100">
+                        </div>
                         <input type="file" class="form-control" id="editGambar" name="gambar">
-                        <img id="previewGambar" src="" alt="Preview" width="100">
+                        <small class="text-muted">Biarkan kosong jika tidak ingin mengubah gambar.</small>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Status</label>

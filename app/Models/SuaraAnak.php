@@ -10,5 +10,5 @@ class SuaraAnak extends Model
     use HasFactory;
     protected $table = 'suara_anak';
 
-    protected $fillable = ['nomorSuara', 'tanggal','perihal','deskripsi','pemohon','tanggalTindakLanjut','tindakLanjut','file'];
+    protected $fillable = ['nomorSuara', 'is_active','tanggal','perihal','deskripsi','pemohon','tanggalTindakLanjut','tindakLanjut','file'];
 }

@@ -111,10 +111,16 @@ Route::get('/', function () {return view('frontend.content.landing-page');})->na
 
 
 //=======================  Backend  =============================//
-
 //Bagian Kelurahan Layak Anak
-Route::get('/KelurahanLayakAnak', [KelurahanLayakAnakController::class, 'HalamanDokumenLayakAnak'])->name('HalamanDokument');
-Route::get('/KegiatanLayakAnak', [KelurahanLayakAnakController::class, 'KegiatanKelurahanAnak'])->name('Kegiatankelurahan');
+Route::middleware('auth')->group(function () {
+    Route::get('/KelurahanLayakAnak', [KelurahanLayakAnakController::class, 'HalamanDokumenLayakAnak'])->name('HalamanDokument');
+    Route::get('/KegiatanLayakAnak', [KelurahanLayakAnakController::class, 'KegiatanKelurahanAnak'])->name('Kegiatankelurahan');
+
+    //tambah
+    Route::post('/createKelurahanLayakAnak', [PusatInformasiSahabatController::class, 'storeDokumenKelurahan'])->name('createDokumenKelurahan');
+    Route::post('/createKegiatanKelurahan', [PusatInformasiSahabatController::class, 'storeKegiatanKelurahan'])->name('createKegiatanKelurahan');
+
+});
 
 
 // Halaman Pusat Informasi Sahabat Anak
@@ -125,6 +131,9 @@ Route::middleware('auth')->group(function () {
     // Tambah
     Route::post('/createDokumenPisa', [PusatInformasiSahabatController::class, 'storeDokumenPisa'])->name('createDokumenPisa');
     Route::post('/createKegiatanPisa', [PusatInformasiSahabatController::class, 'storeKegiatanPisa'])->name('createKegiatanPisa');
+
+    //edit
+    Route::put('/DokumenPisa/update/{id}', [PusatInformasiSahabatController::class, 'updateDokumenPisa'])->name('updateDokumenPisa');
 
 });
 
@@ -201,6 +210,12 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/dokumen-kec', [KecamatanLayakController::class, 'dokumenkec'])->name('dokumen-kec');
     Route::get('/kegiatan-kecamatan', [KecamatanLayakController::class, 'kegiatanKecamatan'])->name('kegiatan-kecamatan');
+
+    //Tambah Data
+    Route::post('/createDokumenKecamatan', [KecamatanLayakController::class, 'storeDokumenKecamatan'])->name('createDokumenKecamatan');
+    Route::post('/createKegiatanKecamatan', [KecamatanLayakController::class, 'storeKegiatanKecamatan'])->name('createKegiatanKecamatan');
+
+
 });
 
 //Mitra Anak
@@ -244,6 +259,10 @@ Route::middleware('auth')->group(function () {
 
     //update
     Route::put('/karya-anak/update/{id}', [UsulanKegiatanController::class, 'updateKaryaAnak'])->name('updateKaryaAnak');
+    Route::put('/karya-anak/verifikasi/{id}', [UsulanKegiatanController::class, 'verifikasiKaryaAnak'])->name('updateKaryaAnak');
+    Route::put('/pemantauan-suara/update/{id}', [UsulanKegiatanController::class, 'updatePemantauanSuara'])->name('updatePemantauanSuara');
+    Route::put('/tindak-lanjut/update/{id}', [UsulanKegiatanController::class, 'updateTindakLanjut'])->name('updateTindakLanjut');
+    Route::put('/verifikasi/update/{id}', [UsulanKegiatanController::class, 'updateVerifikasiUsulan'])->name('updateVerifikasi');
 
 });
 

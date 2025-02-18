@@ -90,14 +90,12 @@
                         <td>
                             <div class="d-flex align-items-center justify-content-center gap-1 py-1" style="min-height: 38px;">
                                 <!-- Tombol Edit -->
-                                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editKaryaModal"
-                                data-id="{{ $karya->id }}" 
-                                data-judul="{{ $karya->judul }}" 
-                                data-tag="{{ $karya->tag }}" 
-                                data-slug="{{ $karya->slug }}" 
-                                data-konten="{{ $karya->konten }}" 
-                                data-gambar="{{ asset($karya->gambar) }}" 
-                                data-status="{{ $karya->is_active }}">
+                                <button class="btn btn-sm btn-primary edit-karya" data-bs-toggle="modal" data-bs-target="#editKaryaModal"
+                                    data-id="{{ $karya->id }}" 
+                                    data-judul="{{ $karya->judul }}" 
+                                    data-kreator="{{ $karya->kreator }}" 
+                                    data-deskripsi="{{ $karya->deskripsi }}" 
+                                    data-gambar="{{ asset($karya->gambar) }}">
                                     <i class="bi bi-pencil"></i>
                                 </button>
 
@@ -107,7 +105,10 @@
                                 </button>
 
                                 <!-- Tombol Verifikasi -->
-                                <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#verifikasiModal">
+                                <button class="btn btn-sm btn-success verifikasi-edit" data-bs-toggle="modal" data-bs-target="#verifikasiModal" 
+                                data-status="{{ $karya->status }}" 
+                                data-id="{{ $karya->id }}"
+                                dataID="{{ $karya->id }}">
                                     <i class="bi bi-check-lg"></i>
                                 </button>
                             </div>
@@ -167,28 +168,36 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="mb-3">
-                    <label class="form-label">Kreator</label>
-                    <input type="text" class="form-control">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Judul</label>
-                    <input type="text" class="form-control">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Deskripsi</label>
-                    <textarea class="form-control" rows="3"></textarea>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Upload Foto</label>
-                    <input type="file" class="form-control" accept=".jpg, .png">
-                    <small class="text-muted">Tidak ada file yang dipilih</small>
-                </div>
+                <form id="editKaryaForm" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+                    <input type="hidden" id="editId" name="id">
+                    <div class="mb-3">
+                        <label class="form-label">Kreator</label>
+                        <input type="text" name="kreator" class="form-control" id="editKreator">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Judul</label>
+                        <input type="text" name="judul" class="form-control" id="editJudul">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Deskripsi</label>
+                        <textarea class="form-control" name="deskripsi" rows="3" id="editDeskripsi"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editGambar" class="form-label">Gambar</label>
+                        <div class="mb-2">
+                            <img id="previewGambar" src="#" alt="Preview Gambar" class="img-thumbnail" width="100">
+                        </div>
+                        <input type="file" class="form-control" id="editGambar" name="gambar">
+                        <small class="text-muted">Biarkan kosong jika tidak ingin mengubah gambar.</small>
+                    </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                <button type="submit" class="btn btn-primary">Simpan</button>
-            </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
         </div>
     </div>
 </div>
@@ -196,40 +205,43 @@
 <!-- Modal Verifikasi -->
 <div class="modal fade" id="verifikasiModal" tabindex="-1" aria-labelledby="verifikasiModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title fw-bold">Verifikasi</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body text-center">
-                <p class="fw-semibold">Apakah Anda yakin ingin memverifikasi data ini?</p>
-            </div>
-            <div class="modal-footer d-flex justify-content-center">
-                <button class="btn btn-success">TERIMA</button>
-                <button class="btn btn-danger" data-bs-dismiss="modal">TOLAK</button>
-            </div>
+        <form id="verifikasi" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+            <input type="hidden" id="editIdverifikasi" name="id">
+            <input type="hidden" id="editStatus" name="edit">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold">Verifikasi</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <p class="fw-semibold">Apakah Anda yakin ingin memverifikasi data ini?</p>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button class="btn btn-success" name="status" value="1" type="submit">TERIMA</button>
+                    <button class="btn btn-danger"  name="status"  value="0" type="submit" data-bs-dismiss="modal">TOLAK</button>
+                </div>
+        </form>
         </div>
     </div>
 </div>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        document.querySelectorAll(".edit-arekSuroboyo").forEach(button => {
+        document.querySelectorAll(".edit-karya").forEach(button => {
             button.addEventListener("click", function () {
                 let id = this.getAttribute("data-id");
                 let judul = this.getAttribute("data-judul");
-                let slug = this.getAttribute("data-slug");
-                let tag = this.getAttribute("data-tag");
-                let konten = this.getAttribute("data-konten");
+                let kreator = this.getAttribute("data-kreator");
+                let deskripsi = this.getAttribute("data-deskripsi");
                 let gambar = this.getAttribute("data-gambar");
-                let status = this.getAttribute("data-status");
 
                 // Set nilai form dalam modal
                 document.getElementById("editJudul").value = judul;
-                document.getElementById("editSlug").value = slug;
-                document.getElementById("editTag").value = tag;
-                document.getElementById("editKonten").value = konten;
-                document.getElementById("editStatus").value = status; // Pastikan select memiliki id="editStatus"
+                document.getElementById("editId").value = id;
+                document.getElementById("editKreator").value = kreator;
+                document.getElementById("editDeskripsi").value = deskripsi;
 
                 // Set preview gambar
                 let previewGambar = document.getElementById("previewGambar");
@@ -241,7 +253,27 @@
                 }
 
                 // Set action form ke URL update yang sesuai
-                document.getElementById("editFormSuroboyo").action = `/KegiatanArekSuroboyo/update/${id}`;
+                document.getElementById("editKaryaForm").action = `/karya-anak/update/${id}`;
+            });
+        });
+    });
+</script>
+
+{{-- verifikasi --}}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".verifikasi-edit").forEach(button => {
+            button.addEventListener("click", function () {
+                let status = this.getAttribute("data-status");
+                let id = this.getAttribute("data-id");
+                let di = this.getAttribute("dataID");
+
+                // Set nilai form dalam modal
+                document.getElementById("editStatus").value = status;
+                document.getElementById("editIdverifikasi").value = di;
+
+                // Set action form ke URL update yang sesuai
+                document.getElementById("verifikasi").action = `/karya-anak/verifikasi/${id}`;
             });
         });
     });

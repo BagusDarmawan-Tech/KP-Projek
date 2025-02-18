@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DokumenPisa;
 use App\Models\JenisSurat;
+use App\Models\DokumenPisa;
 use App\Models\KegiatanPisa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PusatInformasiSahabatController extends Controller
 {
@@ -23,9 +24,21 @@ class PusatInformasiSahabatController extends Controller
         $request->validate([
             'nama' => 'required|string|max:255',
             'jenisSurat' => 'required|string|max:255',
-            'dataPendukung' => 'required|mimes:pdf,doc,docx|max:10048', // Hanya PDF, DOC, DOCX, max 2MB
+            'dataPendukung' => 'required|mimes:pdf|max:10048', // Hanya PDF, DOC, DOCX, max 2MB
             'keterangan' => 'required|string|max:500',
             'is_active' => 'required|in:0,1', // Pastikan hanya 0 atau 1 yang diterima
+        ],[
+            'nama.required' => 'nama wajib diisi.',
+            'nama.max' => 'nama maksimal 255 karakter.',
+            
+            'jenisSurat.required' => 'jenisSurat wajib diisi.',
+            'keterangan.required' => 'keterangan wajib diisi.',
+            'keterangan.max' => 'keterangan maksimal 500 karakter.',
+            
+            'dataPendukung.required' => 'dataPendukung wajib diisi.',
+            'dataPendukung.mimes' => 'dataPendukung harus berformat PDF.',
+            'dataPendukung.max' => 'Ukuran dataPendukung maksimal 10 MB.',
+            
         ]);
     
         // Simpan file ke storage/public/forum-anak
@@ -42,15 +55,69 @@ class PusatInformasiSahabatController extends Controller
             'dibuatOleh' => $request->dibuatOleh, // Pastikan dibuatOleh tidak null
         ]);
     
-        return redirect()->route('DokumenLayakAnak')->with('success', 'Kategori berhasil ditambahkan!');
+        return redirect()->route('DokumenLayakAnak')->with('success', 'Dokumen berhasil ditambahkan!');
     } 
+
+    public function updateDokumenPisa(Request $request, $id)
+    {
+        // dd($request->all());
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'jenisSurat' => 'required|string|max:255',
+            'dataPendukung' => 'mimes:pdf|max:10048', // Hanya PDF, DOC, DOCX, max 2MB
+            'keterangan' => 'required|string|max:500',
+            'is_active' => 'required|in:0,1', // Pastikan hanya 0 atau 1 yang diterima
+        ],[
+            'nama.required' => 'nama wajib diisi.',
+            'nama.max' => 'nama maksimal 255 karakter.',
+            
+            'jenisSurat.required' => 'jenisSurat wajib diisi.',
+            'keterangan.required' => 'keterangan wajib diisi.',
+            'keterangan.max' => 'keterangan maksimal 500 karakter.',
+            
+            'dataPendukung.mimes' => 'dataPendukung harus berformat PDF.',
+            'dataPendukung.max' => 'Ukuran dataPendukung maksimal 10 MB.',
+            
+        ]);
+    
+        $dokumen = DokumenPisa::findOrFail($id);
+    
+        // Simpan data baru
+        $data = [
+            'nama' => $request->nama,
+            'jenisSurat' => $request->jenisSurat,
+            'keterangan' => $request->keterangan,
+            'is_active' => $request->is_active,
+        ];
+    
+        // Jika ada gambar baru
+        // Jika ada file baru
+        if ($request->hasFile('dataPendukung')) {
+            // Hapus file lama
+            if ($dokumen->dataPendukung && Storage::exists('public/' . $dokumen->dataPendukung)) {
+                Storage::delete('public/' . $dokumen->dataPendukung);
+            }
+
+            // Simpan file baru
+            $file = $request->file('dataPendukung');
+            $fileName = date('Y-m-d-His') . '-' . uniqid() . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs('public/dokumen-pisa', $fileName);
+            $data['dataPendukung'] = 'dokumen-pisa/' . $fileName;
+        }
+    
+        // Update dokumen
+        $dokumen->update($data);
+    
+        return redirect()->route('DokumenLayakAnak')->with('success', 'Dokumen berhasil diperbarui!');
+    }
     
     // =========== END CRUD dokumen pisa
 
 
     // =========== CRUD kegiatan pisa
     public function HalamanKegiatan() {
-        return view('admin.KegiatanPisaa'); 
+        $dokumens = KegiatanPisa::all();
+        return view('admin.KegiatanPisaa',compact('dokumens'));
     }
 
     public function storeKegiatanPisa(Request $request)
@@ -59,9 +126,19 @@ class PusatInformasiSahabatController extends Controller
         $request->validate([
             'nama' => 'required|string|max:255',
             'caption' => 'required|string|max:255',
-            'gambar' => 'required|mimes:png,jpg,jpeg|max:2048',
+            'gambar' => 'required|mimes:png,jpg,jpeg|max:6048',
             'deskripsi' => 'required|string|max:500',
             'is_active' => 'required|boolean',
+        ],[
+            'nama.required' => 'nama wajib diisi.',
+            'nama.max' => 'nama maksimal 255 karakter.',
+            
+            'deskripsi.required' => 'deskripsi wajib diisi.',
+            'deskripsi.max' => 'deskripsi maksimal 500 karakter.',
+            
+            'gambar.mimes' => 'gambar harus berformat PNG JPG JPEG.',
+            'gambar.max' => 'Ukuran gambar maksimal 6 MB.',
+            
         ]);
 
         if ($request->hasFile('gambar')) {
@@ -81,7 +158,7 @@ class PusatInformasiSahabatController extends Controller
             'dibuatOleh' => $request->dibuatOleh
         ]);
 
-        return redirect()->route('KegiatanLayakanak')->with('success', 'Kategori berhasil ditambahkan!');
+        return redirect()->route('KegiatanLayakanak')->with('success', 'Kegiatan Pisa berhasil ditambahkan!');
     }
     // =========== CRUD kegiatan pisa
 }

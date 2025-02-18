@@ -14,6 +14,13 @@
         </ul>
     </div>
     @endif
+    @if(session('success'))
+    <div class="alert alert-success">
+        <ul>
+                <li>{{ session('success') }}</li>
+        </ul>
+    </div>
+    @endif
     <div class="card shadow-lg border-0 position-relative overflow-hidden mb-5">
         <div class="card-body mt-4">
             <div class="text-center mb-4">
@@ -61,17 +68,17 @@
                             <td>
                                 <!-- Button Edit Modal -->
                                 <button class="btn btn-sm btn-primary btn-edit"
-                                data-id="{{ $subKegiatan->id }}"
-                                data-nama="{{ $subKegiatan->nama }}"
-                                data-file="{{ asset('storage/' . $subKegiatan->dataPendukung) }}"
-                                data-status="{{ $subKegiatan->is_active }}"
-                                data-klaster="{{ $subKegiatan->klusterid }}"
-                                data-keterangan="{{ $subKegiatan->keterangan }}"
-                                data-bs-toggle="modal"
-                                data-bs-target="#SubKegiatanEditModal">
-                                <i class="bi bi-pencil-square"></i>
-                            </button>
-                            
+                                    data-id="{{ $subKegiatan->id }}"
+                                    data-nama="{{ $subKegiatan->nama }}"
+                                    data-file="{{ asset('storage/' . $subKegiatan->dataPendukung) }}"
+                                    data-status="{{ $subKegiatan->is_active }}"
+                                    data-klaster="{{ $subKegiatan->klusterid }}"
+                                    data-keterangan="{{ $subKegiatan->keterangan }}"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#SubKegiatanEditModal">
+                                    <i class="bi bi-pencil-square"></i>
+                                </button>
+                                
                         
                                 <!-- Tombol Hapus -->
                                 <button class="btn btn-sm btn-danger delete-slider" data-id="{{ $subKegiatan->id }}">

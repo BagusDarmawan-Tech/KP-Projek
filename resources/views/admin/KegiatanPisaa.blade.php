@@ -6,6 +6,22 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <div class="container mt-5">
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+    @if(session('success'))
+    <div class="alert alert-success">
+        <ul>
+                <li>{{ session('success') }}</li>
+        </ul>
+    </div>
+    @endif
     <div class="card shadow-lg border-0 position-relative overflow-hidden mb-4 p-3">
         <div class="card-body">
             <h4 class="fw-bold mb-3 text-center">Kegiatan Pisa</h4>
@@ -111,18 +127,25 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($dokumens as $index => $dokumen)
                         <tr>
-                            <td>1</td>
-                            <td>SK FAS</td>
-                            <td>SK FAS Kecamatan Simokerto</td>
-                            <td><a href="#" class="text-primary">Lihat</a></td>
-                            <td>Ema</td>
-                            <td><span class="badge bg-success">Aktif</span></td>
+                            <td>{{ $loop->iteration }}</td>
+                            <td><img src="{{ asset($dokumen->gambar) }}" alt="Gambar" width="50"></td>
+                            <td>{{ $dokumen->nama }}</td>
+                            <td>{{ $dokumen->caption }}</td>
+                            <td>{{ $dokumen->deskripsi }}</td>
                             <td>
+                                @if($dokumen->is_active == 0)
+                                    <span class="badge bg-warning">Non Aktif</span>
+                                @else
+                                    <span class="badge bg-success">Aktif</span>
+                                @endif
+                            </td>                            <td>
                                 <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modaEditKegiatan"><i class="bi bi-pencil-square"></i></button>
                                 <button class="btn btn-sm btn-danger delete-slider"><i class="bi bi-trash"></i> </button>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -140,36 +163,37 @@
             <div class="modal-body">
              <form method="POST" action="{{ route('createKegiatanPisa') }}" enctype="multipart/form-data">
                     @csrf 
-             <div class="mb-3">
-            <label for="namaKegiatan" class="form-label fw-semibold">Nama</label>
-            <input type="text" class="form-control" name="nama" id="namaKegiatan" placeholder="Masukkan nama kegiatan">
-            </div>
-              <div class="mb-3">
-            <label for="tanggalKegiatan" class="form-label fw-semibold">Tanggal Kegiatan</label>
-            <input type="date" class="form-control" id="tanggalKegiatan">
-            </div>
-             <div class="mb-3">
-            <label for="gambarKegiatan" class="form-label fw-semibold">Gambar</label>
-            <input type="file" class="form-control" id="gambarKegiatan" accept="image/*" onchange="previewImage(event)">
-            <img id="preview" src="#" alt="Preview" class="img-fluid mt-2 d-none" style="max-height: 200px;">
-             </div>
-             <div class="mb-3">
-            <label for="keteranganKegiatan" class="form-label fw-semibold">Keterangan</label>
-                <textarea class="form-control" id="keteranganKegiatan" rows="3" placeholder="Tambahkan keterangan kegiatan"></textarea>
-            </div>
-            <div class="mb-3">
-                            <label for="editStatus" class="form-label">Status</label>
-                            <select class="form-select" id="editStatus">
-                                <option selected>Aktif</option>
-                                <option value="Non-Aktif">Non-Aktif</option>
-                            </select>
-                        </div>
-            </form>
+                <div class="mb-3">
+                    <label for="namaKegiatan" class="form-label fw-semibold">Nama</label>
+                    <input type="text" class="form-control" name="nama" id="namaKegiatan" placeholder="Masukkan nama kegiatan">
+                </div>
+                <div class="mb-3">
+                    <label for="gambarKegiatan" class="form-label fw-semibold">Gambar</label>
+                    <input type="file" class="form-control" name="gambar" id="gambarKegiatan">
+                </div>
+                <div class="mb-3">
+                    <label for="keteranganKegiatan" class="form-label fw-semibold">Caption</label>
+                    <textarea class="form-control" name="caption" id="caption" rows="3" placeholder="Tambahkan keterangan kegiatan"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="keteranganKegiatan" class="form-label fw-semibold">Deskripsi</label>
+                    <textarea class="form-control" name="deskripsi" id="keterangan" rows="3" placeholder="Tambahkan keterangan kegiatan"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Status</label>
+                    <select class="form-select" name="is_active" required>
+                        <option value="1">Aktif</option>
+                        <option value="0">Non-Aktif</option>
+                    </select>
+                </div>
+                            
         </div>
+        <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
         </div>
+    </form>
         </div>
     </div>
 </div>
