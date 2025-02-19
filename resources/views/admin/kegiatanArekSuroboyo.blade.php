@@ -2,7 +2,7 @@
 @section('main')
 <link href="{{ asset('assets/css/tabel.css') }}" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="{{ asset('assets/js/hapus.js') }}"></script>
+<!-- <script src="{{ asset('assets/js/hapus.js') }}"></script> -->
 
 <div class="container mt-5">
     @if ($errors->any())
@@ -71,9 +71,7 @@
                                 data-gambar="{{ asset($kegiatan->gambar) }}" 
                                 data-status="{{ $kegiatan->is_active }}"
                                 ><i class="bi bi-pencil-square"></i></button>
-                                <button class="btn btn-sm btn-danger delete-slider">
-                                    <i class="bi bi-trash"></i>
-                                </button>
+                                <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i></button>
                             </td>
                         </tr>
                         @endforeach
@@ -90,7 +88,7 @@
         <div class="modal-content">
             <div class="modal-header d-flex flex-column align-items-center">
                 <h5 class="modal-title fw-bold text-center mb-0" id="halamanModalLabel">Kegiatan Arek Suroboyo Baru</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
             </div>
             <div class="modal-body">
                 <form method="POST" action="{{ route('createKegiatanArekSuroboyo') }}" enctype="multipart/form-data">
@@ -122,23 +120,23 @@
                             <option value="0">Non-Aktif</option>
                         </select>
                     </div>
-                    <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
                 </div>
-                <div class="modal-footer border-top pt-3 d-flex justify-content-end"> <!-- Tambahan border-top dan padding -->
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
-                </div>
-            </form>
+        <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-</div>
-</div>
 
 <div class="modal fade" id="halamanEditModal" tabindex="-1" aria-labelledby="halamanModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header d-flex flex-column align-items-center">
                 <h5 class="modal-title fw-bold text-center mb-0" id="halamanModalLabel">Kegiatan Arek Suroboyo Baru</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
             </div>
             <div class="modal-body">
                 <form method="POST" id="editFormSuroboyo" action="" enctype="multipart/form-data">
@@ -175,17 +173,36 @@
                             <option value="0">Non-Aktif</option>
                         </select>
                     </div>
-                    <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
+                </div>
+                <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                     </div>
                 </form>
-                
+            </div>
+        </div>
+    </div>
+
+   <!-- MODAL DELETE  -->
+   <div class="modal fade" id="deleteMenuModal" tabindex="-1" aria-labelledby="deleteMenuModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteMenuModalLabel">Hapus Menu</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Apakah Anda yakin ingin menghapus Data di Menu ini?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger">Delete</button>
+            </div>
         </div>
     </div>
 </div>
-</div>
+
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {

@@ -76,8 +76,7 @@
                                     data-bs-target="#EditModal">
                                     <i class="bi bi-pencil-square"></i>
                                 </button>
-                        
-                                <button class="btn btn-sm btn-danger delete-klaster"><i class="bi bi-trash"></i></button>
+                                <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i></button>
                             </td>
                         </tr>
                         @endforeach
@@ -139,7 +138,7 @@
                     <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
             
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
 
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
@@ -152,11 +151,10 @@
 
 <!-- Modal edit -->
 <div class="modal fade" id="EditModal" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="EditModalLabel">Edit Klaster</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header d-flex justify-content-center w-100 ">
+                <h5 class="modal-title fw-bold text-center" id="EdiEditModal">Edit Klaster</h5>
             </div>
             <div class="modal-body">
                 <form id="editKlasterForm" method="POST" enctype="multipart/form-data">
@@ -192,7 +190,7 @@
                             <option value="0">Non-Aktif</option>
                         </select>
                     </div>
-
+                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                         <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
@@ -217,15 +215,15 @@
                 Apakah Anda yakin ingin menghapus menu ini?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-danger">Delete</button>
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-danger">Hapus</button>
             </div>
         </div>
     </div>
 </div>
 
 
-{{-- <update --}}
+<!-- {{-- <update --}} -->
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll(".edit-klaster").forEach(button => {
@@ -250,40 +248,6 @@
         });
     });
 </script>
-
-
-<!-- Bagian delete -->
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        document.querySelectorAll(".delete-slider").forEach(button => {
-            button.addEventListener("click", function () {
-                Swal.fire({
-                    title: "<b>Apakah Anda Yakin!</b>",
-                    text: "Akan Menghapus Data ini!",
-                    icon: "question",
-                    showCancelButton: true,
-                    confirmButtonColor: "#d33",
-                    cancelButtonColor: "#6c757d",
-                    confirmButtonText: "CONFIRM",
-                    cancelButtonText: "CANCEL",
-                    customClass: {
-                        title: 'fw-bold',
-                    }
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire({
-                            title: "Dihapus!",
-                            text: "Data telah berhasil dihapus.",
-                            icon: "success"
-                        });
-                    }
-                });
-            });
-        });
-    });
-
-    </script>
-
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {

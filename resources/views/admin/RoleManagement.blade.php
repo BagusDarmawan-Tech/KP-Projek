@@ -49,8 +49,8 @@
                             <td>Artikel</td>
                             <td>
                             <button class="btn btn-sm btn-primary edit-btn" data-bs-toggle="modal" data-bs-target="#EditModal"data-status="Aktif"><i class="bi bi-pencil-square"></i></button>
-                            <button class="btn btn-sm btn-danger delete-slider"><i class="bi bi-trash"></i> </button>                            
-                        </td>
+                            <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i></button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -75,8 +75,8 @@
                     </div>
                     </div>
                     <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Tutup</button>
+                <button type="button" class="btn btn-primary">Simpan</button>
             </div>
                 </form>
             </div>
@@ -101,8 +101,8 @@
                     </div>
                     </div>
                     <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Tutup</button>
+                <button type="button" class="btn btn-primary">Simpan</button>
             </div>
                 </form>
             </div>
@@ -111,6 +111,28 @@
     </div>
 </div>
 
+
+<!-- Modal Delete -->
+<div class="modal fade" id="deleteMenuModal" tabindex="-1" aria-labelledby="deleteMenuModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteMenuModalLabel">Hapus Menu</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Apakah Anda yakin ingin menghapus Data di Menu ini?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         var kategoriModal = new bootstrap.Modal(document.getElementById("kategoriModal"));
@@ -118,36 +140,6 @@
 </script>
 
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        document.querySelectorAll(".delete-slider").forEach(button => {
-            button.addEventListener("click", function () {
-                Swal.fire({
-                    title: "<b>Apakah Anda Yakin!</b>",
-                    text: "Akan Menghapus Data ini!",
-                    icon: "question",
-                    showCancelButton: true,
-                    confirmButtonColor: "#d33",
-                    cancelButtonColor: "#6c757d",
-                    confirmButtonText: "CONFIRM",
-                    cancelButtonText: "CANCEL",
-                    customClass: {
-                        title: 'fw-bold',
-                    }
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire({
-                            title: "Dihapus!",
-                            text: "Data telah berhasil dihapus.",
-                            icon: "success"
-                        });
-                    }
-                });
-            });
-        });
-    });
-
-</script>
 
 
 @endsection

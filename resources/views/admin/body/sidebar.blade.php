@@ -31,16 +31,16 @@
             <i class="bi bi-circle"></i><span>Configurasi App</span>
           </a>
         </li>
-        <li>
+        <!-- <li>
           <a class= "{{ request()->routeIs('components-breadcrumbs.html') ? 'active' : '' }}" href="components-breadcrumbs.html">
             <i class="bi bi-circle"></i><span>Module Management</span>
           </a>
-        </li>
-        <li>
+        </li> -->
+        <!-- <li>
           <a class= "{{ request()->routeIs('components-buttons.html') ? 'active' : '' }}" href="components-buttons.html">
             <i class="bi bi-circle"></i><span>Menu Management</span>
           </a>
-        </li>
+        </li> -->
       </ul>
     </li><!-- End Components Nav -->
     @endif
@@ -186,18 +186,18 @@
     </li><!-- End Icons Nav -->
 
     <li class="nav-item">
-      <a class="nav-link {{ request()->routeIs('kegiatan-arek') ? '' : 'collapsed' }}" href="{{route('kegiatan-arek')}}">
-        <i class="bi bi-journal-text"></i>
-        <span>Kegiatan Arek Suroboyo</span>
-      </a>
-    </li>
+  <a class="nav-link {{ request()->routeIs('kegiatan-arek') ? '' : 'collapsed' }}" href="{{ route('kegiatan-arek') }}">
+    <i class="bi bi-journal-text"></i>
+    <span>Kegiatan Arek Suroboyo</span>
+  </a>
+</li>
 
-    <li class="nav-item">
-      <a class="nav-link{{ request()->routeIs('KegiatanForumSurabaya') ? '' : 'collapsed' }}" href="{{route('KegiatanForumSurabaya')}}">
-        <i class="bi bi-journal-text"></i>
-        <span>Kegiatan Forum Anak Surabaya</span>
-      </a>
-    </li>
+<li class="nav-item">
+  <a class="nav-link {{ request()->routeIs('KegiatanForumSurabaya') ? '' : 'collapsed' }}" href="{{ route('KegiatanForumSurabaya') }}">
+    <i class="bi bi-journal-text"></i>
+    <span>Kegiatan Forum Anak Surabaya</span>
+  </a>
+</li>
 
     <li class="nav-item {{ request()->is('Usulan-Kegiatan/*') ? 'active' : '' }}">
       <a class="nav-link {{ request()->is('Usulan-Kegiatan/*') ? '' : 'collapsed' }}" data-bs-target="#usulan-kegiatan" data-bs-toggle="collapse" href="#">
@@ -218,11 +218,12 @@
     </li><!-- End Icons Nav -->
 
     <li class="nav-item">
-      <a class="{{ request()->routeIs('dokumen-skcfci') ? 'active' : '' }}" href="{{ route('dokumen-skcfci') }}">
-        <i class="bi bi-journal-text"></i>
-        <span>Dokumen SK FAS, CFCI Dan KLA</span>
-      </a>
-    </li><!-- End Icons Nav -->
+  <a class="nav-link {{ request()->routeIs('dokumen-skcfci') ? '' : 'collapsed' }}" href="{{ route('dokumen-skcfci') }}">
+    <i class="bi bi-journal-text"></i>
+    <span>Dokumen SK FAS, CFCI Dan KLA</span>
+  </a>
+</li><!-- End Icons Nav -->
+
 
     <li class="nav-heading">Pages</li>
 
@@ -285,22 +286,24 @@ document.addEventListener("DOMContentLoaded", function () {
     // Ambil semua menu yang memiliki submenu
     let menuWithSubmenu = sidebarNav.querySelectorAll("a[data-bs-toggle='collapse']");
 
-    // Ambil semua submenu yang memiliki halaman aktif dan buka submenu tersebut
     menuWithSubmenu.forEach(submenu => {
         let target = document.querySelector(submenu.getAttribute("data-bs-target"));
-        if (target.querySelector(".active")) {
-            target.classList.add("show");
+        let collapseInstance = new bootstrap.Collapse(target, { toggle: false });
+
+        // Jika submenu memiliki halaman aktif, maka buka secara default
+        let isActive = target.querySelector(".active") !== null;
+        if (isActive) {
+            collapseInstance.show();
         }
 
         // Tambahkan event listener untuk toggle submenu saat diklik
         submenu.addEventListener("click", function (event) {
             event.preventDefault(); // Mencegah reload jika tombol adalah link
 
-            // Toggle submenu yang diklik (buka/tutup)
             if (target.classList.contains("show")) {
-                new bootstrap.Collapse(target).hide();
+                collapseInstance.hide();
             } else {
-                new bootstrap.Collapse(target).show();
+                collapseInstance.show();
             }
         });
     });

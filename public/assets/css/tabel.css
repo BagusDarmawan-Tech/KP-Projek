@@ -31,4 +31,14 @@
         margin-right: 5px;
     }
 
+    .card {
+        max-width: 100%;
+        overflow-x: auto; /* Agar bisa di-scroll secara horizontal */
+        word-wrap: break-word;
+    }
+    #userEntri {
+        max-width: 100%;
+        width: 100%;
+    }
+    
     

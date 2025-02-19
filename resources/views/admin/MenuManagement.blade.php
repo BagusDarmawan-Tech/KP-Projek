@@ -56,8 +56,7 @@
                         <td>&#10004;</td>
                         <td>
                             <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editMenuModal"><i class="bi bi-pencil-square"></i></button>
-                            <button class="btn btn-sm btn-danger delete-slider"><i class="bi bi-trash"></i> </button>
-                        </td>
+                            <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i></button>                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -200,35 +199,5 @@
         }
     }
     </script>
-    <!-- // !-- Bagian delete --> 
-   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        document.querySelectorAll(".delete-slider").forEach(button => {
-            button.addEventListener("click", function () {
-                Swal.fire({
-                    title: "<b>Apakah Anda Yakin!</b>",
-                    text: "Akan Menghapus Data ini!",
-                    icon: "question",
-                    showCancelButton: true,
-                    confirmButtonColor: "#d33",
-                    cancelButtonColor: "#6c757d",
-                    confirmButtonText: "CONFIRM",
-                    cancelButtonText: "CANCEL",
-                    customClass: {
-                        title: 'fw-bold',
-                    }
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire({
-                            title: "Dihapus!",
-                            text: "Data telah berhasil dihapus.",
-                            icon: "success"
-                        });
-                    }
-                });
-            });
-        });
-    });
 
-</script>
 @endsection

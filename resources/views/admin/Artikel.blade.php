@@ -76,9 +76,7 @@
                                 </button>
                                 
                         
-                                <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteMenuModal">
-                                    <i class="bi bi-trash"></i>
-                                </button>
+                                <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i></button>
                             </td>
                         </tr>
                         @endforeach
@@ -169,7 +167,7 @@
                     </div>
 
              <div class="modal-footer border-top pt-3 d-flex justify-content-end"> <!-- Tambahan border-top dan padding -->
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                 <button type="submit" class="btn btn-primary">Simpan</button>
             </div>
                 </form>
@@ -178,15 +176,15 @@
 </div>
 </div>
 
-<!-- Modal Edit -->
 <!-- Modal Edit Artikel -->
 <div class="modal fade" id="halamanModal" tabindex="-1" aria-labelledby="halamanModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="halamanModalLabel">Edit Artikel</h5>
+            <div class="modal-header d-flex justify-content-center w-100 ">
+                <h5 class="modal-title fw-bold text-center" id="menuModalLabel">Edit Menu Artikel</h5>
             </div>
             <div class="modal-body">
+
                 <form id="editArtikelForm" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
@@ -250,18 +248,18 @@
                             <option value="1">Aktif</option>
                             <option value="0">Non Aktif</option>
                         </select>
-                    </div>
-                    <div class="modal-footer border-top pt-3 d-flex justify-content-end"> <!-- Tambahan border-top dan padding -->
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                        </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
-
 
 
 <!-- Modal Delete Menu -->
@@ -273,11 +271,11 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Apakah Anda yakin ingin menghapus menu ini?
+                Apakah Anda yakin ingin menghapus Data di Menu ini?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-danger">Delete</button>
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Tutup</button>
+                <button type="button" class="btn btn-danger">Hapus</button>
             </div>
         </div>
     </div>

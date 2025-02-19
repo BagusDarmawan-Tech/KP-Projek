@@ -71,7 +71,7 @@
                                     data-tindakLanjut="{{ $usulan->tindakLanjut }}">
                                     <i class="bi bi-pencil-square"></i>
                                 </button>                                  
-                                <button class="btn btn-sm btn-danger delete-slider"><i class="bi bi-trash"></i> </button>
+                                <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i></button>
 
                             </td>
                         </tr>
@@ -112,7 +112,7 @@
                         <textarea class="form-control" id="keterangan" rows="2" name="keterangan" value="{{ old('keterangan') }}"></textarea>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
@@ -159,10 +159,10 @@
             <option value="0">Non-Aktif</option>
         </select>
     </div>
-
+</div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Tutup</button>
+        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
     </div>
 </form>
 
@@ -171,37 +171,26 @@
     </div>
 </div>
 
-<!-- Bagian delete -->
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        document.querySelectorAll(".delete-slider").forEach(button => {
-            button.addEventListener("click", function () {
-                Swal.fire({
-                    title: "<b>Apakah Anda Yakin!</b>",
-                    text: "Akan Menghapus Data ini!",
-                    icon: "question",
-                    showCancelButton: true,
-                    confirmButtonColor: "#d33",
-                    cancelButtonColor: "#6c757d",
-                    confirmButtonText: "CONFIRM",
-                    cancelButtonText: "CANCEL",
-                    customClass: {
-                        title: 'fw-bold',
-                    }
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire({
-                            title: "Dihapus!",
-                            text: "Data telah berhasil dihapus.",
-                            icon: "success"
-                        });
-                    }
-                });
-            });
-        });
-    });
 
-</script>
+<!-- Modal delete -->
+<div class="modal fade" id="deleteMenuModal" tabindex="-1" aria-labelledby="deleteMenuModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteMenuModalLabel">Hapus Menu</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Apakah Anda yakin ingin menghapus Data di Menu ini?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-danger">Hapus</button>
+            </div>
+        </div>
+    </div>
+</div>
+ 
 
 <!-- Script untuk Mengisi Data ke Modal -->
 <script>

@@ -67,9 +67,7 @@
                                 </button>
                         
                                 <!-- Tombol Hapus -->
-                                <button class="btn btn-sm btn-danger delete-slider" data-id="{{ $galeri->id }}">
-                                    <i class="bi bi-trash"></i>
-                                </button>
+                                <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i></button>
                             </td>
                         </tr>
                         @endforeach
@@ -96,9 +94,8 @@
             @endif
             <form method="POST" action="{{ route('createGaleri') }}" enctype="multipart/form-data">
                 @csrf
-                <div class="modal-header">
-                    <h5 class="modal-title" id="sliderModalLabel">Tambah Galeri Baru</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-header d-flex justify-content-center w-100 ">
+                    <h5 class="modal-title fw-bold text-center" id="sliderModalLabel">Tambah Galeri Baru</h5>
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
@@ -180,16 +177,36 @@
                             <option value="0">Non-Aktif</option>
                         </select>
                     </div>
-
+                    </div>
                     <div class="modal-footer border-top pt-3 d-flex justify-content-end">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Modal Delete -->
+<div class="modal fade" id="deleteMenuModal" tabindex="-1" aria-labelledby="deleteMenuModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteMenuModalLabel">Hapus Menu</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Apakah Anda yakin ingin menghapus Data di Menu ini?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 <script>

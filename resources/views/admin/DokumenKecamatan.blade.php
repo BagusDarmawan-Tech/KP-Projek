@@ -4,7 +4,6 @@
 
 <link href="{{ asset('assets/css/tabel.css') }}" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="{{ asset('assets/js/hapus.js') }}"></script>
 
 <div class="container mt-5">
     @if ($errors->any())
@@ -27,7 +26,7 @@
         <div class="card-body">
             <h4 class="fw-bold mb-3 text-center">Dokumen Kecamatan</h4>
             <div class="row">
-                <div class="col-md-6 ">
+                <div class="col-md-6 col-12">
                     <label for="userEntri" class="form-label">User Entri</label>
                     <select id="userEntri" class="form-select">
                         <option selected disabled>--- Pilih User Entri ---</option>
@@ -75,14 +74,16 @@
                 </div>
             </div>
             <div class="row mt-3">
-                <div class="col-md-6">
-                    <button class="btn btn-primary" id="btnCari" style="width: 150px;">
+                <div class="col-md-6 col-12">
+                    <button class="btn btn-primary w-100" id="btnCari">
                         <i class="bi bi-search"></i> Cari
                     </button>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
 
     <div class="card shadow-lg border-0 position-relative overflow-hidden p-3">
         <div class="card-body">
@@ -126,9 +127,7 @@
                             @endif
                         </td>                        <td>
                             <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editDokumenModal"><i class="bi bi-pencil-square"></i></button>
-                            <button class="btn btn-sm btn-danger delete-slider">
-                                <i class="bi bi-trash"></i>
-                            </button>
+                            <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i></button>
                         </td>
                     </tr>
                     @endforeach
@@ -146,7 +145,7 @@
             <h5 class="modal-title fw-bold text-center mb-0" id="dokumenKelurahanModalLabel">
                 Tambah Dokumen Kecamatan Baru
             </h5>
-            <button type="button" class="btn-close position-absolute end-0 top-0" data-bs-dismiss="modal" aria-label="Close"></button>
+            <!-- <button type="button" class="btn-close position-absolute end-0 top-0" data-bs-dismiss="modal" aria-label="Close"></button> -->
         </div>
 
             <div class="modal-body">
@@ -200,8 +199,8 @@
             </div>
             <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
             </div>
         </form>
         </div>
@@ -214,7 +213,7 @@
         <div class="modal-content">
             <div class="modal-header d-flex flex-column align-items-center">
                 <h5 class="modal-title fw-bold text-center" id="editDokumenModalLabel">Edit Dokumen Kecamatan</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
             </div>
             <div class="modal-body">
                 <form>
@@ -246,11 +245,31 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Modal delete -->
+<div class="modal fade" id="deleteMenuModal" tabindex="-1" aria-labelledby="deleteMenuModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteMenuModalLabel">Hapus Menu</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Apakah Anda yakin ingin menghapus Data di Menu ini?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-danger">Hapus</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 @endsection
