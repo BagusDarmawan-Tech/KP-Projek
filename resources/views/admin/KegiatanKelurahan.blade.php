@@ -130,45 +130,48 @@
 
 <!-- Modal Tambah Dokumen Kelurahan -->
 <div class="modal fade" id="modalTambahKegiatan" tabindex="-1" aria-labelledby="modalTambahKegiatanLabel" aria-hidden="true">
-<div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header d-flex justify-content-center w-100 ">
-                <h5 class="modal-title fw-bold text-center" id="menuModalLabel">Tambah Menu Dokumen Kelurahan</h5>
+    <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header d-flex justify-content-center w-100 ">
+                    <h5 class="modal-title fw-bold text-center" id="menuModalLabel">Tambah Menu Dokumen Kelurahan</h5>
+                </div>
+                <div class="modal-body">
+        <form method="POST" action="{{ route('createKegiatanKecamatan') }}" enctype="multipart/form-data">
+            @csrf 
+            <div class="mb-3">
+                <label for="namaKegiatan" class="form-label fw-semibold">Nama</label>
+                <input type="text" class="form-control" id="namaKegiatan" placeholder="Masukkan nama kegiatan">
             </div>
-            <div class="modal-body">
-        <form>
-          <div class="mb-3">
-            <label for="namaKegiatan" class="form-label fw-semibold">Nama</label>
-            <input type="text" class="form-control" id="namaKegiatan" placeholder="Masukkan nama kegiatan">
-          </div>
-          <div class="mb-3">
-            <label for="tanggalKegiatan" class="form-label fw-semibold">Tanggal Kegiatan</label>
-            <input type="date" class="form-control" id="tanggalKegiatan">
-          </div>
-          <div class="mb-3">
-            <label for="gambarKegiatan" class="form-label fw-semibold">Gambar</label>
-            <input type="file" class="form-control" id="gambarKegiatan" accept="image/*" onchange="previewImage(event)">
-            <img id="preview" src="#" alt="Preview" class="img-fluid mt-2 d-none" style="max-height: 200px;">
-          </div>
-          <div class="mb-3">
-            <label for="keteranganKegiatan" class="form-label fw-semibold">Keterangan</label>
-            <textarea class="form-control" id="keteranganKegiatan" rows="3" placeholder="Tambahkan keterangan kegiatan"></textarea>
-          </div>
-          <div class="mb-3">
-                        <label for="editStatus" class="form-label">Status</label>
-                        <select class="form-select" id="editStatus">
-                            <option selected>Aktif</option>
-                            <option value="Non-Aktif">Non-Aktif</option>
-                        </select>
-                    </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-        <button type="button" class="btn btn-primary">Simpan</button>
-      </div>
+            <div class="mb-3">
+                <label for="tanggalKegiatan" class="form-label fw-semibold">Tanggal Kegiatan</label>
+                <input type="date" class="form-control" id="tanggalKegiatan">
+            </div>
+            <div class="mb-3">
+                <label for="gambarKegiatan" class="form-label fw-semibold">Gambar</label>
+                <input type="file" class="form-control" id="gambarKegiatan" accept="image/*" onchange="previewImage(event)">
+                <img id="preview" src="#" alt="Preview" class="img-fluid mt-2 d-none" style="max-height: 200px;">
+            </div>
+            <div class="mb-3">
+                <label for="keteranganKegiatan" class="form-label fw-semibold">Keterangan</label>
+                <textarea class="form-control" id="keteranganKegiatan" rows="3" placeholder="Tambahkan keterangan kegiatan"></textarea>
+            </div>
+            <div class="mb-3">
+                            <label for="editStatus" class="form-label">Status</label>
+                            <select class="form-select" id="editStatus">
+                                <option selected>Aktif</option>
+                                <option value="Non-Aktif">Non-Aktif</option>
+                            </select>
+                        </div>
+            
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+    </form>
+        </div>
+>>>>>>> a4cd163 (menambahkan fitur create read)
     </div>
-  </div>
 </div>
 
 <!-- Modal Edit Dokumen Kelurahan -->
