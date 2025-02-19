@@ -74,9 +74,14 @@
                                     data-subkegiatanid="{{ $artikel->subkegiatanid }}">
                                     <i class="bi bi-pencil-square"></i>
                                 </button>
-                                
+                                <!-- Tombol Hapus -->
+                                <button class="btn btn-sm btn-danger delete-btn" 
+                                    data-id  ="{{ $artikel->id }}"
+                                    data-nama ="{{ $artikel->judul }}"
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i>
+                                </button>   
                         
-                                <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i></button>
                             </td>
                         </tr>
                         @endforeach
@@ -270,18 +275,23 @@
                 <h5 class="modal-title" id="deleteMenuModalLabel">Hapus Menu</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                Apakah Anda yakin ingin menghapus Data di Menu ini?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Tutup</button>
-                <button type="button" class="btn btn-danger">Hapus</button>
-            </div>
+            <form id="deleteForm" method="POST">
+                @csrf
+                @method('DELETE')
+                <div class="modal-body">
+                    <input type="hidden" id="deleteId" name="id">
+                    <p>Apakah Anda yakin ingin menghapus Slider<br> <strong id="deleteNama"></strong>?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-danger">Hapus</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 
-
+{{-- modal edit --}}
 <script>
    document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".edit-btn").forEach(button => {
@@ -314,5 +324,23 @@
         });
     });
 });
+</script>
+
+
+<!-- Script Delete Data ke Modal -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll(".delete-btn").forEach(button => {
+            button.addEventListener("click", function() {
+                let id = this.getAttribute("data-id");
+                let nama = this.getAttribute("data-nama");
+                document.getElementById("deleteId").value = id;
+                document.getElementById("deleteNama").textContent = nama; // Tampilkan nama di modal
+
+                // Set action form agar mengarah ke endpoint delete yang benar
+                document.getElementById("deleteForm").action = `/artikel/hapus/${id}`;
+            });
+        });
+    });
 </script>
 @endsection

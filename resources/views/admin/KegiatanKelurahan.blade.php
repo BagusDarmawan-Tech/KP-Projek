@@ -5,6 +5,22 @@
 <link href="{{ asset('assets/css/tabel.css') }}" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <div class="container mt-5">
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+    @if(session('success'))
+    <div class="alert alert-success">
+        <ul>
+                <li>{{ session('success') }}</li>
+        </ul>
+    </div>
+    @endif
     <div class="card shadow-lg border-0 position-relative overflow-hidden mb-4 p-3">
         <div class="card-body">
             <h4 class="fw-bold mb-3 text-center">Kegiatan Kelurahan</h4>
@@ -77,32 +93,13 @@
                 </button>
             </div>
             <div class="table-responsive">
-                <table class="table table-hover table-bordered align-middle text-center">
+                <table class="table table-hover table-bordered align-middle text-center" id="myTable">
                     <thead class="table-primary">
-
-                       <!-- Kontrol Tampilkan & Cari -->
-            <div class="row mb-3 align-items-center">
-                <div class="col-md-6">
-                    <label for="showEntries" class="form-label me-2">Show</label>
-                    <select id="showEntries" class="form-select form-select-sm d-inline-block" style="width: 80px;">
-                        <option value="10">10</option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                    </select>
-                    entries
-                </div>
-                <div class="col-md-6 text-end">
-                    <input type="text" id="searchInput" class="form-control form-control-sm d-inline-block" placeholder="Search..." style="width: 200px;">
-                </div>
-            </div>
-            
-            <!-- Tombol Tambah Artikel di atas -->           
-
                         <tr>
                             <th>No</th>
                             <th>Gambar</th>
                             <th>Nama</th>
+                            <th>Kelurahan</th>
                             <th>Keterangan</th>
                             <th>Dibuat Oleh</th>
                             <th>Status</th>
@@ -110,17 +107,37 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($kegiatans as $index => $kegiatan)
                         <tr>
-                            <td>1</td>
-                            <td>SK FAS</td>
-                            <td>SK FAS Kecamatan Simokerto</td>
-                            <td><a href="#" class="text-primary">Lihat</a></td>
-                            <td>Ema</td>
-                            <td><span class="badge bg-success">Aktif</span></td>
+                            <td>{{ $loop->iteration }}</td>
+                            <td><img src="{{ asset($kegiatan->gambar) }}" alt="Slider Image" width="80"></td>
+                            <td>{{ $kegiatan->nama }}</td>
+                            <td>{{ $kegiatan->kelurahan ? $kegiatan->kelurahan->nama : 'Tidak ada Nama' }}</td>
+                            <td>{{ $kegiatan->keterangan }}</td>
+                            <td>{{ $kegiatan->dibuatOleh }}</td>
                             <td>
-                                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modaEditKegiatan"><i class="bi bi-pencil-square"></i></button>
+                                @if($kegiatan->is_active == 0)
+                                    <span class="badge bg-warning">Non Aktif</span>
+                                @else
+                                    <span class="badge bg-success">Aktif</span>
+                                @endif
+                              </td>
+                            <td>
+                                <button class="btn btn-sm btn-primary btn-edit-kegiatan"
+                                    data-id="{{ $kegiatan->id }}"
+                                    data-nama="{{ $kegiatan->nama }}"
+                                    data-gambar="{{ asset($kegiatan->gambar) }}"
+                                    data-status="{{ $kegiatan->is_active }}"
+                                    data-kelurahan="{{ $kegiatan->kelurahanid }}"
+                                    data-keterangan="{{ $kegiatan->keterangan }}"
+                                    data-status="{{ $kegiatan->is_active }}"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#modaEditKegiatan">
+                                    <i class="bi bi-pencil-square"></i>
+                                </button>                            
                                 <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i></button>                              </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -136,85 +153,107 @@
                     <h5 class="modal-title fw-bold text-center" id="menuModalLabel">Tambah Menu Dokumen Kelurahan</h5>
                 </div>
                 <div class="modal-body">
-        <form method="POST" action="{{ route('createKegiatanKecamatan') }}" enctype="multipart/form-data">
-            @csrf 
-            <div class="mb-3">
-                <label for="namaKegiatan" class="form-label fw-semibold">Nama</label>
-                <input type="text" class="form-control" id="namaKegiatan" placeholder="Masukkan nama kegiatan">
-            </div>
-            <div class="mb-3">
-                <label for="tanggalKegiatan" class="form-label fw-semibold">Tanggal Kegiatan</label>
-                <input type="date" class="form-control" id="tanggalKegiatan">
-            </div>
-            <div class="mb-3">
-                <label for="gambarKegiatan" class="form-label fw-semibold">Gambar</label>
-                <input type="file" class="form-control" id="gambarKegiatan" accept="image/*" onchange="previewImage(event)">
-                <img id="preview" src="#" alt="Preview" class="img-fluid mt-2 d-none" style="max-height: 200px;">
-            </div>
-            <div class="mb-3">
-                <label for="keteranganKegiatan" class="form-label fw-semibold">Keterangan</label>
-                <textarea class="form-control" id="keteranganKegiatan" rows="3" placeholder="Tambahkan keterangan kegiatan"></textarea>
-            </div>
-            <div class="mb-3">
-                            <label for="editStatus" class="form-label">Status</label>
-                            <select class="form-select" id="editStatus">
-                                <option selected>Aktif</option>
-                                <option value="Non-Aktif">Non-Aktif</option>
+                    <form method="POST" action="{{ route('createKegiatanKelurahan') }}" enctype="multipart/form-data">
+                        @csrf 
+                        <div class="mb-3">
+                            <label for="kegiatan" class="form-label">Kelurahan</label>
+                            <select class="form-select" id="kegiatan" name="kelurahanid">
+                                <option value="" disabled selected>-- Pilih Kelurahan --</option>
+                                @foreach ($kelurahans as $kelurahan)
+                                    <option value="{{ $kelurahan->id }}" {{ old('kegiatan') == $kelurahan->id ? 'selected' : '' }} >
+                                        {{ $kelurahan->nama }}
+                                    </option>
+                                @endforeach
                             </select>
                         </div>
-            
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-    </form>
+                        <div class="mb-3">
+                            <label for="namaKegiatan" class="form-label fw-semibold">Nama</label>
+                            <input type="text" name="nama" class="form-control" id="namaKegiatan" placeholder="Masukkan nama kegiatan">
+                        </div>
+                        <div class="mb-3">
+                            <label for="gambarKegiatan" class="form-label fw-semibold">Gambar</label>
+                            <input type="file" class="form-control" id="gambarKegiatan" name="gambar">
+                        </div>
+                        <div class="mb-3">
+                            <label for="keteranganKegiatan" class="form-label fw-semibold">Keterangan</label>
+                            <textarea class="form-control" name="keterangan" id="keteranganKegiatan" rows="3" placeholder="Tambahkan keterangan kegiatan"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Status</label>
+                            <div class="form-check form-switch">
+                                <!-- Hidden input sebagai fallback jika checkbox tidak dicentang -->
+                                <input type="hidden" name="is_active" value="0">
+                                
+                                <input class="form-check-input" name="is_active" type="checkbox" id="status" value="1" checked>
+                                <label class="form-check-label" for="status">Aktif</label>
+                            </div>
+                          </div>
+                        
+                          <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+                    </form>
         </div>
->>>>>>> a4cd163 (menambahkan fitur create read)
     </div>
 </div>
 
 <!-- Modal Edit Dokumen Kelurahan -->
 <div class="modal fade" id="modaEditKegiatan" tabindex="-1" aria-labelledby="modaEditKegiatanLabel" aria-hidden="true">
-<div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header d-flex justify-content-center w-100 ">
-                <h5 class="modal-title fw-bold text-center" id="menuModalLabel">Edit Menu Kegiatan Kelurahan</h5>
-            </div>
-            <div class="modal-body">
-        <form>
-          <div class="mb-3">
-            <label for="namaKegiatan" class="form-label">Nama</label>
-            <input type="text" class="form-control" id="namaKegiatan">
-          </div>
-          <div class="mb-3">
-            <label for="tanggalKegiatan" class="form-label">Tanggal Kegiatan</label>
-            <input type="date" class="form-control" id="tanggalKegiatan">
-          </div>
-          <div class="mb-3">
-            <label for="gambarKegiatan" class="form-label">Gambar</label>
-            <input type="file" class="form-control" id="gambarKegiatan" accept="image/*" onchange="previewImage(event)">
-            <img id="preview" src="#" alt="Preview" class="img-fluid mt-2 d-none" style="max-height: 200px;">
-          </div>
-          <div class="mb-3">
-            <label for="keteranganKegiatan" class="form-label">Keterangan</label>
-            <textarea class="form-control" id="keteranganKegiatan" rows="3"></textarea>
-          </div>
-          <div class="mb-3">
-                        <label for="editStatus" class="form-label">Status</label>
-                        <select class="form-select" id="editStatus">
-                            <option selected>Aktif</option>
-                            <option value="Non-Aktif">Non-Aktif</option>
+    <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header d-flex justify-content-center w-100 ">
+                    <h5 class="modal-title fw-bold text-center" id="menuModalLabel">Edit Menu Kegiatan Kelurahan</h5>
+                </div>
+                <div class="modal-body">
+            <form id="editKegiatanForm" method="POST" enctype="multipart/form-data">
+                 @csrf
+                @method('PUT')
+                <input type="hidden" id="editId" name="id">
+                    <div class="mb-3">
+                        <label for="namaKegiatan" class="form-label">Nama</label>
+                        <input type="text" class="form-control" name="nama" id="editNama">
+                    </div>
+                    <div class="mb-3">
+                        <label for="kegiatan" class="form-label">Kelurahan</label>
+                        <select class="form-select" id="editKelurahan" name="kelurahanid">
+                            <option value="" disabled selected>-- Pilih Kelurahan --</option>
+                            @foreach ($kelurahans as $kelurahan)
+                                <option value="{{ $kelurahan->id }}" {{ old('kegiatan') == $kelurahan->id ? 'selected' : '' }} >
+                                    {{ $kelurahan->nama }}
+                                </option>
+                            @endforeach
                         </select>
                     </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-        <button type="button" class="btn btn-primary">Simpan Perubahan</button>
-      </div>
+                    <div class="mb-3">
+                        <label for="gambarKegiatan" class="form-label">Gambar</label>
+                        <input type="file" name="gambar" class="form-control" id="editGambar" accept="image/*" onchange="previewImage(event)">
+                        <img id="previewGambar" src="#" alt="Preview Gambar" class="img-fluid mt-2 d-none" style="max-height: 200px;">
+                    </div>
+                    <div class="mb-3">
+                        <label for="keteranganKegiatan" class="form-label">Keterangan</label>
+                        <textarea class="form-control" name="keterangan" id="editKeterangan" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Status</label>
+                        <div class="form-check form-switch">
+                            <!-- Hidden input sebagai fallback jika checkbox tidak dicentang -->
+                            <input type="hidden" name="is_active" value="0">
+                            
+                            <input class="form-check-input" name="is_active" type="checkbox" id="editStatus" value="1" checked>
+                            <label class="form-check-label" for="status">Aktif</label>
+                        </div>
+                    </div>          
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                </div>
+            </form>
+        </div>
     </div>
-  </div>
 </div>
 
 <!-- Modal delete -->
@@ -236,5 +275,40 @@
     </div>
 </div>
 
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".btn-edit-kegiatan").forEach(button => {
+        button.addEventListener("click", function () {
+            let id = this.getAttribute("data-id");
+            let nama = this.getAttribute("data-nama");
+            let gambar = this.getAttribute("data-gambar");
+            let kelurahan = this.getAttribute("data-kelurahan");
+            let keterangan = this.getAttribute("data-keterangan");
+            let status = this.getAttribute("data-status");
 
+            console.log("Gambar URL:", gambar); // Debugging
+
+            document.getElementById("editId").value = id;
+            document.getElementById("editNama").value = nama;
+            document.getElementById("editKelurahan").value = kelurahan;
+            document.getElementById("editKeterangan").value = keterangan;
+            document.getElementById("editStatus").checked = status == "1";
+
+            // Set preview gambar
+            let previewGambar = document.getElementById("previewGambar");
+            if (gambar && gambar !== "null") {
+                previewGambar.src = gambar;
+                previewGambar.classList.remove("d-none");
+            } else {
+                previewGambar.src = "#";
+                previewGambar.classList.add("d-none");
+            }
+
+            // Pastikan action form mengarah ke URL update yang benar
+            document.getElementById("editKegiatanForm").action = `/kegiatanKelurahan/update/${id}`;
+        });
+    });
+});
+
+</script>
 @endsection

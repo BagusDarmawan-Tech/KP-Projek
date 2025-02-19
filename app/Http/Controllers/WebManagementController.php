@@ -123,6 +123,14 @@ class WebManagementController extends Controller
     
         return redirect()->route('slider')->with('success', 'Slider berhasil diperbarui!');
     }
+
+    public function destroySlider($id)
+    {
+        $slider = Slider::findOrFail($id);
+        $slider->delete();
+
+        return redirect()->route('slider')->with('success', 'Slider berhasil dihapus!');
+    }
     
     //====================================END CRUD SLider
 
@@ -232,6 +240,14 @@ class WebManagementController extends Controller
         $kegiatan->update($data);
     
         return redirect()->route('sub-kegiatan')->with('success', 'Sub Kegiatan berhasil diperbarui!');
+    }
+
+    public function destroySubKegiatan($id)
+    {
+        $subkegiatan = SubKegiatan::findOrFail($id);
+        $subkegiatan->delete();
+
+        return redirect()->route('sub-kegiatan')->with('success', 'Sub Kegiatan berhasil dihapus!');
     }
     //===========END CRUD Sub Kegiatan
 
@@ -355,6 +371,14 @@ class WebManagementController extends Controller
     
         return redirect()->route('forum-anak')->with('success', 'Forum Anak berhasil diperbarui!');
     }
+
+    public function destroyForumAnak($id)
+    {
+        $forum = ForumAnak::findOrFail($id);
+        $forum->delete();
+
+        return redirect()->route('forum-anak')->with('success', 'Forum Anak berhasil dihapus!');
+    }
     //===========CRUD FORUMANAK
     
 
@@ -473,6 +497,14 @@ class WebManagementController extends Controller
     
         return redirect()->route('galeri')->with('success', 'Galeri Anak berhasil diperbarui!');
     }
+
+    public function destroyGaleri($id)
+    {
+        $galeri = Galeri::findOrFail($id);
+        $galeri->delete();
+
+        return redirect()->route('galeri')->with('success', 'Galeri berhasil dihapus!');
+    }
      //=================END CRUD Galeri
 
 
@@ -520,16 +552,12 @@ class WebManagementController extends Controller
     return redirect()->route('kategoriArtikel')->with('success', 'Kategori berhasil diperbarui!');
     }
 
-
-    public function destroy($id)
+    public function destroyKategoriArtikel($id)
     {
         $kategori = KategoriArtikel::findOrFail($id);
         $kategori->delete();
-    
-        return response()->json([
-            'success' => true,
-            'message' => 'Kategori berhasil dihapus!'
-        ]);
+
+        return redirect()->route('kategoriArtikel')->with('success', 'Kategori berhasil dihapus!');
     }
     
 
@@ -659,6 +687,14 @@ class WebManagementController extends Controller
     
         return redirect()->route('Klaster')->with('success', 'Klaster berhasil diperbarui!');
     }
+
+    public function destroyKlaster($id)
+    {
+        $klaster = Klaster::findOrFail($id);
+        $klaster->delete();
+
+        return redirect()->route('Klaster')->with('success', 'Klaster berhasil dihapus!');
+    }
      //=================END CRUD klaster
 
 
@@ -730,6 +766,14 @@ class WebManagementController extends Controller
         $usulan->update($data);
     
         return redirect()->route('PemantauanUsulanAnak')->with('success', 'Usulan berhasil diperbarui!');
+    }
+
+    public function destroyPemantauan($id)
+    {
+        $pemantauan = PemantauanUsulan::findOrFail($id);
+        $pemantauan->delete();
+
+        return redirect()->route('PemantauanUsulanAnak')->with('success', 'Pemantauan berhasil dihapus!');
     }
      //=================END CRUD PemantauanUsulan
 
@@ -843,6 +887,14 @@ class WebManagementController extends Controller
         $halaman->update($data);
     
         return redirect()->route('Halamandong')->with('success', 'Halaman berhasil diperbarui!');
+    }
+
+    public function destroyHalaman($id)
+    {
+        $halaman = Halaman::findOrFail($id);
+        $halaman->delete();
+
+        return redirect()->route('Halamandong')->with('success', 'Halaman berhasil dihapus!');
     }
     //================== END CRUD Halaman 
 
@@ -982,6 +1034,14 @@ class WebManagementController extends Controller
         $artikel->update($data);
     
         return redirect()->route('Artikel')->with('success', 'Artikel berhasil diperbarui!');
+    }
+
+    public function destroyArtikel($id)
+    {
+        $artikel = Artikel::findOrFail($id);
+        $artikel->delete();
+
+        return redirect()->route('Artikel')->with('success', 'Artikel berhasil dihapus!');
     }
     //================== END CRUD Artikel
 

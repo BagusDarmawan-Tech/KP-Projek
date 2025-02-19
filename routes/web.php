@@ -117,8 +117,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/KegiatanLayakAnak', [KelurahanLayakAnakController::class, 'KegiatanKelurahanAnak'])->name('Kegiatankelurahan');
 
     //tambah
-    Route::post('/createKelurahanLayakAnak', [PusatInformasiSahabatController::class, 'storeDokumenKelurahan'])->name('createDokumenKelurahan');
-    Route::post('/createKegiatanKelurahan', [PusatInformasiSahabatController::class, 'storeKegiatanKelurahan'])->name('createKegiatanKelurahan');
+    Route::post('/createDokumenKelurahan', [KelurahanLayakAnakController::class, 'storeDokumenKelurahan'])->name('createDokumenKelurahan');
+    Route::post('/createKegiatanKelurahan', [KelurahanLayakAnakController::class, 'storeKegiatanKelurahan'])->name('createKegiatanKelurahan');
+
+    //edit
+    Route::put('/DokumenKelurahan/update/{id}', [KelurahanLayakAnakController::class, 'updateDokumenKelurahan'])->name('updateDokumenKelurahan');
+    Route::put('/kegiatanKelurahan/update/{id}', [KelurahanLayakAnakController::class, 'updateKegiatanKelurahan'])->name('updateKegiatanKelurahan');
+
 
 });
 
@@ -202,7 +207,15 @@ Route::middleware('auth')->group(function () {
 
 
     //Delete data
-    Route::delete('/kategori-artikel/{id}', [WebManagementController::class, 'destroy'])->name('deleteKategoriArtikel');
+    Route::delete('/kategori/hapus/{id}', [WebManagementController::class, 'destroyKategoriArtikel'])->name('destroyKategoriArtikel');
+    Route::delete('/slider/hapus/{id}', [WebManagementController::class, 'destroySlider'])->name('destroySlider');
+    Route::delete('/galeri/hapus/{id}', [WebManagementController::class, 'destroyGaleri'])->name('destroyGaleri');
+    Route::delete('/klaster/hapus/{id}', [WebManagementController::class, 'destroyKlaster'])->name('destroyKlaster');
+    Route::delete('/halaman/hapus/{id}', [WebManagementController::class, 'destroyHalaman'])->name('destroyHalaman');
+    Route::delete('/subKegiatan/hapus/{id}', [WebManagementController::class, 'destroySubKegiatan'])->name('destroySubKegiatan');
+    Route::delete('/forumAnak/hapus/{id}', [WebManagementController::class, 'destroyForumAnak'])->name('destroyForumAnak');
+    Route::delete('/pemantauan/hapus/{id}', [WebManagementController::class, 'destroyPemantauan'])->name('destroyPemantauan');
+    Route::delete('/artikel/hapus/{id}', [WebManagementController::class, 'destroyArtikel'])->name('destroyArtikel');
 
 });
 
@@ -215,6 +228,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/createDokumenKecamatan', [KecamatanLayakController::class, 'storeDokumenKecamatan'])->name('createDokumenKecamatan');
     Route::post('/createKegiatanKecamatan', [KecamatanLayakController::class, 'storeKegiatanKecamatan'])->name('createKegiatanKecamatan');
 
+    //edit
+    Route::put('/dokumenKecamatan/update/{id}', [KecamatanLayakController::class, 'updateDokumenKecamatan'])->name('updateDokumenKecamatan');
+    Route::put('/kegiatanKecamatan/update/{id}', [KecamatanLayakController::class, 'updateKegiatanKecamatan'])->name('updateKegiatanKecamatan');
 
 });
 

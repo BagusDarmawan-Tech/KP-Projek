@@ -125,8 +125,21 @@
                             @else
                                 <span class="badge bg-success">Aktif</span>
                             @endif
-                        </td>                        <td>
-                            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editDokumenModal"><i class="bi bi-pencil-square"></i></button>
+                        </td>                        
+                        <td>
+                            <button class="btn btn-sm btn-primary btn-dokumen"
+                                data-id="{{ $dokumen->id }}"
+                                data-nama="{{ $dokumen->nama }}"
+                                data-file="{{ asset('storage/' . $dokumen->dataPendukung) }}"
+                                data-status="{{ $dokumen->is_active }}"
+                                data-jenisSurat="{{ $dokumen->jenis_suratid }}"
+                                data-kecamatan="{{ $dokumen->kecamatanid }}"
+                                data-keterangan="{{ $dokumen->keterangan }}"
+                                data-status="{{ $dokumen->is_active }}"
+                                data-bs-toggle="modal"
+                                data-bs-target="#editDokumenModal">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>                            
                             <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i></button>
                         </td>
                     </tr>
@@ -216,38 +229,64 @@
                 <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
             </div>
             <div class="modal-body">
-                <form>
+                <form id="editDokumenForm" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+                    <input type="hidden" id="editId" name="id">
                     <div class="mb-3">
-                        <label class="form-label">Kegiatan</label>
-                        <select class="form-select" name="kegiatan">
-                            <option selected>--- Pilih Kategori ---</option>
-                            <option value="SK">SK</option>
-                            <option value="RPA">RPA</option>
-                            <option value="SK-FAS">SK-FAS</option>
+                        <label for="kegiatan" class="form-label">Kecamatan</label>
+                        <select class="form-select" id="editKecamatan" name="kecamatanid" required>
+                            <option value="" disabled selected>-- Pilih Kecamatan --</option>
+                            @foreach ($kecamatans as $kecamatan)
+                                <option value="{{ $kecamatan->id }}" {{ old('subkegiatanid') == $kecamatan->id ? 'selected' : '' }} >
+                                    {{ $kecamatan->nama }}
+                                </option>
+                            @endforeach
                         </select>
-                    </div>
+                     </div>
+                    <div class="mb-3">
+                        <label for="kegiatan" class="form-label">Jenis Surat</label>
+                        <select class="form-select" id="editJenisSurat" name="jenis_suratid" required>
+                            <option value="" disabled selected>-- Pilih Surat --</option>
+                            @foreach ($surats as $surat)
+                                <option value="{{ $surat->id }}" {{ old('subkegiatanid') == $surat->id ? 'selected' : '' }} >
+                                    {{ $surat->nama }}
+                                </option>
+                            @endforeach
+                        </select>
+                     </div>
                     <div class="mb-3">
                         <label class="form-label">Nama</label>
-                        <input type="text" class="form-control" name="nama">
+                        <input type="text" class="form-control" id="editNama" name="nama">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Data Dukung</label>
-                        <input type="file" class="form-control" name="data_dukung">
+                        <label for="editFile" class="form-label">Edit File Data Pendukung</label>
+                        <div class="mb-2">
+                            <a id="previewFile" href="#" target="_blank" class="btn btn-secondary btn-sm">Lihat File Saat Ini</a>
+                        </div>
+                        <input type="file" class="form-control" id="editFile" name="dataPendukung">
+                        <small class="text-muted">Biarkan kosong jika tidak ingin mengubah file.</small>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Keterangan</label>
-                        <textarea class="form-control" name="keterangan"></textarea>
+                        <textarea id="editKeterangan" class="form-control" name="keterangan" ></textarea>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Status</label>
-                        <input type="checkbox" class="form-check-input" id="statusEdit" checked>
+                        <div class="form-check form-switch">
+                            <!-- Hidden input sebagai fallback jika checkbox tidak dicentang -->
+                            <input type="hidden" name="is_active" value="0">
+                            
+                            <input class="form-check-input" name="is_active" type="checkbox" id="editStatus" value="1" checked>
+                            <label class="form-check-label" for="status">Aktif</label>
+                        </div>
                     </div>
-                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                 <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
             </div>
+        </form>
         </div>
     </div>
 </div>
@@ -271,5 +310,33 @@
     </div>
 </div>
 
+{{-- //update --}}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".btn-dokumen").forEach(button => {
+        button.addEventListener("click", function () {
+            let id = this.getAttribute("data-id");
+            let nama = this.getAttribute("data-nama");
+            let jenisSurat = this.getAttribute("data-jenisSurat");
+            let kecamatan = this.getAttribute("data-kecamatan");
+            let file = this.getAttribute("data-file");
+            let keterangan = this.getAttribute("data-keterangan");
+            let status = this.getAttribute("data-status");
 
+            console.log(status)
+            document.getElementById("editId").value = id;
+            document.getElementById("editNama").value = nama;
+            document.getElementById("editJenisSurat").value = jenisSurat;
+            document.getElementById("editKecamatan").value = kecamatan;
+            document.getElementById("previewFile").href = file;
+            document.getElementById("editKeterangan").value = keterangan;
+            document.getElementById("editStatus").checked = status == "1";
+
+            // Pastikan action form mengarah ke URL update yang benar
+            document.getElementById("editDokumenForm").action = `/dokumenKecamatan/update/${id}`;
+         
+        });
+    });
+});
+</script>
 @endsection

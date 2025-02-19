@@ -11,7 +11,7 @@
         </div>
         <div class="card-body">
             <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
-                @php
+                {{-- @php
                     $images = [
                         ["url" => "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp", "description" => "Foto kegiatan senam untuk anak-anak di lingkungan sekitar."],
                         ["url" => "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(18).webp", "description" => "Foto kegiatan senam untuk anak-anak di lingkungan sekitar."],
@@ -20,19 +20,19 @@
                         ["url" => "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(77).webp", "description" => "Foto kegiatan senam untuk anak-anak di lingkungan sekitar."],
                         ["url" => "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(81).webp", "description" => "Foto kegiatan senam untuk anak-anak di lingkungan sekitar."]
                     ];
-                @endphp
+                @endphp --}}
 
-                @foreach($images as $index => $image)
+                @foreach($gambars as $index => $gambar)
                 <div class="col-lg-4 col-md-6">
                     <div class="card-gallery">
-                        <img src="{{ $image['url'] }}" class="gallery-image" alt="Gallery Image" data-img-src="{{ $image['url'] }}" data-img-index="{{ $index }}" data-img-description="{{ $image['description'] }}" data-bs-toggle="modal" data-bs-target="#imageModal">
-                        <div class="overlay" data-img-src="{{ $image['url'] }}" data-description="{{ $image['description'] }}" data-bs-toggle="modal" data-bs-target="#imageModal">
+                        <img src="{{ asset($gambar->gambar) }}" class="gallery-image" alt="Gallery Image" data-img-src="{{ asset($gambar->gambar) }}" data-img-index="{{ $index }}" data-img-description="{{ $gambar->deskripsi }}" data-bs-toggle="modal" data-bs-target="#imageModal">
+                        <div class="overlay" data-img-src="{{ asset($gambar->gambar) }}" data-description="{{ $gambar->deskripsi}}" data-bs-toggle="modal" data-bs-target="#imageModal">
                             <span class="plus-icon">+</span>
                         </div>
                     </div>
                     <!-- Deskripsi Gambar yang Ditampilkan di Luar Modal -->
                     <div class="text-center mt-2">
-                        <p>{{ $image['description'] }}</p>
+                        <p>{{ $gambar->deskripsi }}</p>
                     </div>
                 </div>
                 @endforeach

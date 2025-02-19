@@ -94,28 +94,8 @@
                 </button>
             </div>
             <div class="table-responsive">
-                <table class="table table-hover table-bordered align-middle text-center">
-                    <thead class="table-primary">
-
-                       <!-- Kontrol Tampilkan & Cari -->
-            <div class="row mb-3 align-items-center">
-                <div class="col-md-6">
-                    <label for="showEntries" class="form-label me-2">Show</label>
-                    <select id="showEntries" class="form-select form-select-sm d-inline-block" style="width: 80px;">
-                        <option value="10">10</option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                    </select>
-                    entries
-                </div>
-                <div class="col-md-6 text-end">
-                    <input type="text" id="searchInput" class="form-control form-control-sm d-inline-block" placeholder="Search..." style="width: 200px;">
-                </div>
-            </div>
-            
-            <!-- Tombol Tambah Artikel di atas -->           
-
+                <table class="table table-hover table-bordered align-middle text-center" id="myTable">
+                    <thead class="table-primary">        
                         <tr>
                             <th>No</th>
                             <th>Gambar</th>
@@ -130,7 +110,7 @@
                       @foreach($kegiatans as $index => $kegiatan)
                       <tr>
                           <td>{{ $loop->iteration }}</td>
-                            <td></td>
+                            <td><img src="{{ asset('storage/'.$kegiatan->gambar) }}" alt="Slider Image" width="80"></td>
                             <td>{{ $kegiatan->nama }}</td>
                             <td>{{ $kegiatan->dibuatOleh }}</td>
                             <td>{{ $kegiatan->keterangan }}</td>
@@ -142,8 +122,18 @@
                               @endif
                             </td>  
                             <td>
-                                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modaEditKegiatan"><i class="bi bi-pencil-square"></i></button>
-                                <!-- Tombol Hapus -->
+                              <button class="btn btn-sm btn-primary btn-edit-kegiatan"
+                                data-id="{{ $kegiatan->id }}"
+                                data-nama="{{ $kegiatan->nama }}"
+                                data-gambar="{{ asset('storage/'.$kegiatan->gambar) }}"
+                                data-status="{{ $kegiatan->is_active }}"
+                                data-kecamatan="{{ $kegiatan->kecamatanid }}"
+                                data-keterangan="{{ $kegiatan->keterangan }}"
+                                data-status="{{ $kegiatan->is_active }}"
+                                data-bs-toggle="modal"
+                                data-bs-target="#modaEditKegiatan">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>                                 <!-- Tombol Hapus -->
                                 <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i></button>
                             </td>
                         </tr>
@@ -198,14 +188,14 @@
                 <input class="form-check-input" name="is_active" type="checkbox" id="status" value="1" checked>
                 <label class="form-check-label" for="status">Aktif</label>
             </div>
-        </div>
+          </div>
         
-        <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">        
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-        <button type="button" class="btn btn-primary">Simpan</button>
-      </div>
+          <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">        
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+          <button type="submit" class="btn btn-primary">Simpan</button>
+        </div>
       </form>
     </div>
   </div>
@@ -220,37 +210,48 @@
         <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
       </div>
       <div class="modal-body">
-        <form method="POST" action="{{ route('createKegiatanKecamatan') }}" enctype="multipart/form-data">
-          @csrf 
+        <form id="editKegiatanForm" method="POST" enctype="multipart/form-data">
+          @csrf
+         @method('PUT')
+         <input type="hidden" id="editId" name="id">
+         <div class="mb-3">
+          <label for="kegiatan" class="form-label">Kecamatan</label>
+          <select class="form-select" id="editKecamatan" name="kecamatanid" required>
+              <option value="" disabled selected>-- Pilih Kecamatan --</option>
+              @foreach ($kecamatans as $kecamatan)
+                  <option value="{{ $kecamatan->id }}" {{ old('subkegiatanid') == $kecamatan->id ? 'selected' : '' }} >
+                      {{ $kecamatan->nama }}
+                  </option>
+              @endforeach
+          </select>
+       </div>
           <div class="mb-3">
             <label for="namaKegiatan" class="form-label">Nama</label>
-            <input type="text" name="nama" class="form-control" id="namaKegiatan">
-          </div>
-          <div class="mb-3">
-            <label for="tanggalKegiatan" class="form-label">Tanggal Kegiatan</label>
-            <input type="date" class="form-control" id="tanggalKegiatan">
+            <input type="text" name="nama" class="form-control" id="editNama">
           </div>
           <div class="mb-3">
             <label for="gambarKegiatan" class="form-label">Gambar</label>
-            <input type="file" class="form-control" id="gambarKegiatan" accept="image/*" onchange="previewImage(event)">
-            <img id="preview" src="#" alt="Preview" class="img-fluid mt-2 d-none" style="max-height: 200px;">
-          </div>
+            <input type="file" name="gambar" class="form-control" id="editGambar" accept="image/*" onchange="previewImage(event)">
+            <img id="previewGambar" src="#" alt="Preview Gambar" class="img-fluid mt-2 d-none" style="max-height: 200px;">
+        </div>
           <div class="mb-3">
             <label for="keteranganKegiatan" class="form-label">Keterangan</label>
-            <textarea class="form-control" id="keteranganKegiatan" rows="3"></textarea>
+            <textarea class="form-control" name="keterangan" id="editKeterangan" rows="3"></textarea>
           </div>
           <div class="mb-3">
             <label class="form-label">Status</label>
             <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="status" name="is_active" checked>
+                <!-- Hidden input sebagai fallback jika checkbox tidak dicentang -->
+                <input type="hidden" name="is_active" value="0">
+                
+                <input class="form-check-input" name="is_active" type="checkbox" id="editStatus" value="1" checked>
                 <label class="form-check-label" for="status">Aktif</label>
             </div>
-        </div> 
-        </form>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-        <button type="button" class="btn btn-primary">Simpan Perubahan</button>
+        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
       </div>
     </form>
     </div>
@@ -276,4 +277,41 @@
         </div>
     </div>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".btn-edit-kegiatan").forEach(button => {
+        button.addEventListener("click", function () {
+            let id = this.getAttribute("data-id");
+            let nama = this.getAttribute("data-nama");
+            let gambar = this.getAttribute("data-gambar");
+            let kecamatan = this.getAttribute("data-kecamatan");
+            let keterangan = this.getAttribute("data-keterangan");
+            let status = this.getAttribute("data-status");
+
+            console.log("Gambar URL:", gambar); // Debugging
+
+            document.getElementById("editId").value = id;
+            document.getElementById("editNama").value = nama;
+            document.getElementById("editKecamatan").value = kecamatan;
+            document.getElementById("editKeterangan").value = keterangan;
+            document.getElementById("editStatus").checked = status == "1";
+
+            // Set preview gambar
+            let previewGambar = document.getElementById("previewGambar");
+            if (gambar && gambar !== "null") {
+                previewGambar.src = gambar;
+                previewGambar.classList.remove("d-none");
+            } else {
+                previewGambar.src = "#";
+                previewGambar.classList.add("d-none");
+            }
+
+            // Pastikan action form mengarah ke URL update yang benar
+            document.getElementById("editKegiatanForm").action = `/kegiatanKecamatan/update/${id}`;
+        });
+    });
+});
+
+</script>
 @endsection
