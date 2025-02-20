@@ -121,10 +121,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/createKegiatanKelurahan', [KelurahanLayakAnakController::class, 'storeKegiatanKelurahan'])->name('createKegiatanKelurahan');
 
     //edit
-    Route::put('/DokumenKelurahan/update/{id}', [KelurahanLayakAnakController::class, 'updateDokumenKelurahan'])->name('updateDokumenKelurahan');
+    Route::put('/dokumenKelurahan/update/{id}', [KelurahanLayakAnakController::class, 'updateDokumenKelurahan'])->name('updateDokumenKelurahan');
     Route::put('/kegiatanKelurahan/update/{id}', [KelurahanLayakAnakController::class, 'updateKegiatanKelurahan'])->name('updateKegiatanKelurahan');
-
-
+    
+    //delete
+    Route::delete('/dokumenKelurahan/hapus/{id}', [KelurahanLayakAnakController::class, 'destroyDokumenKelurahan'])->name('destroyDokumenKelurahan');
+    Route::delete('/kegiatanKelurahan/hapus/{id}', [KelurahanLayakAnakController::class, 'destroyKegiatanKelurahan'])->name('destroyKegiatanKelurahan');
 });
 
 
@@ -139,6 +141,11 @@ Route::middleware('auth')->group(function () {
 
     //edit
     Route::put('/DokumenPisa/update/{id}', [PusatInformasiSahabatController::class, 'updateDokumenPisa'])->name('updateDokumenPisa');
+    Route::put('/kegiatanPisa/update/{id}', [PusatInformasiSahabatController::class, 'updateKegiatanPisa'])->name('updateKegiatanPisa');
+
+    //delete
+    Route::delete('/halamanDokumenPisa/hapus/{id}', [PusatInformasiSahabatController::class, 'destroyHalamanDokumenPisa'])->name('destroyHalamanDokumenPisa');
+    Route::delete('/kegiatanPisa/hapus/{id}', [PusatInformasiSahabatController::class, 'destroyKegiatanPisa'])->name('destroyKegiatanPisa');
 
 });
 
@@ -146,11 +153,15 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/HalamanForumAnakaSurabaya', [KegiatanForumArekSurabayaController::class, 'HalamanForum'])->name('KegiatanForumSurabaya');
 
-    //tambah
+    //create
     Route::post('/createForumAnakSurabaya', [KegiatanForumArekSurabayaController::class, 'storeForumAnakSurabaya'])->name('createForumAnakSurabaya');
 
     //update
     Route::put('/halamanForum/update/{id}', [KegiatanForumArekSurabayaController::class, 'updateHalamanForum'])->name('updateHalamanForum');
+
+    //delete
+    Route::delete('/halamanForumAnakSurabaya/hapus/{id}', [KegiatanForumArekSurabayaController::class, 'destroyHalamanForum'])->name('destroyHalamanForum');
+
 
 });
 
@@ -232,6 +243,10 @@ Route::middleware('auth')->group(function () {
     Route::put('/dokumenKecamatan/update/{id}', [KecamatanLayakController::class, 'updateDokumenKecamatan'])->name('updateDokumenKecamatan');
     Route::put('/kegiatanKecamatan/update/{id}', [KecamatanLayakController::class, 'updateKegiatanKecamatan'])->name('updateKegiatanKecamatan');
 
+    //delete
+    Route::delete('/dokumenKecamatan/hapus/{id}', [KecamatanLayakController::class, 'destroyDokumenKecamatan'])->name('destroyDokumenKecamatan  ');
+    Route::delete('/kegiatanKecamatan/hapus/{id}', [KecamatanLayakController::class, 'destroyKegiatanKecamatan'])->name('destroyKegiatanKecamatan  ');
+
 });
 
 //Mitra Anak
@@ -267,6 +282,9 @@ Route::middleware('auth')->group(function () {
     //update
     Route::put('/KegiatanArekSuroboyo/update/{id}', [KegiatanArekSuroboyoController::class, 'updateKegiatanArekSuroboyo'])->name('updateKegiatanArekSuroboyo');
 
+    //delete
+    Route::delete('/KegiatanArekSuroboyo/hapus/{id}', [KegiatanArekSuroboyoController::class, 'destroyKegiatanArekSuroboyo'])->name('destroyKegiatanArekSuroboyo');
+
 });
 
 //Usulan Kegiatan
@@ -285,6 +303,10 @@ Route::middleware('auth')->group(function () {
     Route::put('/pemantauan-suara/update/{id}', [UsulanKegiatanController::class, 'updatePemantauanSuara'])->name('updatePemantauanSuara');
     Route::put('/tindak-lanjut/update/{id}', [UsulanKegiatanController::class, 'updateTindakLanjut'])->name('updateTindakLanjut');
     Route::put('/verifikasi/update/{id}', [UsulanKegiatanController::class, 'updateVerifikasiUsulan'])->name('updateVerifikasi');
+
+    //delete
+    Route::delete('/karya-anak/hapus/{id}', [UsulanKegiatanController::class, 'destroyKaryaAnak'])->name('destroyKaryaAnak');
+    Route::delete('/pemantauan-suara/hapus/{id}', [UsulanKegiatanController::class, 'destroyPemantauanSuara'])->name('destroyPemantauanSuara');
 
 });
 

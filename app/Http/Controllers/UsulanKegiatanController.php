@@ -45,6 +45,24 @@ class UsulanKegiatanController extends Controller
         return redirect()->route('pemantauan-suara')->with('success', 'Kategori berhasil ditambahkan!');
     }
 
+    public function destroyPemantauanSuara($id)
+    {
+        $suara = SuaraAnak::findOrFail($id);
+        
+        if ($suara->gambar) {
+            // Konversi path dari 'storage/' ke 'public/' untuk Storage::delete
+            $filePath = str_replace('storage/', 'public/', $suara->gambar);
+            if (Storage::exists($filePath)) {
+                Storage::delete($filePath);
+            }
+        }
+
+        $suara->delete();
+
+        return redirect()->route('pemantauan-suara')->with('success', 'Kegiatan berhasil dihapus!');
+    }
+//=================crud pemnatauan suara
+
     public function updatePemantauanSuara(Request $request, $id)
     {
         // dd($request->all());
@@ -164,6 +182,7 @@ class UsulanKegiatanController extends Controller
     
         return redirect()->route('sub-kegiatan')->with('success', 'Kategori berhasil ditambahkan!');
     }  
+
 // =================================END CRUD suara anak
 
 
@@ -290,6 +309,23 @@ class UsulanKegiatanController extends Controller
         $karya->update($data);
     
         return redirect()->route('karya-anak')->with('success', 'Karya Anak berhasil diperbarui!');
+    }
+
+    public function destroyKaryaAnak($id)
+    {
+        $kegiatan = KaryaAnak::findOrFail($id);
+        
+        if ($kegiatan->gambar) {
+            // Konversi path dari 'storage/' ke 'public/' untuk Storage::delete
+            $filePath = str_replace('storage/', 'public/', $kegiatan->gambar);
+            if (Storage::exists($filePath)) {
+                Storage::delete($filePath);
+            }
+        }
+
+        $kegiatan->delete();
+
+        return redirect()->route('karya-anak')->with('success', 'Karya berhasil dihapus!');
     }
 // =================================END CRUD Karya Anak
 

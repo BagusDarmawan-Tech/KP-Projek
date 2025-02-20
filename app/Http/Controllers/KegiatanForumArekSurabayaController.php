@@ -114,5 +114,22 @@ class KegiatanForumArekSurabayaController extends Controller
     
         return redirect()->route('KegiatanForumSurabaya')->with('success', 'Artikel Anak berhasil diperbarui!');
     }
+
+    public function destroyHalamanForum($id)
+    {
+        $kegiatan = ForumAnakSurabaya::findOrFail($id);
+        
+        if ($kegiatan->gambar) {
+            // Konversi path dari 'storage/' ke 'public/' untuk Storage::delete
+            $filePath = str_replace('storage/', 'public/', $kegiatan->gambar);
+            if (Storage::exists($filePath)) {
+                Storage::delete($filePath);
+            }
+        }
+
+        $kegiatan->delete();
+
+        return redirect()->route('KegiatanForumSurabaya')->with('success', 'Kegiatan Forum berhasil dihapus!');
+    }
 }
 

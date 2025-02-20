@@ -137,7 +137,14 @@
                                     data-bs-target="#editDokumenModal">
                                     <i class="bi bi-pencil-square"></i>
                                 </button>
-                                <button class="btn btn-sm btn-danger delete-slider"><i class="bi bi-trash"></i> </button>                            </td>
+                                <!-- Button Delete Modal -->
+                                <button class="btn btn-sm btn-danger delete-btn" 
+                                    data-id  ="{{ $dokumen->id }}"
+                                    data-nama ="{{ $dokumen->nama }}"
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i>
+                                </button> 
+                            </td>                       
                         </tr>
                         @endforeach
                     </tbody>
@@ -250,6 +257,30 @@
     </div>
 </div>
 
+<!-- Modal Delete Menu -->
+<div class="modal fade" id="deleteMenuModal" tabindex="-1" aria-labelledby="deleteMenuModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteMenuModalLabel">Hapus Menu</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="deleteForm" method="POST">
+                @csrf
+                @method('DELETE')
+                <div class="modal-body">
+                    <input type="hidden" id="deleteId" name="id">
+                    <p>Apakah Anda yakin ingin menghapus record<br> <strong id="deleteNama"></strong>?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-danger">Hapus</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".btn-edit-dokumen").forEach(button => {
@@ -277,35 +308,25 @@
 
 </script>
 
+<!-- Script Delete Data ke Modal -->
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        document.querySelectorAll(".delete-slider").forEach(button => {
-            button.addEventListener("click", function () {
-                Swal.fire({
-                    title: "<b>Apakah Anda Yakin!</b>",
-                    text: "Akan Menghapus Data ini!",
-                    icon: "question",
-                    showCancelButton: true,
-                    confirmButtonColor: "#d33",
-                    cancelButtonColor: "#6c757d",
-                    confirmButtonText: "CONFIRM",
-                    cancelButtonText: "CANCEL",
-                    customClass: {
-                        title: 'fw-bold',
-                    }
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire({
-                            title: "Dihapus!",
-                            text: "Data telah berhasil dihapus.",
-                            icon: "success"
-                        });
-                    }
-                });
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll(".delete-btn").forEach(button => {
+            button.addEventListener("click", function() {
+                let id = this.getAttribute("data-id");
+                let nama = this.getAttribute("data-nama");
+
+                console.log(id)
+                console.log(nama)
+
+                document.getElementById("deleteId").value = id;
+                document.getElementById("deleteNama").textContent = nama; // Tampilkan nama di modal
+
+                // Set action form agar mengarah ke endpoint delete yang benar
+                document.getElementById("deleteForm").action = `/kegiatanPisa/hapus/${id}`;
             });
         });
     });
-
 </script>
 
 

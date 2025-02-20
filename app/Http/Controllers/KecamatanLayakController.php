@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 
 class KecamatanLayakController extends Controller
 {
+    //================crud dokumen kecamatan
     public function dokumenkec() {
         $kecamatans = Kecamatan::all();
         $surats = JenisSurat::all();
@@ -42,14 +43,14 @@ class KecamatanLayakController extends Controller
     
         $file = $request->file('dataPendukung');
         $filename = date('Y-m-d-His') . '-' . uniqid() . '.' . $file->getClientOriginalExtension();
-        $path = $file->storeAs('dokumen-kecamtan', $filename, 'public'); // Disimpan di storage/app/public/sub-kegiatan
+        $path = $file->storeAs('dokumen-kecamatan', $filename, 'public'); // Disimpan di storage/app/public/sub-kegiatan
     
         DokumenKecamatan::create([
             'nama' => $request->nama,
             'jenis_suratid' => $request->jenis_suratid,
             'kecamatanid' => $request->kecamatanid,
             'keterangan' => $request->keterangan,
-            'dataPendukung' => $path,
+            'dataPendukung' => 'storage/'.$path,
             'is_active' => $request->is_active,
             'dibuatOleh' => $request->dibuatOleh, 
         ]);
@@ -92,20 +93,24 @@ class KecamatanLayakController extends Controller
             'jenis_suratid' => $request->jenis_suratid,
         ];
     
-        // Jika ada gambar baru
         // Jika ada file baru
         if ($request->hasFile('dataPendukung')) {
-            // Hapus file lama
-            if ($dokumen->dataPendukung && Storage::exists('public/' . $dokumen->dataPendukung)) {
-                Storage::delete('public/' . $dokumen->dataPendukung);
+            // Hapus FILE lama jika ada
+            if ($dokumen->dataPendukung) {
+                // Hapus FILE berdasarkan path lengkap yang disimpan di database
+                if (Storage::exists(str_replace('storage/', 'public/', $dokumen->dataPendukung))) {
+                    Storage::delete(str_replace('storage/', 'public/', $dokumen->dataPendukung));
+                }
             }
-
-            // Simpan file baru
+            // Simpan FILE baru dengan nama format "YYYY-MM-DD-nama-baru.PDF"
             $file = $request->file('dataPendukung');
             $fileName = date('Y-m-d-His') . '-' . uniqid() . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('public/dokumen-kecamatan', $fileName);
-            $data['dataPendukung'] = 'dokumen-kecamatan/' . $fileName;
-        }
+            $file->storeAs('dokumen-kecamatan', $fileName, 'public');
+            $path = $file->storeAs('dokumen-kecamatan', $fileName, 'public');
+
+            // Simpan nama FILE baru ke database
+            $data['dataPendukung'] = 'storage/' . $path;
+        }        
     
         // Update dokumen
         $dokumen->update($data);
@@ -113,9 +118,28 @@ class KecamatanLayakController extends Controller
         return redirect()->route('dokumen-kec')->with('success', 'Dokumen berhasil diperbarui!');
     }
 
+    public function destroyDokumenKecamatan($id)
+    {
+        $dokumen = DokumenKecamatan::findOrFail($id);
+        
+        if ($dokumen->dataPendukung) {
+            // Konversi path dari 'storage/' ke 'public/' untuk Storage::delete
+            $filePath = str_replace('storage/', 'public/', $dokumen->dataPendukung);
+            if (Storage::exists($filePath)) {
+                Storage::delete($filePath);
+            }
+        }
+
+        $dokumen->delete();
+
+        return redirect()->route('dokumen-kec')->with('success', 'Kegiatan berhasil dihapus!');
+    }
+    //======================END crud dokumen kecamatan
 
 
-    ///////kegiatan
+
+
+    //============crud kegiatan kecamatan
     public function kegiatanKecamatan() {
         $kecamatans = Kecamatan::all();
         $kegiatans = KegiatanKecamatan::all();
@@ -148,7 +172,7 @@ class KecamatanLayakController extends Controller
             'nama' => $request->nama,
             'kecamatanid' => $request->kecamatanid,
             'keterangan' => $request->keterangan,
-            'gambar' => $path,
+            'gambar' => 'storage/' . $path,
             'is_active' => $request->is_active,
             'dibuatOleh' => $request->dibuatOleh, 
         ]);
@@ -198,8 +222,8 @@ class KecamatanLayakController extends Controller
             // Simpan gambar baru dengan nama format "YYYY-MM-DD-nama-baru.jpg"
             $photo = $request->file('gambar');
             $gambarName = date('Y-m-d-His') . '-' . uniqid() . '.' . $photo->getClientOriginalExtension();
-            $photo->storeAs('kegiatan-kelurahan', $gambarName, 'public');
-            $path = $photo->storeAs('kegiatan-kelurahan', $gambarName, 'public');
+            $photo->storeAs('kegiatan-kecamatan', $gambarName, 'public');
+            $path = $photo->storeAs('kegiatan-kecamatan', $gambarName, 'public');
 
             // Simpan nama gambar baru ke database
             $data['gambar'] = 'storage/' . $path;
@@ -210,4 +234,22 @@ class KecamatanLayakController extends Controller
     
         return redirect()->route('kegiatan-kecamatan')->with('success', 'Kegiatan berhasil diperbarui!');
     }
+
+    public function destroyKegiatanKecamatan($id)
+    {
+        $suara = KegiatanKecamatan::findOrFail($id);
+        
+        if ($suara->gambar) {
+            // Konversi path dari 'storage/' ke 'public/' untuk Storage::delete
+            $filePath = str_replace('storage/', 'public/', $suara->gambar);
+            if (Storage::exists($filePath)) {
+                Storage::delete($filePath);
+            }
+        }
+
+        $suara->delete();
+
+        return redirect()->route('kegiatan-kecamatan')->with('success', 'Kegiatan berhasil dihapus!');
+    }
+    //============crud kegiatan kecamatan
 }

@@ -53,7 +53,7 @@ class KelurahanLayakAnakController extends Controller
             'jenis_suratid' => $request->jenis_suratid,
             'kelurahanid' => $request->kelurahanid,
             'keterangan' => $request->keterangan,
-            'dataPendukung' => $path,
+            'dataPendukung' => 'storage/'.$path,
             'is_active' => $request->is_active,
             'dibuatOleh' => $request->dibuatOleh, 
         ]);
@@ -96,25 +96,45 @@ class KelurahanLayakAnakController extends Controller
             'jenis_suratid' => $request->jenis_suratid,
         ];
     
-        // Jika ada gambar baru
         // Jika ada file baru
         if ($request->hasFile('dataPendukung')) {
-            // Hapus file lama
-            if ($dokumen->dataPendukung && Storage::exists('public/' . $dokumen->dataPendukung)) {
-                Storage::delete('public/' . $dokumen->dataPendukung);
+            // Hapus FILE lama jika ada
+            if ($dokumen->dataPendukung) {
+                // Hapus FILE berdasarkan path lengkap yang disimpan di database
+                if (Storage::exists(str_replace('storage/', 'public/', $dokumen->dataPendukung))) {
+                    Storage::delete(str_replace('storage/', 'public/', $dokumen->dataPendukung));
+                }
             }
-
-            // Simpan file baru
+            // Simpan FILE baru dengan nama format "YYYY-MM-DD-nama-baru.PDF"
             $file = $request->file('dataPendukung');
             $fileName = date('Y-m-d-His') . '-' . uniqid() . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('public/dokumen-kelurahan', $fileName);
-            $data['dataPendukung'] = 'dokumen-kelurahan/' . $fileName;
-        }
-    
+            $file->storeAs('dokumen-kelurahan', $fileName, 'public');
+            $path = $file->storeAs('dokumen-kelurahan', $fileName, 'public');
+
+            // Simpan nama FILE baru ke database
+            $data['dataPendukung'] = 'storage/' . $path;
+        }   
+                
         // Update dokumen
         $dokumen->update($data);
     
         return redirect()->route('HalamanDokument')->with('success', 'Dokumen berhasil diperbarui!');
+    }
+    public function destroyDokumenKelurahan($id)
+    {
+        $dokumen = DokumenKelurahan::findOrFail($id);
+        
+        if ($dokumen->dataPendukung) {
+            // Konversi path dari 'storage/' ke 'public/' untuk Storage::delete
+            $filePath = str_replace('storage/', 'public/', $dokumen->dataPendukung);
+            if (Storage::exists($filePath)) {
+                Storage::delete($filePath);
+            }
+        }
+
+        $dokumen->delete();
+
+        return redirect()->route('HalamanDokument')->with('success', 'Dokumen berhasil dihapus!');
     }
 // END CRUD KEGIATAN KELURAHAN
 

@@ -110,14 +110,31 @@ class PusatInformasiSahabatController extends Controller
     
         return redirect()->route('DokumenLayakAnak')->with('success', 'Dokumen berhasil diperbarui!');
     }
+
+    public function destroyHalamanDokumenPisa($id)
+    {
+        $kegiatan = DokumenPisa::findOrFail($id);
+        
+        if ($kegiatan->gambar) {
+            // Konversi path dari 'storage/' ke 'public/' untuk Storage::delete
+            $filePath = str_replace('storage/', 'public/', $kegiatan->gambar);
+            if (Storage::exists($filePath)) {
+                Storage::delete($filePath);
+            }
+        }
+
+        $kegiatan->delete();
+
+        return redirect()->route('KegiatanLayakanak')->with('success', 'Kegiatan berhasil dihapus!');
+    }
     
     // =========== END CRUD dokumen pisa
 
 
     // =========== CRUD kegiatan pisa
     public function HalamanKegiatan() {
-        $dokumens = KegiatanPisa::all();
-        return view('admin.KegiatanPisaa',compact('dokumens'));
+        $kegiatans = KegiatanPisa::all();
+        return view('admin.KegiatanPisaa',compact('kegiatans'));
     }
 
     public function storeKegiatanPisa(Request $request)
@@ -159,6 +176,78 @@ class PusatInformasiSahabatController extends Controller
         ]);
 
         return redirect()->route('KegiatanLayakanak')->with('success', 'Kegiatan Pisa berhasil ditambahkan!');
+    }
+
+    public function updateKegiatanPisa(Request $request, $id)
+    {
+        // dd($request->all());
+        $request->validate([
+            'nama' => 'required|string|max:255|unique:kategori_artikel,nama',
+            'gambar' => 'mimes:png,jpg,jpeg|max:2048',
+            'deskripsi' => 'required|string|max:500',
+            'is_active' => 'required|boolean',
+        ],[
+            'nama.unique' => 'Nama Klaster ini sudah digunakan, silakan pilih yang lain.',
+            'nama.required' => 'Nama wajib diisi.',
+            'nama.max' => 'Nama maksimal 255 karakter.',
+
+            'deskripsi.required' => 'deskripsi wajib diisi.',
+            'deskripsi.max' => 'deskripsi maksimal 30 karakter.',
+            
+            'gambar.mimes' => 'Gambar harus berformat JPG, PNG, atau JPEG.',
+            'gambar.max' => 'Ukuran gambar maksimal 2 MB.',
+            
+        ]);
+    
+        $klaster = KegiatanPisa::findOrFail($id);
+    
+        // Simpan data baru
+        $data = [
+            'nama' => $request->nama,
+            'deskripsi' => $request->deskripsi,
+            'is_active' => $request->is_active,
+        ];
+    
+        // Jika ada gambar baru
+        if ($request->hasFile('gambar')) {
+            // Hapus gambar lama jika ada
+            if ($klaster->gambar) {
+                // Hapus gambar berdasarkan path lengkap yang disimpan di database
+                if (Storage::exists(str_replace('storage/', 'public/', $klaster->gambar))) {
+                    Storage::delete(str_replace('storage/', 'public/', $klaster->gambar));
+                }
+            }
+            // Simpan gambar baru dengan nama format "YYYY-MM-DD-nama-baru.jpg"
+            $photo = $request->file('gambar');
+            $gambarName = date('Y-m-d-His') . '-' . uniqid() . '.' . $photo->getClientOriginalExtension();
+            $photo->storeAs('kegiatan-pisa', $gambarName, 'public');
+            $path = $photo->storeAs('kegiatan-pisa', $gambarName, 'public');
+
+            // Simpan nama gambar baru ke database
+            $data['gambar'] = 'storage/' . $path;
+        }
+    
+        // Update slider
+        $klaster->update($data);
+    
+        return redirect()->route('KegiatanLayakanak')->with('success', 'Kegiatan berhasil diperbarui!');
+    }
+
+    public function destroyKegiatanPisa($id)
+    {
+        $kegiatan = KegiatanPisa::findOrFail($id);
+        
+        if ($kegiatan->gambar) {
+            // Konversi path dari 'storage/' ke 'public/' untuk Storage::delete
+            $filePath = str_replace('storage/', 'public/', $kegiatan->gambar);
+            if (Storage::exists($filePath)) {
+                Storage::delete($filePath);
+            }
+        }
+
+        $kegiatan->delete();
+
+        return redirect()->route('KegiatanLayakanak')->with('success', 'Kegiatan berhasil dihapus!');
     }
     // =========== CRUD kegiatan pisa
 }

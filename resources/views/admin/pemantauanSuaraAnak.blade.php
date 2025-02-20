@@ -288,6 +288,30 @@
     </div>
 </div>
 
+<!-- Modal Delete Menu -->
+<div class="modal fade" id="deleteMenuModal" tabindex="-1" aria-labelledby="deleteMenuModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteMenuModalLabel">Hapus Menu</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="deleteForm" method="POST">
+                @csrf
+                @method('DELETE')
+                <div class="modal-body">
+                    <input type="hidden" id="deleteId" name="id">
+                    <p>Apakah Anda yakin ingin menghapus record<br> <strong id="deleteNama"></strong>?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-danger">Hapus</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 
 
 {{-- Finalisasi --}}
@@ -382,6 +406,27 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.getElementById("modalPemohon").innerHTML   = `<strong> Pemohon   : </strong>  ${pemohon}`; // Pemohon
                 document.getElementById("modalNomor").innerHTML     = `<strong> Nomor       : </strong>  ${nomor}`; // Nomor
                 document.getElementById("modalDeskripsi").style.textAlign = "justify";
+            });
+        });
+    });
+</script>
+
+<!-- Script Delete Data ke Modal -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll(".delete-btn").forEach(button => {
+            button.addEventListener("click", function() {
+                let id = this.getAttribute("data-id");
+                let nama = this.getAttribute("data-nama");
+
+                console.log(id)
+                console.log(nama)
+
+                document.getElementById("deleteId").value = id;
+                document.getElementById("deleteNama").textContent = nama; // Tampilkan nama di modal
+
+                // Set action form agar mengarah ke endpoint delete yang benar
+                document.getElementById("deleteForm").action = `/karya-anak/hapus/${id}`;
             });
         });
     });

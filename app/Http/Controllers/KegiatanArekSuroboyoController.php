@@ -60,7 +60,7 @@ class KegiatanArekSuroboyoController extends Controller
             'dibuatOleh' => $request->dibuatOleh
         ]);
 
-        return redirect()->route('kegiatan-arek')->with('success', 'Kategori berhasil ditambahkan!');
+        return redirect()->route('kegiatan-arek')->with('success', 'Kegiatan Surabaya berhasil ditambahkan!');
     }
 
     public function updateKegiatanArekSuroboyo(Request $request, $id)
@@ -125,5 +125,22 @@ class KegiatanArekSuroboyoController extends Controller
         $kegiatan->update($data);
     
         return redirect()->route('kegiatan-arek')->with('success', 'Artikel Anak berhasil diperbarui!');
+    }
+
+    public function destroyKegiatanArekSuroboyo($id)
+    {
+        $kegiatan = KegiatanArekSuroboyo::findOrFail($id);
+        
+        if ($kegiatan->gambar) {
+            // Konversi path dari 'storage/' ke 'public/' untuk Storage::delete
+            $filePath = str_replace('storage/', 'public/', $kegiatan->gambar);
+            if (Storage::exists($filePath)) {
+                Storage::delete($filePath);
+            }
+        }
+
+        $kegiatan->delete();
+
+        return redirect()->route('kegiatan-arek')->with('success', 'Kegiatan Arek Surabaya berhasil dihapus!');
     }
 }
