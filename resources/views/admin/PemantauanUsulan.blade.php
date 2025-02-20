@@ -38,22 +38,34 @@
                 <table class="table table-hover table-bordered align-middle text-center"  id="myTable">
                     <thead class="table-primary">
                         <tr>
-                            <th>No</th>
-                            <th>OPD</th>
-                            <th>OPD Terlibat</th>
-                            <th>Nama Usulan</th>
-                            <th>Tindak Lanjut</th>
-                            <th>Status</th>
-                            <th>Actions</th>
+                            <th class="text-center">No</th>
+                            <th class="text-center">OPD</th>
+                            <th class="text-center">Nama Usulan</th>
+                            <th class="text-center">Keterangan</th>
+                            <th class="text-center">Tindak Lanjut</th>
+                            <th class="text-center">Status</th>
+                            <th class="text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($usulans as $usulan )
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td> {{ $usulan->user ? $usulan->user->name : 'Tidak ada pengguna' }}</td>
+                            <td style="text-align: center;">{{ $loop->iteration }}</td>
+
                             <td> {{ $usulan->user ? $usulan->user->name : 'Tidak ada pengguna' }}</td>
                             <td>{{ $usulan->namaUsulan }}</td>
+
+                            <!-- Keterangan -->
+                            <td>
+                                <a href="#" 
+                                class="lihat-keterangan" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#keteranganModal"
+                                data-keterangan="{{ $usulan->keterangan }}">
+                                    Lihat Keterangan
+                                </a>
+                            </td>
+                            <!-- <td>{{ $usulan->keterangan }}</td> -->
                             <td>{{ $usulan->tindakLanjut }}</td>
                             <td>
                                 @if($usulan->is_active == 0)
@@ -62,7 +74,7 @@
                                     <span class="badge bg-success">Aktif</span>
                                 @endif
                             </td>
-                            <td>
+                            <td>    
                                 <button class="btn btn-sm btn-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editPemantauanModal" 
                                     data-id="{{ $usulan->id }}" 
                                     data-namaUsulan="{{ $usulan->namaUsulan }}" 
@@ -200,6 +212,28 @@
     </div>
 </div>
 
+<div class="modal fade" id="keteranganModal" tabindex="-1" aria-labelledby="keteranganModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Header Modal -->
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold text-center" id="keteranganModalLabel">Keterangan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            
+            <!-- Body Modal -->
+            <div class="modal-body">
+                <p id="modalKeterangan" style="text-align: justify;"></p>
+            </div>
+            
+            <!-- Footer Modal -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Script untuk Mengisi Data ke Modal -->
 <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -245,4 +279,20 @@
         });
     });
 </script>
+
+<script>
+   document.addEventListener("DOMContentLoaded", function () {
+    // Ambil semua tombol dengan class "lihat-keterangan"
+    document.querySelectorAll(".lihat-keterangan").forEach(button => {
+        button.addEventListener("click", function () {
+            // Ambil data keterangan dari atribut data-keterangan
+            let keterangan = this.getAttribute("data-keterangan");
+
+            // Tetapkan keterangan ke elemen modal
+            document.getElementById("modalKeterangan").innerHTML = keterangan;
+        });
+    });
+});
+
+ </script>   
 @endsection

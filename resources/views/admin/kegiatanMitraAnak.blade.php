@@ -115,24 +115,35 @@
             
             <!-- Tombol Tambah Artikel di atas -->           
                         <tr>
-                            <th>No</th>
-                            <th>Gambar</th>
-                            <th>Nama</th>
-                            <th>Deskripsi</th>
-                            <th>Dibuat Oleh</th>
-                            <th>Status</th>
-                            <th>Actions</th>
+                            <th class="text-center">No</th>
+                            <th class="text-center">Nama</th>
+                            <th class="text-center">Detail</th>
+                            <th class="text-center">Dibuat Oleh</th>
+                            <th class="text-center">Status</th>
+                            <th class="text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                       @foreach($mitras as $index => $mitra)
                       <tr>
-                          <td>{{ $loop->iteration }}</td>
-                            <td>
+                          <td style="text-align: center;">{{ $loop->iteration }}</td>
+                            <!-- <td>
                                 <img src="{{ asset($mitra->gambar) }}" alt="Gambar" style="width: 50px; height: 50px; object-fit: cover;">
-                            </td>
+                            </td> -->
                             <td>{{ $mitra->nama }}</td>
-                            <td>{{ $mitra->deskripsi }}</td>
+
+                            <td>
+                                <a href="#" 
+                                class="lihat-keterangan" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#keteranganModal"
+                                data-caption="{{ $mitra->caption }}" 
+                                data-deskripsi="{{ $mitra->deskripsi }}"
+                                data-gambar="{{ asset($mitra->gambar) }}">Lihat Detail</a>
+                            </td>
+
+
+                            <!-- <td>{{ $mitra->deskripsi }}</td> -->
                             <td>{{ $mitra->dibuatOleh }}</td>
                             <td>
                               @if($mitra->is_active == 0)
@@ -294,6 +305,43 @@
     </div>
 </div>
 
+<!-- modal detail -->
+<div class="modal fade" id="keteranganModal" tabindex="-1" aria-labelledby="keteranganModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Header Modal -->
+            <div class="modal-header d-flex justify-content-center">
+                <h5 class="modal-title fw-bold w-100 text-center" id="keteranganModalLabel">Detail</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!-- Body Modal -->
+            <div class="modal-body">
+                <div class="row g-4 align-items-center">
+                    <!-- Gambar -->
+                    <div class="col-md-5">
+                        <img id="modalGambar" src="" alt="Gambar" class="img-fluid rounded" style="max-height: 300px; object-fit: contain;">
+                    </div>
+
+                    <!-- Caption dan Deskripsi -->
+                    <div class="col-md-7">
+                        <div>
+                            <p id="modalCaption" style="text-align: justify; font-size: 0.95rem; color: black;"></p>
+                            <p id="modalDeskripsi" style="text-align: justify; font-size: 0.95rem; color: black;"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Modal -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
@@ -337,6 +385,33 @@
             });
         });
     });
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    // Pilih semua tombol dengan class "lihat-keterangan"
+    document.querySelectorAll(".lihat-keterangan").forEach(button => {
+        button.addEventListener("click", function () {
+            // Ambil data dari atribut elemen tombol
+            let caption = this.getAttribute("data-caption");
+            let deskripsi = this.getAttribute("data-deskripsi");
+            let gambar = this.getAttribute("data-gambar");
+
+            // Tetapkan data ke elemen dalam modal
+            document.getElementById("modalCaption").innerHTML = `<strong>Caption:</strong><br>${caption}`;
+            document.getElementById("modalDeskripsi").innerHTML = `<strong>Deskripsi:</strong><br>${deskripsi}`;
+            document.getElementById("modalGambar").src = gambar;
+
+            // Tambahkan gaya untuk teks rata kanan-kiri
+            const modalCaption = document.getElementById("modalCaption");
+            const modalDeskripsi = document.getElementById("modalDeskripsi");
+            modalCaption.style.textAlign = "justify"; // Rata kanan-kiri
+            modalDeskripsi.style.textAlign = "justify"; // Rata kanan-kiri
+        });
+    });
+});
+
+
 </script>
 
 @endsection

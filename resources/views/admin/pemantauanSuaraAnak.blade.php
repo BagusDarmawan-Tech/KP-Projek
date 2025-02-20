@@ -41,22 +41,18 @@
             <table class="table table-hover table-bordered align-middle text-center" id="myTable">
                 <thead class="table-primary">
                     <tr>
-                        <th>No</th>
-                        <!-- <th>Nomor</th>
-                        <th class="text-nowrap">Tanggal</th>
-                        <th>Pemohon</th>
-                        -->
-                        <th>Perihal</th>
-                        <th>Data Detail</th>
-                        <th>Hasil TL</th>
-                        <th>Status</th>
-                        <th>Aksi</th>
+                        <th class="text-center">No</th>
+                        <th class="text-center">Perihal</th>
+                        <th class="text-center">Data Detail</th>
+                        <th class="text-center">Hasil TL</th>
+                        <th class="text-center">Status</th>
+                        <th class="text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($suaras as $index => $suara)
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
+                        <td style="text-align: center;">{{ $loop->iteration }}</td>
                         <!-- <td>{{ $suara->nomorSuara }}</td>
                         <td class="text-nowrap">{{ $suara->tanggal }}</td>
                         <td>{{ $suara->pemohon }}</td>-->

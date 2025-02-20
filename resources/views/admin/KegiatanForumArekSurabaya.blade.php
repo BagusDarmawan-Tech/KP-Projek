@@ -96,22 +96,31 @@
                 <table class="table table-hover table-bordered align-middle text-center"  id="myTable">
                     <thead class="table-primary">
                         <tr>
-                            <th>No</th>
-                            <th>Gambar</th>
-                            <th>Nama</th>
-                            <th>Keterangan</th>
-                            <th>Dibuat Oleh</th>
-                            <th>Status</th>
-                            <th>Actions</th>
+                            <th class="text-center">No</th>
+                            <th class="text-center">Nama</th>
+                            <th class="text-center">Keterangan</th>
+                            <th class="text-center">Dibuat Oleh</th>
+                            <th class="text-center">Status</th>
+                            <th class="text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                       @foreach($kegiatans as $index => $kegiatan)
                       <tr>
-                          <td>{{ $loop->iteration }}</td>
-                          <td><img src="{{ asset($kegiatan->gambar) }}" alt="Kegiatan CFCI" width="80"></td>
+                          <td style="text-align: center;">{{ $loop->iteration }}</td>
+                          <!-- <td><img src="{{ asset($kegiatan->gambar) }}" alt="Kegiatan CFCI" width="80"></td> -->
                           <td>{{ $kegiatan->nama }}</td>
-                            <td>{{ $kegiatan->keterangan }}</td>
+                
+                          <td>
+                                <a href="#" 
+                                class="lihat-keterangan" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#keteranganModal"
+                                data-deskripsi="{{ $kegiatan->keterangan}}"
+                                data-gambar="{{ asset($kegiatan->gambar) }}">Lihat Detail</a>
+                            </td>
+
+                            <!-- <td>{{ $kegiatan->keterangan }}</td> -->
                             <td>{{ $kegiatan->dibuatOleh }}</td>
                             <td>
                               @if($kegiatan->is_active == 0)
@@ -257,6 +266,38 @@
     </div>
 </div>
 
+<!-- modal detail -->
+<div class="modal fade" id="keteranganModal" tabindex="-1" aria-labelledby="keteranganModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <!-- Header Modal -->
+            <div class="modal-header d-flex justify-content-center">
+                <h5 class="modal-title fw-bold w-100 text-center" id="keteranganModalLabel">Detail</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!-- Body Modal -->
+            <div class="modal-body text-center">
+                <!-- Gambar -->
+                <div>
+                    <img id="modalGambar" src="" alt="Gambar Kegiatan" class="img-fluid rounded mb-3" style="max-height: 250px; object-fit: contain;">
+                </div>
+
+                <!-- Keterangan -->
+                <div>
+                    <p id="modalDeskripsi" style="text-align: center; font-size: 1rem; color: black;"></p>
+                </div>
+            </div>
+
+            <!-- Footer Modal -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 
 <script>
@@ -285,6 +326,7 @@
     });
   </script>
 
+
 <!-- Script Delete Data ke Modal -->
 <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -306,5 +348,29 @@
     });
 </script>
 
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Pilih semua tombol dengan class "lihat-keterangan"
+    document.querySelectorAll(".lihat-keterangan").forEach(button => {
+        button.addEventListener("click", function () {
+            // Ambil data dari atribut elemen tombol
+            let deskripsi = this.getAttribute("data-deskripsi");
+            let gambar = this.getAttribute("data-gambar");
+
+            // Tetapkan data ke elemen dalam modal
+            document.getElementById("modalDeskripsi").innerHTML = `<strong>Keterangan :</strong><br>${deskripsi}`;
+            document.getElementById("modalGambar").src = gambar;
+
+            // Tambahkan gaya untuk menaruh teks di tengah
+            const modalDeskripsi = document.getElementById("modalDeskripsi");
+            modalDeskripsi.style.textAlign = "center"; // Teks di tengah horizontal
+        });
+    });
+});
+
+
+
+</script>
 
 @endsection

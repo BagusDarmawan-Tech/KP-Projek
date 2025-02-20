@@ -37,19 +37,19 @@
                 <table class="table table-hover table-bordered align-middle text-center"  id="myTable">
                     <thead class="table-primary">
                         <tr>
-                            <th>No</th>
-                            <th>Gambar</th>
-                            <th>Nama</th>
-                            <th>Caption</th>
-                            <th>Dibuat Oleh</th>
-                            <th>Status</th>
-                            <th>Actions</th>
+                            <th class="text-center">No</th>
+                            <th class="text-center">Gambar</th>
+                            <th class="text-center">Nama</th>
+                            <th class="text-center">Caption</th>
+                            <th class="text-center">Dibuat Oleh</th>
+                            <th class="text-center">Status</th>
+                            <th class="text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($galeris as $galeri)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
+                            <td style="text-align: center;">{{ $loop->iteration }}</td>
                             <td><img src="{{ asset($galeri->gambar) }}" alt="Gambar Galeri" width="80"></td>
                             <td class="nama">{{ $galeri->nama }}</td>
                             <td class="caption">{{ $galeri->caption }}</td>

@@ -38,20 +38,20 @@
                 <table class="table table-hover table-bordered align-middle text-center"  id="myTable">
                     <thead class="table-primary">
                         <tr>
-                            <th>No</th>
-                            <th>Klaster</th>
-                            <th>Nama Sub Kegiatan</th>
-                            <th>Data Dukung</th>
-                            <th>Dibuat Oleh</th>
-                            <th>Status</th>
-                            <th>Actions</th>
+                            <th class="text-center" >No</th>
+                            <th class="text-center" >Klaster</th>
+                            <th class="text-center" >Nama Sub Kegiatan</th>
+                            <th class="text-center" >Data Dukung</th>
+                            <th class="text-center" >Dibuat Oleh</th>
+                            <th class="text-center" >Status</th>
+                            <th class="text-center" >Actions</th>
                         </tr>
                     </thead>
                     <tbody>
 
                         @foreach ($subKegiatans as $subKegiatan)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
+                            <td style="text-align: center;">{{ $loop->iteration }}</td>
                             <td>{{ $subKegiatan->user ? $subKegiatan->user->nama : 'Tidak ada pengguna' }}</td>
                             <td>{{ $subKegiatan->nama }}</td>
                             <td>

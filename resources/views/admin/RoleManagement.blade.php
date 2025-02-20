@@ -38,14 +38,14 @@
                 <table class="table table-hover table-bordered align-middle text-center">
                     <thead class="table-primary">
                         <tr>
-                            <th>No</th>
-                            <th>Nama</th>
-                            <th>Actions</th>
+                            <th class="text-center">No</th>
+                            <th class="text-center">Nama</th>
+                            <th class="text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>1</td>
+                            <td style="text-align: center;">1</td>
                             <td>Artikel</td>
                             <td>
                             <button class="btn btn-sm btn-primary edit-btn" data-bs-toggle="modal" data-bs-target="#EditModal"data-status="Aktif"><i class="bi bi-pencil-square"></i></button>

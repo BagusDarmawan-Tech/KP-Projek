@@ -34,29 +34,38 @@
                 <table class="table table-hover table-bordered align-middle text-center"  id="myTable">
                     <thead class="table-primary">
                         <tr>
-                            <th>No</th>
-                            <th>Gambar</th>
-                            <th>Nama</th>
-                            <th>Caption</th>
-                            <th>Deskripsi</th>
-                            <th>Status</th>
-                            <th>Actions</th>
+                            <th class="text-center">No</th>
+                            <th class="text-center">Nama</th>
+                            <th class="text-center">Status</th>
+                            <th class="text-center">Detail</th>
+                            <th class="text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($cfcis as $index => $cfci)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td><img src="{{ asset($cfci->gambar) }}" alt="Kegiatan CFCI" width="80"></td>
+                            <td style="text-align: center;">{{ $loop->iteration }}</td>
+                            <!-- <td><img src="{{ asset($cfci->gambar) }}" alt="Kegiatan CFCI" width="80"></td> -->
                             <td>{{ $cfci->nama }}</td>
-                            <td>{{ $cfci->caption }}</td>
-                            <td>{{ $cfci->deskripsi }}</td>
+
+                            <!-- <td>{{ $cfci->caption }}</td> -->
+                             
                             <td>
                                 @if($cfci->is_active == 0)
                                 <span class="badge bg-warning">Non Aktif</span>
                                 @else
                                     <span class="badge bg-success">Aktif</span>
                                 @endif
+                            </td>
+                            <!-- bagian detail -->
+                            <td>
+                                <a href="#" 
+                                class="lihat-keterangan" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#keteranganModal"
+                                data-caption="{{ $cfci->caption }}" 
+                                data-deskripsi="{{ $cfci->deskripsi }}"
+                                data-gambar="{{ asset($cfci->gambar) }}">Lihat Keterangan</a>
                             </td>
                             <td>
                                 <button class="btn btn-sm btn-primary edit-cfci" data-bs-toggle="modal" data-bs-target="#editKegiatanModal" 
@@ -207,6 +216,46 @@
 </div>
 
 
+<!-- modal detail  -->
+<div class="modal fade" id="keteranganModal" tabindex="-1" aria-labelledby="keteranganModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Header Modal -->
+            <div class="modal-header">
+    <h5 class="modal-title fw-bold" id="keteranganModalLabel">Detail</h5>
+    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+</div>
+
+
+            <!-- Body Modal -->
+            <div class="modal-body">
+                <div class="row">
+                    <!-- Gambar -->
+                    <div class="col-md-4">
+                        <img id="modalGambar" src="" alt="Gambar" class="img-fluid rounded">
+                    </div>
+
+                    <!-- Caption dan Deskripsi -->
+                    <div class="col-md-8">
+                        <p id="modalCaption" style="text-align: justify;"></p>
+                        <p id="modalDeskripsi" style="text-align: justify;"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Modal -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
       document.querySelectorAll(".edit-cfci").forEach(button => {
@@ -249,6 +298,44 @@
             });
         });
     });
+</script>
+
+<!-- modal detail -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    // Pilih semua tombol dengan class "lihat-keterangan"
+    document.querySelectorAll(".lihat-keterangan").forEach(button => {
+        button.addEventListener("click", function () {
+            // Ambil data dari atribut elemen tombol
+            let caption = this.getAttribute("data-caption");
+            let deskripsi = this.getAttribute("data-deskripsi");
+            let gambar = this.getAttribute("data-gambar");
+
+            // Tetapkan data ke elemen dalam modal
+            document.getElementById("modalCaption").innerHTML = `<strong>Caption :</strong><br>${caption}`;
+            document.getElementById("modalDeskripsi").innerHTML = `<strong>Deskripsi :</strong><br>${deskripsi}`;
+            document.getElementById("modalGambar").src = gambar;
+
+            // Tambahkan gaya untuk memusatkan teks header di tengah
+            const modalHeader = document.querySelector("#keteranganModal .modal-header");
+            modalHeader.style.display = "flex";
+            modalHeader.style.justifyContent = "center";
+            modalHeader.style.alignItems = "center";
+            modalHeader.style.position = "relative";
+
+            const closeButton = modalHeader.querySelector(".btn-close");
+            closeButton.style.position = "absolute";
+            closeButton.style.right = "10px";
+
+            // Tambahkan gaya untuk teks rata kanan-kiri
+            const modalCaption = document.getElementById("modalCaption");
+            const modalDeskripsi = document.getElementById("modalDeskripsi");
+            modalCaption.style.textAlign = "justify"; // Rata kanan-kiri
+            modalDeskripsi.style.textAlign = "justify"; // Rata kanan-kiri
+        });
+    });
+});
+
 </script>
 
 @endsection

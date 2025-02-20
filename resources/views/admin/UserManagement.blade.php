@@ -97,18 +97,18 @@
             <table class="table table-hover table-bordered align-middle text-center" id="myTable">
                 <thead class="table-primary">
                     <tr>
-                        <th>No</th>
-                        <th>Email</th>
-                        <th>Nama</th>
-                        <th>Role</th>
-                        <th>Dibuat Oleh</th>
-                        <th>Actions</th>
+                        <th class="text-center">No</th>
+                        <th class="text-center">Email</th>
+                        <th class="text-center">Nama</th>
+                        <th class="text-center">Role</th>
+                        <th class="text-center">Dibuat Oleh</th>
+                        <th class="text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($user as $person)
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
+                        <td style="text-align: center;">{{ $loop->iteration }}</td>
                         <td>{{ $person->name }}</td>
                         <td>{{ $person->email }}</td>
                         <td>{{ $person->getRoleNames()->implode(', ') }}</td>

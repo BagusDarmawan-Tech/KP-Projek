@@ -98,19 +98,19 @@
             <table class="table table-hover table-bordered align-middle text-center" id="myTable">
                 <thead class="table-primary">
                     <tr>
-                        <th>No</th>
-                        <th>Jenis Dokumen</th>
-                        <th>Kecamatan</th>
-                        <th>Data Dukung</th>
-                        <th>Dibuat Oleh</th>
-                        <th>Status</th>
-                        <th>Actions</th>
+                        <th class="text-center">No</th>
+                        <th class="text-center">Jenis Dokumen</th>
+                        <th class="text-center">Kecamatan</th>
+                        <th class="text-center">Data Dukung</th>
+                        <th class="text-center">Dibuat Oleh</th>
+                        <th class="text-center">Status</th>
+                        <th class="text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($dokumens as $index => $dokumen)
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
+                        <td style="text-align: center;">{{ $loop->iteration }}</td>
                         <td> {{ $dokumen->surat ? $dokumen->surat->nama : 'Tidak ada pengguna' }}</td>
                         <td> {{ $dokumen->kecamatan ? $dokumen->kecamatan->nama : 'Tidak ada pengguna' }}</td>
                         <td>

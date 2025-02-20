@@ -38,20 +38,20 @@
                 <table class="table table-hover table-bordered align-middle text-center"  id="myTable">
                     <thead class="table-primary">
                         <tr>
-                            <th>No</th>
-                            <th>Icon</th>
-                            <th>Nama</th>
-                            <th>Slug</th>
-                            <th>Gambar</th>
-                            <th>Dibuat Oleh</th>
-                            <th>Status</th>
-                            <th>Actions</th>
+                            <th class="text-center">No</th>
+                            <th class="text-center">Icon</th>
+                            <th class="text-center">Nama</th>
+                            <th class="text-center">Slug</th>
+                            <th class="text-center">Gambar</th>
+                            <th class="text-center">Dibuat Oleh</th>
+                            <th class="text-center">Status</th>
+                            <th class="text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($klasters as $klaster)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
+                            <td style="text-align: center;">{{ $loop->iteration }}</td>
                             <td><i class="{{ $klaster->icon }}"></i></td>
                             <td>{{ $klaster->nama }}</td>
                             <td>{{ $klaster->slug }}</td>
