@@ -129,6 +129,15 @@ class WebManagementController extends Controller
     public function destroySlider($id)
     {
         $slider = Slider::findOrFail($id);
+
+        if ($slider->gambar) {
+            // Konversi path dari 'storage/' ke 'public/' untuk Storage::delete
+            $filePath = str_replace('storage/', 'public/', $slider->gambar);
+            if (Storage::exists($filePath)) {
+                Storage::delete($filePath);
+            }
+        }
+        
         $slider->delete();
 
         return redirect()->route('slider')->with('success', 'Slider berhasil dihapus!');
@@ -184,7 +193,7 @@ class WebManagementController extends Controller
             'nama' => $request->nama,
             'klusterid' => $request->klusterid,
             'keterangan' => $request->keterangan,
-            'dataPendukung' => $path,
+            'dataPendukung' => 'storage/' .$path,
             'is_active' => $request->is_active,
             'dibuatOleh' => $request->dibuatOleh, 
         ]);
@@ -247,6 +256,15 @@ class WebManagementController extends Controller
     public function destroySubKegiatan($id)
     {
         $subkegiatan = SubKegiatan::findOrFail($id);
+
+        if ($subkegiatan->dataPendukung) {
+            // Konversi path dari 'storage/' ke 'public/' untuk Storage::delete
+            $filePath = str_replace('storage/', 'public/', $subkegiatan->dataPendukung);
+            if (Storage::exists($filePath)) {
+                Storage::delete($filePath);
+            }
+        }
+
         $subkegiatan->delete();
 
         return redirect()->route('sub-kegiatan')->with('success', 'Sub Kegiatan berhasil dihapus!');
@@ -377,6 +395,15 @@ class WebManagementController extends Controller
     public function destroyForumAnak($id)
     {
         $forum = ForumAnak::findOrFail($id);
+
+        if ($forum->gambar) {
+            // Konversi path dari 'storage/' ke 'public/' untuk Storage::delete
+            $filePath = str_replace('storage/', 'public/', $forum->gambar);
+            if (Storage::exists($filePath)) {
+                Storage::delete($filePath);
+            }
+        }
+        
         $forum->delete();
 
         return redirect()->route('forum-anak')->with('success', 'Forum Anak berhasil dihapus!');
@@ -503,6 +530,15 @@ class WebManagementController extends Controller
     public function destroyGaleri($id)
     {
         $galeri = Galeri::findOrFail($id);
+
+        if ($galeri->gambar) {
+            // Konversi path dari 'storage/' ke 'public/' untuk Storage::delete
+            $filePath = str_replace('storage/', 'public/', $galeri->gambar);
+            if (Storage::exists($filePath)) {
+                Storage::delete($filePath);
+            }
+        }
+
         $galeri->delete();
 
         return redirect()->route('galeri')->with('success', 'Galeri berhasil dihapus!');
@@ -693,6 +729,15 @@ class WebManagementController extends Controller
     public function destroyKlaster($id)
     {
         $klaster = Klaster::findOrFail($id);
+        
+        if ($klaster->gambar) {
+            // Konversi path dari 'storage/' ke 'public/' untuk Storage::delete
+            $filePath = str_replace('storage/', 'public/', $klaster->gambar);
+            if (Storage::exists($filePath)) {
+                Storage::delete($filePath);
+            }
+        }
+
         $klaster->delete();
 
         return redirect()->route('Klaster')->with('success', 'Klaster berhasil dihapus!');
@@ -773,6 +818,7 @@ class WebManagementController extends Controller
     public function destroyPemantauan($id)
     {
         $pemantauan = PemantauanUsulan::findOrFail($id);
+
         $pemantauan->delete();
 
         return redirect()->route('PemantauanUsulanAnak')->with('success', 'Pemantauan berhasil dihapus!');
@@ -878,8 +924,8 @@ class WebManagementController extends Controller
             // Simpan gambar baru dengan nama format "YYYY-MM-DD-nama-baru.jpg"
             $photo = $request->file('gambar');
             $gambarName = date('Y-m-d-His') . '-' . uniqid() . '.' . $photo->getClientOriginalExtension();
-            $photo->storeAs('slider', $gambarName, 'public');
-            $path = $photo->storeAs('slider', $gambarName, 'public');
+            $photo->storeAs('halaman', $gambarName, 'public');
+            $path = $photo->storeAs('halaman', $gambarName, 'public');
 
             // Simpan nama gambar baru ke database
             $data['gambar'] = 'storage/' . $path;
@@ -895,6 +941,14 @@ class WebManagementController extends Controller
     {
         $halaman = Halaman::findOrFail($id);
         $halaman->delete();
+
+        if ($halaman->gambar) {
+            // Konversi path dari 'storage/' ke 'public/' untuk Storage::delete
+            $filePath = str_replace('storage/', 'public/', $halaman->gambar);
+            if (Storage::exists($filePath)) {
+                Storage::delete($filePath);
+            }
+        }
 
         return redirect()->route('Halamandong')->with('success', 'Halaman berhasil dihapus!');
     }
@@ -1041,10 +1095,22 @@ class WebManagementController extends Controller
     public function destroyArtikel($id)
     {
         $artikel = Artikel::findOrFail($id);
+    
+        // Hapus gambar jika ada
+        if ($artikel->gambar) {
+            // Konversi path dari 'storage/' ke 'public/' untuk Storage::delete
+            $filePath = str_replace('storage/', 'public/', $artikel->gambar);
+            if (Storage::exists($filePath)) {
+                Storage::delete($filePath);
+            }
+        }
+    
+        // Hapus artikel dari database
         $artikel->delete();
-
+    
         return redirect()->route('Artikel')->with('success', 'Artikel berhasil dihapus!');
     }
+    
     //================== END CRUD Artikel
 
 

@@ -48,7 +48,7 @@ class MitraAnakController extends Controller
         if ($request->hasFile('gambar')) {
             $photo = $request->file('gambar');
             $filename = date('Y-m-d-His') . '-' . uniqid() . '.' . $photo->getClientOriginalExtension();
-            $path = $photo->storeAs('kegiatan_mitra_anak', $filename, 'public'); // Simpan di storage/public/kegiatan_mitra_anak
+            $path = $photo->storeAs('kegiatan-cfci', $filename, 'public'); // Simpan di storage/public/kegiatan_mitra_anak
         } else {
             return redirect()->back()->with('error', 'Gambar tidak ditemukan');
         }
@@ -123,6 +123,23 @@ class MitraAnakController extends Controller
         $kegiatan->update($data);
     
         return redirect()->route('kegiatan-cfci')->with('success', 'kegiatan-cfci berhasil diperbarui!');
+    }
+
+    public function destroyMitraCfci($id)
+    {
+        $kegiatan = KegiatanCfci::findOrFail($id);
+        
+        if ($kegiatan->gambar) {
+            // Konversi path dari 'storage/' ke 'public/' untuk Storage::delete
+            $filePath = str_replace('storage/', 'public/', $kegiatan->gambar);
+            if (Storage::exists($filePath)) {
+                Storage::delete($filePath);
+            }
+        }
+
+        $kegiatan->delete();
+
+        return redirect()->route('kegiatan-cfci')->with('success', 'Kegiatan CFCI berhasil dihapus!');
     }
 // ================================ END CRUD Kegiatan CFCI
 
@@ -245,6 +262,23 @@ class MitraAnakController extends Controller
     
         return redirect()->route('artikel-mitraanak')->with('success', 'Artikel Anak berhasil diperbarui!');
     }
+
+    public function destroyArtikelMitra($id)
+    {
+        $artikel = ArtikelMitraAnak::findOrFail($id);
+        
+        if ($artikel->gambar) {
+            // Konversi path dari 'storage/' ke 'public/' untuk Storage::delete
+            $filePath = str_replace('storage/', 'public/', $artikel->gambar);
+            if (Storage::exists($filePath)) {
+                Storage::delete($filePath);
+            }
+        }
+
+        $artikel->delete();
+
+        return redirect()->route('artikel-mitraanak')->with('success', 'Artikel mitra berhasil dihapus!');
+    }
       //========================END CRUD ArtikelMitra ANAK 
 
     
@@ -364,6 +398,24 @@ class MitraAnakController extends Controller
         $kegiatan_mitra_anak->update($data);
     
         return redirect()->route('kegiatan-mitra')->with('success', 'Kegiatan Mitra Anak berhasil diperbarui!');
+    }
+
+
+    public function destroyKegiatanMitra($id)
+    {
+        $kegiatan = KegiatanMitraAnak::findOrFail($id);
+        
+        if ($kegiatan->gambar) {
+            // Konversi path dari 'storage/' ke 'public/' untuk Storage::delete
+            $filePath = str_replace('storage/', 'public/', $kegiatan->gambar);
+            if (Storage::exists($filePath)) {
+                Storage::delete($filePath);
+            }
+        }
+
+        $kegiatan->delete();
+
+        return redirect()->route('kegiatan-mitra')->with('success', 'Kegiatan mitra berhasil dihapus!');
     }
   //======================== END CRUD KEGIATAN MITRA ANAK 
 
