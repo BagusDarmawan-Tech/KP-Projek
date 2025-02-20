@@ -42,11 +42,12 @@
                 <thead class="table-primary">
                     <tr>
                         <th>No</th>
-                        <th>Nomor</th>
+                        <!-- <th>Nomor</th>
                         <th class="text-nowrap">Tanggal</th>
                         <th>Pemohon</th>
+                        -->
                         <th>Perihal</th>
-                        <th>Deskripsi</th>
+                        <th>Data Detail</th>
                         <th>Hasil TL</th>
                         <th>Status</th>
                         <th>Aksi</th>
@@ -56,11 +57,34 @@
                     @foreach($suaras as $index => $suara)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $suara->nomorSuara }}</td>
+                        <!-- <td>{{ $suara->nomorSuara }}</td>
                         <td class="text-nowrap">{{ $suara->tanggal }}</td>
-                        <td>{{ $suara->pemohon }}</td>
+                        <td>{{ $suara->pemohon }}</td>-->
                         <td>{{ $suara->perihal }}</td>
-                        <td>{{ $suara->deskripsi}}</td>
+
+
+                            <!-- bagian deskripsi -->
+                        <!-- <td>
+                            <a href="#"class="lihat-detail" 
+                            data-deskripsi="{{ $suara->deskripsi}}">Lihat Detail</a>
+                        </td> -->
+
+                        <!-- bagian detail -->
+                        <td>
+                            <a href="#" 
+                                class="lihat-detail" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#deskripsiModal" 
+                                data-judul="{{ $suara->perihal }}" 
+                                data-deskripsi="{{ $suara->deskripsi }}" 
+                                data-gambar="{{ asset($suara->gambar) }}" 
+                                data-tanggal="{{ $suara->tanggal }}" 
+                                data-pemohon="{{ $suara->pemohon }}"
+                                data-nomor="{{ $suara->nomorSuara }}">Lihat Detail</a>
+                        </td>
+
+
+
                         @if(is_null($suara->tindakLanjut))
                             <td class="text-danger">Dinsos : ✖ Belum di TL</td>
                         @else
@@ -119,7 +143,7 @@
         <div class="modal-content">
             <div class="modal-header d-flex flex-column align-items-center">
             <h5 class="modal-title fw-bold text-center mb-0" id="tambahPemantauanModalLabel">Tambah Pemantauan Baru</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
             </div>
             <div class="modal-body">
                 <form method="POST" action="{{ route('createPemantauanSuara') }}" >
@@ -148,7 +172,7 @@
         <div class="modal-content">
             <div class="modal-header d-flex flex-column align-items-center">
             <h5 class="modal-title fw-bold text-center mb-0" id="tambahPemantauanModalLabel">Tambah Pemantauan Baru</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
             </div>
             <div class="modal-body">
               <form id="editUsulanForm" method="POST" enctype="multipart/form-data">
@@ -239,6 +263,31 @@
 </div>
 
 
+<!-- modal -->
+<div class="modal fade" id="deskripsiModal" tabindex="-1" aria-labelledby="deskripsiModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header d-flex justify-content-center w-100">
+                <h5 class="modal-title fw-bold text-center" id="deskripsiModalLabel">Detail</h5>
+            </div>
+            <div class="modal-body">
+    <div class="card" style="width: 100%;">
+        <div class="card-body">
+            <h5 id="modalJudul" class="card-title text-center"></h5>
+            <p id="modalNomor" class="info-row"></p>
+            <p id="modalTanggal" class="info-row"></p>
+            <p id="modalPemohon" class="info-row"></p>
+            <p id="modalDeskripsi" class="card-text"></p>
+        </div>
+    </div>
+</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 {{-- Finalisasi --}}
@@ -259,7 +308,7 @@
     });
 </script>
 
-{{-- <update --}}
+<!-- {{-- <update --}} -->
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll(".edit-usulan").forEach(button => {
@@ -307,4 +356,35 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 </script>
+
+
+<!-- bagian data detail -->
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".lihat-detail").forEach(button => {
+            button.addEventListener("click", function () {
+                // Ambil data dari atribut elemen
+                let judul = this.getAttribute("data-judul");
+                let deskripsi = this.getAttribute("data-deskripsi");
+                let gambar = this.getAttribute("data-gambar");
+                let tanggal = this.getAttribute("data-tanggal");
+                let pemohon = this.getAttribute("data-pemohon");
+                let nomor = this.getAttribute("data-nomor");
+
+                // Tetapkan teks header modal selalu "Detail"
+                document.getElementById("deskripsiModalLabel").innerText = "Detail";
+
+                // Set nilai ke elemen dalam modal
+                document.getElementById("modalJudul").innerText = judul; // Judul dalam kartu mengambil dari perihal
+                document.getElementById("modalDeskripsi").innerHTML = `<strong> Deskripsi : </strong>  <br> ${deskripsi}`; // Deskripsi
+                document.getElementById("modalTanggal").innerHTML   = `<strong> Tanggal   : </strong>  ${tanggal}`; // Tanggal
+                document.getElementById("modalPemohon").innerHTML   = `<strong> Pemohon   : </strong>  ${pemohon}`; // Pemohon
+                document.getElementById("modalNomor").innerHTML     = `<strong> Nomor       : </strong>  ${nomor}`; // Nomor
+                document.getElementById("modalDeskripsi").style.textAlign = "justify";
+            });
+        });
+    });
+</script>
+
 @endsection

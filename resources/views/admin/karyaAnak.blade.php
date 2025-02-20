@@ -7,7 +7,7 @@
 <!-- Tambahkan CSS Kustom -->
 <link href="{{ asset('assets/css/tabel.css') }}" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="{{ asset('assets/js/hapus.js') }}"></script>
+<!-- <script src="{{ asset('assets/js/hapus.js') }}"></script> -->
 
 <style>
     /* untuk "Terverifikasi" */
@@ -33,10 +33,9 @@
 </div>
 @endif
 @if(session('success'))
-<div class="alert alert-success">
-    <ul>
-            <li>{{ session('success') }}</li>
-    </ul>
+<div class="alert alert-success text-center">
+    {{ session('success')}}
+  
 </div>
 @endif
 <div class="card shadow-lg border-0 position-relative overflow-hidden mb-5">
@@ -58,14 +57,12 @@
         <div class="table-responsive">
             <table class="table table-hover table-bordered align-middle text-center"  id="myTable">
                 <thead class="table-primary">
-                    <tr>
+                    <tr class = "text-center">
                         <th>No</th>
                         <th class="text-nowrap">Tanggal</th>
                         <th>Pemohon</th>
                         <th>Kreator</th>
-                        <th>Judul</th>
-                        <th>Deskripsi</th>
-                        <th>Hasil Karya</th>
+                        <th>Detail</th>
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>
@@ -77,9 +74,21 @@
                         <td class="text-nowrap">{{ $karya->tanggal }}</td>
                         <td>{{ $karya->pemohon }}</td>
                         <td>{{ $karya->kreator }}</td>
-                        <td>{{ $karya->judul }}</td>
-                        <td>{{ $karya->deskripsi }}</td>
-                        <td><img src="{{ asset($karya->gambar) }}" width="60"></td>
+                    
+                        <!-- bagian deskripsi -->
+                        <td>
+                            <a href="#" 
+                            class="lihat-detail" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#deskripsiModal" 
+                            data-id="{{ $karya->id }}" 
+                            data-judul="{{ $karya->judul }}" 
+                            data-deskripsi="{{ $karya->deskripsi }}" 
+                            data-gambar="{{ asset($karya->gambar) }}">Lihat Detail</a>
+                        </td>
+
+    
+                        <!-- <td>{{ $karya->deskripsi }}</td> -->
                         <td>
                             @if($karya->status == 0)
                                 <span class="badge bg-warning">Proses Verifikasi</span>
@@ -89,6 +98,7 @@
                         </td>                        
                         <td>
                             <div class="d-flex align-items-center justify-content-center gap-1 py-1" style="min-height: 38px;">
+                                
                                 <!-- Tombol Edit -->
                                 <button class="btn btn-sm btn-primary edit-karya" data-bs-toggle="modal" data-bs-target="#editKaryaModal"
                                     data-id="{{ $karya->id }}" 
@@ -100,9 +110,9 @@
                                 </button>
 
                                 <!-- Tombol Hapus -->
-                                <button class="btn btn-sm btn-danger delete-slider">
-                                    <i class="bi bi-trash"></i>
-                                </button>
+                                <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i></button>
+
+
 
                                 <!-- Tombol Verifikasi -->
                                 <button class="btn btn-sm btn-success verifikasi-edit" data-bs-toggle="modal" data-bs-target="#verifikasiModal" 
@@ -127,34 +137,34 @@
         <div class="modal-content">
             <div class="modal-header d-flex flex-column align-items-center">
             <h5 class="modal-title fw-bold text-center mb-0" id="tambahKaryaModalLabel">Tambah Karya Anak Baru</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
             </div>
             <div class="modal-body">
             <form method="POST" action="{{ route('createKaryaAnak') }}" enctype="multipart/form-data">
                     @csrf 
                 <div class="mb-3">
                     <label class="form-label">Kreator</label>
-                    <input type="text" name="kreator" class="form-control" required placeholder="Masukkan nama kreator">
+                    <input type="text" name="kreator" class="form-control"  placeholder="Masukkan nama kreator">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Judul</label>
-                    <input type="text" name="judul" class="form-control" required placeholder="Masukkan judul">
+                    <input type="text" name="judul" class="form-control"  placeholder="Masukkan judul">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Deskripsi</label>
-                    <textarea class="form-control" name="deskripsi" rows="3" required placeholder="Masukkan deskripsi"></textarea>
+                    <textarea class="form-control" name="deskripsi" rows="3"  placeholder="Masukkan deskripsi"></textarea>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Upload Foto</label>
                     <input type="file" name="gambar" class="form-control" accept=".jpg, .png">
                 </div>
                 <input type="hidden" name="pemohon" value="{{ Auth::user()->name }}">
-                <div class="modal-footer">
+            </div>
+            <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </form>
-            </div>
         </div>
     </div>
 </div>
@@ -165,7 +175,7 @@
         <div class="modal-content">
             <div class="modal-header d-flex flex-column align-items-center">
             <h5 class="modal-title fw-bold text-center mb-0" id="editKaryaModalLabel">Edit Karya Anak</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
             </div>
             <div class="modal-body">
                 <form id="editKaryaForm" method="POST" enctype="multipart/form-data">
@@ -201,6 +211,7 @@
         </div>
     </div>
 </div>
+</div>
 
 <!-- Modal Verifikasi -->
 <div class="modal fade" id="verifikasiModal" tabindex="-1" aria-labelledby="verifikasiModalLabel" aria-hidden="true">
@@ -226,6 +237,53 @@
         </div>
     </div>
 </div>
+
+
+<!-- Modal detail-->
+<div class="modal fade" id="deskripsiModal" tabindex="-1" aria-labelledby="deskripsiModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header d-flex justify-content-center w-100 ">
+                <h5 class="modal-title fw-bold text-center" id="deskripsiModalLabel">Detail</h5>
+                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+            </div>
+            <div class="modal-body">
+                <!-- Kartu di dalam Modal -->
+                <div class="card" style="width: 100%;">
+                    <img id="modalGambar" class="card-img-top" alt="Gambar Karya">
+                    <div class="card-body">
+                        <h5 id="modalJudul" class="card-title text-center"></h5>
+                        <p id="modalDeskripsi" class="card-text text-justify"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal delete -->
+<div class="modal fade" id="deleteMenuModal" tabindex="-1" aria-labelledby="deleteMenuModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteMenuModalLabel">Hapus Menu</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Apakah Anda yakin ingin menghapus Data di Menu ini?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-danger">Hapus</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -278,4 +336,27 @@
         });
     });
 </script>
+
+<!-- untuk deskripsi -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".lihat-detail").forEach(button => {
+            button.addEventListener("click", function () {
+                // Ambil data dari atribut elemen
+                let judul = this.getAttribute("data-judul");
+                let deskripsi = this.getAttribute("data-deskripsi");
+                let gambar = this.getAttribute("data-gambar");
+
+                // Tetapkan teks header modal selalu "Detail"
+                document.getElementById("deskripsiModalLabel").innerText = "Detail";
+
+                // Set nilai ke elemen dalam modal
+                document.getElementById("modalJudul").innerText = judul; // Judul dalam kartu
+                document.getElementById("modalDeskripsi").innerText = deskripsi; // Deskripsi
+                document.getElementById("modalGambar").src = gambar; // Gambar dalam kartu
+            });
+        });
+    });
+</script>
 @endsection
+
