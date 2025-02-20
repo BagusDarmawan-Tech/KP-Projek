@@ -44,6 +44,8 @@ class WebManagementController extends Controller
             'gambar.mimes' => 'Gambar harus berformat PNG, JPG, atau JPEG.',
             'gambar.max' => 'Ukuran gambar maksimal 2 MB.',
             
+            'deskripsi.required' => 'Deskripsi wajib diisi.',
+            'deskripsi.max' => 'Deskripsi maksimal 500 karakter.',
         ]);
     
         

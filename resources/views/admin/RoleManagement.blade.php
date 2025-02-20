@@ -60,56 +60,650 @@
 </div>
 
 
-<!-- Modal Tambah  -->
+<!-- Modal Tambah -->
 <div class="modal fade" id="kategoriModal" tabindex="-1" aria-labelledby="kategoriModalLabel" aria-hidden="true">
-<div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header d-flex justify-content-center w-100 ">
+            <div class="modal-header d-flex justify-content-center w-100">
                 <h5 class="modal-title fw-bold text-center" id="kategoriModalLabel">Tambah Menu Role Management</h5>
             </div>
             <div class="modal-body">
                 <form>
+                    <!-- Input Nama -->
                     <div class="mb-3">
                         <label for="kategoriNama" class="form-label">Nama</label>
                         <input type="text" class="form-control" id="kategoriNama" placeholder="Masukkan Nama">
                     </div>
+
+                    <!-- Daftar Akses -->
+                    <div class="mb-3">
+                        <label for="akses" class="form-label">Akses</label>
+                        <div class="table-responsive " style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd;">
+                            <table class="table table-bordered table-hover ">
+                                <thead class="table-light" style="position: sticky; top: 0; z-index: 2;">
+                                    <tr>
+                                        <th style="width: 40%; text-align: left; background: white;">Nama Menu</th>
+                                        <th style="width: 10%; text-align: center; background: white;">List</th>
+                                        <th style="width: 10%; text-align: center; background: white;">Add</th>
+                                        <th style="width: 10%; text-align: center; background: white;">Edit</th>
+                                        <th style="width: 10%; text-align: center; background: white;">Delete</th>
+                                        <th style="width: 10%; text-align: center; background: white;">Verifikasi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Dashboard</td>
+                                        <td class="text-center"><input type="checkbox" name="dashboard_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="dashboard_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="dashboard_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="dashboard_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="dashboard_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Config</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>User Management</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Role Management</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Configurasi APP</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Web Management</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Menu Management</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Artikel</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kategori Artikel</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Slider</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Klaster</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sub Kegiatan</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Galeri</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Forum Anak</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Halaman</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Pemantauan Usulan</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kecamatan Layak Anak</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dokumen Kecamatan</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kegiatan Kecamatan</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kelurahan Layak Anak </td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dokumen Kelurahan
+                                        </td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kegiatan Kelurahan</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mitra Anak</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kegiatan CFCI</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Artikel Anak</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Pusat Informasi Sahabat Anak</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dokumen Pisa</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kegiatan Pisa</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kegiatan Arek Suroboyo</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kegiatan Forum Anak Surabaya</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Usulan Kegiatan</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Pemantauan Suara Anak</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Karya</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dokumen SK FAS, CFCI dan KLA</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <!-- Tambahkan menu lainnya di sini -->
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Tutup</button>
-                <button type="button" class="btn btn-primary">Simpan</button>
-            </div>
                 </form>
             </div>
 
+            <!-- Tombol Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Tutup</button>
+                <button type="button" class="btn btn-primary">Simpan</button>
+            </div>
         </div>
     </div>
 </div>
 
+
+
 <!-- bagian Edit -->
- <!-- Modal Tambah Klaster -->
 <div class="modal fade" id="EditModal" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
-<div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header d-flex justify-content-center w-100 ">
-                <h5 class="modal-title fw-bold text-center" id="EditModalLabel">Edit  Menu Role Management</h5>
+            <div class="modal-header d-flex justify-content-center w-100">
+                <h5 class="modal-title fw-bold text-center" id="EditModalLabel">Edit Menu Role Management</h5>
             </div>
             <div class="modal-body">
                 <form>
+                    <!-- Input Nama -->
                     <div class="mb-3">
                         <label for="kategoriNama" class="form-label">Nama</label>
                         <input type="text" class="form-control" id="kategoriNama" placeholder="Masukkan Nama">
                     </div>
+
+                    <!-- Daftar Akses -->
+                    <div class="mb-3">
+                        <label for="akses" class="form-label">Akses</label>
+                        <div class="table-responsive " style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd;">
+                            <table class="table table-bordered table-hover ">
+                                <thead class="table-light" style="position: sticky; top: 0; z-index: 2;">
+                                    <tr>
+                                        <th style="width: 40%; text-align: left; background: white;">Nama Menu</th>
+                                        <th style="width: 10%; text-align: center; background: white;">List</th>
+                                        <th style="width: 10%; text-align: center; background: white;">Add</th>
+                                        <th style="width: 10%; text-align: center; background: white;">Edit</th>
+                                        <th style="width: 10%; text-align: center; background: white;">Delete</th>
+                                        <th style="width: 10%; text-align: center; background: white;">Verifikasi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Dashboard</td>
+                                        <td class="text-center"><input type="checkbox" name="dashboard_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="dashboard_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="dashboard_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="dashboard_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="dashboard_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Config</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>User Management</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Role Management</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Configurasi APP</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Web Management</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Menu Management</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Artikel</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kategori Artikel</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Slider</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Klaster</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sub Kegiatan</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Galeri</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Forum Anak</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Halaman</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Pemantauan Usulan</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kecamatan Layak Anak</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dokumen Kecamatan</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kegiatan Kecamatan</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kelurahan Layak Anak </td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dokumen Kelurahan
+                                        </td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kegiatan Kelurahan</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mitra Anak</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kegiatan CFCI</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Artikel Anak</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Pusat Informasi Sahabat Anak</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dokumen Pisa</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kegiatan Pisa</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kegiatan Arek Suroboyo</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kegiatan Forum Anak Surabaya</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Usulan Kegiatan</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Pemantauan Suara Anak</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Karya</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dokumen SK FAS, CFCI dan KLA</td>
+                                        <td class="text-center"><input type="checkbox" name="config_list"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_add"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_edit"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_delete"></td>
+                                        <td class="text-center"><input type="checkbox" name="config_verifikasi"></td>
+                                    </tr>
+                                    <!-- Tambahkan menu lainnya di sini -->
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Tutup</button>
-                <button type="button" class="btn btn-primary">Simpan</button>
-            </div>
                 </form>
             </div>
 
+            <!-- Tombol Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Tutup</button>
+                <button type="button" class="btn btn-primary">Simpan</button>
+            </div>
         </div>
     </div>
 </div>
+
 
 
 <!-- Modal Delete -->

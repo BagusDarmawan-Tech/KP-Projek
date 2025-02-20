@@ -75,7 +75,7 @@
                         <td>{{ $karya->pemohon }}</td>
                         <td>{{ $karya->kreator }}</td>
                     
-                        <!-- bagian deskripsi -->
+                        <!-- bagian detail -->
                         <td>
                             <a href="#" 
                             class="lihat-detail" 

@@ -32,10 +32,10 @@
                     <thead class="table-primary">
                         <tr>
                             <th>No</th>
-                            <th>Gambar</th>
-                            <th>Nama</th>
-                            <th>Caption</th>
-                            <th>Deskripsi</th>
+                            <!-- <th>Gambar</th>
+                            <th>Nama</th> -->
+                            <!-- <th>Caption</th> -->
+                            <th>Detail</th>
                             <th>Dibuat Oleh</th>
                             <th>Status</th>
                             <th>Actions</th>
@@ -45,10 +45,24 @@
                         @foreach($sliders as $index => $Slider)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td><img src="{{ asset($Slider->gambar) }}" alt="Slider Image" width="80"></td>
-                            <td>{{ $Slider->nama }}</td>
-                            <td>{{ $Slider->caption }}</td>
-                            <td>{{ $Slider->deskripsi }}</td>
+                            <!-- <td><img src="{{ asset($Slider->gambar) }}" alt="Slider Image" width="80"></td>
+                            <td>{{ $Slider->nama }}</td> -->
+                            <!-- <td>{{ $Slider->caption }}</td> -->
+
+                            <!-- Bagian detail -->
+                            <td>
+                                <a href="#" 
+                                class="lihat-detail" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#deskripsiModal" 
+                                data-gambar="{{ asset($Slider->gambar) }}"
+                                data-nama="{{ $Slider->nama }}"
+                                data-caption="{{ $Slider->caption }}"
+                                data-deskripsi="{{ $Slider->deskripsi }}">Lihat Detail
+                                </a> 
+                            </td>
+
+                            <!-- <td>{{ $Slider->deskripsi }}</td> -->
                             <td>{{ $Slider->dibuatOleh }}</td>
                             <td>
                                     @if($Slider->is_active == 0)
@@ -57,6 +71,7 @@
                                         <span class="badge bg-success">Aktif</span>
                                     @endif
                             </td>
+
                             <td>
                                 <!-- Bagian buttom edit -->
                                 <button class="btn btn-sm btn-primary edit-slider" 
@@ -74,7 +89,8 @@
                                     data-nama ="{{ $Slider->nama }}"
                                     data-bs-toggle="modal" 
                                     data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i>
-                                </button>       
+                                </button>
+
                         </tr>
                         @endforeach
                     </tbody>
@@ -212,6 +228,38 @@
 </div>
 
 
+<!-- Modal detail -->
+<div class="modal fade" id="deskripsiModal" tabindex="-1" aria-labelledby="deskripsiModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <!-- Header Modal -->
+      <div class="modal-header">
+        <h5 class="modal-title fw-bold" id="deskripsiModalLabel">Detail</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <!-- Body Modal -->
+      <div class="modal-body text-center">
+        <!-- Gambar -->
+        <img id="modalGambar" src="" alt="Detail Gambar" class="img-fluid mb-3" style="max-height: 300px; object-fit: cover;">
+
+        <!-- Judul -->
+        <h5 id="modalJudul" class="fw-bold"></h5>
+
+        <!-- Deskripsi -->
+        <p id="modalDeskripsi" class="mt-3"></p>
+      </div>
+
+      <!-- Footer Modal -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -273,6 +321,28 @@
         });
     });
 </script>
-    
 
+<!-- bagian detail -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+      // Menambahkan event listener pada setiap elemen dengan class "lihat-detail"
+      document.querySelectorAll(".lihat-detail").forEach(button => {
+          button.addEventListener("click", function () {
+              // Ambil data dari atribut elemen
+              let judul = this.getAttribute("data-nama");
+              let deskripsi = this.getAttribute("data-deskripsi");
+              let gambar = this.getAttribute("data-gambar");
+
+              // Tetapkan teks header modal menjadi "Detail"
+              document.getElementById("deskripsiModalLabel").innerText = "Detail";
+
+              // Isi data ke dalam modal
+              document.getElementById("modalJudul").innerText = judul; // Judul
+              document.getElementById("modalDeskripsi").innerText = deskripsi; // Deskripsi
+              document.getElementById("modalGambar").src = gambar; // Gambar
+          });
+      });
+  });
+</script>
 @endsection
+
