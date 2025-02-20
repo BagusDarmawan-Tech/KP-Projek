@@ -249,6 +249,12 @@ Route::middleware('auth')->group(function () {
     Route::put('/artikelMitra/update/{id}', [MitraAnakController::class, 'updateArtikelMitra'])->name('updateArtikelMitra');
     Route::put('/kegiatanMitra/update/{id}', [MitraAnakController::class, 'updateKegiatanMitra'])->name('updatekegiatanMitra');
     Route::put('/update/{id}', [MitraAnakController::class, 'update'])->name('updateCfci');
+
+    //delete
+    Route::delete('/artikelMitra/hapus/{id}', [MitraAnakController::class, 'destroyArtikelMitra'])->name('destroyArtikelMitra');
+    Route::delete('/kegiatanMitra/hapus/{id}', [MitraAnakController::class, 'destroyKegiatanMitra'])->name('destroyKegiatanMitra');
+    Route::delete('/mitraCfci/hapus/{id}', [MitraAnakController::class, 'destroyMitraCfci'])->name('destroyMitraCfci  ');
+
 });
 
 //Kegiatan Arek Suroboyo
