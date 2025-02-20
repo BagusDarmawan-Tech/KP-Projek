@@ -259,8 +259,6 @@
 </div>
 
 
-
-
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         var kategoriModal = new bootstrap.Modal(document.getElementById("kategoriModal"));
