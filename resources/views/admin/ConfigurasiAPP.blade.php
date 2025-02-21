@@ -3,6 +3,22 @@
 <link href="{{ asset('assets/css/tabel.css') }}" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <div class="container mt-5">
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+    @if(session('success'))
+    <div class="alert alert-success">
+        <ul>
+                <li>{{ session('success') }}</li>
+        </ul>
+    </div>
+    @endif
     <div class="card shadow-lg border-0 position-relative overflow-hidden mb-5"> 
         <div class="card-body mt-4">
             <div class="text-center mb-4">
@@ -16,26 +32,9 @@
                 </button>
             </div>
 
-            <!-- Kontrol Atas (Tampilkan & Cari) -->
-            <div class="row mb-3 align-items-center">
-                <div class="col-md-6">
-                    <label for="showEntries" class="form-label me-2">Show</label>
-                    <select id="showEntries" class="form-select form-select-sm d-inline-block" style="width: 80px;">
-                        <option value="10">10</option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                    </select>
-                    entries
-                </div>
-                <div class="col-md-6 text-end">
-                    <input type="text" id="searchInput" class="form-control form-control-sm d-inline-block" placeholder="Search..." style="width: 200px;">
-                </div>
-            </div>
-
             <!-- Tabel -->
             <div class="table-responsive">
-                <table class="table table-hover table-bordered align-middle text-center">
+                <table class="table table-hover table-bordered align-middle text-center" id="myTable">
                     <thead class="table-primary">
                         <tr>
                             <th>No</th>
@@ -44,15 +43,31 @@
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="text-start">
+                        @foreach($komponents as $index => $komponen)
                         <tr>
-                            <td>1</td>
-                            <td><i class="bi bi-file-earmark-text"></i></td>
-                            <td>Artikel</td>
+                            <td style="text-align: center;">{{ $loop->iteration }}</td>
+                            <td>{{ $komponen->nama }}</td>
+                            <td>{{ $komponen->detail }}</td>
                             <td>
-                            <button class="btn btn-sm btn-primary edit-btn" data-bs-toggle="modal" data-bs-target="#EditModal"data-status="Aktif"><i class="bi bi-pencil-square"></i></button>
-                            <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i></button>                            </td>
+                                <button class="btn btn-sm btn-primary btn-edit-kegiatan"
+                                    data-id="{{ $komponen->id }}"
+                                    data-nama="{{ $komponen->nama }}"
+                                    data-detail="{{ $komponen->detail }}"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#EditModal">
+                                    <i class="bi bi-pencil-square"></i>
+                                </button> 
+                             <!-- Tombol Hapus -->
+                             <button class="btn btn-sm btn-danger delete-btn" 
+                                data-id  ="{{ $komponen->id }}"
+                                data-nama ="{{ $komponen->nama }}"
+                                data-bs-toggle="modal" 
+                                data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i>
+                            </button>                            
+                        </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -69,18 +84,19 @@
                 <h5 class="modal-title fw-bold text-center" id="kategoriModalLabel">Tambah Menu Configurasi APP</h5>
             </div>
             <div class="modal-body">
-                <form>
+                <form method="POST" action="{{ route('createConfigurasiAPP') }}" >
+                    @csrf 
                     <div class="mb-3">
                         <label for="kategoriNama" class="form-label">Nama</label>
-                        <input type="text" class="form-control" id="kategoriNama" placeholder="Masukkan Nama">
+                        <input type="text" name="nama" class="form-control" id="kategoriNama" placeholder="Masukkan Nama">
                     </div>
                     <div class="mb-3">
                         <label for="kategoriSlug" class="form-label">Detail</label>
-                        <input type="text" class="form-control" id="kategoriSlug" placeholder="Masukkan Detail">
+                        <input type="text" name="detail" class="form-control" id="kategoriSlug" placeholder="Masukkan Detail">
                     </div>
                   <div class="modal-footer">
                 <button type="button" class="btn btn-light" data-bs-dismiss="modal">Tutup</button>
-                <button type="button" class="btn btn-primary">Simpan</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
             </div>
                 </form>
             </div>
@@ -97,19 +113,21 @@
                 <h5 class="modal-title fw-bold text-center" id="EditModalLabel">Edit Menu Configurasi APP</h5>
             </div>
             <div class="modal-body">
-
-                <form>
+                <form id="editForm" method="POST" enctype="multipart/form-data">
+                    @csrf
+                   @method('PUT')
+                   <input type="hidden" id="editId" name="id">
                     <div class="mb-3">
                         <label for="kategoriNama" class="form-label">Nama</label>
-                        <input type="text" class="form-control" id="kategoriNama" placeholder="Masukkan Nama">
+                        <input type="text" name="nama" class="form-control" id="editNama" placeholder="Masukkan Nama">
                     </div>
                     <div class="mb-3">
                         <label for="kategoriSlug" class="form-label">Detail</label>
-                        <input type="text" class="form-control" id="kategoriSlug" placeholder="Masukkan Detail">
+                        <input type="text" name="detail" class="form-control" id="editDetail" placeholder="Masukkan Detail">
                     </div>
                   <div class="modal-footer">
                 <button type="button" class="btn btn-light" data-bs-dismiss="modal">Tutup</button>
-                <button type="button" class="btn btn-primary">Simpan</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
             </div>
                 </form>
             </div>
@@ -120,7 +138,7 @@
 
 
 
-<!-- Modal Delete -->
+<!-- Modal Delete Menu -->
 <div class="modal fade" id="deleteMenuModal" tabindex="-1" aria-labelledby="deleteMenuModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -128,19 +146,64 @@
                 <h5 class="modal-title" id="deleteMenuModalLabel">Hapus Menu</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                Apakah Anda yakin ingin menghapus Data di Menu ini?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-danger">Delete</button>
-            </div>
+            <form id="deleteForm" method="POST">
+                @csrf
+                @method('DELETE')
+                <div class="modal-body">
+                    <input type="hidden" id="deleteId" name="id">
+                    <p>Apakah Anda yakin ingin menghapus record<br> <strong id="deleteNama"></strong>?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-danger">Hapus</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.querySelectorAll(".btn-edit-kegiatan").forEach(button => {
+          button.addEventListener("click", function () {
+              let id = this.getAttribute("data-id");
+              let nama = this.getAttribute("data-nama");
+              let detail = this.getAttribute("data-detail");
+
+            console.log(detail);
+              document.getElementById("editId").value = id;
+              document.getElementById("editNama").value = nama;
+              document.getElementById("editDetail").value = detail;
+  
+  
+              // Pastikan action form mengarah ke URL update yang benar
+              document.getElementById("editForm").action = `/configurasiAPP/update/${id}`;
+          });
+      });
+  });
+  </script>
 
 
+<!-- Script Delete Data ke Modal -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll(".delete-btn").forEach(button => {
+            button.addEventListener("click", function() {
+                let id = this.getAttribute("data-id");
+                let nama = this.getAttribute("data-nama");
+  
+                console.log(id)
+                console.log(nama)
+  
+                document.getElementById("deleteId").value = id;
+                document.getElementById("deleteNama").textContent = nama; // Tampilkan nama di modal
+  
+                // Set action form agar mengarah ke endpoint delete yang benar
+                document.getElementById("deleteForm").action = `/ConfigurasiAPP/hapus/${id}`;
+            });
+        });
+    });
+  </script>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {

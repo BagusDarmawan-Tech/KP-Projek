@@ -31,7 +31,7 @@
 
             <!-- Tabel -->
             <div class="table-responsive">
-                <table class="table table-hover table-bordered align-middle">
+                <table class="table table-hover table-bordered align-middle text-center">
                     <thead class="text-center">
                         <tr>
                             <th>No</th>
@@ -40,6 +40,19 @@
                             <th>File</th>
                         </tr>
                     </thead>
+                    <tbody>
+                        @foreach ($datas as $data)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $data->nama }}</td>
+                            <td>{{ $data->keterangan }}</td>
+                            <td>
+                                <a href="{{ asset($data->dataPendukung) }}" target="_blank">
+                                    <i class="fas fa-file-pdf text-danger "></i>
+                                </a>
+                            </td>                        </tr>
+                        @endforeach
+                    </tbody>
                     
                 </table>
             </div>

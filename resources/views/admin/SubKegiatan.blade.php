@@ -70,7 +70,7 @@
                                 <button class="btn btn-sm btn-primary btn-edit"
                                     data-id="{{ $subKegiatan->id }}"
                                     data-nama="{{ $subKegiatan->nama }}"
-                                    data-file="{{ asset('storage/' . $subKegiatan->dataPendukung) }}"
+                                    data-file="{{ asset( $subKegiatan->dataPendukung) }}"
                                     data-status="{{ $subKegiatan->is_active }}"
                                     data-klaster="{{ $subKegiatan->klusterid }}"
                                     data-keterangan="{{ $subKegiatan->keterangan }}"

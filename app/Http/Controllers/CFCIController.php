@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\DokumenKecamatan;
 use Illuminate\Http\Request;
 use League\CommonMark\Node\Block\Document;
 
@@ -13,8 +15,9 @@ public function CFCIArtikel(){
 }
 
 public function CFCIKecamatann(){
-    // $documents = cfcisk::paginate(10);
-    return view('frontend.content.CFCISkecam');
+    $datas = DokumenKecamatan::all();
+
+    return view('frontend.content.CFCISkecam' ,compact('datas'));
 }
 
 public function CFCIKelurahan (){

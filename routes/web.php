@@ -1,32 +1,33 @@
 <?php
 
-use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\CFCIController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\pisaController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserManagement;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ConfigController;
+
 use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\KlasterController;
-
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\forumanakController;
-use App\Http\Controllers\KelurahanLayakAnakController;
 
+use App\Http\Controllers\forumanakController;
+use App\Http\Controllers\MitraAnakController;
 use App\Http\Controllers\SuaraAnakController;
+use App\Http\Controllers\DokumenSkCfciController;
 use App\Http\Controllers\KotaLayakAnakController;
-use App\Http\Controllers\PusatInformasiSahabatController;
-use App\Http\Controllers\KegiatanForumArekSurabayaController;
-use App\Http\Controllers\ConfigController;
 
 use App\Http\Controllers\WebManagementController;
 use App\Http\Controllers\KecamatanLayakController;
-use App\Http\Controllers\MitraAnakController;
-use App\Http\Controllers\KegiatanArekSuroboyoController;
 use App\Http\Controllers\UsulanKegiatanController;
-use App\Http\Controllers\DokumenSkCfciController;
-use App\Http\Controllers\UserManagement;
+use App\Http\Controllers\KelurahanLayakAnakController;
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\KegiatanArekSuroboyoController;
+use App\Http\Controllers\PusatInformasiSahabatController;
+use App\Http\Controllers\KegiatanForumArekSurabayaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -169,6 +170,16 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/HalamanRoleManagement', [ConfigController::class, 'RoleManagementt'])->name('HalamanRole');
     Route::get('/HalamanConfigurasiAPP', [ConfigController::class, 'ConfigurasiAPP'])->name('HalamanConfigurasi');
+
+    //tambah
+    Route::post('/createConfigurasiAPP', [ConfigController::class, 'storeConfigurasiAPP'])->name('createConfigurasiAPP');
+
+    //edit
+    Route::put('/configurasiAPP/update/{id}', [ConfigController::class, 'updateConfigurasiAPP'])->name('updateConfigurasiAPP');
+
+    //delete
+    Route::delete('/ConfigurasiAPP/hapus/{id}', [ConfigController::class, 'destroyConfigurasiAPP'])->name('destroyConfigurasiAPP');
+
 });
 
 
@@ -319,9 +330,19 @@ Route::middleware('auth')->group(function () {
 //CONFIG
 Route::middleware('auth')->group(function () {
     Route::get('/admin/config', [UserManagement::class, 'UserManagement'])
-    ->middleware(['auth', 'verified','role:developer'])->name('UserManagement');
+    ->middleware(['auth', 'verified'])->name('UserManagement')->middleware(['auth', 'verified', 'can:configurasi app-list']);
+    
+    Route::get('/roles', [RoleController::class, 'index'])->name('admin.index')->middleware(['auth', 'verified', 'can:configurasi app-list']);
+    Route::get('/roles/create', [RoleController::class, 'create'])->name('admin.create')->middleware(['auth', 'verified', 'can:configurasi app-list']);
+    Route::post('/roles', [RoleController::class, 'store'])->name('admin.store')->middleware(['auth', 'verified', 'can:configurasi app-list']);
 
-});
+    Route::get('/roles/{role}/edit', [RoleController::class, 'edit'])->name('admin.edit')->middleware(['auth', 'verified', 'can:configurasi app-list']);
+    Route::put('/admin/{role}', [RoleController::class, 'update'])->name('admin.update')->middleware(['auth', 'verified', 'can:configurasi app-list']);
+
+    Route::delete('/roles/{role}', [RoleController::class, 'destroy'])->name('admin.destroy')->middleware(['auth', 'verified', 'can:configurasi app-list']);
+
+
+})->middleware(['auth', 'verified', 'can:configurasi app-list']);
 
 //======================= Backend  =============================//
 

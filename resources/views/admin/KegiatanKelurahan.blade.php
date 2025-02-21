@@ -338,7 +338,7 @@
                 document.getElementById("deleteNama").textContent = nama; // Tampilkan nama di modal
   
                 // Set action form agar mengarah ke endpoint delete yang benar
-                document.getElementById("deleteForm").action = `/dokumenKelurahan/hapus/${id}`;
+                document.getElementById("deleteForm").action = `/kegiatanKelurahan/hapus/${id}`;
             });
         });
     });

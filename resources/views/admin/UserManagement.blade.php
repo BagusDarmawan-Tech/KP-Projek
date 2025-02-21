@@ -145,7 +145,9 @@
                         <label class="form-label">Role</label>
                         <select class="form-select" name="role" required>
                             <option selected disabled>--- Pilih Role ---</option>
-                            <option value="developer">Developer</option>
+                            @foreach ($roles as $role )
+                                <option value="{{ $role->name }}">{{ $role->name }}</option>
+                            @endforeach
                             <option value="admin">Admin</option>
                             <option value="opd">OPD</option>
                             <option value="user">User</option>

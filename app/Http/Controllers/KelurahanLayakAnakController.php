@@ -167,6 +167,7 @@ class KelurahanLayakAnakController extends Controller
             
             'gambar.required' => 'gambar wajib diisi.',
             'gambar.max' => 'gambar maksimal 500 karakter.',
+            'gambar.mimes'=>'File harus JPEG ,JPG atau PNG',
 
             'keterangan.required' => 'Keterangan wajib diisi.',
             'keterangan.max' => 'Keterangan maksimal 500 karakter.',
@@ -242,6 +243,23 @@ class KelurahanLayakAnakController extends Controller
         $kegiatan->update($data);
     
         return redirect()->route('Kegiatankelurahan')->with('success', 'Kegiatan berhasil diperbarui!');
+    }
+
+    public function destroyKegiatanKelurahan($id)
+    {
+        $kegiatan = KegiatanKelurahan::findOrFail($id);
+        
+        if ($kegiatan->gambar) {
+            // Konversi path dari 'storage/' ke 'public/' untuk Storage::delete
+            $filePath = str_replace('storage/', 'public/', $kegiatan->gambar);
+            if (Storage::exists($filePath)) {
+                Storage::delete($filePath);
+            }
+        }
+
+        $kegiatan->delete();
+
+        return redirect()->route('Kegiatankelurahan')->with('success', 'Kegiatan berhasil dihapus!');
     }
 // END CRUD KEGIATAN KELURAHAN
     

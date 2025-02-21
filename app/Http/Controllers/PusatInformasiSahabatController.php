@@ -50,7 +50,7 @@ class PusatInformasiSahabatController extends Controller
             'nama' => $request->nama,
             'jenisSurat' => $request->jenisSurat,
             'keterangan' => $request->keterangan,
-            'dataPendukung' => $path, // Hanya menyimpan path yang benar
+            'dataPendukung' => 'storage/'.$path, // Hanya menyimpan path yang benar
             'is_active' => $request->is_active,
             'dibuatOleh' => $request->dibuatOleh, // Pastikan dibuatOleh tidak null
         ]);
@@ -90,20 +90,25 @@ class PusatInformasiSahabatController extends Controller
             'is_active' => $request->is_active,
         ];
     
-        // Jika ada gambar baru
         // Jika ada file baru
         if ($request->hasFile('dataPendukung')) {
-            // Hapus file lama
-            if ($dokumen->dataPendukung && Storage::exists('public/' . $dokumen->dataPendukung)) {
-                Storage::delete('public/' . $dokumen->dataPendukung);
+            // Hapus FILE lama jika ada
+            if ($dokumen->dataPendukung) {
+                // Hapus FILE berdasarkan path lengkap yang disimpan di database
+                if (Storage::exists(str_replace('storage/', 'public/', $dokumen->dataPendukung))) {
+                    Storage::delete(str_replace('storage/', 'public/', $dokumen->dataPendukung));
+                }
             }
-
-            // Simpan file baru
+            // Simpan FILE baru dengan nama format "YYYY-MM-DD-nama-baru.PDF"
             $file = $request->file('dataPendukung');
             $fileName = date('Y-m-d-His') . '-' . uniqid() . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('public/dokumen-pisa', $fileName);
-            $data['dataPendukung'] = 'dokumen-pisa/' . $fileName;
+            $file->storeAs('dokumen-pisa', $fileName, 'public');
+            $path = $file->storeAs('dokumen-pisa', $fileName, 'public');
+
+            // Simpan nama FILE baru ke database
+            $data['dataPendukung'] = 'storage/' . $path;
         }
+
     
         // Update dokumen
         $dokumen->update($data);
@@ -115,9 +120,9 @@ class PusatInformasiSahabatController extends Controller
     {
         $kegiatan = DokumenPisa::findOrFail($id);
         
-        if ($kegiatan->gambar) {
+        if ($kegiatan->dataPendukung) {
             // Konversi path dari 'storage/' ke 'public/' untuk Storage::delete
-            $filePath = str_replace('storage/', 'public/', $kegiatan->gambar);
+            $filePath = str_replace('storage/', 'public/', $kegiatan->dataPendukung);
             if (Storage::exists($filePath)) {
                 Storage::delete($filePath);
             }
@@ -125,7 +130,7 @@ class PusatInformasiSahabatController extends Controller
 
         $kegiatan->delete();
 
-        return redirect()->route('KegiatanLayakanak')->with('success', 'Kegiatan berhasil dihapus!');
+        return redirect()->route('DokumenLayakAnak')->with('success', 'Dokumen berhasil dihapus!');
     }
     
     // =========== END CRUD dokumen pisa

@@ -112,7 +112,7 @@
                             <td>{{ $dokumen->jenisSurat }}</td>
                             <td>{{ $dokumen->nama }}</td>
                             <td>
-                                <a href="{{ asset('storage/' . $dokumen->dataPendukung) }}" target="_blank">
+                                <a href="{{ asset($dokumen->dataPendukung) }}" target="_blank">
                                     <i class="fas fa-file-pdf text-danger fa-2x"></i>
                                 </a>
                             </td>
@@ -128,7 +128,7 @@
                                 <button class="btn btn-sm btn-primary btn-edit-dokumen"
                                     data-id="{{ $dokumen->id }}"
                                     data-nama="{{ $dokumen->nama }}"
-                                    data-file="{{ asset('storage/' . $dokumen->dataPendukung) }}"
+                                    data-file="{{ asset($dokumen->dataPendukung) }}"
                                     data-status="{{ $dokumen->is_active }}"
                                     data-jenisSurat="{{ $dokumen->jenisSurat }}"
                                     data-keterangan="{{ $dokumen->keterangan }}"
@@ -323,7 +323,7 @@
                 document.getElementById("deleteNama").textContent = nama; // Tampilkan nama di modal
 
                 // Set action form agar mengarah ke endpoint delete yang benar
-                document.getElementById("deleteForm").action = `/kegiatanPisa/hapus/${id}`;
+                document.getElementById("deleteForm").action = `/halamanDokumenPisa/hapus/${id}`;
             });
         });
     });

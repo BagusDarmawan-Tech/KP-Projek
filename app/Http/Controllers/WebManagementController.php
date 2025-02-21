@@ -232,20 +232,24 @@ class WebManagementController extends Controller
             'is_active' => $request->is_active,
         ];
     
-        // Jika ada gambar baru
-        // Jika ada file baru
-        if ($request->hasFile('dataPendukung')) {
-            // Hapus file lama
-            if ($kegiatan->dataPendukung && Storage::exists('public/' . $kegiatan->dataPendukung)) {
-                Storage::delete('public/' . $kegiatan->dataPendukung);
-            }
-
-            // Simpan file baru
-            $file = $request->file('dataPendukung');
-            $fileName = date('Y-m-d-His') . '-' . uniqid() . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('public/data_pendukung', $fileName);
-            $data['dataPendukung'] = 'data_pendukung/' . $fileName;
-        }
+                // Jika ada file baru
+                if ($request->hasFile('dataPendukung')) {
+                    // Hapus FILE lama jika ada
+                    if ($kegiatan->dataPendukung) {
+                        // Hapus FILE berdasarkan path lengkap yang disimpan di database
+                        if (Storage::exists(str_replace('storage/', 'public/', $kegiatan->dataPendukung))) {
+                            Storage::delete(str_replace('storage/', 'public/', $kegiatan->dataPendukung));
+                        }
+                    }
+                    // Simpan FILE baru dengan nama format "YYYY-MM-DD-nama-baru.PDF"
+                    $file = $request->file('dataPendukung');
+                    $fileName = date('Y-m-d-His') . '-' . uniqid() . '.' . $file->getClientOriginalExtension();
+                    $file->storeAs('sub-kegiatan', $fileName, 'public');
+                    $path = $file->storeAs('sub-kegiatan', $fileName, 'public');
+        
+                    // Simpan nama FILE baru ke database
+                    $data['dataPendukung'] = 'storage/' . $path;
+                }                
     
         // Update kegiatan
         $kegiatan->update($data);

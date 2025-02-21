@@ -10,7 +10,7 @@
     </li><!-- End Dashboard Nav -->
 
     {{-- CONFIG --}}
-    @if (auth()->user()->hasRole('developer') )
+    @if (auth()->user()->hasPermissionTo('configurasi app-list'))
     <li class="nav-item {{ request()->is('config/*') ? 'active' : '' }}">
       <a class="nav-link {{ request()->is('config/*') ? '' : 'collapsed' }}" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-gear-wide"></i><span>Config</span><i class="bi bi-chevron-down ms-auto"></i>
