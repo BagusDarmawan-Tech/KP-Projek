@@ -47,7 +47,7 @@
     {{-- END CONFIG --}}
 
     {{-- WEB MANAGEMENT --}}
-    
+    @if (auth()->user()->hasPermissionTo('artikel-list'))
     <li class="nav-item {{ request()->is('web-management/*') ? 'active' : '' }}">
       <a class="nav-link {{ request()->is('web-management/*') ? '' : 'collapsed' }}" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-keyboard"></i><span>Web Management</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -105,9 +105,9 @@
         </li>
       </ul>
     </li><!-- End Forms Nav -->
-    
+    @endif
     {{-- END WEB MANAGEMENT --}}
-
+    @if (auth()->user()->hasPermissionTo('kegiatan kecamatan-list'))
     <li class="nav-item {{ request()->is('Kecamatan-Layak-Anak/*') ? 'active' : '' }}">
       <a class="nav-link {{ request()->is('Kecamatan-Layak-Anak/*') ? '' : 'collapsed' }}" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-house-gear-fill"></i><span>Kecamatan Layak Anak</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -125,7 +125,9 @@
         </li>
       </ul>
     </li><!-- End Tables Nav -->
+    @endif
 
+    @if (auth()->user()->hasPermissionTo('dokumen kelurahan-list'))
     <li class="nav-item {{ request()->is('Kelurahan-Layak-Anak/*') ? 'active' : '' }}">
       <a class="nav-link {{ request()->is('Kelurahan-Layak-Anak/*') ? '' : 'collapsed' }}" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-house-gear-fill"></i><span>Kelurahan Layak Anak</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -143,7 +145,9 @@
         </li>
       </ul>
     </li><!-- End Charts Nav -->
+    @endif
 
+    @if (auth()->user()->hasPermissionTo('kegiatan mitra anak-list'))
     <li class="nav-item {{ request()->is('Mitra-Anak/*') ? 'active' : '' }}">
       <a class="nav-link {{ request()->is('Mitra-Anak/*') ? '' : 'collapsed' }}" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-palette"></i><span>Mitra Anak</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -166,7 +170,9 @@
         </li>
       </ul>
     </li><!-- End Icons Nav -->
+    @endif
 
+    @if (auth()->user()->hasPermissionTo('dokumen pisa-list'))
     <li class="nav-item {{ request()->is('Pusat-Informasi-Sahabat-Anak/*') ? 'active' : '' }}">
       <a class="nav-link {{ request()->is('Pusat-Informasi-Sahabat-Anak/*') ? '' : 'collapsed' }}" data-bs-target="#icons" data-bs-toggle="collapse" href="#">
         <i class="bi bi-info-circle"></i><span>Pusat Informasi Sahabat Anak</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -184,21 +190,27 @@
         </li>
       </ul>
     </li><!-- End Icons Nav -->
+    @endif
 
+    @if (auth()->user()->hasPermissionTo('kegiatan arek suroboyo-list'))
     <li class="nav-item">
-  <a class="nav-link {{ request()->routeIs('kegiatan-arek') ? '' : 'collapsed' }}" href="{{ route('kegiatan-arek') }}">
-    <i class="bi bi-journal-text"></i>
-    <span>Kegiatan Arek Suroboyo</span>
-  </a>
-</li>
+      <a class="nav-link {{ request()->routeIs('kegiatan-arek') ? '' : 'collapsed' }}" href="{{ route('kegiatan-arek') }}">
+        <i class="bi bi-journal-text"></i>
+        <span>Kegiatan Arek Suroboyo</span>
+      </a>
+    </li>
+    @endif
 
-<li class="nav-item">
-  <a class="nav-link {{ request()->routeIs('KegiatanForumSurabaya') ? '' : 'collapsed' }}" href="{{ route('KegiatanForumSurabaya') }}">
-    <i class="bi bi-journal-text"></i>
-    <span>Kegiatan Forum Anak Surabaya</span>
-  </a>
-</li>
+    @if (auth()->user()->hasPermissionTo('kegiatan forum anak suroboyo-list'))
+    <li class="nav-item">
+      <a class="nav-link {{ request()->routeIs('KegiatanForumSurabaya') ? '' : 'collapsed' }}" href="{{ route('KegiatanForumSurabaya') }}">
+        <i class="bi bi-journal-text"></i>
+        <span>Kegiatan Forum Anak Surabaya</span>
+      </a>
+    </li>
+    @endif
 
+    @if (auth()->user()->hasPermissionTo('pemantauan suara anak-list'))
     <li class="nav-item {{ request()->is('Usulan-Kegiatan/*') ? 'active' : '' }}">
       <a class="nav-link {{ request()->is('Usulan-Kegiatan/*') ? '' : 'collapsed' }}" data-bs-target="#usulan-kegiatan" data-bs-toggle="collapse" href="#">
         <i class="bi bi-gem"></i><span>Usulan Kegiatan</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -216,13 +228,17 @@
         </li>
       </ul>
     </li><!-- End Icons Nav -->
+    @endif
 
+    @if (auth()->user()->hasPermissionTo('dokumen sk fas, cfci dan kla-list'))
     <li class="nav-item">
-  <a class="nav-link {{ request()->routeIs('dokumen-skcfci') ? '' : 'collapsed' }}" href="{{ route('dokumen-skcfci') }}">
-    <i class="bi bi-journal-text"></i>
-    <span>Dokumen SK FAS, CFCI Dan KLA</span>
-  </a>
-</li><!-- End Icons Nav -->
+      <a class="nav-link {{ request()->routeIs('dokumen-skcfci') ? '' : 'collapsed' }}" href="{{ route('dokumen-skcfci') }}">
+        <i class="bi bi-journal-text"></i>
+        <span>Dokumen SK FAS, CFCI Dan KLA</span>
+      </a>
+    </li>
+    @endif
+    <!-- End Icons Nav -->
 
 
     <li class="nav-heading">Pages</li>

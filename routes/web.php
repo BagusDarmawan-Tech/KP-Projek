@@ -114,8 +114,14 @@ Route::get('/', function () {return view('frontend.content.landing-page');})->na
 //=======================  Backend  =============================//
 //Bagian Kelurahan Layak Anak
 Route::middleware('auth')->group(function () {
-    Route::get('/KelurahanLayakAnak', [KelurahanLayakAnakController::class, 'HalamanDokumenLayakAnak'])->name('HalamanDokument');
-    Route::get('/KegiatanLayakAnak', [KelurahanLayakAnakController::class, 'KegiatanKelurahanAnak'])->name('Kegiatankelurahan');
+    Route::get('/KelurahanLayakAnak', [KelurahanLayakAnakController::class, 'HalamanDokumenLayakAnak'])
+        ->name('HalamanDokument')
+        ->middleware(['auth', 'verified', 'can:dokumen kelurahan-list']);
+
+    Route::get('/KegiatanLayakAnak', [KelurahanLayakAnakController::class, 'KegiatanKelurahanAnak'])
+        ->name('Kegiatankelurahan')
+        ->middleware(['auth', 'verified', 'can:kegiatan kelurahan-list']);
+        
 
     //tambah
     Route::post('/createDokumenKelurahan', [KelurahanLayakAnakController::class, 'storeDokumenKelurahan'])->name('createDokumenKelurahan');
@@ -133,8 +139,13 @@ Route::middleware('auth')->group(function () {
 
 // Halaman Pusat Informasi Sahabat Anak
 Route::middleware('auth')->group(function () {
-    Route::get('/HalamananDokumenPisa', [PusatInformasiSahabatController::class, 'HalamanDokumen'])->name('DokumenLayakAnak');
-    Route::get('/HalamananKegiatanPisa', [PusatInformasiSahabatController::class, 'HalamanKegiatan'])->name('KegiatanLayakanak');
+    Route::get('/HalamananDokumenPisa', [PusatInformasiSahabatController::class, 'HalamanDokumen'])
+        ->name('DokumenLayakAnak')
+        ->middleware(['auth', 'verified', 'can:dokumen pisa-list']);
+
+    Route::get('/HalamananKegiatanPisa', [PusatInformasiSahabatController::class, 'HalamanKegiatan'])
+        ->name('KegiatanLayakanak')
+        ->middleware(['auth', 'verified', 'can:kegiatan pisa-list']);
 
     // Tambah
     Route::post('/createDokumenPisa', [PusatInformasiSahabatController::class, 'storeDokumenPisa'])->name('createDokumenPisa');
@@ -152,16 +163,20 @@ Route::middleware('auth')->group(function () {
 
 // Halaman Kegiatan Forum Anak surabaya
 Route::middleware('auth')->group(function () {
-    Route::get('/HalamanForumAnakaSurabaya', [KegiatanForumArekSurabayaController::class, 'HalamanForum'])->name('KegiatanForumSurabaya');
+    Route::get('/HalamanForumAnakaSurabaya', [KegiatanForumArekSurabayaController::class, 'HalamanForum'])
+        ->name('KegiatanForumSurabaya');
 
     //create
-    Route::post('/createForumAnakSurabaya', [KegiatanForumArekSurabayaController::class, 'storeForumAnakSurabaya'])->name('createForumAnakSurabaya');
+    Route::post('/createForumAnakSurabaya', [KegiatanForumArekSurabayaController::class, 'storeForumAnakSurabaya'])
+        ->name('createForumAnakSurabaya');
 
     //update
-    Route::put('/halamanForum/update/{id}', [KegiatanForumArekSurabayaController::class, 'updateHalamanForum'])->name('updateHalamanForum');
+    Route::put('/halamanForum/update/{id}', [KegiatanForumArekSurabayaController::class, 'updateHalamanForum'])
+        ->name('updateHalamanForum');
 
     //delete
-    Route::delete('/halamanForumAnakSurabaya/hapus/{id}', [KegiatanForumArekSurabayaController::class, 'destroyHalamanForum'])->name('destroyHalamanForum');
+    Route::delete('/halamanForumAnakSurabaya/hapus/{id}', [KegiatanForumArekSurabayaController::class, 'destroyHalamanForum'])
+        ->name('destroyHalamanForum');
 
 
 });
@@ -194,16 +209,45 @@ Route::get('/session-keep-alive', function () {
 
 //Web Management
 Route::middleware('auth')->group(function () {
-    Route::get('/slider', [WebManagementController::class, 'slider'])->name('slider');
-    Route::get('/sub-kegiatan', [WebManagementController::class, 'subkegiatan'])->name('sub-kegiatan');
-    Route::get('/galeri', [WebManagementController::class, 'galeri'])->name('galeri');
-    Route::get('/forum-anak', [WebManagementController::class, 'forumanak'])->name('forum-anak');
-    Route::get('/PemantauanUsulan', [WebManagementController::class, 'PemantauanUsulan'])->name('PemantauanUsulanAnak');
-    Route::get('/HalamanMenuManagement', [WebManagementController::class, 'ManagementMenu'])->name('MenuManagement');
-    Route::get('/KategoriArtikel', [WebManagementController::class, 'kategoriArtikel'])->name('kategoriArtikel');
-    Route::get('/Klaster', [WebManagementController::class, 'Klaster1'])->name('Klaster');
-    Route::get('/bagianHalaman', [WebManagementController::class, 'BagianHalaman'])->name('Halamandong');
-    Route::get('/Artikel', [WebManagementController::class, 'BagianArtikel'])->name('Artikel');
+    Route::get('/slider', [WebManagementController::class, 'slider'])
+        ->name('slider')
+        ->middleware(['auth', 'verified', 'can:slider-list']);
+
+    Route::get('/sub-kegiatan', [WebManagementController::class, 'subkegiatan'])
+        ->name('sub-kegiatan')
+        ->middleware(['auth', 'verified', 'can:sub kegiatan-list']);
+
+    Route::get('/galeri', [WebManagementController::class, 'galeri'])
+        ->name('galeri')
+        ->middleware(['auth', 'verified', 'can:galeri-list']);
+
+    Route::get('/forum-anak', [WebManagementController::class, 'forumanak'])
+        ->name('forum-anak')
+        ->middleware(['auth', 'verified', 'can:forum anak-list']);
+
+    Route::get('/PemantauanUsulan', [WebManagementController::class, 'PemantauanUsulan'])
+        ->name('PemantauanUsulanAnak')
+        ->middleware(['auth', 'verified', 'can:pemantauan usulan-list']);
+        
+    Route::get('/HalamanMenuManagement', [WebManagementController::class, 'ManagementMenu'])
+        ->name('MenuManagement')
+        ->middleware(['auth', 'verified', 'can:halaman-list']);
+
+    Route::get('/KategoriArtikel', [WebManagementController::class, 'kategoriArtikel'])
+        ->name('kategoriArtikel')
+        ->middleware(['auth', 'verified', 'can:kategori artikel-list']);
+
+    Route::get('/Klaster', [WebManagementController::class, 'Klaster1'])
+        ->name('Klaster')
+        ->middleware(['auth', 'verified', 'can:klaster-list']);
+
+    Route::get('/bagianHalaman', [WebManagementController::class, 'BagianHalaman'])
+        ->name('Halamandong')
+        ->middleware(['auth', 'verified', 'can:configurasi app-list']);
+
+    Route::get('/Artikel', [WebManagementController::class, 'BagianArtikel'])
+        ->name('Artikel')
+        ->middleware(['auth', 'verified', 'can:artikel-list']);
 
     //Tambah data
     Route::post('/createKategoriArtikel', [WebManagementController::class, 'storeKategoriArtikel'])->name('createKategoriArtikel');
@@ -243,8 +287,13 @@ Route::middleware('auth')->group(function () {
 
 //Kecamatan Layak Anak
 Route::middleware('auth')->group(function () {
-    Route::get('/dokumen-kec', [KecamatanLayakController::class, 'dokumenkec'])->name('dokumen-kec');
-    Route::get('/kegiatan-kecamatan', [KecamatanLayakController::class, 'kegiatanKecamatan'])->name('kegiatan-kecamatan');
+    Route::get('/dokumen-kec', [KecamatanLayakController::class, 'dokumenkec'])
+        ->name('dokumen-kec')
+        ->middleware(['auth', 'verified', 'can:dokumen kecamatan-list']);
+
+    Route::get('/kegiatan-kecamatan', [KecamatanLayakController::class, 'kegiatanKecamatan'])
+        ->name('kegiatan-kecamatan')
+        ->middleware(['auth', 'verified', 'can:kegiatan kecamatan-list']);
 
     //Tambah Data
     Route::post('/createDokumenKecamatan', [KecamatanLayakController::class, 'storeDokumenKecamatan'])->name('createDokumenKecamatan');
@@ -262,9 +311,18 @@ Route::middleware('auth')->group(function () {
 
 //Mitra Anak
 Route::middleware('auth')->group(function () {
-    Route::get('/kegiatan-cfci', [MitraAnakController::class, 'kegiatanCfci'])->name('kegiatan-cfci');
-    Route::get('/artikel-mitraanak', [MitraAnakController::class, 'artikelmitraanak'])->name('artikel-mitraanak');
-    Route::get('/kegiatan-mitra', [MitraAnakController::class, 'kegiatanMitraAnak'])->name('kegiatan-mitra');
+    Route::get('/kegiatan-cfci', [MitraAnakController::class, 'kegiatanCfci'])
+        ->name('kegiatan-cfci')
+        ->middleware(['auth', 'verified', 'can:cfci-list']);
+        
+    Route::get('/artikel-mitraanak', [MitraAnakController::class, 'artikelmitraanak'])
+        ->name('artikel-mitraanak')
+        ->middleware(['auth', 'verified', 'can:artikel anak-list']);
+
+    Route::get('/kegiatan-mitra', [MitraAnakController::class, 'kegiatanMitraAnak'])
+        ->name('kegiatan-mitra')
+        ->middleware(['auth', 'verified', 'can:kegiatan mitra anak-list']);
+
 
     //Tambah
     Route::post('/createKegiatanMitraAnak', [MitraAnakController::class, 'storeKegiatanMitraAnak'])->name('createKegiatanMitraAnak');
@@ -285,7 +343,9 @@ Route::middleware('auth')->group(function () {
 
 //Kegiatan Arek Suroboyo
 Route::middleware('auth')->group(function () {
-    Route::get('/kegiatan-arek', [KegiatanArekSuroboyoController::class, 'kegiatanarek'])->name('kegiatan-arek');
+    Route::get('/kegiatan-arek', [KegiatanArekSuroboyoController::class, 'kegiatanarek'])
+        ->name('kegiatan-arek')
+        ->middleware(['auth', 'verified', 'can:kegiatan arek suroboyo-list']);
 
     //tambah
     Route::post('/createKegiatanArekSuroboyo', [KegiatanArekSuroboyoController::class, 'storeKegiatanArekSuroboyo'])->name('createKegiatanArekSuroboyo');
@@ -300,8 +360,13 @@ Route::middleware('auth')->group(function () {
 
 //Usulan Kegiatan
 Route::middleware('auth')->group(function () {
-    Route::get('/pemantauan-suara', [UsulanKegiatanController::class, 'pemantauansuara'])->name('pemantauan-suara');
-    Route::get('/karya-anak', [UsulanKegiatanController::class, 'karyaanak'])->name('karya-anak');
+    Route::get('/pemantauan-suara', [UsulanKegiatanController::class, 'pemantauansuara'])
+        ->name('pemantauan-suara')
+        ->middleware(['auth', 'verified', 'can:pemantauan suara anak-list']);
+
+    Route::get('/karya-anak', [UsulanKegiatanController::class, 'karyaanak'])
+        ->name('karya-anak')
+        ->middleware(['auth', 'verified', 'can:karya-list']);
 
     //Tambah data
     Route::post('/createPemantauanSuara', [UsulanKegiatanController::class, 'storePemantauanSuara'])->name('createPemantauanSuara');
@@ -323,23 +388,41 @@ Route::middleware('auth')->group(function () {
 
 //Dokumen SK FAS, CFCI DAN KLA
 Route::middleware('auth')->group(function () {
-    Route::get('/dokumen-skcfci', [DokumenSkCfciController::class, 'dokumenSkCfciKla'])->name('dokumen-skcfci');
+    Route::get('/dokumen-skcfci', [DokumenSkCfciController::class, 'dokumenSkCfciKla'])
+        ->name('dokumen-skcfci')
+        ->middleware(['auth', 'verified', 'can:dokumen sk fas, cfci dan kla-list']);
 });
 
 
 //CONFIG
 Route::middleware('auth')->group(function () {
     Route::get('/admin/config', [UserManagement::class, 'UserManagement'])
-    ->middleware(['auth', 'verified'])->name('UserManagement')->middleware(['auth', 'verified', 'can:configurasi app-list']);
+        ->name('UserManagement')
+        ->middleware(['auth', 'verified', 'can:configurasi app-list']);
     
-    Route::get('/roles', [RoleController::class, 'index'])->name('admin.index')->middleware(['auth', 'verified', 'can:configurasi app-list']);
-    Route::get('/roles/create', [RoleController::class, 'create'])->name('admin.create')->middleware(['auth', 'verified', 'can:configurasi app-list']);
-    Route::post('/roles', [RoleController::class, 'store'])->name('admin.store')->middleware(['auth', 'verified', 'can:configurasi app-list']);
+    Route::get('/roles', [RoleController::class, 'index'])
+        ->name('admin.index')
+        ->middleware(['auth', 'verified', 'can:configurasi app-list']);
 
-    Route::get('/roles/{role}/edit', [RoleController::class, 'edit'])->name('admin.edit')->middleware(['auth', 'verified', 'can:configurasi app-list']);
-    Route::put('/admin/{role}', [RoleController::class, 'update'])->name('admin.update')->middleware(['auth', 'verified', 'can:configurasi app-list']);
+    Route::get('/roles/create', [RoleController::class, 'create'])
+        ->name('admin.create')
+        ->middleware(['auth', 'verified', 'can:configurasi app-list']);
 
-    Route::delete('/roles/{role}', [RoleController::class, 'destroy'])->name('admin.destroy')->middleware(['auth', 'verified', 'can:configurasi app-list']);
+    Route::post('/roles', [RoleController::class, 'store'])
+        ->name('admin.store')
+        ->middleware(['auth', 'verified', 'can:configurasi app-list']);
+
+    Route::get('/roles/{role}/edit', [RoleController::class, 'edit'])
+        ->name('admin.edit')
+        ->middleware(['auth', 'verified', 'can:configurasi app-list']);
+
+    Route::put('/admin/{role}', [RoleController::class, 'update'])
+        ->name('admin.update')
+        ->middleware(['auth', 'verified', 'can:configurasi app-list']);
+
+    Route::delete('/roles/{role}', [RoleController::class, 'destroy'])
+        ->name('admin.destroy')
+        ->middleware(['auth', 'verified', 'can:configurasi app-list']);
 
 
 })->middleware(['auth', 'verified', 'can:configurasi app-list']);

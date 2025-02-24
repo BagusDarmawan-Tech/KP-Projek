@@ -159,7 +159,7 @@ class WebManagementController extends Controller
     public function subKegiatan() 
     {
         $subKegiatans = SubKegiatan::all();
-        $klasters = Klaster::all();
+        $klasters = Klaster::where('is_active', true)->get();
         return view('admin.SubKegiatan', compact('subKegiatans','klasters'));
     }
 
@@ -963,8 +963,8 @@ class WebManagementController extends Controller
     public function bagianArtikel() {
         $artikels = Artikel::all();
         $kategoris = KategoriArtikel::where('is_active', true)->get();
-        $klasters = Klaster::all();
-        $subKegiatans = SubKegiatan::all();
+        $klasters = Klaster::where('is_active', true)->get();;
+        $subKegiatans = SubKegiatan::where('is_active', true)->get();;
         return view('admin.Artikel', compact('artikels','kategoris','subKegiatans','klasters'));
 
     }

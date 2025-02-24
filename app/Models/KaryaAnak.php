@@ -11,5 +11,5 @@ class KaryaAnak extends Model
 
     protected $table = 'karya_anak';
 
-    protected $fillable = ['kreator', 'tanggal','judul','gambar','pemohon','deskripsi','status'];
+    protected $fillable = ['kreator','tingkatKarya', 'tanggal','judul','gambar','pemohon','deskripsi','status'];
 }

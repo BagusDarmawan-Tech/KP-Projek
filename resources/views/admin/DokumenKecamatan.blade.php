@@ -88,9 +88,11 @@
     <div class="card shadow-lg border-0 position-relative overflow-hidden p-3">
         <div class="card-body">
             <div class="d-flex justify-content-end mb-1">
+                @if (auth()->user()->hasPermissionTo('dokumen kecamatan-add'))
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#dokumenKelurahanModal">
                     <i class="bi bi-plus"></i> Dokumen Kecamatan
                 </button>
+                @endif
             </div>
         </div>
 
@@ -127,6 +129,7 @@
                             @endif
                         </td>                        
                         <td>
+                        @if (auth()->user()->hasPermissionTo('dokumen kecamatan-edit'))
                             <button class="btn btn-sm btn-primary btn-dokumen"
                                 data-id="{{ $dokumen->id }}"
                                 data-nama="{{ $dokumen->nama }}"
@@ -139,14 +142,17 @@
                                 data-bs-toggle="modal"
                                 data-bs-target="#editDokumenModal">
                                 <i class="bi bi-pencil-square"></i>
-                            </button>                            
+                            </button>
+                        @endif                            
                                 <!-- Tombol Hapus -->
+                        @if (auth()->user()->hasPermissionTo('dokumen kecamatan-delete'))
                                 <button class="btn btn-sm btn-danger delete-btn" 
                                     data-id  ="{{ $dokumen->id }}"
                                     data-nama ="{{ $dokumen->nama }}"
                                     data-bs-toggle="modal" 
                                     data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i>
-                                </button>                          
+                                </button>   
+                        @endif                       
                             </td>
                     </tr>
                     @endforeach

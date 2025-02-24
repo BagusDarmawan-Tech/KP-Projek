@@ -247,10 +247,11 @@ class UsulanKegiatanController extends Controller
             'gambar' => 'storage/' . $path, 
             'pemohon' => $request->pemohon,
             'tanggal' => $tanggal,
+            'tingkatKarya' => $request->tingkatKarya,
             'status' => $status
         ]);
 
-        return redirect()->route('karya-anak')->with('success', 'Kategori berhasil ditambahkan!');
+        return redirect()->route('karya-anak')->with('success', 'Karya berhasil ditambahkan!');
     }
     
     public function updateKaryaAnak(Request $request, $id)
@@ -278,12 +279,12 @@ class UsulanKegiatanController extends Controller
     
         $karya = KaryaAnak::findOrFail($id);
 
-    
         // Simpan data baru
         $data = [
             'judul' => $request->judul,
             'kreator' => $request->kreator,
             'deskripsi' => $request->deskripsi,
+            'tingkatKarya' => $request->tingkatKarya,
         ];
     
         // Jika ada gambar baru

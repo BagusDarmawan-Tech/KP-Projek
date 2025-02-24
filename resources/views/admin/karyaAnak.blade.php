@@ -47,9 +47,11 @@
         <!-- Tombol Tambah Karya -->
         <div class="row mb-3">
             <div class="col-md-12 d-flex justify-content-end">
+                @if (auth()->user()->hasPermissionTo('karya-add')) 
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambahKaryaModal">
                     + Karya Anak Baru
                 </button>
+                @endif
             </div>
         </div>
 
@@ -100,31 +102,38 @@
                             <div class="d-flex align-items-center justify-content-center gap-1 py-1" style="min-height: 38px;">
                                 
                                 <!-- Tombol Edit -->
+                                @if (auth()->user()->hasPermissionTo('karya-edit')) 
                                 <button class="btn btn-sm btn-primary edit-karya" data-bs-toggle="modal" data-bs-target="#editKaryaModal"
                                     data-id="{{ $karya->id }}" 
                                     data-judul="{{ $karya->judul }}" 
                                     data-kreator="{{ $karya->kreator }}" 
                                     data-deskripsi="{{ $karya->deskripsi }}" 
+                                    data-karya="{{ $karya->tingkatKarya }}" 
                                     data-gambar="{{ asset($karya->gambar) }}">
                                     <i class="bi bi-pencil"></i>
                                 </button>
+                                @endif
 
                                 <!-- Tombol Hapus -->
+                                @if (auth()->user()->hasPermissionTo('karya-delete')) 
                                 <button class="btn btn-sm btn-danger delete-btn" 
                                     data-id  ="{{ $karya->id }}"
                                     data-nama ="{{ $karya->judul }}"
                                     data-bs-toggle="modal" 
                                     data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i>
                                 </button>  
+                                @endif
 
 
                                 <!-- Tombol Verifikasi -->
+                                @if (auth()->user()->hasPermissionTo('karya-verifikasi')) 
                                 <button class="btn btn-sm btn-success verifikasi-edit" data-bs-toggle="modal" data-bs-target="#verifikasiModal" 
                                 data-status="{{ $karya->status }}" 
                                 data-id="{{ $karya->id }}"
                                 dataID="{{ $karya->id }}">
                                     <i class="bi bi-check-lg"></i>
                                 </button>
+                                @endif
                             </div>
                         </td>
                     </tr>
@@ -153,6 +162,15 @@
                 <div class="mb-3">
                     <label class="form-label">Judul</label>
                     <input type="text" name="judul" class="form-control"  placeholder="Masukkan judul">
+                </div>
+                <div class="mb-3">
+                    <label for="kegiatan" class="form-label">Kecamatan</label>
+                    <select class="form-select" id="editTingkatKarya" name="tingkatKarya" required>
+                        <option value="" disabled selected>-- Pilih Tingkat Karya --</option>
+                            <option value="kelurahan">Kelurahan</option>
+                            <option value="kecamatan">Kecamatan</option>
+                            <option value="kota">Kota</option>
+                    </select>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Deskripsi</label>
@@ -194,6 +212,14 @@
                         <label class="form-label">Judul</label>
                         <input type="text" name="judul" class="form-control" id="editJudul">
                     </div>
+                    <div class="mb-3">
+                        <label for="editStatus" class="form-label">Status</label>
+                        <select class="form-select" id="editTingkat" name="tingkatKarya" required>
+                            <option value="kelurahan">Kelurahan</option>
+                            <option value="kecamatan">Kecamatan</option>
+                            <option value="kota">Kota</option>
+                        </select>
+                        </div>
                     <div class="mb-3">
                         <label class="form-label">Deskripsi</label>
                         <textarea class="form-control" name="deskripsi" rows="3" id="editDeskripsi"></textarea>
@@ -303,12 +329,17 @@
                 let kreator = this.getAttribute("data-kreator");
                 let deskripsi = this.getAttribute("data-deskripsi");
                 let gambar = this.getAttribute("data-gambar");
+                let karya = this.getAttribute("data-karya");
+
+                console.log(karya);
 
                 // Set nilai form dalam modal
                 document.getElementById("editJudul").value = judul;
                 document.getElementById("editId").value = id;
                 document.getElementById("editKreator").value = kreator;
                 document.getElementById("editDeskripsi").value = deskripsi;
+                document.getElementById("editTingkat").value = karya;
+
 
                 // Set preview gambar
                 let previewGambar = document.getElementById("previewGambar");

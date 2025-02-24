@@ -30,9 +30,11 @@
         <!-- Kontrol Atas -->
         <div class="row mb-3">
             <div class="col-md-12 d-flex justify-content-end">
+            @if (auth()->user()->hasPermissionTo('pemantauan suara anak-add')) 
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambahPemantauanModal">
                     + Pemantauan Suara Anak
                 </button>
+            @endif
             </div>
         </div>
 
@@ -96,6 +98,7 @@
                         </td>
                         <td class="d-flex align-items-center justify-content-center gap-2 py-2">
                             <!-- Tombol Edit -->
+                            @if (auth()->user()->hasPermissionTo('pemantauan suara anak-edit')) 
                             <button class="btn btn-sm btn-primary edit-usulan" 
                                 data-bs-toggle="modal" 
                                 data-bs-target="#editForm"
@@ -104,7 +107,9 @@
                                 data-deskripsi="{{ $suara->deskripsi }}">
                                 <i class="bi bi-pencil-square"></i>
                             </button>
+                            @endif
                             <!-- Tombol Tindak Lanjut -->
+                            @if (auth()->user()->hasPermissionTo('pemantauan suara anak-verifikasi')) 
                             <button class="btn btn-sm rounded-circle edit-tindakan"
                                     style="background-color: #6A0DAD; width: 36px; height: 36px;"
                                     data-bs-toggle="modal" data-bs-target="#tindakLanjutModal"
@@ -114,15 +119,18 @@
                                     data-tindakLanjut="{{ $suara->tindakLanjut }}">
                                 <i class="bi bi-calendar text-white fs-6"></i>
                             </button>
+                            @endif
                     
                             
                             <!-- Tombol Finalisasi -->
+                            @if (auth()->user()->hasPermissionTo('pemantauan suara anak-verifikasi')) 
                             <button class="btn btn-sm rounded-circle edit-verifikasi" style="background-color: #FFC107; width: 36px; height: 36px;"
                                 data-bs-toggle="modal" data-bs-target="#finalisasiModal"
                                 data-id="{{ $suara->id }}"
                                 data-status="{{ $suara->is_active }}">
                                 <i class="bi bi-list-task text-white fs-6"></i>
                             </button>
+                            @endif
                         </td>
                     </tr>
                     @endforeach

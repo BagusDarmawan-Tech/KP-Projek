@@ -147,7 +147,7 @@ class MitraAnakController extends Controller
 
 //========================CRUD ArtikelMitra ANAk
     public function artikelmitraanak() {
-        $kategoris = KategoriArtikel::all();
+        $kategoris = KategoriArtikel::where('is_active', true)->get();
         $artikels = ArtikelMitraAnak::all();
         return view('admin.artikelMitraAnak', compact('kategoris', 'artikels'));        
     }

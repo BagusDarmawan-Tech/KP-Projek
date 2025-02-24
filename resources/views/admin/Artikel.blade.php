@@ -49,8 +49,8 @@
                         <tr>
                             <td style="text-align: center;">{{ $loop->iteration }}</td>
                             <td><img src="{{ asset($artikel->gambar) }}" alt="Artikel Image" width="80"></td>
+                            <td>{{ $artikel->kategori ? $artikel->kategori->nama : 'Tidak ada Kategori' }}</td>
                             <td>{{ $artikel->judul }}</td>
-                            <td>{{ $artikel->slug }}</td>
                             <td>{{ $artikel->dibuatOleh }}</td>
                             <td>
                                 @if($artikel->is_active == 0)

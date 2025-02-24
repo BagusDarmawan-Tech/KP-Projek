@@ -88,9 +88,11 @@
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <!-- <h5 class="fw-bold">Daftar Dokumen</h5> -->
                  <br>
+            @if (auth()->user()->hasPermissionTo('kegiatan arek suroboyo-add'))
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTambahKegiatan">
                     <i class="bi bi-plus"></i> Tambah kegiatan Forum Anak Surabaya
                 </button>
+            @endif
             </div>
             <div class="table-responsive">
                 <table class="table table-hover table-bordered align-middle text-center"  id="myTable">
@@ -131,6 +133,7 @@
 
                             </td>
                             <td>
+                            @if (auth()->user()->hasPermissionTo('kegiatan arek suroboyo-edit'))
                                 <button class="btn btn-sm btn-primary edit-forum" data-bs-toggle="modal" data-bs-target="#modaEditKegiatan"
                                     data-id="{{ $kegiatan->id }}" 
                                     data-nama="{{ $kegiatan->nama }}" 
@@ -139,13 +142,16 @@
                                     data-status="{{ $kegiatan->is_active }}">
                                     <i class="bi bi-pencil-square"></i>
                                 </button>
+                            @endif
                                 <!-- Button Delete Modal -->
+                            @if (auth()->user()->hasPermissionTo('kegiatan arek suroboyo-delete'))
                                 <button class="btn btn-sm btn-danger delete-btn" 
                                     data-id  ="{{ $kegiatan->id }}"
                                     data-nama ="{{ $kegiatan->nama }}"
                                     data-bs-toggle="modal" 
                                     data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i>
-                                </button>   
+                                </button> 
+                            @endif  
                             </td>
                         </tr>
                         @endforeach

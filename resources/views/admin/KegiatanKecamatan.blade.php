@@ -89,9 +89,11 @@
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <!-- <h5 class="fw-bold">Daftar Dokumen</h5> -->
                  <br>
+                 @if (auth()->user()->hasPermissionTo('kegiatan kecamatan-add'))
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTambahKegiatan">
                     <i class="bi bi-plus"></i> Kegiatan Kecamatan 
                 </button>
+                @endif
             </div>
             <div class="table-responsive">
                 <table class="table table-hover table-bordered align-middle text-center" id="myTable">
@@ -123,6 +125,7 @@
                               @endif
                             </td>  
                             <td>
+                            @if (auth()->user()->hasPermissionTo('kegiatan kecamatan-add'))
                               <button class="btn btn-sm btn-primary btn-edit-kegiatan"
                                 data-id="{{ $kegiatan->id }}"
                                 data-nama="{{ $kegiatan->nama }}"
@@ -134,14 +137,17 @@
                                 data-bs-toggle="modal"
                                 data-bs-target="#modaEditKegiatan">
                                 <i class="bi bi-pencil-square"></i>
-                              </button>                                 
+                              </button> 
+                            @endif                                
                                 <!-- Tombol Hapus -->
+                            @if (auth()->user()->hasPermissionTo('kegiatan kecamatan-delete'))
                                 <button class="btn btn-sm btn-danger delete-btn" 
                                     data-id  ="{{ $kegiatan->id }}"
                                     data-nama ="{{ $kegiatan->nama }}"
                                     data-bs-toggle="modal" 
                                     data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i>
-                                </button>                              
+                                </button> 
+                            @endif                             
                             </td>
                         </tr>
                         @endforeach
