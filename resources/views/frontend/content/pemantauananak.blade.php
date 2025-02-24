@@ -37,19 +37,44 @@
                             <th>No</th>
                             <th>Usulan Anak Untuk Pembangunan Kota Surabaya</th>
                             <th>OPD Pelaksana</th>
-                            <th>Status Tindak Lanjut</th>
                             <th>Keterangan</th>
+                            <th>Status Tindak Lanjut</th>
                         </tr>
                     </thead>
-                    
+                    <tbody>
+                        @forelse($datas as $key => $data)
+                            <tr>
+                                <td class="text-center">{{ $key + 1 }}</td>
+                                <td class ="text-center">{{ $data->namaUsulan }} <!-- Kolom "usulan" -->
+                                <td class ="text-center">{{ $data -> user ? $data -> user -> name : 'Tidak ada pengguna' }}</td>
+                                <td class ="text-center">{{ $data->keterangan }}</td> <!-- Kolom "keterangan" -->
+                                <td class="text-center">
+                                        <!-- Cek nilai 'tindakLanjut' dan tampilkan badge -->
+                                        @if($data->tindakLanjut === 'Diproses')
+                                            <span class="badge bg-success">Belom di Tindak Lanjut</span>
+                                        @elseif($data->tindakLanjut === 'Telah Diproses')
+                                            <span class="badge bg-warning">Sudah di Tindak Lanjut</span>
+                                        @else
+                                            <span class="badge bg-secondary">Tidak Ada Status</span>
+                                        @endif
+                                    </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="5" class="text-center">Tidak ada data aktif.</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
                 </table>
             </div>
 
-            <!-- Paginasi -->
-            
+            <!-- Paginasi (Jika diperlukan) -->
+            {{-- @if(method_exists($datas, 'links'))
+                <div class="d-flex justify-content-center mt-3">
+                    {{ $datas->links() }}
+                </div>
+            @endif --}}
         </div>
     </div>
 </div>
-
-
 @endsection

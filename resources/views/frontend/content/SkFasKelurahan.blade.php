@@ -35,14 +35,28 @@
                     <thead class="text-center">
                         <tr>
                             <th>No</th>
-                            <th>Pengupload</th>
+
                             <th>Kategori</th>
                             <th>Nama</th>
                             <th>Keterangan</th>
                             <th>File</th>
                         </tr>
                     </thead>
-                    
+                    <tbody>
+                        @foreach($dataAktif as $index => $data)
+                        <tr>
+                            <td style="text-align: center;">{{ $loop->iteration }}</td>
+                            <td class="text-center"> {{ $data->surat ? $data->surat->nama : 'Tidak ada surat' }}</td>                            
+                           
+                            <td class="text-center">{{ $data->nama }}</td>
+                            <td class="text-center">{{ $data->keterangan }}</td>
+                            <td class="text-center">
+                            <a href="{{ asset('/' . $data->dataPendukung) }}" download class="btn btn-sm btn-primary">Download</a>
+                        </td>
+
+                        </tr>
+                        @endforeach
+                        </tbody>
                 </table>
             </div>
 
