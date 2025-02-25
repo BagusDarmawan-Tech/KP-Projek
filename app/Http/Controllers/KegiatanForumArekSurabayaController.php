@@ -52,7 +52,7 @@ class KegiatanForumArekSurabayaController extends Controller
             'keterangan' => $request->keterangan,
             'gambar' => 'storage/' . $path, 
             'is_active' => $request->is_active,
-            'dibuatOleh' => $request->dibuatOleh,
+            'dibuatOleh' =>  (int) $request->dibuatOleh,
             'tanggal' => $tanggal
         ]);
 

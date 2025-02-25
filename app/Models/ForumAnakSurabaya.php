@@ -12,4 +12,10 @@ class ForumAnakSurabaya extends Model
     protected $table = 'kegiatan_forum_anak_surabaya';
 
     protected $fillable = ['nama', 'keterangan','gambar','is_active','dibuatOleh','tanggal'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'dibuatOleh');
+    }
 }
+

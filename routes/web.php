@@ -124,16 +124,31 @@ Route::middleware('auth')->group(function () {
         
 
     //tambah
-    Route::post('/createDokumenKelurahan', [KelurahanLayakAnakController::class, 'storeDokumenKelurahan'])->name('createDokumenKelurahan');
-    Route::post('/createKegiatanKelurahan', [KelurahanLayakAnakController::class, 'storeKegiatanKelurahan'])->name('createKegiatanKelurahan');
+    Route::post('/createDokumenKelurahan', [KelurahanLayakAnakController::class, 'storeDokumenKelurahan'])
+        ->name('createDokumenKelurahan')
+        ->middleware(['auth', 'verified', 'can:dokumen kelurahan-add']);
+
+    Route::post('/createKegiatanKelurahan', [KelurahanLayakAnakController::class, 'storeKegiatanKelurahan'])
+        ->name('createKegiatanKelurahan')
+        ->middleware(['auth', 'verified', 'can:kegiatan kelurahan-add']);
 
     //edit
-    Route::put('/dokumenKelurahan/update/{id}', [KelurahanLayakAnakController::class, 'updateDokumenKelurahan'])->name('updateDokumenKelurahan');
-    Route::put('/kegiatanKelurahan/update/{id}', [KelurahanLayakAnakController::class, 'updateKegiatanKelurahan'])->name('updateKegiatanKelurahan');
+    Route::put('/dokumenKelurahan/update/{id}', [KelurahanLayakAnakController::class, 'updateDokumenKelurahan'])
+        ->name('updateDokumenKelurahan')
+        ->middleware(['auth', 'verified', 'can:dokumen kelurahan-edit']);
+
+    Route::put('/kegiatanKelurahan/update/{id}', [KelurahanLayakAnakController::class, 'updateKegiatanKelurahan'])
+        ->name('updateKegiatanKelurahan')
+        ->middleware(['auth', 'verified', 'can:kegiatan kelurahan-add']);
     
     //delete
-    Route::delete('/dokumenKelurahan/hapus/{id}', [KelurahanLayakAnakController::class, 'destroyDokumenKelurahan'])->name('destroyDokumenKelurahan');
-    Route::delete('/kegiatanKelurahan/hapus/{id}', [KelurahanLayakAnakController::class, 'destroyKegiatanKelurahan'])->name('destroyKegiatanKelurahan');
+    Route::delete('/dokumenKelurahan/hapus/{id}', [KelurahanLayakAnakController::class, 'destroyDokumenKelurahan'])
+        ->name('destroyDokumenKelurahan')
+        ->middleware(['auth', 'verified', 'can:dokumen kelurahan-delete']);
+
+    Route::delete('/kegiatanKelurahan/hapus/{id}', [KelurahanLayakAnakController::class, 'destroyKegiatanKelurahan'])
+        ->name('destroyKegiatanKelurahan')
+        ->middleware(['auth', 'verified', 'can:kegiatan kelurahan-delete']);
 });
 
 
@@ -148,52 +163,111 @@ Route::middleware('auth')->group(function () {
         ->middleware(['auth', 'verified', 'can:kegiatan pisa-list']);
 
     // Tambah
-    Route::post('/createDokumenPisa', [PusatInformasiSahabatController::class, 'storeDokumenPisa'])->name('createDokumenPisa');
-    Route::post('/createKegiatanPisa', [PusatInformasiSahabatController::class, 'storeKegiatanPisa'])->name('createKegiatanPisa');
+    Route::post('/createDokumenPisa', [PusatInformasiSahabatController::class, 'storeDokumenPisa'])
+        ->name('createDokumenPisa')
+        ->middleware(['auth', 'verified', 'can:dokumen pisa-add']);
+
+    Route::post('/createKegiatanPisa', [PusatInformasiSahabatController::class, 'storeKegiatanPisa'])
+        ->name('createKegiatanPisa')
+        ->middleware(['auth', 'verified', 'can:kegiatan pisa-add']);
 
     //edit
-    Route::put('/DokumenPisa/update/{id}', [PusatInformasiSahabatController::class, 'updateDokumenPisa'])->name('updateDokumenPisa');
-    Route::put('/kegiatanPisa/update/{id}', [PusatInformasiSahabatController::class, 'updateKegiatanPisa'])->name('updateKegiatanPisa');
+    Route::put('/DokumenPisa/update/{id}', [PusatInformasiSahabatController::class, 'updateDokumenPisa'])
+        ->name('updateDokumenPisa')
+        ->middleware(['auth', 'verified', 'can:dokumen pisa-edit']);
+
+    Route::put('/kegiatanPisa/update/{id}', [PusatInformasiSahabatController::class, 'updateKegiatanPisa'])
+        ->name('updateKegiatanPisa')
+        ->middleware(['auth', 'verified', 'can:kegiatan pisa-edit']);
 
     //delete
-    Route::delete('/halamanDokumenPisa/hapus/{id}', [PusatInformasiSahabatController::class, 'destroyHalamanDokumenPisa'])->name('destroyHalamanDokumenPisa');
-    Route::delete('/kegiatanPisa/hapus/{id}', [PusatInformasiSahabatController::class, 'destroyKegiatanPisa'])->name('destroyKegiatanPisa');
+    Route::delete('/halamanDokumenPisa/hapus/{id}', [PusatInformasiSahabatController::class, 'destroyHalamanDokumenPisa'])
+        ->name('destroyHalamanDokumenPisa')
+        ->middleware(['auth', 'verified', 'can:dokumen pisa-delete']);
+
+    Route::delete('/kegiatanPisa/hapus/{id}', [PusatInformasiSahabatController::class, 'destroyKegiatanPisa'])
+        ->name('destroyKegiatanPisa')
+        ->middleware(['auth', 'verified', 'can:kegiatan pisa-delete']);
 
 });
 
 // Halaman Kegiatan Forum Anak surabaya
 Route::middleware('auth')->group(function () {
     Route::get('/HalamanForumAnakaSurabaya', [KegiatanForumArekSurabayaController::class, 'HalamanForum'])
-        ->name('KegiatanForumSurabaya');
+        ->name('KegiatanForumSurabaya')
+        ->middleware(['auth', 'verified', 'can:kegiatan forum anak suroboyo-list']);
 
     //create
     Route::post('/createForumAnakSurabaya', [KegiatanForumArekSurabayaController::class, 'storeForumAnakSurabaya'])
-        ->name('createForumAnakSurabaya');
+        ->name('createForumAnakSurabaya')
+        ->middleware(['auth', 'verified', 'can:kegiatan forum anak suroboyo-add']);
 
     //update
     Route::put('/halamanForum/update/{id}', [KegiatanForumArekSurabayaController::class, 'updateHalamanForum'])
-        ->name('updateHalamanForum');
+        ->name('updateHalamanForum')
+        ->middleware(['auth', 'verified', 'can:kegiatan forum anak suroboyo-edit']);
 
     //delete
     Route::delete('/halamanForumAnakSurabaya/hapus/{id}', [KegiatanForumArekSurabayaController::class, 'destroyHalamanForum'])
-        ->name('destroyHalamanForum');
+        ->name('destroyHalamanForum')
+        ->middleware(['auth', 'verified', 'can:kegiatan forum anak suroboyo-delete']);
 
 
 });
 
 // Halaman Config
 Route::middleware('auth')->group(function () {
-    Route::get('/HalamanRoleManagement', [ConfigController::class, 'RoleManagementt'])->name('HalamanRole');
-    Route::get('/HalamanConfigurasiAPP', [ConfigController::class, 'ConfigurasiAPP'])->name('HalamanConfigurasi');
+    //read
+    Route::get('/HalamanRoleManagement', [ConfigController::class, 'RoleManagementt'])
+        ->name('HalamanRole')
+        ->middleware(['auth', 'verified', 'can:role management-list']);
+
+    Route::get('/HalamanConfigurasiAPP', [ConfigController::class, 'ConfigurasiAPP'])
+        ->name('HalamanConfigurasi')
+        ->middleware(['auth', 'verified', 'can:configurasi app-list']);
+    
+    Route::get('/admin/config', [UserManagement::class, 'UserManagement'])
+        ->name('UserManagement')
+        ->middleware(['auth', 'verified', 'can:user management-list']);
+    
+    Route::get('/roles', [RoleController::class, 'index'])
+        ->name('admin.index')
+        ->middleware(['auth', 'verified', 'can:role management-list']);
+
+    Route::get('/roles/create', [RoleController::class, 'create'])
+        ->name('admin.create')
+        ->middleware(['auth', 'verified', 'can:role management-list']);
+
+    Route::get('/roles/{role}/edit', [RoleController::class, 'edit'])
+        ->name('admin.edit')
+        ->middleware(['auth', 'verified', 'can:role management-list']);
 
     //tambah
-    Route::post('/createConfigurasiAPP', [ConfigController::class, 'storeConfigurasiAPP'])->name('createConfigurasiAPP');
+    Route::post('/createConfigurasiAPP', [ConfigController::class, 'storeConfigurasiAPP'])
+        ->name('createConfigurasiAPP')
+        ->middleware(['auth', 'verified', 'can:configurasi app-add']);
+    
+    Route::post('/roles', [RoleController::class, 'store'])
+        ->name('admin.store')
+        ->middleware(['auth', 'verified', 'can:role management-add']);
 
     //edit
-    Route::put('/configurasiAPP/update/{id}', [ConfigController::class, 'updateConfigurasiAPP'])->name('updateConfigurasiAPP');
+    Route::put('/configurasiAPP/update/{id}', [ConfigController::class, 'updateConfigurasiAPP'])
+        ->name('updateConfigurasiAPP')
+        ->middleware(['auth', 'verified', 'can:configurasi app-edit']);
+    
+    Route::put('/admin/{role}', [RoleController::class, 'update'])
+        ->name('admin.update')
+        ->middleware(['auth', 'verified', 'can:role management-edit']);
 
     //delete
-    Route::delete('/ConfigurasiAPP/hapus/{id}', [ConfigController::class, 'destroyConfigurasiAPP'])->name('destroyConfigurasiAPP');
+    Route::delete('/ConfigurasiAPP/hapus/{id}', [ConfigController::class, 'destroyConfigurasiAPP'])
+        ->name('destroyConfigurasiAPP')
+        ->middleware(['auth', 'verified', 'can:configurasi app-delete']);
+
+    Route::delete('/roles/{role}', [RoleController::class, 'destroy'])
+        ->name('admin.destroy')
+        ->middleware(['auth', 'verified', 'can:role management-delete']);
 
 });
 
@@ -250,38 +324,116 @@ Route::middleware('auth')->group(function () {
         ->middleware(['auth', 'verified', 'can:artikel-list']);
 
     //Tambah data
-    Route::post('/createKategoriArtikel', [WebManagementController::class, 'storeKategoriArtikel'])->name('createKategoriArtikel');
-    Route::post('/createSlider', [WebManagementController::class, 'storeSlider'])->name('createSlider');
-    Route::post('/createPemantauanUsulan', [WebManagementController::class, 'storepemantauanUsulan'])->name('createPemantauanUsulan');
-    Route::post('/createKlaster', [WebManagementController::class, 'storeKlaster'])->name('createKlaster');
-    Route::post('/createHalaman', [WebManagementController::class, 'storeHalaman'])->name('createHalaman');
-    Route::post('/createGaleri', [WebManagementController::class, 'storeGaleri'])->name('createGaleri');
-    Route::post('/createForumAnak', [WebManagementController::class, 'storeForumAnak'])->name('createForumAnak');
-    Route::post('/createSubKegiatan', [WebManagementController::class, 'storeSubKegiatan'])->name('createSubKegiatan');
-    Route::post('/createArtikel', [WebManagementController::class, 'storeArtikel'])->name('createArtikel');
+    Route::post('/createKategoriArtikel', [WebManagementController::class, 'storeKategoriArtikel'])
+        ->name('createKategoriArtikel')
+        ->middleware(['auth', 'verified', 'can:kategori artikel-add']);
+
+    Route::post('/createSlider', [WebManagementController::class, 'storeSlider'])
+        ->name('createSlider')
+        ->middleware(['auth', 'verified', 'can:slider-add']);
+
+    Route::post('/createPemantauanUsulan', [WebManagementController::class, 'storepemantauanUsulan'])
+        ->name('createPemantauanUsulan')
+        ->middleware(['auth', 'verified', 'can:pemantauan usulan-add']);
+
+    Route::post('/createKlaster', [WebManagementController::class, 'storeKlaster'])
+        ->name('createKlaster')
+        ->middleware(['auth', 'verified', 'can:klaster-add']);
+
+    Route::post('/createHalaman', [WebManagementController::class, 'storeHalaman'])
+        ->name('createHalaman')
+        ->middleware(['auth', 'verified', 'can:halaman-add']);
+
+    Route::post('/createGaleri', [WebManagementController::class, 'storeGaleri'])
+        ->name('createGaleri')
+        ->middleware(['auth', 'verified', 'can:galeri-add']);
+
+    Route::post('/createForumAnak', [WebManagementController::class, 'storeForumAnak'])
+        ->name('createForumAnak')
+        ->middleware(['auth', 'verified', 'can:forum anak-add']);
+
+    Route::post('/createSubKegiatan', [WebManagementController::class, 'storeSubKegiatan'])
+        ->name('createSubKegiatan')
+        ->middleware(['auth', 'verified', 'can:sub kegiatan-add']);
+
+    Route::post('/createArtikel', [WebManagementController::class, 'storeArtikel'])
+        ->name('createArtikel')
+        ->middleware(['auth', 'verified', 'can:artikel-add']);
 
     //Edit data
-    Route::put('/kategori-artikel/update/{id}', [WebManagementController::class, 'updateKategoriArtikel'])->name('updateKategoriArtikel');
-    Route::put('/slider/update/{id}', [WebManagementController::class, 'updateSlider'])->name('updateSlider');
-    Route::put('/klaster/update/{id}', [WebManagementController::class, 'updateKlaster'])->name('updateKlaster');
-    Route::put('/halaman/update/{id}', [WebManagementController::class, 'updateHalaman'])->name('updateHalaman');
-    Route::put('/forumAnak/update/{id}', [WebManagementController::class, 'updateForumAnak'])->name('updateForumAnak');
-    Route::put('/galeri/update/{id}', [WebManagementController::class, 'updateGaleri'])->name('updateGaleri');
-    Route::put('/subKegiatan/update/{id}', [WebManagementController::class, 'updateSubKegiatan'])->name('updateSubKegiatan');
-    Route::put('/artikel/update/{id}', [WebManagementController::class, 'updateArtikel'])->name('updateArtikel');
-    Route::put('/pemantauan/update/{id}', [WebManagementController::class, 'updatePemantauanUsulan'])->name('updatePemantauaUsulan');
+    Route::put('/kategori-artikel/update/{id}', [WebManagementController::class, 'updateKategoriArtikel'])
+        ->name('updateKategoriArtikel')
+        ->middleware(['auth', 'verified', 'can:kategori artikel-edit']);
+
+    Route::put('/slider/update/{id}', [WebManagementController::class, 'updateSlider'])
+        ->name('updateSlider')
+        ->middleware(['auth', 'verified', 'can:slider-edit']);
+
+    Route::put('/klaster/update/{id}', [WebManagementController::class, 'updateKlaster'])
+        ->name('updateKlaster')
+        ->middleware(['auth', 'verified', 'can:klaster-edit']);
+
+    Route::put('/halaman/update/{id}', [WebManagementController::class, 'updateHalaman'])
+        ->name('updateHalaman')
+        ->middleware(['auth', 'verified', 'can:halaman-edit']);
+
+    Route::put('/forumAnak/update/{id}', [WebManagementController::class, 'updateForumAnak'])
+        ->name('updateForumAnak')
+        ->middleware(['auth', 'verified', 'can:forum anak-edit']);
+
+    Route::put('/galeri/update/{id}', [WebManagementController::class, 'updateGaleri'])
+        ->name('updateGaleri')
+        ->middleware(['auth', 'verified', 'can:galeri-edit']);
+
+    Route::put('/subKegiatan/update/{id}', [WebManagementController::class, 'updateSubKegiatan'])
+        ->name('updateSubKegiatan')
+        ->middleware(['auth', 'verified', 'can:sub kegiatan-edit']);
+
+    Route::put('/artikel/update/{id}', [WebManagementController::class, 'updateArtikel'])
+        ->name('updateArtikel')
+        ->middleware(['auth', 'verified', 'can:artikel-edit']);
+
+    Route::put('/pemantauan/update/{id}', [WebManagementController::class, 'updatePemantauanUsulan'])
+        ->name('updatePemantauaUsulan')
+        ->middleware(['auth', 'verified', 'can:pemantauan usulan-edit']);
 
 
     //Delete data
-    Route::delete('/kategori/hapus/{id}', [WebManagementController::class, 'destroyKategoriArtikel'])->name('destroyKategoriArtikel');
-    Route::delete('/slider/hapus/{id}', [WebManagementController::class, 'destroySlider'])->name('destroySlider');
-    Route::delete('/galeri/hapus/{id}', [WebManagementController::class, 'destroyGaleri'])->name('destroyGaleri');
-    Route::delete('/klaster/hapus/{id}', [WebManagementController::class, 'destroyKlaster'])->name('destroyKlaster');
-    Route::delete('/halaman/hapus/{id}', [WebManagementController::class, 'destroyHalaman'])->name('destroyHalaman');
-    Route::delete('/subKegiatan/hapus/{id}', [WebManagementController::class, 'destroySubKegiatan'])->name('destroySubKegiatan');
-    Route::delete('/forumAnak/hapus/{id}', [WebManagementController::class, 'destroyForumAnak'])->name('destroyForumAnak');
-    Route::delete('/pemantauan/hapus/{id}', [WebManagementController::class, 'destroyPemantauan'])->name('destroyPemantauan');
-    Route::delete('/artikel/hapus/{id}', [WebManagementController::class, 'destroyArtikel'])->name('destroyArtikel');
+    Route::delete('/kategori/hapus/{id}', [WebManagementController::class, 'destroyKategoriArtikel'])
+        ->name('destroyKategoriArtikel')
+        ->middleware(['auth', 'verified', 'can:kategori artikel-delete']);
+
+    Route::delete('/slider/hapus/{id}', [WebManagementController::class, 'destroySlider'])
+        ->name('destroySlider')
+        ->middleware(['auth', 'verified', 'can:slider-delete']);
+
+    Route::delete('/galeri/hapus/{id}', [WebManagementController::class, 'destroyGaleri'])
+        ->name('destroyGaleri')
+        ->middleware(['auth', 'verified', 'can:galeri-delete']);
+
+    Route::delete('/klaster/hapus/{id}', [WebManagementController::class, 'destroyKlaster'])
+        ->name('destroyKlaster')
+        ->middleware(['auth', 'verified', 'can:klaster-delete']);
+
+    Route::delete('/halaman/hapus/{id}', [WebManagementController::class, 'destroyHalaman'])
+        ->name('destroyHalaman')
+        ->middleware(['auth', 'verified', 'can:halaman-delete']);
+
+    Route::delete('/subKegiatan/hapus/{id}', [WebManagementController::class, 'destroySubKegiatan'])
+        ->name('destroySubKegiatan')
+        ->middleware(['auth', 'verified', 'can:sub kegiatan-delete']);
+
+    Route::delete('/forumAnak/hapus/{id}', [WebManagementController::class, 'destroyForumAnak'])
+        ->name('destroyForumAnak')
+        ->middleware(['auth', 'verified', 'can:forum anak-delete']);
+
+    Route::delete('/pemantauan/hapus/{id}', [WebManagementController::class, 'destroyPemantauan'])
+        ->name('destroyPemantauan')
+        ->middleware(['auth', 'verified', 'can:pemantauan usulan-delete']);
+
+    Route::delete('/artikel/hapus/{id}', [WebManagementController::class, 'destroyArtikel'])
+        ->name('destroyArtikel')
+        ->middleware(['auth', 'verified', 'can:artikel-delete']);
 
 });
 
@@ -296,16 +448,31 @@ Route::middleware('auth')->group(function () {
         ->middleware(['auth', 'verified', 'can:kegiatan kecamatan-list']);
 
     //Tambah Data
-    Route::post('/createDokumenKecamatan', [KecamatanLayakController::class, 'storeDokumenKecamatan'])->name('createDokumenKecamatan');
-    Route::post('/createKegiatanKecamatan', [KecamatanLayakController::class, 'storeKegiatanKecamatan'])->name('createKegiatanKecamatan');
+    Route::post('/createDokumenKecamatan', [KecamatanLayakController::class, 'storeDokumenKecamatan'])
+        ->name('createDokumenKecamatan')
+        ->middleware(['auth', 'verified', 'can:dokumen kecamatan-add']);
+
+    Route::post('/createKegiatanKecamatan', [KecamatanLayakController::class, 'storeKegiatanKecamatan'])
+        ->name('createKegiatanKecamatan')
+        ->middleware(['auth', 'verified', 'can:kegiatan kecamatan-add']);
 
     //edit
-    Route::put('/dokumenKecamatan/update/{id}', [KecamatanLayakController::class, 'updateDokumenKecamatan'])->name('updateDokumenKecamatan');
-    Route::put('/kegiatanKecamatan/update/{id}', [KecamatanLayakController::class, 'updateKegiatanKecamatan'])->name('updateKegiatanKecamatan');
+    Route::put('/dokumenKecamatan/update/{id}', [KecamatanLayakController::class, 'updateDokumenKecamatan'])
+        ->name('updateDokumenKecamatan')
+        ->middleware(['auth', 'verified', 'can:dokumen kecamatan-edit']);
+
+    Route::put('/kegiatanKecamatan/update/{id}', [KecamatanLayakController::class, 'updateKegiatanKecamatan'])
+        ->name('updateKegiatanKecamatan')
+        ->middleware(['auth', 'verified', 'can:kegiatan kecamatan-edit']);
 
     //delete
-    Route::delete('/dokumenKecamatan/hapus/{id}', [KecamatanLayakController::class, 'destroyDokumenKecamatan'])->name('destroyDokumenKecamatan  ');
-    Route::delete('/kegiatanKecamatan/hapus/{id}', [KecamatanLayakController::class, 'destroyKegiatanKecamatan'])->name('destroyKegiatanKecamatan  ');
+    Route::delete('/dokumenKecamatan/hapus/{id}', [KecamatanLayakController::class, 'destroyDokumenKecamatan'])
+        ->name('destroyDokumenKecamatan')
+        ->middleware(['auth', 'verified', 'can:dokumen kecamatan-delete']);
+
+    Route::delete('/kegiatanKecamatan/hapus/{id}', [KecamatanLayakController::class, 'destroyKegiatanKecamatan'])
+        ->name('destroyKegiatanKecamatan')
+        ->middleware(['auth', 'verified', 'can:kegiatan kecamatan-delete']);
 
 });
 
@@ -325,19 +492,43 @@ Route::middleware('auth')->group(function () {
 
 
     //Tambah
-    Route::post('/createKegiatanMitraAnak', [MitraAnakController::class, 'storeKegiatanMitraAnak'])->name('createKegiatanMitraAnak');
-    Route::post('/createMitraCfci', [MitraAnakController::class, 'storeKegiatanCfci'])->name('createMitraCfci');
-    Route::post('/createArtikelMitra', [MitraAnakController::class, 'storeArtikelMitra'])->name('createArtikelMitra');
+    Route::post('/createKegiatanMitraAnak', [MitraAnakController::class, 'storeKegiatanMitraAnak'])
+        ->name('createKegiatanMitraAnak')
+        ->middleware(['auth', 'verified', 'can:kegiatan mitra anak-add']);
+
+    Route::post('/createMitraCfci', [MitraAnakController::class, 'storeKegiatanCfci'])
+        ->name('createMitraCfci')
+        ->middleware(['auth', 'verified', 'can:cfci-add']);
+
+    Route::post('/createArtikelMitra', [MitraAnakController::class, 'storeArtikelMitra'])
+        ->name('createArtikelMitra')
+        ->middleware(['auth', 'verified', 'can:artikel anak-add']);
 
     //Update Data
-    Route::put('/artikelMitra/update/{id}', [MitraAnakController::class, 'updateArtikelMitra'])->name('updateArtikelMitra');
-    Route::put('/kegiatanMitra/update/{id}', [MitraAnakController::class, 'updateKegiatanMitra'])->name('updatekegiatanMitra');
-    Route::put('/update/{id}', [MitraAnakController::class, 'update'])->name('updateCfci');
+    Route::put('/artikelMitra/update/{id}', [MitraAnakController::class, 'updateArtikelMitra'])
+        ->name('updateArtikelMitra')
+        ->middleware(['auth', 'verified', 'can:artikel anak-edit']);
+
+    Route::put('/kegiatanMitra/update/{id}', [MitraAnakController::class, 'updateKegiatanMitra'])
+        ->name('updatekegiatanMitra')
+        ->middleware(['auth', 'verified', 'can:kegiatan mitra anak-edit']);
+
+    Route::put('/update/{id}', [MitraAnakController::class, 'update'])
+        ->name('updateCfci')
+        ->middleware(['auth', 'verified', 'can:cfci-edit']);
 
     //delete
-    Route::delete('/artikelMitra/hapus/{id}', [MitraAnakController::class, 'destroyArtikelMitra'])->name('destroyArtikelMitra');
-    Route::delete('/kegiatanMitra/hapus/{id}', [MitraAnakController::class, 'destroyKegiatanMitra'])->name('destroyKegiatanMitra');
-    Route::delete('/mitraCfci/hapus/{id}', [MitraAnakController::class, 'destroyMitraCfci'])->name('destroyMitraCfci  ');
+    Route::delete('/artikelMitra/hapus/{id}', [MitraAnakController::class, 'destroyArtikelMitra'])
+        ->name('destroyArtikelMitra')
+        ->middleware(['auth', 'verified', 'can:artikel anak-delete']);
+
+    Route::delete('/kegiatanMitra/hapus/{id}', [MitraAnakController::class, 'destroyKegiatanMitra'])
+        ->name('destroyKegiatanMitra')
+        ->middleware(['auth', 'verified', 'can:kegiatan mitra anak-delete']);
+
+    Route::delete('/mitraCfci/hapus/{id}', [MitraAnakController::class, 'destroyMitraCfci'])
+        ->name('destroyMitraCfci  ')
+        ->middleware(['auth', 'verified', 'can:cfci-delete']);
 
 });
 
@@ -348,13 +539,19 @@ Route::middleware('auth')->group(function () {
         ->middleware(['auth', 'verified', 'can:kegiatan arek suroboyo-list']);
 
     //tambah
-    Route::post('/createKegiatanArekSuroboyo', [KegiatanArekSuroboyoController::class, 'storeKegiatanArekSuroboyo'])->name('createKegiatanArekSuroboyo');
+    Route::post('/createKegiatanArekSuroboyo', [KegiatanArekSuroboyoController::class, 'storeKegiatanArekSuroboyo'])
+        ->name('createKegiatanArekSuroboyo')
+        ->middleware(['auth', 'verified', 'can:kegiatan arek suroboyo-add']);
     
     //update
-    Route::put('/KegiatanArekSuroboyo/update/{id}', [KegiatanArekSuroboyoController::class, 'updateKegiatanArekSuroboyo'])->name('updateKegiatanArekSuroboyo');
+    Route::put('/KegiatanArekSuroboyo/update/{id}', [KegiatanArekSuroboyoController::class, 'updateKegiatanArekSuroboyo'])
+        ->name('updateKegiatanArekSuroboyo')
+        ->middleware(['auth', 'verified', 'can:kegiatan arek suroboyo-edit']);
 
     //delete
-    Route::delete('/KegiatanArekSuroboyo/hapus/{id}', [KegiatanArekSuroboyoController::class, 'destroyKegiatanArekSuroboyo'])->name('destroyKegiatanArekSuroboyo');
+    Route::delete('/KegiatanArekSuroboyo/hapus/{id}', [KegiatanArekSuroboyoController::class, 'destroyKegiatanArekSuroboyo'])
+        ->name('destroyKegiatanArekSuroboyo')
+        ->middleware(['auth', 'verified', 'can:kegiatan arek suroboyo-delete']);
 
 });
 
@@ -369,20 +566,47 @@ Route::middleware('auth')->group(function () {
         ->middleware(['auth', 'verified', 'can:karya-list']);
 
     //Tambah data
-    Route::post('/createPemantauanSuara', [UsulanKegiatanController::class, 'storePemantauanSuara'])->name('createPemantauanSuara');
-    Route::post('/createTindakLanjut', [UsulanKegiatanController::class, 'storeTindakLanjut'])->name('createTindakLanjut');
-    Route::post('/createKaryaAnak', [UsulanKegiatanController::class, 'storeKaryaAnak'])->name('createKaryaAnak');
+    Route::post('/createPemantauanSuara', [UsulanKegiatanController::class, 'storePemantauanSuara'])
+        ->name('createPemantauanSuara')
+        ->middleware(['auth', 'verified', 'can:pemantauan suara anak-add']);
+
+    Route::post('/createTindakLanjut', [UsulanKegiatanController::class, 'storeTindakLanjut'])
+        ->name('createTindakLanjut')
+        ->middleware(['auth', 'verified', 'can:pemantauan suara anak-verifikasi']);
+
+    Route::post('/createKaryaAnak', [UsulanKegiatanController::class, 'storeKaryaAnak'])
+        ->name('createKaryaAnak')
+        ->middleware(['auth', 'verified', 'can:karya-add']);
 
     //update
-    Route::put('/karya-anak/update/{id}', [UsulanKegiatanController::class, 'updateKaryaAnak'])->name('updateKaryaAnak');
-    Route::put('/karya-anak/verifikasi/{id}', [UsulanKegiatanController::class, 'verifikasiKaryaAnak'])->name('updateKaryaAnak');
-    Route::put('/pemantauan-suara/update/{id}', [UsulanKegiatanController::class, 'updatePemantauanSuara'])->name('updatePemantauanSuara');
-    Route::put('/tindak-lanjut/update/{id}', [UsulanKegiatanController::class, 'updateTindakLanjut'])->name('updateTindakLanjut');
-    Route::put('/verifikasi/update/{id}', [UsulanKegiatanController::class, 'updateVerifikasiUsulan'])->name('updateVerifikasi');
+    Route::put('/karya-anak/update/{id}', [UsulanKegiatanController::class, 'updateKaryaAnak'])
+        ->name('updateKaryaAnak')
+        ->middleware(['auth', 'verified', 'can:karya-edit']);
+
+    Route::put('/karya-anak/verifikasi/{id}', [UsulanKegiatanController::class, 'verifikasiKaryaAnak'])
+        ->name('updateKaryaAnak')
+        ->middleware(['auth', 'verified', 'can:karya-verifikasi']);
+
+    Route::put('/pemantauan-suara/update/{id}', [UsulanKegiatanController::class, 'updatePemantauanSuara'])
+        ->name('updatePemantauanSuara')
+        ->middleware(['auth', 'verified', 'can:pemantauan suara anak-edit']);
+
+    Route::put('/tindak-lanjut/update/{id}', [UsulanKegiatanController::class, 'updateTindakLanjut'])
+        ->name('updateTindakLanjut')
+        ->middleware(['auth', 'verified', 'can:pemantauan suara anak-verifikasi']);
+
+    Route::put('/verifikasi/update/{id}', [UsulanKegiatanController::class, 'updateVerifikasiUsulan'])
+        ->name('updateVerifikasi')
+        ->middleware(['auth', 'verified', 'can:pemantauan suara anak-verifikasi']);
 
     //delete
-    Route::delete('/karya-anak/hapus/{id}', [UsulanKegiatanController::class, 'destroyKaryaAnak'])->name('destroyKaryaAnak');
-    Route::delete('/pemantauan-suara/hapus/{id}', [UsulanKegiatanController::class, 'destroyPemantauanSuara'])->name('destroyPemantauanSuara');
+    Route::delete('/karya-anak/hapus/{id}', [UsulanKegiatanController::class, 'destroyKaryaAnak'])
+        ->name('destroyKaryaAnak')
+        ->middleware(['auth', 'verified', 'can:karya-delete']);
+
+    Route::delete('/pemantauan-suara/hapus/{id}', [UsulanKegiatanController::class, 'destroyPemantauanSuara'])
+        ->name('destroyPemantauanSuara')
+        ->middleware(['auth', 'verified', 'can:pemantauan suara anak-delete']);
 
 });
 
@@ -396,38 +620,13 @@ Route::middleware('auth')->group(function () {
 
 //CONFIG
 Route::middleware('auth')->group(function () {
-    Route::get('/admin/config', [UserManagement::class, 'UserManagement'])
-        ->name('UserManagement')
-        ->middleware(['auth', 'verified', 'can:configurasi app-list']);
-    
-    Route::get('/roles', [RoleController::class, 'index'])
-        ->name('admin.index')
-        ->middleware(['auth', 'verified', 'can:configurasi app-list']);
 
-    Route::get('/roles/create', [RoleController::class, 'create'])
-        ->name('admin.create')
-        ->middleware(['auth', 'verified', 'can:configurasi app-list']);
 
-    Route::post('/roles', [RoleController::class, 'store'])
-        ->name('admin.store')
-        ->middleware(['auth', 'verified', 'can:configurasi app-list']);
 
-    Route::get('/roles/{role}/edit', [RoleController::class, 'edit'])
-        ->name('admin.edit')
-        ->middleware(['auth', 'verified', 'can:configurasi app-list']);
-
-    Route::put('/admin/{role}', [RoleController::class, 'update'])
-        ->name('admin.update')
-        ->middleware(['auth', 'verified', 'can:configurasi app-list']);
-
-    Route::delete('/roles/{role}', [RoleController::class, 'destroy'])
-        ->name('admin.destroy')
-        ->middleware(['auth', 'verified', 'can:configurasi app-list']);
 
 
 })->middleware(['auth', 'verified', 'can:configurasi app-list']);
 
-//======================= Backend  =============================//
 
 //Logout
 Route::get('/admin/logout', [AdminController::class, 'destroy'])->name('admin.logout');

@@ -123,8 +123,7 @@
                             </td>
 
                             <!-- <td>{{ $kegiatan->keterangan }}</td> -->
-                            <td>{{ $kegiatan->dibuatOleh }}</td>
-                            <td>
+                            <td> {{ $kegiatan->user ? $kegiatan->user->name : 'Tidak ada pengguna' }}</td>                            <td>
                               @if($kegiatan->is_active == 0)
                               <span class="badge bg-warning">Non Aktif</span>
                               @else
@@ -192,7 +191,7 @@
                 <option value="0">Non-Aktif</option>
             </select>
         </div>
-        <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
+        <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->id }}">
     </div>
     <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
