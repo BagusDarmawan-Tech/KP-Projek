@@ -83,9 +83,11 @@
         <!-- Tombol + Dokumen Kecamatan di kanan atas -->
         <div class="row mb-3">
             <div class="col-md-12 d-flex justify-content-end">
+                @if (auth()->user()->hasPermissionTo('user management-add'))
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#subKegiatanModal">
                     Registrasi User
                 </button>
+                @endif
             </div>
         </div>
 
@@ -101,8 +103,6 @@
                         <th class="text-center">Email</th>
                         <th class="text-center">Nama</th>
                         <th class="text-center">Role</th>
-                        <th class="text-center">Dibuat Oleh</th>
-                        <th class="text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -112,11 +112,6 @@
                         <td>{{ $person->name }}</td>
                         <td>{{ $person->email }}</td>
                         <td>{{ $person->getRoleNames()->implode(', ') }}</td>
-                        <td>-</td>
-                        <td>
-                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#EditKegiatanManModal"><i class="bi bi-pencil-square"></i></button>
-                        <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i></button>
-                        </td>
                     </tr>
                     @endforeach
                 </tbody>

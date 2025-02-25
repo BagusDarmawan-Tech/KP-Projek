@@ -65,7 +65,9 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header d-flex justify-content-center w-100">
+                @if (auth()->user()->hasPermissionTo('role management-list'))
                 <h5 class="modal-title fw-bold text-center" id="kategoriModalLabel">Tambah Menu Role Management</h5>
+                @endif
             </div>
             <div class="modal-body">
                 <form>

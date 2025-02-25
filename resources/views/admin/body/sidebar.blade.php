@@ -16,21 +16,31 @@
         <i class="bi bi-gear-wide"></i><span>Config</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
       <ul id="components-nav" class="nav-content collapse {{ request()->is('config/*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+        
+        @if (auth()->user()->hasPermissionTo('user management-list'))
         <li>
           <a class= "{{ request()->routeIs('UserManagement') ? 'active' : '' }}" href="{{route('UserManagement')}}">
             <i class="bi bi-circle"></i><span>Users Management</span>
           </a>
         </li>
+        @endif
+        
+        @if (auth()->user()->hasPermissionTo('role management-list'))
         <li>
           <a class= "{{ request()->routeIs('HalamanRole') ? 'active' : '' }}" href="{{route('HalamanRole')}}">
             <i class="bi bi-circle"></i><span>Role Management</span>
           </a>
         </li>
+        @endif
+
+        @if (auth()->user()->hasPermissionTo('configurasi app-list'))
         <li>
           <a class= "{{ request()->routeIs('HalamanConfigurasi') ? 'active' : '' }}" href="{{route('HalamanConfigurasi')}}">
             <i class="bi bi-circle"></i><span>Configurasi App</span>
           </a>
         </li>
+        @endif
+
         <!-- <li>
           <a class= "{{ request()->routeIs('components-breadcrumbs.html') ? 'active' : '' }}" href="components-breadcrumbs.html">
             <i class="bi bi-circle"></i><span>Module Management</span>
