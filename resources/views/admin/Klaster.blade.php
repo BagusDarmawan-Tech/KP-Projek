@@ -28,9 +28,11 @@
             
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <div></div> <!-- Spacer -->
+                @if (auth()->user()->hasPermissionTo('klaster-add'))
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kategoriModal">
                     + Tambah Klaster
                 </button>
+                @endif
             </div>
 
             <!-- Tabel -->
@@ -65,6 +67,7 @@
                                 @endif
                             </td>
                             <td>
+                                @if (auth()->user()->hasPermissionTo('klaster-edit'))
                                 <button class="btn btn-sm btn-primary edit-klaster"
                                     data-id="{{ $klaster->id }}"
                                     data-nama="{{ $klaster->nama }}"
@@ -76,13 +79,17 @@
                                     data-bs-target="#EditModal">
                                     <i class="bi bi-pencil-square"></i>
                                 </button>
+                                @endif
                                 <!-- Button Delete Modal -->
+                                @if (auth()->user()->hasPermissionTo('klaster-delete'))
                                 <button class="btn btn-sm btn-danger delete-btn" 
                                     data-id  ="{{ $klaster->id }}"
                                     data-nama ="{{ $klaster->nama }}"
                                     data-bs-toggle="modal" 
                                     data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i>
-                                </button>                            </td>
+                                </button>    
+                                @endif                        
+                            </td>
                         </tr>
                         @endforeach
                         

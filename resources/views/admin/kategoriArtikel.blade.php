@@ -28,9 +28,11 @@
             </div>
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <div></div> <!-- Spacer -->
+                @if (auth()->user()->hasPermissionTo('kategori artikel-add'))
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kategoriModal">
                     + Kategori Artikel
                 </button>
+                @endif
             </div>
 
 
@@ -60,18 +62,23 @@
                                 @endif
                             </td>
                             <td>
+                                @if (auth()->user()->hasPermissionTo('kategori artikel-edit'))
                                 <button class="btn btn-sm btn-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editMenuModal" 
                                     data-id="{{ $kategori->id }}" 
                                     data-nama="{{ $kategori->nama }}" 
                                     data-status="{{ $kategori->is_active }}">
                                     <i class="bi bi-pencil-square"></i>
-                                </button>                           
+                                </button>    
+                                @endif      
+                                
+                                @if (auth()->user()->hasPermissionTo('kategori artikel-delete'))
                                 <button class="btn btn-sm btn-danger delete-btn" 
                                     data-id  ="{{ $kategori->id }}"
                                     data-nama ="{{ $kategori->nama }}"
                                     data-bs-toggle="modal" 
                                     data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i>
                                 </button>
+                                @endif
                             </td>
                         </tr>
                         @endforeach

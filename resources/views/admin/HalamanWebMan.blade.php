@@ -27,7 +27,9 @@
             </div>
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <div></div> <!-- Spacer -->
+                @if (auth()->user()->hasPermissionTo('halaman-add'))
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#halamanModal">+ Tambahkan Halaman</button> 
+                @endif
             </div>
 
 
@@ -59,6 +61,7 @@
                                 @endif
                             </td>
                             <td>
+                                @if (auth()->user()->hasPermissionTo('halaman-edit'))
                                 <button class="btn btn-sm btn-primary edit-btn"
                                     data-id="{{ $halaman->id }}"
                                     data-judul="{{ $halaman->judul }}"
@@ -70,13 +73,16 @@
                                     data-bs-target="#halamanEditModal">
                                     <i class="bi bi-pencil-square"></i>
                                 </button>
+                                @endif
                                 <!-- Button Delete Modal -->
+                                @if (auth()->user()->hasPermissionTo('halaman-delete'))
                                 <button class="btn btn-sm btn-danger delete-btn" 
                                     data-id  ="{{ $halaman->id }}"
                                     data-nama ="{{ $halaman->judul }}"
                                     data-bs-toggle="modal" 
                                     data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i>
-                                </button>                             
+                                </button>  
+                                @endif                           
                             </td>
                         </tr>
                         @endforeach

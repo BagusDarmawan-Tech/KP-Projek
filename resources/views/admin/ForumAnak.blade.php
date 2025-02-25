@@ -21,7 +21,7 @@
             </div>
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <div></div> <!-- Spacer -->
-            @if (auth()->user()->hasPermissionTo('kegiatan forum anak suroboyo-add'))
+            @if (auth()->user()->hasPermissionTo('forum anak-add'))
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#sliderModal">
                     + Forum Anak
                 </button>
@@ -57,7 +57,7 @@
                             </td>
                             <td>
                                 <!-- Button Edit Modal -->
-                            @if (auth()->user()->hasPermissionTo('kegiatan forum anak suroboyo-edit'))
+                            @if (auth()->user()->hasPermissionTo('forum anak-edit'))
                                 <button class="btn btn-sm btn-primary edit-btn"
                                     data-id="{{ $forumAnak->id }}"
                                     data-nama="{{ $forumAnak->nama }}"
@@ -72,7 +72,7 @@
                             @endif
                         
                                 <!-- Button Delete Modal -->
-                            @if (auth()->user()->hasPermissionTo('kegiatan forum anak suroboyo-delete'))
+                            @if (auth()->user()->hasPermissionTo('forum-delete'))
                                 <button class="btn btn-sm btn-danger delete-btn" 
                                     data-id  ="{{ $forumAnak->id }}"
                                     data-nama ="{{ $forumAnak->nama }}"

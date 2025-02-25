@@ -28,9 +28,11 @@
             </div>
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <div></div> <!-- Spacer -->
+                @if (auth()->user()->hasPermissionTo('pemantauan usulan-add'))
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pemantauanModal">
                     + Tambah Usulan
                 </button>
+                @endif
             </div>
 
             <!-- Tabel -->
@@ -75,6 +77,7 @@
                                 @endif
                             </td>
                             <td>    
+                                @if (auth()->user()->hasPermissionTo('pemantauan usulan-edit'))
                                 <button class="btn btn-sm btn-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editPemantauanModal" 
                                     data-id="{{ $usulan->id }}" 
                                     data-namaUsulan="{{ $usulan->namaUsulan }}" 
@@ -82,14 +85,17 @@
                                     data-status="{{ $usulan->is_active }}"
                                     data-tindakLanjut="{{ $usulan->tindakLanjut }}">
                                     <i class="bi bi-pencil-square"></i>
-                                </button>                                  
+                                </button>     
+                                @endif                             
                                 <!-- Button Delete Modal -->
+                                @if (auth()->user()->hasPermissionTo('pemantauan usulan-delete'))
                                 <button class="btn btn-sm btn-danger delete-btn" 
                                     data-id  ="{{ $usulan->id }}"
                                     data-nama ="{{ $usulan->namaUsulan }}"
                                     data-bs-toggle="modal" 
                                     data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i>
                                 </button> 
+                                @endif
                             </td>
                         </tr>
                         @endforeach

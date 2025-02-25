@@ -21,9 +21,11 @@
             </div>
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <div></div> <!-- Spacer -->
+                @if (auth()->user()->hasPermissionTo('slider-add'))
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#sliderModal">
                     + Tambah Slider
                 </button>
+                @endif
             </div>
 
             <!-- Tabel -->
@@ -72,6 +74,7 @@
 
                             <td>
                                 <!-- Bagian buttom edit -->
+                                @if (auth()->user()->hasPermissionTo('slider-edit'))
                                 <button class="btn btn-sm btn-primary edit-slider" 
                                     data-id="{{ $Slider->id }}" 
                                     data-nama="{{ $Slider->nama }}" 
@@ -81,13 +84,16 @@
                                     data-gambar="{{ asset( $Slider->gambar) }}">
                                     <i class="bi bi-pencil-square"></i>
                                 </button>
+                                @endif
                              <!-- Tombol Hapus dengan konfirmasi -->
+                             @if (auth()->user()->hasPermissionTo('slider-delete'))
                                 <button class="btn btn-sm btn-danger delete-btn" 
                                     data-id  ="{{ $Slider->id }}"
                                     data-nama ="{{ $Slider->nama }}"
                                     data-bs-toggle="modal" 
                                     data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i>
                                 </button>
+                            @endif
 
                         </tr>
                         @endforeach
