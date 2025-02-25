@@ -54,7 +54,7 @@
                         <tr>
                             <td style="text-align: center;">{{ $loop->iteration }}</td>
 
-                            <td> {{ $usulan->user ? $usulan->user->name : 'Tidak ada pengguna' }}</td>
+                            <td> {{ $usulan->opd ? $usulan->opd->nama : 'Tidak ada pengguna' }}</td>
                             <td>{{ $usulan->namaUsulan }}</td>
 
                             <!-- Keterangan -->
@@ -80,6 +80,7 @@
                                 @if (auth()->user()->hasPermissionTo('pemantauan usulan-edit'))
                                 <button class="btn btn-sm btn-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editPemantauanModal" 
                                     data-id="{{ $usulan->id }}" 
+                                    data-opd="{{ $usulan->opdId }}" 
                                     data-namaUsulan="{{ $usulan->namaUsulan }}" 
                                     data-keterangan="{{ $usulan->keterangan }}" 
                                     data-status="{{ $usulan->is_active }}"
@@ -127,19 +128,34 @@
                     @csrf 
                     <input type="hidden" name="userid" value="{{ Auth::user()->id }}">
                     <div class="mb-3">
+                        <label for="opdId" class="form-label">OPD</label>
+                         <select class="form-select select2" id="opdId" name="opdId" >
+                            <option value="" disabled selected>Pilih OPD</option> <!-- Tidak bisa dipilih -->
+                            @foreach ($opds as $opd)
+                                <option value="{{ $opd->id }}">{{ $opd->nama }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    
+                    
+                    <div class="mb-3">
                         <label for="namaUsulan" class="form-label">Nama Usulan</label>
                         <input type="text" class="form-control"  id="namaUsulan" name="namaUsulan" value="{{ old('namaUsulan') }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="keterangan" class="form-label">Tindak Lanjut</label>
+                        <textarea class="form-control" id="" rows="2" name="tindakLanjut" value="{{ old('tindakLanjut') }}"></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="keterangan" class="form-label">Keterangan</label>
                         <textarea class="form-control" id="keterangan" rows="2" name="keterangan" value="{{ old('keterangan') }}"></textarea>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                    </div>
-                </form>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -156,15 +172,19 @@
     @csrf
     @method('PUT')
     <input type="hidden" id="editId" name="id"> <!-- Tambahkan input hidden untuk ID -->
-    
     <div class="mb-3">
-        <label for="editTindakLanjut" class="form-label">Tindak Lanjut</label>
-        <select class="form-select" id="editTindakLanjut" name="tindakLanjut">
-            <option value="Diproses">Diproses</option>
-            <option value="Telah Diproses">Telah Diproses</option>
+        <label for="opdId" class="form-label">OPD</label>
+         <select class="form-select select2" id="editOpdId" name="opdId" >
+            <option value="" disabled selected>Pilih OPD</option> <!-- Tidak bisa dipilih -->
+            @foreach ($opds as $opd)
+                <option value="{{ $opd->id }}">{{ $opd->nama }}</option>
+            @endforeach
         </select>
     </div>
-
+    <div class="mb-3">
+        <label for="keterangan" class="form-label">Tindak Lanjut</label>
+        <textarea class="form-control" id="editTindakLanjut" rows="2" name="tindakLanjut"></textarea>
+    </div>
     <div class="mb-3">
         <label for="editNamaUsulan" class="form-label">Nama Usulan</label>
         <input type="text" class="form-control" id="editNamaUsulan" name="namaUsulan">
@@ -174,7 +194,7 @@
         <label for="editKeterangan" class="form-label">Keterangan</label>
         <textarea class="form-control" id="editKeterangan" rows="2" name="keterangan"></textarea>
     </div>
-
+    @if (auth()->user()->hasPermissionTo('pemantauan usulan-edit'))
     <div class="mb-3">
         <label for="editStatus" class="form-label">Status</label>
         <select class="form-select" id="editStatus" name="is_active" required>
@@ -182,6 +202,7 @@
             <option value="0">Non-Aktif</option>
         </select>
     </div>
+    @endif
 </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Tutup</button>
@@ -246,12 +267,16 @@
     document.querySelectorAll(".edit-btn").forEach(button => {
         button.addEventListener("click", function() {
             let id = this.getAttribute("data-id");
+            let opd = this.getAttribute("data-opd");
             let namaUsulan = this.getAttribute("data-namaUsulan");
             let keterangan = this.getAttribute("data-keterangan");
             let tindakLanjut = this.getAttribute("data-tindakLanjut");
             let status = this.getAttribute("data-status");
 
+            console.log(opd);
+
             document.getElementById("editId").value = id;
+            document.getElementById("editOpdId").value = opd;
             document.getElementById("editNamaUsulan").value = namaUsulan;
             document.getElementById("editTindakLanjut").value = tindakLanjut;
             document.getElementById("editKeterangan").value = keterangan;

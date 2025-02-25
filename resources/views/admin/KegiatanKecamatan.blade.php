@@ -125,7 +125,7 @@
                               @endif
                             </td>  
                             <td>
-                            @if (auth()->user()->hasPermissionTo('kegiatan kecamatan-add'))
+                            @if (auth()->user()->hasPermissionTo('kegiatan kecamatan-edit'))
                               <button class="btn btn-sm btn-primary btn-edit-kegiatan"
                                 data-id="{{ $kegiatan->id }}"
                                 data-nama="{{ $kegiatan->nama }}"

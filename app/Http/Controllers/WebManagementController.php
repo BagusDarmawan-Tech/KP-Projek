@@ -7,6 +7,7 @@ use App\Models\ForumAnak;
 use App\Models\Galeri;
 use App\Models\Halaman;
 use App\Models\Klaster;
+use App\Models\OPD;
 use App\Models\PemantauanUsulan;
 use App\Models\Slider;
 use Illuminate\Http\Request;
@@ -752,14 +753,17 @@ class WebManagementController extends Controller
      //=================CRUD PemantauanUsulan
     public function pemantauanUsulan() {
         $usulans = PemantauanUsulan::all();
-        return view('admin.PemantauanUsulan',compact(('usulans'))); 
+        $opds = OPD::all();
+        return view('admin.PemantauanUsulan',compact('usulans','opds')); 
     }
 
     public function storepemantauanUsulan(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'namaUsulan' => 'required|string|max:255',
             'keterangan' => 'required|string|max:500',
+            'tindakLanjut' => 'required|string|max:500',
         ],
         [
             'namaUsulan.required' => 'Nama Usulan wajib diisi.',
@@ -771,13 +775,13 @@ class WebManagementController extends Controller
         ]);
 
         $is_active = 1;
-        $tindakLanjut = 'Diproses';
         PemantauanUsulan::create([
             'namaUsulan' => $request->namaUsulan,
             'keterangan' => $request->keterangan,
             'is_active' =>  $is_active,
             'userid' => $request->userid,
-            'tindakLanjut' => $tindakLanjut
+            'opdId' => (int) $request->opdId,
+            'tindakLanjut' => $request->tindakLanjut
         ]);
 
         return redirect()->route('PemantauanUsulanAnak')->with('success', 'Usulan berhasil ditambahkan!');
@@ -811,6 +815,7 @@ class WebManagementController extends Controller
             'keterangan' => $request->keterangan,
             'tindakLanjut' => $request->tindakLanjut,
             'is_active' => $request->is_active,
+            'opdId' => $request->opdId,
         ];
 
         // Update 

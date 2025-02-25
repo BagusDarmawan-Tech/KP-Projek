@@ -27,7 +27,9 @@
             </div>
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <div></div>
+                @if (auth()->user()->hasPermissionTo('cfci-add'))
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kegiatanModal">+ Kegiatan CFCI</button> 
+                @endif
             </div>
 
             <div class="table-responsive">

@@ -68,71 +68,104 @@
             <i class="bi bi-circle"></i><span>Menu Management</span>
           </a>
         </li>
+
+        @if (auth()->user()->hasPermissionTo('artikel-list'))
         <li>
           <a class="{{ request()->routeIs('Artikel') ? 'active' : '' }}" href="{{route('Artikel')}}">
             <i class="bi bi-circle"></i><span>Artikel</span>
           </a>
         </li>
+        @endif
+
+        @if (auth()->user()->hasPermissionTo('kategori artikel-list'))
         <li>
           <a class="{{ request()->routeIs('kategoriArtikel') ? 'active' : '' }}" href="{{route('kategoriArtikel')}}">
             <i class="bi bi-circle"></i><span>Kategori Artikel</span>
           </a>
         </li>
+        @endif
+
+        @if (auth()->user()->hasPermissionTo('slider-list'))
         <li>
           <a class="{{ request()->routeIs('slider') ? 'active' : '' }}" href="{{route('slider')}}">
             <i class="bi bi-circle"></i><span>Slider</span>
           </a>
         </li>
+        @endif
+
+        @if (auth()->user()->hasPermissionTo('klaster-list'))
         <li>
           <a class="{{ request()->routeIs('Klaster') ? 'active' : '' }}"href="{{route('Klaster')}}">
             <i class="bi bi-circle"></i><span>Klaster</span>
           </a>
         </li>
+        @endif
+
+        @if (auth()->user()->hasPermissionTo('sub kegiatan-list'))
         <li>
           <a class="{{ request()->routeIs('sub-kegiatan') ? 'active' : '' }}"href="{{route('sub-kegiatan')}}">
             <i class="bi bi-circle"></i><span>Sub Kegiatan</span>
           </a>
         </li>
+        @endif
+
+        @if (auth()->user()->hasPermissionTo('galeri-list'))
         <li>
           <a class="{{ request()->routeIs('galeri') ? 'active' : '' }}"href="{{route('galeri')}}">
             <i class="bi bi-circle"></i><span>Galleri</span>
           </a>
         </li>
+        @endif
+
+        @if (auth()->user()->hasPermissionTo('forum anak-list'))
         <li>
           <a class="{{ request()->routeIs('forum-anak') ? 'active' : '' }}" href="{{route('forum-anak')}}">
             <i class="bi bi-circle"></i><span>Forum Anak</span>
           </a>
         </li>
+        @endif
+
+        @if (auth()->user()->hasPermissionTo('halaman-list'))
         <li>
           <a class="{{ request()->routeIs('Halamandong') ? 'active' : '' }}" href="{{route('Halamandong')}}">
             <i class="bi bi-circle"></i><span>Halaman </span>
           </a>
         </li>
+        @endif
+
+        @if (auth()->user()->hasPermissionTo('pemantauan usulan-list'))
         <li>
           <a class="{{ request()->routeIs('PemantauanUsulanAnak') ? 'active' : '' }}" href="{{route('PemantauanUsulanAnak')}}">
             <i class="bi bi-circle"></i><span>Pemantauan Usulan </span>
           </a>
         </li>
+        @endif
       </ul>
     </li><!-- End Forms Nav -->
     @endif
     {{-- END WEB MANAGEMENT --}}
+
     @if (auth()->user()->hasPermissionTo('kegiatan kecamatan-list'))
     <li class="nav-item {{ request()->is('Kecamatan-Layak-Anak/*') ? 'active' : '' }}">
       <a class="nav-link {{ request()->is('Kecamatan-Layak-Anak/*') ? '' : 'collapsed' }}" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-house-gear-fill"></i><span>Kecamatan Layak Anak</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
       <ul id="tables-nav" class="nav-content collapse {{ request()->is('Kecamatan-Layak-Anak/*') ? 'show' : '' }} " data-bs-parent="#sidebar-nav">
+        @if (auth()->user()->hasPermissionTo('dokumen kecamatan-list'))
         <li>
           <a class="{{ request()->routeIs('dokumen-kec') ? 'active' : '' }}" href="{{route('dokumen-kec')}}">
             <i class="bi bi-circle"></i><span>Dokumen Kecamatan</span>
           </a>
         </li>
+        @endif
+
+        @if (auth()->user()->hasPermissionTo('kegiatan kecamatan-list'))
         <li>
           <a class="{{ request()->routeIs('kegiatan-kecamatan') ? 'active' : '' }}" href="{{route('kegiatan-kecamatan')}}">
             <i class="bi bi-circle"></i><span>Kegiatan Kecamatan</span>
           </a>
         </li>
+        @endif
       </ul>
     </li><!-- End Tables Nav -->
     @endif
@@ -143,16 +176,21 @@
         <i class="bi bi-house-gear-fill"></i><span>Kelurahan Layak Anak</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
       <ul id="charts-nav" class="nav-content collapse {{ request()->is('Kelurahan-Layak-Anak/*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+        @if (auth()->user()->hasPermissionTo('dokumen kelurahan-list'))
         <li>
           <a class="{{ request()->routeIs('HalamanDokument') ? 'active' : '' }}" href="{{route('HalamanDokument')}}">
             <i class="bi bi-circle"></i><span>Dokumen Kelurahan</span>
           </a>
         </li>
+        @endif
+
+        @if (auth()->user()->hasPermissionTo('kegiatan kelurahan-list'))
         <li>
           <a class="{{ request()->routeIs('Kegiatankelurahan') ? 'active' : '' }}" href="{{route('Kegiatankelurahan')}}">
             <i class="bi bi-circle"></i><span>Kegiatan Kelurahan</span>
           </a>
         </li>
+        @endif
       </ul>
     </li><!-- End Charts Nav -->
     @endif
@@ -163,21 +201,30 @@
         <i class="bi bi-palette"></i><span>Mitra Anak</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
       <ul id="icons-nav" class="nav-content collapse {{ request()->is('Mitra-Anak/*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+        @if (auth()->user()->hasPermissionTo('cfci-list'))
         <li>
           <a class="{{ request()->routeIs('kegiatan-cfci') ? 'active' : '' }}" href="{{route('kegiatan-cfci')}}">
             <i class="bi bi-circle"></i><span>Kegiatan CFCI</span>
           </a>
         </li>
+        @endif
+
+        @if (auth()->user()->hasPermissionTo('artikel anak-list'))
         <li>
           <a class="{{ request()->routeIs('artikel-mitraanak') ? 'active' : '' }}" href="{{route('artikel-mitraanak')}}">
             <i class="bi bi-circle"></i><span>Artikel Anak</span>
           </a>
         </li>
+        @endif
+
+        @if (auth()->user()->hasPermissionTo('kegiatan mitra anak-list'))
         <li>
           <a class="{{ request()->routeIs('kegiatan-mitra') ? 'active' : '' }}" href="{{route('kegiatan-mitra')}}">
             <i class="bi bi-circle"></i><span>Kegiatan Mitra Anak</span>
           </a>
         </li>
+        @endif
+
       </ul>
     </li><!-- End Icons Nav -->
     @endif
@@ -188,16 +235,22 @@
         <i class="bi bi-info-circle"></i><span>Pusat Informasi Sahabat Anak</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
       <ul id="icons" class="nav-content collapse {{ request()->is('Pusat-Informasi-Sahabat-Anak/*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+       
+        @if (auth()->user()->hasPermissionTo('dokumen pisa-list'))
         <li>
           <a class="{{ request()->routeIs('DokumenLayakAnak') ? 'active' : '' }}" href="{{route('DokumenLayakAnak')}}">
             <i class="bi bi-circle"></i><span>Dokumen PISA</span>
           </a>
         </li>
+        @endif
+
+        @if (auth()->user()->hasPermissionTo('kegiatan pisa-list'))
         <li>
           <a class="{{ request()->routeIs('KegiatanLayakanak') ? 'active' : '' }}" href="{{route('KegiatanLayakanak')}}">
             <i class="bi bi-circle"></i><span>Kegiatan PISA</span>
           </a>
         </li>
+        @endif
       </ul>
     </li><!-- End Icons Nav -->
     @endif

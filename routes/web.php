@@ -618,15 +618,6 @@ Route::middleware('auth')->group(function () {
 });
 
 
-//CONFIG
-Route::middleware('auth')->group(function () {
-
-
-
-
-
-})->middleware(['auth', 'verified', 'can:configurasi app-list']);
-
 
 //Logout
 Route::get('/admin/logout', [AdminController::class, 'destroy'])->name('admin.logout');

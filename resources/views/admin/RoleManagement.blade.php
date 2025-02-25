@@ -44,14 +44,16 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($roles as $role )
                         <tr>
-                            <td style="text-align: center;">1</td>
-                            <td>Artikel</td>
+                            <td style="text-align: center;">{{ $loop->iteration }}</td>
+                            <td>{{ $role->name }}</td>
                             <td>
                             <button class="btn btn-sm btn-primary edit-btn" data-bs-toggle="modal" data-bs-target="#EditModal"data-status="Aktif"><i class="bi bi-pencil-square"></i></button>
                             <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i></button>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -70,7 +72,7 @@
                 @endif
             </div>
             <div class="modal-body">
-                <form>
+                <form action="{{ route('admin.store') }}" method="POST">
                     <!-- Input Nama -->
                     <div class="mb-3">
                         <label for="kategoriNama" class="form-label">Nama</label>
@@ -84,12 +86,12 @@
                             <table class="table table-bordered table-hover ">
                                 <thead class="table-light" style="position: sticky; top: 0; z-index: 2;">
                                     <tr>
-                                        <th style="width: 40%; text-align: left; background: white;">Nama Menu</th>
-                                        <th style="width: 10%; text-align: center; background: white;">List</th>
-                                        <th style="width: 10%; text-align: center; background: white;">Add</th>
-                                        <th style="width: 10%; text-align: center; background: white;">Edit</th>
-                                        <th style="width: 10%; text-align: center; background: white;">Delete</th>
-                                        <th style="width: 10%; text-align: center; background: white;">Verifikasi</th>
+                                        <th>Nama Menu</th>
+                                        <th><input type="checkbox" id="checkAllList"> List</th>
+                                        <th><input type="checkbox" id="checkAllAdd"> Add</th>
+                                        <th><input type="checkbox" id="checkAllEdit"> Edit</th>
+                                        <th><input type="checkbox" id="checkAllDelete"> Delete</th>
+                                        <th><input type="checkbox" id="checkAllVerify"> Verifikasi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
