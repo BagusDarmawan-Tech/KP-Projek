@@ -5,7 +5,7 @@
             <!-- Logo Section -->
             <div class="col-lg-3 col-md-6 text-center">
                 <div class="d-flex justify-content-center">
-                    <div class="col-6"><img class="img-fluid" src="{{ asset('kla-log.png') }}" alt="Logo 1"></div>
+                    <div class="col-6"><img class="img-fluid" src="{{ asset('kla-log.png') }}" alt="Logo 1" ></div>
                     <div class="col-6"><img class="img-fluid" src="{{ asset('logo-sby.png') }}" alt="Logo 2"></div>
                 </div>
             </div>

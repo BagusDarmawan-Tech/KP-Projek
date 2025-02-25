@@ -5,13 +5,28 @@ namespace App\Http\Controllers;
 use App\Models\DokumenKecamatan;
 use Illuminate\Http\Request;
 use League\CommonMark\Node\Block\Document;
-
+use App\Models\Artikel;
+use App\Models\KategoriArtikel; 
 class CFCIController extends Controller
 {
 
 
 public function CFCIArtikel(){
-    return view('frontend.content.artikel-kegiatan');
+    $categories = KategoriArtikel::where('is_active', true)->get(); // Hanya kategori aktif
+    $articles = Artikel::where('is_active', true)->with('kategori')->get(); // Artikel aktif dengan relasi kategori
+
+    return view('frontend.content.artikel-kegiatan', compact('categories', 'articles'));
+    }
+    
+    public function artikelDetail($slug)
+{
+    $article = Artikel::where('slug', $slug)->with('kategori')->first(); // Cari artikel berdasarkan slug
+
+    if (!$article) {
+        abort(404); // Jika artikel tidak ditemukan, tampilkan halaman 404
+    }
+
+    return view('frontend.content.artikel-detail', compact('article'));
 }
 
 public function CFCIKecamatann(){

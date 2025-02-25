@@ -11,4 +11,9 @@ class KategoriArtikel extends Model
     protected $table = 'kategori_artikel';
 
     protected $fillable = ['nama', 'is_active', 'dibuatOleh'];
+
+    public function artikels()
+    {
+        return $this->hasMany(Artikel::class, 'kategoriartikelid');
+    }
 }
