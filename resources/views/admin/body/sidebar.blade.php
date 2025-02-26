@@ -63,11 +63,6 @@
         <i class="bi bi-keyboard"></i><span>Web Management</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
       <ul id="forms-nav" class="nav-content collapse {{ request()->is('web-management/*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
-        <li>
-          <a class="{{ request()->routeIs('MenuManagement') ? 'active' : '' }}" href="{{route('MenuManagement')}}">
-            <i class="bi bi-circle"></i><span>Menu Management</span>
-          </a>
-        </li>
 
         @if (auth()->user()->hasPermissionTo('artikel-list'))
         <li>
@@ -137,6 +132,22 @@
         <li>
           <a class="{{ request()->routeIs('PemantauanUsulanAnak') ? 'active' : '' }}" href="{{route('PemantauanUsulanAnak')}}">
             <i class="bi bi-circle"></i><span>Pemantauan Usulan </span>
+          </a>
+        </li>
+        @endif
+
+        @if (auth()->user()->hasPermissionTo('pemantauan usulan-list'))
+        <li>
+          <a class="{{ request()->routeIs('OPD') ? 'active' : '' }}" href="">
+            <i class="bi bi-circle"></i><span>OPD</span>
+          </a>
+        </li>
+        @endif
+
+        @if (auth()->user()->hasPermissionTo('pemantauan usulan-list'))
+        <li>
+          <a class="{{ request()->routeIs('suratJenis') ? 'active' : '' }}" href="">
+            <i class="bi bi-circle"></i><span>Surat Jenis</span>
           </a>
         </li>
         @endif

@@ -15,41 +15,32 @@
             <div class="col-xl-10">
               <div class="card rounded-3 text-black shadow md-4">
                 <div class="row g-0">
-                  <div class="col-lg-6">
+                  <div class="col-lg-12">
                     <div class="card-body p-md-5 mx-md-4">
       
                       <div class="text-center">
                         <img src="{{ asset('logo.png') }}"
                           style="width: 185px;" alt="logo">
-                        <h4 class="mt-1 mb-5 pb-1">Selamat Datang Admin</h4>
+                        <h4 class="mt-1 mb-5 pb-1">Lupa Password?</h4>
                       </div>
+                      <x-auth-session-status class="mb-4" :status="session('status')" />
       
 
                       <!-- Form Login-->
-                      <form method="POST" action="{{ route('login') }}">
-                        @if ($errors->has('email'))
-                            <p class="text-sm text-danger">{{ $errors->first('email') }}</p>
-                        @endif
+                      <form method="POST" action="{{ route('password.email') }}">
                         @csrf
                         <div data-mdb-input-init class="form-outline mb-4">
-                            <label for="floatingInputDisabled" :value="__('Email')">Email</label>
-                            <input id="email" class="form-control" type="email" name="email" :value="old('email')" required autofocus autocomplete="username">
+                            <x-input-label for="email" :value="__('Email')" />
+                            <x-text-input id="email" class="form-control" type="email" name="email" :value="old('email')" required autofocus />
+                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
                         </div>
+
       
-                        <div data-mdb-input-init class="form-outline mb-4">
-                            <labelfor="password" :value="__('Password')">Password</labelfor=>
-                          <input id="password" class="form-control"
-                          type="password"
-                          name="password"
-                          required autocomplete="current-password" />
-                        </div>
-                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
                         
                         <div class="d-grid gap-2">
                           <x-primary-button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3">
-                              {{ __('Log in') }}        
+                            {{ __('Email Password Reset Link') }}      
                               <i class="bi bi-box-arrow-in-right"></i>
-
                           </x-primary-button>
                         </div>
 
@@ -63,13 +54,13 @@
                       <!-- END Form Login-->
                     </div>
                   </div>
-                  <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                  {{-- <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
                     <div class="row text-white px-3 py-4 p-md-5 mx-md-4">
                       <img src="{{ asset('kids-cover.png') }}" alt="" width="220" height="280">
                       <h4 class="mb-4 text-center">Silahkan Login untuk Mengoperasikan website
                         Kota Layak Anak</h4>
                     </div>
-                  </div>
+                  </div> --}}
                 </div>
                 <div class="" height="20">
 

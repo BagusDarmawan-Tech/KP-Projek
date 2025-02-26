@@ -27,9 +27,11 @@
             
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <div></div> <!-- Spacer -->
+                @if (auth()->user()->hasPermissionTo('configurasi app-add'))
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kategoriModal">
                     + Tambah Configurasi APP
                 </button>
+                @endif
             </div>
 
             <!-- Tabel -->
@@ -50,6 +52,7 @@
                             <td>{{ $komponen->nama }}</td>
                             <td>{{ $komponen->detail }}</td>
                             <td>
+                            @if (auth()->user()->hasPermissionTo('configurasi app-edit'))
                                 <button class="btn btn-sm btn-primary btn-edit-kegiatan"
                                     data-id="{{ $komponen->id }}"
                                     data-nama="{{ $komponen->nama }}"
@@ -58,13 +61,16 @@
                                     data-bs-target="#EditModal">
                                     <i class="bi bi-pencil-square"></i>
                                 </button> 
+                            @endif
                              <!-- Tombol Hapus -->
+                             @if (auth()->user()->hasPermissionTo('configurasi app-delete'))
                              <button class="btn btn-sm btn-danger delete-btn" 
                                 data-id  ="{{ $komponen->id }}"
                                 data-nama ="{{ $komponen->nama }}"
                                 data-bs-toggle="modal" 
                                 data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i>
-                            </button>                            
+                            </button>  
+                            @endif                          
                         </td>
                         </tr>
                         @endforeach
@@ -117,10 +123,14 @@
                     @csrf
                    @method('PUT')
                    <input type="hidden" id="editId" name="id">
+                   @if (auth()->user()->hasPermissionTo('configurasi app-add'))
                     <div class="mb-3">
                         <label for="kategoriNama" class="form-label">Nama</label>
                         <input type="text" name="nama" class="form-control" id="editNama" placeholder="Masukkan Nama">
                     </div>
+                    @else
+                        <input type="hidden" name="nama" id="editNama">
+                    @endif
                     <div class="mb-3">
                         <label for="kategoriSlug" class="form-label">Detail</label>
                         <input type="text" name="detail" class="form-control" id="editDetail" placeholder="Masukkan Detail">

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ArtikelLandingPage;
+use App\Http\Controllers\ArtikelLandingPageController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\CFCIController;
@@ -101,8 +103,8 @@ Route::get('/KaryaAnak', [SuaraAnakController::class, 'karyaAnak'])->name('Karya
 
 
 // HALAMAN MITRA ANAK
-Route::get('/HalamanArtikelMitra', [MitraAnakController::class, 'ArtikelMitra'])->name('HArtikelMitra');
-Route::get('/HalamanKegiatanMitra', [MitraAnakController::class, 'KegiatanMitra'])->name('HKegiatanMitra');
+Route::get('/HalamanArtikelMitra', [ArtikelLandingPageController::class, 'ArtikelMitraAnak'])->name('HArtikelMitra');
+Route::get('/HalamanKegiatanMitra', [ArtikelLandingPageController::class, 'KegiatanMitraAnak'])->name('HKegiatanMitra');
 
 
 
