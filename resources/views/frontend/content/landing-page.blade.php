@@ -150,78 +150,98 @@
 
     </section><!-- /Testimonials Section -->
  
+    <!-- bagian kota layak anak -->
+     
     <!-- About Section -->
     <section id="about" class="about section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <span>KOTA LAYAK ANAK<br></span>
-        <h2>KOTA LAYAK ANAK</h2>
-      </div><!-- End Section Title -->
-
-      <div class="container">
-
-      <div class="row gy-4">
-  <div class="col-lg-6 position-relative align-self-start" data-aos="fade-up" data-aos-delay="100">
-    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    <!-- Section Title -->
+    <div class="container section-title text-dark" data-aos="fade-up">
+          <span style="font-size: 36px;">KOTA LAYAK ANAK</span>
+          <h2 style="font-size: 36px;">KOTA LAYAK ANAK</h2>
       </div>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="{{asset('assets/img/hero-img.jpg')}}" class="d-block w-100" alt="Slide 1">
+
+    <!-- End Section Title -->
+    <div class="container py-3">
+    <div class="row align-items-center">
+        <!-- Carousel Area -->
+        <div class="col-lg-6 col-md-12 mb-4 mb-lg-0" data-aos="fade-right">
+            <div id="carouselExampleIndicators" class="carousel slide shadow-lg rounded" data-bs-ride="carousel">
+                <!-- Carousel Indicators -->
+                <div class="carousel-indicators">
+                    @foreach ($gambars as $key => $gambar)
+                        <button type="button" 
+                                data-bs-target="#carouselExampleIndicators" 
+                                data-bs-slide-to="{{ $key }}" 
+                                class="{{ $key == 0 ? 'active' : '' }}" 
+                                aria-current="{{ $key == 0 ? 'true' : '' }}" 
+                                aria-label="Slide {{ $key + 1 }}">
+                        </button>
+                    @endforeach
+                </div>
+
+                <!-- Carousel Items -->
+                <div class="carousel-inner">
+                    @if ($gambars->isNotEmpty())
+                        @foreach ($gambars as $key => $gambar)
+                            <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                                <img src="{{ asset($gambar->gambar) }}" class="d-block w-100 rounded" alt="{{ $gambar->nama }}">
+                                <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
+                                    <h5 class="text-white fw-bold">{{ $gambar->nama }}</h5>
+                                    <p class="text-white">{{ $gambar->caption }}</p>
+                                </div>
+                            </div>
+                        @endforeach
+                    @else
+                        <div class="carousel-item active">
+                            <img src="{{ asset('assets/img/default-image.jpg') }}" class="d-block w-100 rounded" alt="Default Slide">
+                            <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
+                                <h5 class="text-white fw-bold">Default Slide</h5>
+                                <p class="text-white">Tidak ada gambar yang aktif.</p>
+                            </div>
+                        </div>
+                    @endif
+                </div>
+
+                <!-- Carousel Controls -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
         </div>
-        <div class="carousel-item">
-          <img src="{{asset('assets/img/hero-img.jpg')}}" class="d-block w-100" alt="Slide 2">
+        <!-- End Carousel Area -->
+
+        <!-- Text Area -->
+        <div class="col-lg-6 col-md-12" data-aos="fade-left">
+            <div class="content">
+                <!-- Query di Blade untuk Judul -->
+                @php
+                    $judulKotaLayakAnak = $configApps->firstWhere('nama', 'Judul_kota_layak_anak');
+                    $deskripsiKotaLayakAnak = $configApps->firstWhere('nama', 'deskripsi_kota_layak_anak');
+                @endphp
+
+                <!-- Tampilkan Judul -->
+                <h3 class="fw-bold text-center mb-4">
+                    {{ $judulKotaLayakAnak->detail ?? 'Judul Kota Layak Anak belum tersedia.' }}
+                </h3>
+
+                <!-- Tampilkan Deskripsi -->
+                <p class="text-muted fst-italic">
+                    {{ $deskripsiKotaLayakAnak->detail ?? 'Deskripsi tentang Kota Layak Anak belum tersedia.' }}
+                </p>
+            </div>
         </div>
-        <div class="carousel-item">
-          <img src="{{asset('assets/img/hero-img.jpg')}}" class="d-block w-100" alt="Slide 3">
-        </div>
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
+        <!-- End Text Area -->
     </div>
-  </div>
-  <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="200">
-    <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
-    <p class="fst-italic">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-      magna aliqua.
-    </p>
-    <ul>
-      <li><i class="bi bi-check2-all"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></li>
-      <li><i class="bi bi-check2-all"></i> <span>Duis aute irure dolor in reprehenderit in voluptate velit.</span></li>
-      <li><i class="bi bi-check2-all"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</span></li>
-    </ul>
-    <p>
-      Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident
-    </p>
-  </div>
 </div>
 
-
-
-
-
-      </div>
+</section>
 
     </section><!-- /About Section -->
-
-
-
-        </div>
-
-      </div>
-
     </section><!-- /Stats Section -->
 
     <!-- Services Section -->
@@ -229,8 +249,8 @@
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <span>GALERI SITALAS</span>
-        <h2>GALERI SITALAS</h2>
+        <span>GALERI</span>
+        <h2>GALERI</h2>
       </div><!-- End Section Title -->
 
       <div class="container">
@@ -323,8 +343,8 @@
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <span>BERITA DAN ARTKEL SITALAS</span>
-        <h2>BERITA DAN ARTKEL SITALAS</h2>
+        <span>BERITA DAN ARTIKEL</span>
+        <h2>BERITA DAN ARTIKEL</h2>
       </div><!-- End Section Title -->
 
       <div class="container">

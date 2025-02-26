@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use League\CommonMark\Node\Block\Document;
 use App\Models\Artikel;
 use App\Models\KategoriArtikel; 
+use App\Models\KegiatanCfci; 
 class CFCIController extends Controller
 {
 
@@ -40,8 +41,8 @@ public function CFCIKelurahan (){
     return view('frontend.content.CFCIKELUR');
 }
 public function Kegiatan(){
-    // $documents = cfcisk::paginate(10);
-    return view('frontend.content.KegiatanCFCI');
+    $datas = KegiatanCfci::where('is_active', true)->get();
+    return view('frontend.content.KegiatanCFCI', compact('datas'));
 }
 
 public function galeri(){

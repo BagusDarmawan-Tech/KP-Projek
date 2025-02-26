@@ -21,6 +21,7 @@ use App\Http\Controllers\MitraAnakController;
 use App\Http\Controllers\SuaraAnakController;
 use App\Http\Controllers\DokumenSkCfciController;
 use App\Http\Controllers\KotaLayakAnakController;
+use App\Http\Controllers\landingpagescontroller;
 
 use App\Http\Controllers\WebManagementController;
 use App\Http\Controllers\KecamatanLayakController;
@@ -110,7 +111,9 @@ Route::get('/HalamanKegiatanMitra', [ArtikelLandingPageController::class, 'Kegia
 
 
 //Landing Page
-Route::get('/', function () {return view('frontend.content.landing-page');})->name('content');
+// Route::get('/', function () {return view('frontend.content.landing-page');})->name('content');
+Route::get('/', [landingpagescontroller::class, 'slider'])->name('content');
+
 
 
 //=======================  Backend  =============================//

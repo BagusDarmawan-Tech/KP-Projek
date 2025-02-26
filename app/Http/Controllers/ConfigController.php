@@ -151,13 +151,13 @@ public function destroy(Role $role)
         // dd($request->all());
         $request->validate([
             'nama' => 'required|string|max:255',
-            'detail' => 'required|string|max:255'
+            'detail' => 'required|string|max:500'
         ],[
             'nama.required' => 'Nama wajib diisi.',
             'nama.max' => 'Nama maksimal 255 karakter.',
             
             'detail.required' => 'Detail wajib diisi.',
-            'detail.max' => 'Detail maksimal 255 karakter.'
+            'detail.max' => 'Detail maksimal 500 karakter.'
             
         ]);
     
