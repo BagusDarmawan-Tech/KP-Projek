@@ -10,7 +10,7 @@
     </li><!-- End Dashboard Nav -->
 
     {{-- CONFIG --}}
-    @if (auth()->user()->hasPermissionTo('configurasi app-list'))
+    @if (auth()->user()->hasAnyPermission(['configurasi app-list', 'user management-list', 'role management-list']))
     <li class="nav-item {{ request()->is('config/*') ? 'active' : '' }}">
       <a class="nav-link {{ request()->is('config/*') ? '' : 'collapsed' }}" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-gear-wide"></i><span>Config</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -57,7 +57,7 @@
     {{-- END CONFIG --}}
 
     {{-- WEB MANAGEMENT --}}
-    @if (auth()->user()->hasPermissionTo('artikel-list'))
+    @if (auth()->user()->hasAnyPermission(['artikel-list', 'kategori artikel-list','slider-list','klaster-list','sub kegiatan-list','galeri-list','forum anak-list','halaman-list','pemantauan usulan-list']))
     <li class="nav-item {{ request()->is('web-management/*') ? 'active' : '' }}">
       <a class="nav-link {{ request()->is('web-management/*') ? '' : 'collapsed' }}" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-keyboard"></i><span>Web Management</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -142,10 +142,11 @@
         @endif
       </ul>
     </li><!-- End Forms Nav -->
-    @endif
+  @endif
     {{-- END WEB MANAGEMENT --}}
 
-    @if (auth()->user()->hasPermissionTo('kegiatan kecamatan-list'))
+    {{-- KECAMATAN --}}
+    @if (auth()->user()->hasAnyPermission(['kegiatan kecamatan-list','dokumen kecamatan-list']))
     <li class="nav-item {{ request()->is('Kecamatan-Layak-Anak/*') ? 'active' : '' }}">
       <a class="nav-link {{ request()->is('Kecamatan-Layak-Anak/*') ? '' : 'collapsed' }}" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-house-gear-fill"></i><span>Kecamatan Layak Anak</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -169,8 +170,10 @@
       </ul>
     </li><!-- End Tables Nav -->
     @endif
+    {{-- END KECAMATAN --}}
 
-    @if (auth()->user()->hasPermissionTo('dokumen kelurahan-list'))
+    {{-- KELURAHAN --}}
+    @if (auth()->user()->hasAnyPermission(['dokumen kelurahan-list' ,'kegiatan kelurahan-list']))
     <li class="nav-item {{ request()->is('Kelurahan-Layak-Anak/*') ? 'active' : '' }}">
       <a class="nav-link {{ request()->is('Kelurahan-Layak-Anak/*') ? '' : 'collapsed' }}" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-house-gear-fill"></i><span>Kelurahan Layak Anak</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -194,8 +197,10 @@
       </ul>
     </li><!-- End Charts Nav -->
     @endif
-
-    @if (auth()->user()->hasPermissionTo('kegiatan mitra anak-list'))
+    {{-- END KELURAHAN --}}
+     
+    {{-- MITRA --}}
+    @if (auth()->user()->hasAnyPermission('kegiatan mitra anak-list','cfci-list','artikel anak-list'))
     <li class="nav-item {{ request()->is('Mitra-Anak/*') ? 'active' : '' }}">
       <a class="nav-link {{ request()->is('Mitra-Anak/*') ? '' : 'collapsed' }}" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-palette"></i><span>Mitra Anak</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -228,8 +233,10 @@
       </ul>
     </li><!-- End Icons Nav -->
     @endif
+    {{-- END MITRA --}}
 
-    @if (auth()->user()->hasPermissionTo('dokumen pisa-list'))
+    {{-- PUSAT INFORMASI SAHABAT --}}
+    @if (auth()->user()->hasAnyPermission(['dokumen pisa-list','kegiatan pisa-list']))
     <li class="nav-item {{ request()->is('Pusat-Informasi-Sahabat-Anak/*') ? 'active' : '' }}">
       <a class="nav-link {{ request()->is('Pusat-Informasi-Sahabat-Anak/*') ? '' : 'collapsed' }}" data-bs-target="#icons" data-bs-toggle="collapse" href="#">
         <i class="bi bi-info-circle"></i><span>Pusat Informasi Sahabat Anak</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -254,7 +261,9 @@
       </ul>
     </li><!-- End Icons Nav -->
     @endif
+    {{--END PUSAT INFORMASI SAHABAT --}}
 
+    {{-- KEGIATAN AREK SUROBOYO --}}
     @if (auth()->user()->hasPermissionTo('kegiatan arek suroboyo-list'))
     <li class="nav-item">
       <a class="nav-link {{ request()->routeIs('kegiatan-arek') ? '' : 'collapsed' }}" href="{{ route('kegiatan-arek') }}">
@@ -263,7 +272,9 @@
       </a>
     </li>
     @endif
+    {{-- END KEGIATAN AREK SUROBOYO --}}
 
+    {{-- FORUM ANAK SUROBOYO --}}
     @if (auth()->user()->hasPermissionTo('kegiatan forum anak suroboyo-list'))
     <li class="nav-item">
       <a class="nav-link {{ request()->routeIs('KegiatanForumSurabaya') ? '' : 'collapsed' }}" href="{{ route('KegiatanForumSurabaya') }}">
@@ -272,7 +283,9 @@
       </a>
     </li>
     @endif
+    {{-- END FORUM ANAK SUROBOYO --}}
 
+    {{-- PEMANTAUAN SUARA --}}
     @if (auth()->user()->hasPermissionTo('pemantauan suara anak-list'))
     <li class="nav-item {{ request()->is('Usulan-Kegiatan/*') ? 'active' : '' }}">
       <a class="nav-link {{ request()->is('Usulan-Kegiatan/*') ? '' : 'collapsed' }}" data-bs-target="#usulan-kegiatan" data-bs-toggle="collapse" href="#">
@@ -292,7 +305,10 @@
       </ul>
     </li><!-- End Icons Nav -->
     @endif
+    {{-- END PEMANTAUAN SUARA --}}
 
+
+    {{-- DOKUMEN FAS DLL --}}
     @if (auth()->user()->hasPermissionTo('dokumen sk fas, cfci dan kla-list'))
     <li class="nav-item">
       <a class="nav-link {{ request()->routeIs('dokumen-skcfci') ? '' : 'collapsed' }}" href="{{ route('dokumen-skcfci') }}">
@@ -301,6 +317,7 @@
       </a>
     </li>
     @endif
+    {{-- END DOKUMEN FAS DLL --}}
     <!-- End Icons Nav -->
 
 
