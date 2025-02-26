@@ -4,7 +4,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <div class="container">
     <h2>Edit Role</h2>
-    <form action="{{ route('admin.update', $role->id) }}" method="POST">
+    <form action="{{ route('updateRole', $role->id) }}" method="POST">
         @csrf
         @method('PUT')
         

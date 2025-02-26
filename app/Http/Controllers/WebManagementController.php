@@ -794,7 +794,6 @@ class WebManagementController extends Controller
             'namaUsulan' => 'required|string|max:255',
             'keterangan' => 'required|string|max:500',
             'tindakLanjut' => 'required',
-            'is_active' => 'required',
         ],
         [
             'namaUsulan.required' => 'Nama Usulan wajib diisi.',
@@ -804,7 +803,6 @@ class WebManagementController extends Controller
             'keterangan.max' => 'Keterangan maksimal 500 karakter.',
             
             'tindakLanjut.required' => 'Harus ada',
-            'is_active.required' => 'Harus ada'
         ]);
 
         $usulan = PemantauanUsulan::findOrFail($id);

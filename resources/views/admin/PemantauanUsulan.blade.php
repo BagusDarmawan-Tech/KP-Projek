@@ -194,7 +194,7 @@
         <label for="editKeterangan" class="form-label">Keterangan</label>
         <textarea class="form-control" id="editKeterangan" rows="2" name="keterangan"></textarea>
     </div>
-    @if (auth()->user()->hasPermissionTo('pemantauan usulan-edit'))
+@if (auth()->user()->hasPermissionTo('pemantauan usulan-verifikasi'))
     <div class="mb-3">
         <label for="editStatus" class="form-label">Status</label>
         <select class="form-select" id="editStatus" name="is_active" required>
@@ -202,7 +202,10 @@
             <option value="0">Non-Aktif</option>
         </select>
     </div>
-    @endif
+@else
+    <input type="hidden" name="is_active" id="editStatus">
+@endif
+
 </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Tutup</button>
@@ -280,7 +283,7 @@
             document.getElementById("editNamaUsulan").value = namaUsulan;
             document.getElementById("editTindakLanjut").value = tindakLanjut;
             document.getElementById("editKeterangan").value = keterangan;
-            document.getElementById("editStatus").checked = status === "1"; // Pastikan status diubah ke boolean
+            document.getElementById("editStatus").value = status; // Pastikan status diubah ke boolean
 
             // Set action form update sesuai ID
             document.getElementById("editForm").action = `/pemantauan/update/${id}`;

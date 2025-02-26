@@ -72,7 +72,7 @@
                             @endif
                         
                                 <!-- Button Delete Modal -->
-                            @if (auth()->user()->hasPermissionTo('forum-delete'))
+                            @if (auth()->user()->hasPermissionTo('forum anak-delete'))
                                 <button class="btn btn-sm btn-danger delete-btn" 
                                     data-id  ="{{ $forumAnak->id }}"
                                     data-nama ="{{ $forumAnak->nama }}"

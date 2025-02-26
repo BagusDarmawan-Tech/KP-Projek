@@ -229,35 +229,28 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/config', [UserManagement::class, 'UserManagement'])
         ->name('UserManagement')
         ->middleware(['auth', 'verified', 'can:user management-list']);
-    
-    Route::get('/roles', [RoleController::class, 'index'])
-        ->name('admin.index')
-        ->middleware(['auth', 'verified', 'can:role management-list']);
 
-    Route::get('/roles/create', [RoleController::class, 'create'])
-        ->name('admin.create')
-        ->middleware(['auth', 'verified', 'can:role management-list']);
-
-    Route::get('/roles/{role}/edit', [RoleController::class, 'edit'])
-        ->name('admin.edit')
-        ->middleware(['auth', 'verified', 'can:role management-list']);
+    Route::get('/role/{role}/edit', [ConfigController::class, 'RoleEdit'])
+        ->name('EditRole')
+        ->middleware(['auth', 'verified', 'can:role management-edit']);
 
     //tambah
     Route::post('/createConfigurasiAPP', [ConfigController::class, 'storeConfigurasiAPP'])
         ->name('createConfigurasiAPP')
         ->middleware(['auth', 'verified', 'can:configurasi app-add']);
     
-    Route::post('/roles', [RoleController::class, 'store'])
-        ->name('admin.store')
+
+    Route::post('/role/create', [ConfigController::class, 'storeRoleManagement'])
+        ->name('storeRoleManagement')
         ->middleware(['auth', 'verified', 'can:role management-add']);
 
     //edit
     Route::put('/configurasiAPP/update/{id}', [ConfigController::class, 'updateConfigurasiAPP'])
         ->name('updateConfigurasiAPP')
         ->middleware(['auth', 'verified', 'can:configurasi app-edit']);
-    
-    Route::put('/admin/{role}', [RoleController::class, 'update'])
-        ->name('admin.update')
+
+    Route::put('/admin/{role}', [ConfigController::class, 'update'])
+        ->name('updateRole')
         ->middleware(['auth', 'verified', 'can:role management-edit']);
 
     //delete
@@ -265,8 +258,8 @@ Route::middleware('auth')->group(function () {
         ->name('destroyConfigurasiAPP')
         ->middleware(['auth', 'verified', 'can:configurasi app-delete']);
 
-    Route::delete('/roles/{role}', [RoleController::class, 'destroy'])
-        ->name('admin.destroy')
+    Route::delete('/role/delete/{role}', [ConfigController::class, 'destroy'])
+        ->name('deleteRole')
         ->middleware(['auth', 'verified', 'can:role management-delete']);
 
 });
@@ -317,7 +310,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/bagianHalaman', [WebManagementController::class, 'BagianHalaman'])
         ->name('Halamandong')
-        ->middleware(['auth', 'verified', 'can:configurasi app-list']);
+        ->middleware(['auth', 'verified', 'can:halaman-list']);
 
     Route::get('/Artikel', [WebManagementController::class, 'BagianArtikel'])
         ->name('Artikel')
