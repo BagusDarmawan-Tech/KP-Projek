@@ -19,7 +19,6 @@ class KegiatanArekSuroboyoController extends Controller
         $request->validate([
             'judul' => 'required|string|max:255',
             'tag' => 'required|string|max:255',
-            'slug' => 'required|string|max:255',
             'gambar' => 'required|mimes:png,jpg,jpeg|max:2048',
             'konten' => 'required|string|max:500',
             'is_active' => 'required|boolean',
@@ -29,9 +28,6 @@ class KegiatanArekSuroboyoController extends Controller
 
             'tag.required' => 'tag wajib diisi.',
             'tag.max' => 'tag maksimal 255 karakter.',
-
-            'slug.required' => 'slug wajib diisi.',
-            'slug.max' => 'slug maksimal 255 karakter.',
 
             'konten.required' => 'konten wajib diisi.',
             'konten.max' => 'konten maksimal 500 karakter.',
@@ -50,11 +46,13 @@ class KegiatanArekSuroboyoController extends Controller
             return redirect()->back()->with('error', 'Gambar tidak ditemukan');
         }
 
+        $slug ='/';
+
         KegiatanArekSuroboyo::create([
             'judul' => $request->judul,
             'tag' => $request->tag,
             'konten' => $request->konten,
-            'slug' => $request->slug,
+            'slug' => $slug,
             'gambar' => 'storage/' . $path, 
             'is_active' => $request->is_active,
             'dibuatOleh' => $request->dibuatOleh
@@ -69,7 +67,6 @@ class KegiatanArekSuroboyoController extends Controller
        $request->validate([
         'judul' => 'required|string|max:255',
         'tag' => 'required|string|max:255',
-        'slug' => 'required|string|max:255',
         'gambar' => 'mimes:png,jpg,jpeg|max:2048',
         'konten' => 'required|string|max:500',
     ],[
@@ -78,9 +75,6 @@ class KegiatanArekSuroboyoController extends Controller
 
         'tag.required' => 'tag wajib diisi.',
         'tag.max' => 'tag maksimal 255 karakter.',
-
-        'slug.required' => 'slug wajib diisi.',
-        'slug.max' => 'slug maksimal 255 karakter.',
 
         'konten.required' => 'konten wajib diisi.',
         'konten.max' => 'konten maksimal 500 karakter.',
@@ -97,7 +91,6 @@ class KegiatanArekSuroboyoController extends Controller
         $data = [
             'judul' => $request->judul,
             'tag' => $request->tag,
-            'slug' => $request->slug,
             'konten' => $request->konten,
             'is_active' => $request->is_active
         ];

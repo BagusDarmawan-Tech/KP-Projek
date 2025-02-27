@@ -7,69 +7,22 @@
 <link href="{{ asset('assets/css/tabel.css') }}" rel="stylesheet">
 
 <div class="container mt-5">
-    <!-- Card untuk Filter User Entri -->
-    <div class="card shadow-lg border-0 position-relative overflow-hidden mb-4 p-3">
-        <div class="card-body">
-            <h4 class="fw-bold mb-3">Users Management</h4>
-            
-            <div class="row">
-                <div class="col-md-6 ">
-                    <label for="userEntri" class="form-label">User Entri</label>
-                    <select id="userEntri" class="form-select">
-                        <option selected disabled>--- Pilih User Entri ---</option>
-                        @php
-                            $users = [
-                                'dispusip_kla' => 'DISPUSIP KLA',
-                                'dp3a' => 'DP3A',
-                                'ihsan' => 'Ihsan',
-                                'kecamatan_asemrowo' => 'Kecamatan Asemrowo',
-                                'kecamatan_benowo' => 'Kecamatan Benowo',
-                                'kecamatan_bubutan' => 'Kecamatan Bubutan',
-                                'kecamatan_bulak' => 'Kecamatan Bulak',
-                                'kecamatan_dukuh_pakis' => 'Kecamatan Dukuh Pakis',
-                                'kecamatan_gayungan' => 'Kecamatan Gayungan',
-                                'kecamatan_genteng' => 'Kecamatan Genteng',
-                                'kecamatan_gubeng' => 'Kecamatan Gubeng',
-                                'kecamatan_gunung_anyar' => 'Kecamatan Gunung Anyar',
-                                'kecamatan_jambangan' => 'Kecamatan Jambangan',
-                                'kecamatan_karang_pilang' => 'Kecamatan Karang Pilang',
-                                'kecamatan_kenjeran' => 'Kecamatan Kenjeran',
-                                'kecamatan_krembangan' => 'Kecamatan Krembangan',
-                                'kecamatan_lakarsantri' => 'Kecamatan Lakarsantri',
-                                'kecamatan_mulyorejo' => 'Kecamatan Mulyorejo',
-                                'kecamatan_pabean_cantian' => 'Kecamatan Pabean Cantian',
-                                'kecamatan_pakal' => 'Kecamatan Pakal',
-                                'kecamatan_sambikerep' => 'Kecamatan Sambikerep',
-                                'kecamatan_sawahan' => 'Kecamatan Sawahan',
-                                'kecamatan_semampir' => 'Kecamatan Semampir',
-                                'kecamatan_simokerto' => 'Kecamatan Simokerto',
-                                'kecamatan_sukolilo' => 'Kecamatan Sukolilo',
-                                'kecamatan_sukomanunggal' => 'Kecamatan Sukomanunggal',
-                                'kecamatan_tambaksari' => 'Kecamatan Tambaksari',
-                                'kecamatan_tandes' => 'Kecamatan Tandes',
-                                'kecamatan_tegalsari' => 'Kecamatan Tegalsari',
-                                'kecamatan_tenggilis_mejoyo' => 'Kecamatan Tenggilis Mejoyo',
-                                'kecamatan_wiyung' => 'Kecamatan Wiyung',
-                                'kecamatan_wonocolo' => 'Kecamatan Wonocolo',
-                                'kecamatan_wonokromo' => 'Kecamatan Wonokromo'
-                            ];
-                        @endphp
-                        @foreach($users as $value => $label)
-                            <option value="{{ $value }}">{{ $label }}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-            <div class="row mt-3">
-                <div class="col-md-6">
-                    <button class="btn btn-primary" id="btnCari" style="width: 150px;">
-                        <i class="bi bi-search"></i> Cari
-                    </button>
-                </div>
-            </div>
-
-        </div>
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
     </div>
+    @endif
+    @if(session('success'))
+    <div class="alert alert-success">
+        <ul>
+                <li>{{ session('success') }}</li>
+        </ul>
+    </div>
+    @endif
 </div>
 
 <div class="card shadow-lg border-0 position-relative overflow-hidden mb-5">
@@ -132,13 +85,13 @@
                 @csrf    
                     <div class="mb-3">
                         <label class="form-label" for="name" :value="__('Name')">Nama</label>
-                        <input type="text" class="form-control"  id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')"  required>
-                        <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                        <input type="text" class="form-control"  id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" >
+                        <x-input-error :messages="$errors->get('name')" class="text-danger" />
                     </div>
                     
                     <div class="mb-3">
                         <label class="form-label">Role</label>
-                        <select class="form-select" name="role" required>
+                        <select class="form-select" name="role" >
                             <option selected disabled>--- Pilih Role ---</option>
                             @foreach ($roles as $role )
                                 <option value="{{ $role->name }}">{{ $role->name }}</option>
@@ -147,35 +100,27 @@
                             <option value="opd">OPD</option>
                             <option value="user">User</option>
                         </select>
+                        <x-input-error :messages="$errors->get('role')" class="text-danger" />
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label" for="email" :value="__('Email')">Email</label>
-                        <input type="email" class="form-control" name="email" :value="old('email')" required>
-                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                        <input type="email" class="form-control" name="email" :value="old('email')" >
+                        <x-input-error :messages="$errors->get('email')" class="text-danger" />
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label" for="password" :value="__('Password')">Password</label>
-                        <input id="password" name="password" type="password" class="form-control" required autocomplete="new-password">
-                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                        <input id="password" name="password" type="password" class="form-control"  autocomplete="new-password">
+                        <x-input-error :messages="$errors->get('password')" class="text-danger" />
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label" for="password_confirmation" :value="__('Confirm Password')">Confirm Password</label>
                         <input id="password_confirmation" class="form-control"
                         type="password"
-                        name="password_confirmation" required autocomplete="new-password">
-                        <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="status" class="form-label">Status</label>
-                        <select class="form-select" id="status" name="status">
-                            <!-- <option selected>--- Pilih Status ---</option> -->
-                            <option value="Aktif">Aktif</option>
-                            <option value="Non-Aktif">Non-Aktif</option>
-                        </select>
+                        name="password_confirmation"  autocomplete="new-password">
+                        <x-input-error :messages="$errors->get('password_confirmation')" class="text-danger" />
                     </div>
                 </div>
                 <div class="modal-footer">

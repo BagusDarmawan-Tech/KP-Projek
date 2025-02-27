@@ -66,7 +66,6 @@
                                     data-bs-target="#editArtikelModal"
                                     data-id="{{ $artikel->id }}" 
                                     data-judul="{{ $artikel->judul }}" 
-                                    data-slug="{{ $artikel->slug }}" 
                                     data-tag="{{ $artikel->tag }}" 
                                     data-konten="{{ $artikel->konten }}" 
                                     data-status="{{ $artikel->is_active }}"
@@ -104,37 +103,36 @@
                     @csrf
                     <div class="mb-3">
                         <label for="judul" class="form-label">Judul</label>
-                        <input type="text" class="form-control" id="judul" name="judul" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="slug" class="form-label">Slug</label>
-                        <input type="text" class="form-control" id="slug" name="slug" required>
+                        <input type="text" class="form-control" id="judul" name="judul" value="{{ old('judul') }}">
                     </div>
                     <div class="mb-3">
                         <label for="tag" class="form-label">Tag</label>
-                        <input type="text" class="form-control" id="tag" name="tag">
+                        <input type="text" class="form-control" id="tag" name="tag" value="{{ old('tag') }}">
                     </div>
                     <div class="mb-3">
                         <label for="kategoriartikelid" class="form-label">Kategori Artikel</label>
                         <select class="form-select" id="kategoriartikelid" name="kategoriartikelid">
                             @foreach ($kategoris as $kategori)
-                                <option value="{{ $kategori->id }}">{{ $kategori->nama }}</option>
+                                <option value="{{ $kategori->id }}" {{ old('kategoriartikelid') == $kategori->id ? 'selected' : '' }}>
+                                    {{ $kategori->nama }}
+                                </option>
                             @endforeach
                         </select>
-                    </div>
+                    </div>                    
                     <div class="mb-3">
                         <label for="gambar" class="form-label">Gambar</label>
                         <input type="file" class="form-control" id="gambar" name="gambar" required>
                     </div>
                     <div class="mb-3">
                         <label for="konten" class="form-label">Konten</label>
-                        <textarea class="form-control" id="konten" rows="3" name="konten"></textarea>
+                        <textarea class="form-control" id="konten" rows="3" name="konten" value="{{ old('konten') }}"></textarea>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Status</label>
-                        <select class="form-select" name="is_active" required>
-                            <option value="1">Aktif</option>
-                            <option value="0">Non-Aktif</option>
+                        <label for="kategoriStatus" class="form-label">Status</label>
+                        <select class="form-select" id="kategoriStatus" name="is_active" required>
+                            <option value="" disabled selected>--- Pilih Status ---</option>
+                            <option value="1" {{ old('is_active') == "1" ? 'selected' : '' }}>Aktif</option>
+                            <option value="0" {{ old('is_active') == "0" ? 'selected' : '' }}>Non-Aktif</option>
                         </select>
                     </div>
                     </div>
@@ -167,10 +165,6 @@
                     <div class="mb-3">
                         <label for="editJudul" class="form-label">Judul</label>
                         <input type="text" class="form-control" id="editJudul" name="judul" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editSlug" class="form-label">Slug</label>
-                        <input type="text" class="form-control" id="editSlug" name="slug" required>
                     </div>
                     <div class="mb-3">
                         <label for="tag" class="form-label">Tag</label>
@@ -248,7 +242,6 @@
             button.addEventListener("click", function() {
                 let id = this.getAttribute("data-id");
                 let judul = this.getAttribute("data-judul");
-                let slug = this.getAttribute("data-slug");
                 let konten = this.getAttribute("data-konten");
                 let status = this.getAttribute("data-status");
                 let gambar = this.getAttribute("data-gambar");
@@ -256,7 +249,6 @@
 
                 document.getElementById("editId").value = id;
                 document.getElementById("editJudul").value = judul;
-                document.getElementById("editSlug").value = slug;
                 document.getElementById("editKonten").value = konten;
                 document.getElementById("editStatus").value = status;
                 document.getElementById("editTag").value = tag;

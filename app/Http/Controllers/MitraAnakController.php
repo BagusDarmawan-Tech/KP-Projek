@@ -157,7 +157,6 @@ class MitraAnakController extends Controller
         // dd($request->all());
         $request->validate([
             'judul' => 'required|string|max:255',
-            'slug' => 'required|string|max:255',
             'tag' => 'required|string|max:255',
             'konten' => 'required|string|max:500',
             'gambar' => 'required|mimes:png,jpg,jpeg|max:6048',
@@ -166,11 +165,10 @@ class MitraAnakController extends Controller
             'judul.required' => 'Nama wajib diisi.',
             'judul.max' => 'Nama maksimal 255 karakter.',
 
+            'tag.required' => 'Tag wajib diisi.',
+
             'konten.required' => 'konten wajib diisi.',
             'konten.max' => 'konten maksimal 500 karakter.',
-
-            'slug.required' => 'slug wajib diisi.',
-            'slug.max' => 'slug maksimal 100 karakter.',
             
             'gambar.required' => 'gambar wajib diunggah.',
             'gambar.mimes' => 'Dat Pendukung harus berformat JPG, PNG, atau JPEG.',
@@ -187,10 +185,11 @@ class MitraAnakController extends Controller
         }
 
         // dd($path);
+        $slug ='/';
         ArtikelMitraAnak::create([
             'judul' => $request->judul,
             'kategoriartikelid' => $request->kategoriartikelid,
-            'slug' => $request->slug,
+            'slug' => $slug,
             'tag' => $request->tag,
             'konten' => $request->konten,
             'gambar' => 'storage/' . $path, 
@@ -206,20 +205,17 @@ class MitraAnakController extends Controller
         // dd($request->all());
         $request->validate([
             'judul' => 'required|string|max:255',
-            'slug' => 'required|string|max:255',
             'tag' => 'required|string|max:255',
             'konten' => 'required|string|max:500',
             'gambar' => 'mimes:png,jpg,jpeg|max:6048',
             'is_active' => 'required|boolean',
         ],[
             'judul.required' => 'Nama wajib diisi.',
+            'tag.required' => 'Tag wajib diisi.',
             'judul.max' => 'Nama maksimal 255 karakter.',
 
             'konten.required' => 'konten wajib diisi.',
             'konten.max' => 'konten maksimal 500 karakter.',
-
-            'slug.required' => 'slug wajib diisi.',
-            'slug.max' => 'slug maksimal 100 karakter.',
             
             'gambar.mimes' => 'Gambar harus berformat JPG, PNG, atau JPEG.',
             'gambar.max' => 'Ukuran gambar maksimal 6 MB.',
@@ -233,7 +229,6 @@ class MitraAnakController extends Controller
             'judul' => $request->judul,
             'tag' => $request->tag,
             'konten' => $request->konten,
-            'slug' => $request->slug,
             'is_active' => $request->is_active,
             'kategoriartikelid' => $request->kategoriartikelid,
         ];

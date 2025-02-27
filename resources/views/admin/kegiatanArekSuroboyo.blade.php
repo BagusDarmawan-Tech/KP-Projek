@@ -39,7 +39,6 @@
                             <th class="text-center">No</th>
                             <th class="text-center">Gambar</th>
                             <th class="text-center">Judul</th>
-                            <th class="text-center">Slug</th>
                             <th class="text-center">Tag</th>
                             <th class="text-center">Dibuat Oleh</th>
                             <th class="text-center">Status</th>
@@ -52,7 +51,6 @@
                             <td style="text-align: center;">{{ $loop->iteration }}</td>
                             <td><img src="{{ asset($kegiatan->gambar) }}" alt="Slider Image" width="80"></td>
                             <td>{{ $kegiatan->judul }}</td>
-                            <td>{{ $kegiatan->slug }}</td>
                             <td>{{ $kegiatan->tag }}</td>
                             <td>{{ $kegiatan->dibuatOleh }}</td>
                             <td>
@@ -67,7 +65,6 @@
                                     data-id="{{ $kegiatan->id }}" 
                                     data-judul="{{ $kegiatan->judul }}" 
                                     data-tag="{{ $kegiatan->tag }}" 
-                                    data-slug="{{ $kegiatan->slug }}" 
                                     data-konten="{{ $kegiatan->konten }}" 
                                     data-gambar="{{ asset($kegiatan->gambar) }}" 
                                     data-status="{{ $kegiatan->is_active }}"
@@ -103,15 +100,11 @@
                     @csrf 
                     <div class="mb-3">
                         <label for="judul" class="form-label">Judul</label>
-                        <input name="judul" type="text" class="form-control" id="judul">
-                    </div>
-                    <div class="mb-3">
-                        <label for="slug" class="form-label">Slug</label>
-                        <input type="text" name="slug" class="form-control" id="slug">
+                        <input name="judul" type="text" class="form-control" id="judul" value="{{ old('judul') }}"    >
                     </div>
                     <div class="mb-3">
                         <label for="tag" class="form-label">Tag</label>
-                        <input type="text" name="tag" class="form-control" id="tag">
+                        <input type="text" name="tag" class="form-control" id="tag" value="{{ old('tag') }}"    >
                     </div>
                     <div class="mb-3">
                         <label for="gambar" class="form-label">Gambar</label>
@@ -119,13 +112,14 @@
                     </div>
                     <div class="mb-3">
                         <label for="konten" class="form-label">Konten</label>
-                        <textarea class="form-control" name="konten" id="konten" rows="3"></textarea>
-                    </div>
+                        <textarea class="form-control" name="konten" id="konten" rows="3">{{ old('konten') }}</textarea>
+                    </div>                    
                     <div class="mb-3">
-                        <label class="form-label">Status</label>
-                        <select class="form-select" name="is_active" required>
-                            <option value="1">Aktif</option>
-                            <option value="0">Non-Aktif</option>
+                        <label for="kategoriStatus" class="form-label">Status</label>
+                        <select class="form-select" id="kategoriStatus" name="is_active" required>
+                            <option value="" disabled selected>--- Pilih Status ---</option>
+                            <option value="1" {{ old('is_active') == "1" ? 'selected' : '' }}>Aktif</option>
+                            <option value="0" {{ old('is_active') == "0" ? 'selected' : '' }}>Non-Aktif</option>
                         </select>
                     </div>
                 </div>
@@ -153,10 +147,6 @@
                     <div class="mb-3">
                         <label for="editJudul" class="form-label">Judul</label>
                         <input name="judul" type="text" class="form-control" id="editJudul">
-                    </div>
-                    <div class="mb-3">
-                        <label for="editSlug" class="form-label">Slug</label>
-                        <input type="text" name="slug" class="form-control" id="editSlug">
                     </div>
                     <div class="mb-3">
                         <label for="editTag" class="form-label">Tag</label>
@@ -223,7 +213,6 @@
             button.addEventListener("click", function () {
                 let id = this.getAttribute("data-id");
                 let judul = this.getAttribute("data-judul");
-                let slug = this.getAttribute("data-slug");
                 let tag = this.getAttribute("data-tag");
                 let konten = this.getAttribute("data-konten");
                 let gambar = this.getAttribute("data-gambar");
@@ -231,7 +220,6 @@
 
                 // Set nilai form dalam modal
                 document.getElementById("editJudul").value = judul;
-                document.getElementById("editSlug").value = slug;
                 document.getElementById("editTag").value = tag;
                 document.getElementById("editKonten").value = konten;
                 document.getElementById("editStatus").value = status; // Pastikan select memiliki id="editStatus"

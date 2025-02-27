@@ -43,7 +43,6 @@
                             <th class="text-center">No</th>
                             <th class="text-center">Icon</th>
                             <th class="text-center">Nama</th>
-                            <th class="text-center">Slug</th>
                             <th class="text-center">Gambar</th>
                             <th class="text-center">Dibuat Oleh</th>
                             <th class="text-center">Status</th>
@@ -56,7 +55,6 @@
                             <td style="text-align: center;">{{ $loop->iteration }}</td>
                             <td><i class="{{ $klaster->icon }}"></i></td>
                             <td>{{ $klaster->nama }}</td>
-                            <td>{{ $klaster->slug }}</td>
                             <td><img src="{{ asset($klaster->gambar) }}" alt="Gambar" width="50"></td>
                             <td>{{ $klaster->dibuatOleh }}</td>
                             <td>
@@ -72,7 +70,6 @@
                                     data-id="{{ $klaster->id }}"
                                     data-nama="{{ $klaster->nama }}"
                                     data-icon="{{ $klaster->icon }}"
-                                    data-slug="{{ $klaster->slug }}"
                                     data-gambar="{{ asset($klaster->gambar) }}"
                                     data-is_active="{{ $klaster->is_active }}"
                                     data-bs-toggle="modal"
@@ -128,10 +125,6 @@
                         <label for="kategoriNama" class="form-label">Nama</label>
                         <input type="text" class="form-control"  id="nama" name="nama" value="{{ old('nama') }}" placeholder="Masukkan Nama">
                     </div>
-                    <div class="mb-3">
-                        <label for="kategoriSlug" class="form-label">Slug</label>
-                        <input type="text" class="form-control" id="slug" id="caption" name="slug" value="{{ old('slug') }}" placeholder="Masukkan Slug">
-                    </div>
 
                     <div class="mb-3">
                         <label for="kategoriGambar" class="form-label">Gambar</label>
@@ -182,10 +175,6 @@
                     <div class="mb-3">
                         <label class="form-label">Icon</label>
                         <input type="text" class="form-control" id="editIcon" name="icon" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Slug</label>
-                        <input type="text" class="form-control" id="editSlug" name="slug" required>
                     </div>
                     <div class="mb-3">
                         <label for="editGambar" class="form-label">Gambar</label>
@@ -248,14 +237,12 @@
                 let id = this.getAttribute("data-id");
                 let nama = this.getAttribute("data-nama");
                 let icon = this.getAttribute("data-icon");
-                let slug = this.getAttribute("data-slug");
                 let gambar = this.getAttribute("data-gambar");
                 let isActive = this.getAttribute("data-is_active");
 
                 document.getElementById("editId").value = id;
                 document.getElementById("editNama").value = nama;
                 document.getElementById("editIcon").value = icon;
-                document.getElementById("editSlug").value = slug;
                 document.getElementById("editIsActive").value = isActive;
                 document.getElementById("previewGambar").src = gambar;
 

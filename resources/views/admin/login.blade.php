@@ -45,14 +45,14 @@
                         </div>
                         <x-input-error :messages="$errors->get('password')" class="mt-2" />
                         
-                        <div class="d-grid gap-2">
+                        <div class="d-grid gap-2 text-center">
                           <x-primary-button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3">
                               {{ __('Log in') }}        
                               <i class="bi bi-box-arrow-in-right"></i>
 
                           </x-primary-button>
-                        </div>
-
+                          <a href="{{ route('password.request') }}" class="text-dark text-decoration-none" style="color: black !important;">Lupa Password</a>
+                        </div> 
       
                         {{-- <div class="d-flex align-items-center justify-content-center pb-4">
                           <p class="mb-0 me-2">Don't have an account?</p>

@@ -68,7 +68,6 @@
                                     data-bs-target="#halamanModal"
                                     data-id="{{ $artikel->id }}"
                                     data-judul="{{ $artikel->judul }}"
-                                    data-slug="{{ $artikel->slug }}"
                                     data-tag="{{ $artikel->tag }}"
                                     data-konten="{{ $artikel->konten }}"
                                     data-gambar="{{ asset($artikel->gambar) }}"
@@ -121,11 +120,6 @@
                     <div class="mb-3">
                         <label for="judul" class="form-label">Judul</label>
                         <input type="text" class="form-control" id="judul" name="judul" value="{{ old('judul') }}" required>
-                    </div>
-                
-                    <div class="mb-3">
-                        <label for="slug" class="form-label">Slug</label>
-                        <input type="text" class="form-control" id="slug" name="slug" value="{{ old('slug') }}" required>
                     </div>
                 
                     <div class="mb-3">
@@ -205,11 +199,6 @@
                     <div class="mb-3">
                         <label for="editJudul" class="form-label">Judul</label>
                         <input type="text" class="form-control" id="editJudul" name="judul" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="editSlug" class="form-label">Slug</label>
-                        <input type="text" class="form-control" id="editSlug" name="slug" required>
                     </div>
 
                     <div class="mb-3">
@@ -304,7 +293,6 @@
         button.addEventListener("click", function () {
             let id = this.getAttribute("data-id");
             let judul = this.getAttribute("data-judul");
-            let slug = this.getAttribute("data-slug");
             let tag = this.getAttribute("data-tag");
             let konten = this.getAttribute("data-konten");
             let gambar = this.getAttribute("data-gambar");
@@ -315,7 +303,6 @@
             // Set nilai form dalam modal
             document.getElementById("editId").value = id;
             document.getElementById("editJudul").value = judul;
-            document.getElementById("editSlug").value = slug;
             document.getElementById("editTag").value = tag;
             document.getElementById("editKonten").value = konten;
             document.getElementById("editKategori").value = kategoriartikelid;

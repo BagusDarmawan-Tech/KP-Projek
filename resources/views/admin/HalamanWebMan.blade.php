@@ -41,7 +41,6 @@
                             <th class="text-center">No</th>
                             <th class="text-center">Gambar</th>
                             <th class="text-center">Judul</th>
-                            <th class="text-center">Slug</th>
                             <th class="text-center">Status</th>
                             <th class="text-center">Actions</th>
                         </tr>
@@ -52,7 +51,6 @@
                             <td style="text-align: center;">{{ $loop->iteration }}</td>
                             <td><img src="{{ asset($halaman->gambar) }}" alt="Slider Image" width="80"></td>
                             <td>{{ $halaman->judul }}</td>
-                            <td>{{ $halaman->slug }}</td>
                             <td>
                                 @if($halaman->is_active == 0)
                                     <span class="badge bg-warning">Non Aktif</span>
@@ -65,7 +63,6 @@
                                 <button class="btn btn-sm btn-primary edit-btn"
                                     data-id="{{ $halaman->id }}"
                                     data-judul="{{ $halaman->judul }}"
-                                    data-slug="{{ $halaman->slug }}"
                                     data-gambar="{{ asset($halaman->gambar) }}"
                                     data-konten="{{ $halaman->konten}}"
                                     data-status="{{ $halaman->is_active }}"
@@ -115,19 +112,15 @@
                     @csrf 
                     <div class="mb-3">
                         <label for="judul" class="form-label">Judul</label>
-                        <input type="text" class="form-control" id="judul" name="judul" value="{{ old('judul') }}" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="slug" class="form-label">Slug</label>
-                        <input type="text" class="form-control" id="slug" name="slug" value="{{ old('slug') }}" required>
+                        <input type="text" class="form-control" id="judul" name="judul" value="{{ old('judul') }}" >
                     </div>
                     <div class="mb-3">
                         <label for="gambar" class="form-label">Gambar</label>
-                        <input type="file" class="form-control" id="gambar" name="gambar" value="{{ old('gambar') }}" required>
+                        <input type="file" class="form-control" id="gambar" name="gambar" value="{{ old('gambar') }}" >
                     </div>
                     <div class="mb-3">
                         <label for="konten" class="form-label">Konten</label>
-                        <textarea class="form-control" id="konten" rows="3" name="konten" value="{{ old('konten') }}" required></textarea>
+                        <textarea class="form-control" id="konten" rows="3" name="konten" >{{ old('konten') }}</textarea>
                     </div>
                     <div class="mb-3">
                         <label for="kategoriStatus" class="form-label">Status</label>
@@ -167,10 +160,6 @@
                     <div class="mb-3">
                         <label class="form-label">Judul</label>
                         <input type="text" class="form-control" id="editJudul" name="judul" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Slug</label>
-                        <input type="text" class="form-control" id="editSlug" name="slug" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Gambar</label>
@@ -237,14 +226,12 @@
             button.addEventListener("click", function () {
                 let id = this.getAttribute("data-id");
                 let judul = this.getAttribute("data-judul");
-                let slug = this.getAttribute("data-slug");
                 let gambar = this.getAttribute("data-gambar");
                 let status = this.getAttribute("data-status");
                 let konten = this.getAttribute("data-konten");
 
                 document.getElementById("editId").value = id;
                 document.getElementById("editJudul").value = judul;
-                document.getElementById("editSlug").value = slug;
                 document.getElementById("editStatus").value = status;
                 document.getElementById("editKonten").value = konten;
                 document.getElementById("previewGambar").src = gambar;

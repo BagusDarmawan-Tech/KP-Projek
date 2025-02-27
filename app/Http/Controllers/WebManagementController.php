@@ -630,7 +630,6 @@ class WebManagementController extends Controller
             'nama' => 'required|string|max:255|unique:kategori_artikel,nama',
             'gambar' => 'required|mimes:png,jpg,jpeg|max:2048',
             'icon' => 'required|string|max:30',
-            'slug' => 'required|string|max:100',
             'is_active' => 'required|boolean',
         ],[
             'nama.unique' => 'Nama Klaster ini sudah digunakan, silakan pilih yang lain.',
@@ -639,9 +638,6 @@ class WebManagementController extends Controller
 
             'icon.required' => 'icon wajib diisi.',
             'icon.max' => 'icon maksimal 30 karakter.',
-
-            'slug.required' => 'slug wajib diisi.',
-            'slug.max' => 'slug maksimal 100 karakter.',
             
             'gambar.required' => 'gambar wajib diunggah.',
             'gambar.mimes' => 'Dat Pendukung harus berformat JPG, PNG, atau JPEG.',
@@ -658,10 +654,11 @@ class WebManagementController extends Controller
         }
 
         // dd($path);
+        $slug='/';
         Klaster::create([
             'nama' => $request->nama,
             'icon' => $request->icon,
-            'slug' => $request->slug,
+            'slug' => $slug,
             'gambar' => 'storage/' . $path, 
             'is_active' => $request->is_active,
             'dibuatOleh' => $request->dibuatOleh
@@ -678,7 +675,6 @@ class WebManagementController extends Controller
             'nama' => 'required|string|max:255|unique:kategori_artikel,nama',
             'gambar' => 'mimes:png,jpg,jpeg|max:2048',
             'icon' => 'required|string|max:30',
-            'slug' => 'required|string|max:100',
             'is_active' => 'required|boolean',
         ],[
             'nama.unique' => 'Nama Klaster ini sudah digunakan, silakan pilih yang lain.',
@@ -687,9 +683,6 @@ class WebManagementController extends Controller
 
             'icon.required' => 'icon wajib diisi.',
             'icon.max' => 'icon maksimal 30 karakter.',
-
-            'slug.required' => 'slug wajib diisi.',
-            'slug.max' => 'slug maksimal 100 karakter.',
             
             'gambar.mimes' => 'Dat Pendukung harus berformat JPG, PNG, atau JPEG.',
             'gambar.max' => 'Ukuran gambar maksimal 2 MB.',
@@ -702,7 +695,6 @@ class WebManagementController extends Controller
         $data = [
             'nama' => $request->nama,
             'icon' => $request->icon,
-            'slug' => $request->slug,
             'is_active' => $request->is_active,
         ];
     
@@ -844,7 +836,6 @@ class WebManagementController extends Controller
             'judul' => 'required|string|max:255',
             'gambar' => 'required|mimes:png,jpg,jpeg|max:2048',
             'konten' => 'required|string|max:500',
-            'slug' => 'required|string|max:100',
             'is_active' => 'required|boolean',
         ],
         [
@@ -853,9 +844,6 @@ class WebManagementController extends Controller
             
             'konten.required' => 'konten wajib diisi.',
             'konten.max' => 'konten maksimal 500 karakter.',
-            
-            'slug.required' => 'slug wajib diisi.',
-            'slug.max' => 'slug maksimal 500 karakter.',
             
             'gambar.required' => 'gambar wajib diunggah.',
             'gambar.mimes' => 'Dat Pendukung harus berformat JPG, PNG, atau JPEG.',
@@ -872,10 +860,11 @@ class WebManagementController extends Controller
         }
 
         // dd($path);
+        $slug ='/';
         Halaman::create([
             'judul' => $request->judul,
             'konten' => $request->konten,
-            'slug' => $request->slug,
+            'slug' => $slug,
             'gambar' => 'storage/' . $path, 
             'is_active' => $request->is_active,
             'dibuatOleh' => $request->dibuatOleh
@@ -891,7 +880,6 @@ class WebManagementController extends Controller
             'judul' => 'required|string|max:255',
             'gambar' => 'mimes:png,jpg,jpeg|max:2048',
             'konten' => 'required|string|max:500',
-            'slug' => 'required|string|max:100',
             'is_active' => 'required|boolean',
         ],
         [
@@ -900,10 +888,7 @@ class WebManagementController extends Controller
             
             'konten.required' => 'konten wajib diisi.',
             'konten.max' => 'konten maksimal 500 karakter.',
-            
-            'slug.required' => 'slug wajib diisi.',
-            'slug.max' => 'slug maksimal 500 karakter.',
-            
+
             'gambar.mimes' => 'Gambar harus berformat JPG, PNG, atau JPEG.',
             'gambar.max' => 'Ukuran gambar maksimal 2 MB.',
             
@@ -915,7 +900,6 @@ class WebManagementController extends Controller
         $data = [
             'judul' => $request->judul,
             'konten' => $request->konten,
-            'slug' => $request->slug,
             'is_active' => $request->is_active,
         ];
     
@@ -976,7 +960,6 @@ class WebManagementController extends Controller
         // dd($request->all());
         $request->validate([
             'judul' => 'required|string|max:255',
-            'slug' => 'required|string|max:100',
             'tag' => 'required|string|max:255',
             'gambar' => 'required|mimes:png,jpg,jpeg|max:2048',
             'subkegiatanid' => 'required|integer',
@@ -991,9 +974,6 @@ class WebManagementController extends Controller
             
             'konten.required' => 'konten wajib diisi.',
             'konten.max' => 'konten maksimal 500 karakter.',
-            
-            'slug.required' => 'slug wajib diisi.',
-            'slug.max' => 'slug maksimal 100 karakter.',
 
             'tag.required' => 'tag wajib diisi.',
             'tag.max' => 'tag maksimal 100 karakter.',
@@ -1014,9 +994,10 @@ class WebManagementController extends Controller
         }
 
         // dd($path);
+        $slug ='/';
         Artikel::create([
             'judul' => $request->judul,
-            'slug' => $request->slug,
+            'slug' => $slug,
             'tag' => $request->tag,
             'gambar' => 'storage/' . $path, 
             'subkegiatanid' => $request->subkegiatanid,
@@ -1034,7 +1015,6 @@ class WebManagementController extends Controller
         // dd($request->all());
         $request->validate([
             'judul' => 'required|string|max:255',
-            'slug' => 'required|string|max:100',
             'tag' => 'required|string|max:255',
             'gambar' => 'mimes:png,jpg,jpeg|max:2048',
             'subkegiatanid' => 'required|integer',
@@ -1048,9 +1028,6 @@ class WebManagementController extends Controller
             
             'konten.required' => 'konten wajib diisi.',
             'konten.max' => 'konten maksimal 500 karakter.',
-            
-            'slug.required' => 'slug wajib diisi.',
-            'slug.max' => 'slug maksimal 100 karakter.',
 
             'tag.required' => 'tag wajib diisi.',
             'tag.max' => 'tag maksimal 100 karakter.',
@@ -1067,7 +1044,6 @@ class WebManagementController extends Controller
         $data = [
             'judul' => $request->judul,
             'konten' => $request->konten,
-            'slug' => $request->slug,
             'tag' => $request->tag,
             'subkegiatanid' => $request->subkegiatanid,
             'kategoriartikelid' => $request->kategoriartikelid,
