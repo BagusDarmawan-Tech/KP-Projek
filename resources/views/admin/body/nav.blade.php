@@ -1,19 +1,12 @@
 <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="{{ route('dashboard') }}" class="logo d-flex align-items-center">
         <img src="{{ asset('logo.png') }}" alt="" >
         {{-- <span class="d-none d-lg-block">SiTalas</span> --}}
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
-
-    <div class="search-bar">
-      <form class="search-form d-flex align-items-center" method="POST" action="#">
-        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-      </form>
-    </div><!-- End Search Bar -->
 
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
@@ -45,7 +38,7 @@
             </li>
 
           <li>
-            <a class="dropdown-item d-flex align-items-center" href="#" data-bs-toggle="modal" data-bs-target="#accountSettingsModal">
+            <a class="dropdown-item d-flex align-items-center" href="{{ route('profile.edit') }}"  data-bs-target="#accountSettingsModal">
               <i class="bi bi-gear"></i>
               <span>Account Settings</span>
             </a>
@@ -124,58 +117,68 @@
 
                 <!-- Modal Body -->
                 <div class="modal-body text-dark">
-                  
+  
                   <!-- Profile Information -->
                   <div class="card p-3 mb-3 border border-primary shadow-sm">
                     <h3 class="text-dark">Profile Information</h3>
                     <p>Update your account's profile information and email address.</p>
-                    <label class="form-label">Name</label>
-                    <input type="text" class="form-control" value="{{ Auth::user()->name }}">
-                    <label class="form-label mt-2">Email</label>
-                    <input type="email" class="form-control" value="{{ Auth::user()->email }}">
-                    <button class="btn btn-primary mt-3 w-100">Save</button>
+                    
+                    <form method="POST" action="{{ route('profile.update') }}">
+                      @csrf
+                      @method('patch')
+                      
+                      <label class="form-label" for="name" :value="__('Name')">Nama</label>
+                      <input type="text" name="name" class="form-control" value="{{ Auth::user()->name }}">
+                
+                      <label class="form-label mt-2">Email</label>
+                      <input type="email" name="email" class="form-control" value="{{ Auth::user()->email }}">
+                
+                      <button type="submit" class="btn btn-primary mt-3 w-100">Save</button>
+                    </form>
                   </div>
-
+                
                   <!-- Update Password -->
                   <div class="card p-3 mb-3 border border-primary shadow-sm">
                     <h3 class="text-dark">Update Password</h3>
                     <p>Ensure your account is using a long, random password to stay secure.</p>
-
-                    <label class="form-label">Current Password</label>
-                    <div class="password-wrapper">
-                      <input type="password" class="form-control" id="currentPassword">
-                      <button class="toggle-password" onclick="togglePassword('currentPassword', 'toggleIcon1')">
-                        <i id="toggleIcon1" class="bi bi-eye-slash"></i>
-                      </button>
-                    </div>
-
-                    <label class="form-label mt-2">New Password</label>
-                    <div class="password-wrapper">
-                      <input type="password" class="form-control" id="newPassword">
-                      <button class="toggle-password" onclick="togglePassword('newPassword', 'toggleIcon2')">
-                        <i id="toggleIcon2" class="bi bi-eye-slash"></i>
-                      </button>
-                    </div>
-
-                    <label class="form-label mt-2">Confirm Password</label>
-                    <div class="password-wrapper">
-                      <input type="password" class="form-control" id="confirmPassword">
-                      <button class="toggle-password" onclick="togglePassword('confirmPassword', 'toggleIcon3')">
-                        <i id="toggleIcon3" class="bi bi-eye-slash"></i>
-                      </button>
-                    </div>
-
-                    <button class="btn btn-primary mt-3 w-100">Save</button>
+                    <form id="send-verification" method="post" action="{{ route('verification.send') }}">
+                      @csrf
+                  </form>
+                    <form method="POST" action="">
+                      @csrf
+                      @method('PUT')
+                
+                      <label class="form-label">Current Password</label>
+                      <input type="password" name="current_password" class="form-control">
+                
+                      <label class="form-label mt-2">New Password</label>
+                      <input type="password" name="password" class="form-control">
+                
+                      <label class="form-label mt-2">Confirm Password</label>
+                      <input type="password" name="password_confirmation" class="form-control">
+                
+                      <button type="submit" class="btn btn-primary mt-3 w-100">Save</button>
+                    </form>
                   </div>
-
+                
                   <!-- Delete Account -->
                   <div class="card p-3 border border-primary shadow-sm">
                     <h3 class="text-dark">Delete Account</h3>
                     <p>Once your account is deleted, all of its resources and data will be permanently deleted.</p>
-                    <button class="btn btn-danger w-100">Delete Account</button>
+                    
+                    <form method="POST" action="">
+                      @csrf
+                      @method('DELETE')
+                      
+                      <button type="submit" class="btn btn-danger w-100" 
+                        onclick="return confirm('Are you sure you want to delete your account? This action cannot be undone.')">
+                        Delete Account
+                      </button>
+                    </form>
                   </div>
-
+                
                 </div>
+                
 
                 <!-- Modal Footer -->
 
