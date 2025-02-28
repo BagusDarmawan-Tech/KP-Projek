@@ -5,20 +5,17 @@
 
 <div class="container mt-5">
     @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
+    @foreach ($errors->all() as $error)
+        <div class="alert alert-danger text-center p-1 px-2 small">  
+                    {{ $error }}
+        </div>
+    @endforeach
     @endif
     @if(session('success'))
-    <div class="alert alert-success">
-        <ul>
-                <li>{{ session('success') }}</li>
-        </ul>
-    </div>
+        <div class="alert alert-success text-center">
+            {{ session('success')}}
+        
+        </div>
     @endif
     <div class="card shadow-lg border-0 position-relative overflow-hidden mb-5"> 
         <div class="card-body mt-4">
@@ -101,15 +98,6 @@
 <div class="modal fade" id="sliderModal" tabindex="-1" aria-labelledby="sliderModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-            @endif
             <form method="POST" action="{{ route('createGaleri') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-header d-flex justify-content-center w-100 ">
@@ -118,15 +106,15 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="nama" class="form-label">Nama</label>
-                        <input type="text" class="form-control" id="nama" name="nama" required>
+                        <input type="text" class="form-control" id="nama" name="nama" value="{{ old('nama') }}">
                     </div>
                     <div class="mb-3">
                         <label for="caption" class="form-label">Caption</label>
-                        <input type="text" class="form-control" id="caption" name="caption" required>
+                        <input type="text" class="form-control" id="caption" name="caption" value="{{ old('caption') }}">
                     </div>
                     <div class="mb-3">
                         <label for="deskripsi" class="form-label">Deskripsi</label>
-                        <input type="text" class="form-control" id="deskripsi" name="deskripsi" required>
+                        <input type="text" class="form-control" id="deskripsi" name="deskripsi" value="{{ old('deskripsi') }}>
                     </div>
                     <div class="mb-3">
                         <label for="gambar" class="form-label">Gambar</label>

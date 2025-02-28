@@ -6,66 +6,6 @@
 <!-- <script src="{{ asset('assets/js/hapus.js') }}"></script> -->
 
 <div class="container mt-5">
-    <!-- Card Header -->
-    <div class="card shadow-lg border-0 position-relative overflow-hidden mb-4 p-3">
-        <div class="card-body">
-            <h4 class="fw-bold mb-3 text-center">Dokumen SK Fas, CFCI, dan KLA</h4>
-            <div class="row">
-                <div class="col-md-6">
-                    <label for="userEntri" class="form-label">User Entri</label>
-                    <select id="userEntri" class="form-select">
-                        <option selected disabled>--- Pilih User Entri ---</option>
-                        @php
-                            $users = [
-                                'dp3a' => 'DP3A',
-                                'ihsan' => 'Ihsan',
-                                'kecamatan_asemrowo' => 'Kecamatan Asemrowo',
-                                'kecamatan_benowo' => 'Kecamatan Benowo',
-                                'kecamatan_bubutan' => 'Kecamatan Bubutan',
-                                'kecamatan_bulak' => 'Kecamatan Bulak',
-                                'kecamatan_dukuh_pakis' => 'Kecamatan Dukuh Pakis',
-                                'kecamatan_gayungan' => 'Kecamatan Gayungan',
-                                'kecamatan_genteng' => 'Kecamatan Genteng',
-                                'kecamatan_gubeng' => 'Kecamatan Gubeng',
-                                'kecamatan_gunung_anyar' => 'Kecamatan Gunung Anyar',
-                                'kecamatan_jambangan' => 'Kecamatan Jambangan',
-                                'kecamatan_karang_pilang' => 'Kecamatan Karang Pilang',
-                                'kecamatan_kenjeran' => 'Kecamatan Kenjeran',
-                                'kecamatan_krembangan' => 'Kecamatan Krembangan',
-                                'kecamatan_lakarsantri' => 'Kecamatan Lakarsantri',
-                                'kecamatan_mulyorejo' => 'Kecamatan Mulyorejo',
-                                'kecamatan_pabean_cantian' => 'Kecamatan Pabean Cantian',
-                                'kecamatan_pakal' => 'Kecamatan Pakal',
-                                'kecamatan_sambikerep' => 'Kecamatan Sambikerep',
-                                'kecamatan_sawahan' => 'Kecamatan Sawahan',
-                                'kecamatan_semampir' => 'Kecamatan Semampir',
-                                'kecamatan_simokerto' => 'Kecamatan Simokerto',
-                                'kecamatan_sukolilo' => 'Kecamatan Sukolilo',
-                                'kecamatan_sukomanunggal' => 'Kecamatan Sukomanunggal',
-                                'kecamatan_tambaksari' => 'Kecamatan Tambaksari',
-                                'kecamatan_tandes' => 'Kecamatan Tandes',
-                                'kecamatan_tegalsari' => 'Kecamatan Tegalsari',
-                                'kecamatan_tenggilis_mejoyo' => 'Kecamatan Tenggilis Mejoyo',
-                                'kecamatan_wiyung' => 'Kecamatan Wiyung',
-                                'kecamatan_wonocolo' => 'Kecamatan Wonocolo',
-                                'kecamatan_wonokromo' => 'Kecamatan Wonokromo'
-                            ];
-                        @endphp
-                        @foreach($users as $value => $label)
-                            <option value="{{ $value }}">{{ $label }}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-            <div class="row mt-3">
-                <div class="col-md-6">
-                    <button class="btn btn-primary" id="btnCari" style="width: 150px;">
-                        <i class="bi bi-search"></i> Cari
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Card Content -->
     <div class="card shadow-lg border-0 position-relative overflow-hidden p-3">
@@ -75,24 +15,6 @@
                     <i class="bi bi-plus"></i> Dokumen SK Fas, CFCI, dan KLA
                 </button>
             </div>
-
-            <!-- Kontrol Tampilkan & Cari -->
-            <div class="row mb-3 align-items-center">
-                <div class="col-md-6">
-                    <label for="showEntries" class="form-label me-2">Show</label>
-                    <select id="showEntries" class="form-select form-select-sm d-inline-block" style="width: 80px;">
-                        <option value="10">10</option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                    </select>
-                    entries
-                </div>
-                <div class="col-md-6 text-end">
-                    <input type="text" id="searchInput" class="form-control form-control-sm d-inline-block" placeholder="Search..." style="width: 200px;">
-                </div>
-            </div>
-
             <!-- Table -->
             <div class="table-responsive">
                 <table class="table table-hover table-bordered align-middle text-center">
@@ -127,7 +49,7 @@
             </div>
         </div>
     </div>
-</div>
+
 
 <!-- Modal Tambah dan Edit -->
 <div class="modal fade" id="dokumenKelurahanModal" tabindex="-1" aria-labelledby="dokumenKelurahanModalLabel" aria-hidden="true">
@@ -245,5 +167,6 @@
     </div>
 </div>
 
+</div>
 
 @endsection

@@ -6,13 +6,17 @@
 
 <div class="container mt-5">
     @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
+    @foreach ($errors->all() as $error)
+        <div class="alert alert-danger text-center p-1 px-2 small">  
+                    {{ $error }}
+        </div>
+    @endforeach
+    @endif
+    @if(session('success'))
+        <div class="alert alert-success text-center">
+            {{ session('success')}}
+        
+        </div>
     @endif
     <div class="card shadow-lg border-0 position-relative overflow-hidden mb-5"> 
         <div class="card-body mt-4">
@@ -101,32 +105,23 @@
                 <h5 class="modal-title fw-bold text-center" id="menuModalLabel">Tambah Menu Forum Anak Baru</h5>
             </div>
             <div class="modal-body">
-                @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-                @endif
                 <form method="POST" action="{{ route('createForumAnak') }}" enctype="multipart/form-data">
                     @csrf 
                     <div class="mb-3">
                         <label for="sliderNama" class="form-label">Nama </label>
-                        <input type="text" class="form-control" id="nama" name="nama" value="{{ old('nama') }}" required>
+                        <input type="text" class="form-control" id="nama" name="nama" value="{{ old('nama') }}" >
                     </div>
                     <div class="mb-3">
                         <label for="sliderCaption" class="form-label">Caption</label>
-                        <input type="text" class="form-control" id="sliderCaption" name="caption" value="{{ old('caption') }}" required>
+                        <input type="text" class="form-control" id="sliderCaption" name="caption" value="{{ old('caption') }}" >
                     </div>
                     <div class="mb-3">
                         <label for="sliderDeskripsi" class="form-label">Deskripsi</label>
-                        <textarea class="form-control" id="sliderDeskripsi" rows="2" name="deskripsi" value="{{ old('deskripsi') }}" required></textarea>
+                        <textarea class="form-control" id="sliderDeskripsi" rows="2" name="deskripsi" >{{ old('deskripsi') }}</textarea>
                     </div>
                     <div class="mb-3">
                         <label for="sliderGambar" class="form-label">Gambar</label>
-                        <input type="file" class="form-control" id="sliderGambar" name="gambar" value="{{ old('gambar') }}" required>
+                        <input type="file" class="form-control" id="sliderGambar" name="gambar">
                     </div>
                     <div class="mb-3">
                         <label for="kategoriStatus" class="form-label">Status</label>

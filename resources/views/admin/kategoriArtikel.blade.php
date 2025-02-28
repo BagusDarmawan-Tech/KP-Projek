@@ -4,23 +4,19 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <div class="container mt-5">
-                @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-                @endif
-                @if(session('success'))
-                <div class="alert alert-success">
-                    <ul>
-                            <li>{{ session('success') }}</li>
-                    </ul>
-                </div>
-                @endif
-
+    @if ($errors->any())
+    @foreach ($errors->all() as $error)
+        <div class="alert alert-danger text-center p-1 px-2 small">  
+                    {{ $error }}
+        </div>
+    @endforeach
+    @endif
+    @if(session('success'))
+        <div class="alert alert-success text-center">
+            {{ session('success')}}
+        
+        </div>
+    @endif
     <div class="card shadow-lg border-0 position-relative overflow-hidden mb-5"> 
         <div class="card-body mt-4">
             <div class="text-center mb-4">
@@ -98,21 +94,11 @@
                 <h5 class="modal-title fw-bold text-center" id="kategoriModalLabel">Tambah Menu Kategori Baru</h5>
             </div>
             <div class="modal-body"> 
-                @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-                @endif
-            
                 <form method="POST" action="{{ route('createKategoriArtikel') }}">
                     @csrf    
                     <div class="mb-3">
                         <label for="nama" class="form-label">Nama</label>
-                        <input type="text" class="form-control" id="nama" name="nama" value="{{ old('nama') }}" required>
+                        <input type="text" class="form-control" id="nama" name="nama" value="{{ old('nama') }}" >
                     </div>
             
                     <div class="mb-3">

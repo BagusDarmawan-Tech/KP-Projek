@@ -5,199 +5,197 @@
 @section('main')
 
 <link href="{{ asset('assets/css/tabel.css') }}" rel="stylesheet">
-@if ($errors->any())
-<div class="alert alert-danger">
-    <ul>
+<div class="container mt-5"> 
+    @if ($errors->any())
         @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
+            <div class="alert alert-danger text-center p-1 px-2 small">  
+                        {{ $error }}
+            </div>
         @endforeach
-    </ul>
-</div>
-@endif
-@if(session('success'))
-<div class="alert alert-success">
-    <ul>
-            <li>{{ session('success') }}</li>
-    </ul>
-</div>
-@endif
-<div class="card shadow-lg border-0 position-relative overflow-hidden mb-5">
-    <div class="card-body mt-4">
-        <div class="text-center mb-4">
-            <h4 class="fw-bold">Pemantauan Suara Anak</h4>
+    @endif
+    @if(session('success'))
+        <div class="alert alert-success text-center">
+            {{ session('success')}}
+        
         </div>
-
-        <!-- Kontrol Atas -->
-        <div class="row mb-3">
-            <div class="col-md-12 d-flex justify-content-end">
-            @if (auth()->user()->hasPermissionTo('pemantauan suara anak-add')) 
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambahPemantauanModal">
-                    + Pemantauan Suara Anak
-                </button>
-            @endif
+    @endif
+    <div class="card shadow-lg border-0 position-relative overflow-hidden mb-5">
+        <div class="card-body mt-4">
+            <div class="text-center mb-4">
+                <h4 class="fw-bold">Pemantauan Suara Anak</h4>
             </div>
-        </div>
-
-
-        <div class="table-responsive">
-            <table class="table table-hover table-bordered align-middle text-center" id="myTable">
-                <thead class="table-primary">
-                    <tr>
-                        <th class="text-center">No</th>
-                        <th class="text-center">Perihal</th>
-                        <th class="text-center">Data Detail</th>
-                        <th class="text-center">Hasil TL</th>
-                        <th class="text-center">Status</th>
-                        <th class="text-center">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($suaras as $index => $suara)
-                    <tr>
-                        <td style="text-align: center;">{{ $loop->iteration }}</td>
-                        <!-- <td>{{ $suara->nomorSuara }}</td>
-                        <td class="text-nowrap">{{ $suara->tanggal }}</td>
-                        <td>{{ $suara->pemohon }}</td>-->
-                        <td>{{ $suara->perihal }}</td>
-
-
-                            <!-- bagian deskripsi -->
-                        <!-- <td>
-                            <a href="#"class="lihat-detail" 
-                            data-deskripsi="{{ $suara->deskripsi}}">Lihat Detail</a>
-                        </td> -->
-
-                        <!-- bagian detail -->
-                        <td>
-                            <a href="#" 
-                                class="lihat-detail" 
-                                data-bs-toggle="modal" 
-                                data-bs-target="#deskripsiModal" 
-                                data-judul="{{ $suara->perihal }}" 
-                                data-deskripsi="{{ $suara->deskripsi }}" 
-                                data-gambar="{{ asset($suara->gambar) }}" 
-                                data-tanggal="{{ $suara->tanggal }}" 
-                                data-pemohon="{{ $suara->pemohon }}"
-                                data-nomor="{{ $suara->nomorSuara }}">Lihat Detail</a>
-                        </td>
-
-
-
-                        @if(is_null($suara->tindakLanjut))
-                            <td class="text-danger">Dinsos : ✖ Belum di TL</td>
-                        @else
-                        <td class="text-danger">Dinsos : ✅  Sudah di TL</td>
-                        @endif
-                           
-                        <td>
+    
+            <!-- Kontrol Atas -->
+            <div class="row mb-3">
+                <div class="col-md-12 d-flex justify-content-end">
+                @if (auth()->user()->hasPermissionTo('pemantauan suara anak-add')) 
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambahPemantauanModal">
+                        + Pemantauan Suara Anak
+                    </button>
+                @endif
+                </div>
+            </div>
+    
+    
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered align-middle text-center" id="myTable">
+                    <thead class="table-primary">
+                        <tr>
+                            <th class="text-center">No</th>
+                            <th class="text-center">Perihal</th>
+                            <th class="text-center">Data Detail</th>
+                            <th class="text-center">Hasil TL</th>
+                            <th class="text-center">Status</th>
+                            <th class="text-center">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($suaras as $index => $suara)
+                        <tr>
+                            <td style="text-align: center;">{{ $loop->iteration }}</td>
+                            <!-- <td>{{ $suara->nomorSuara }}</td>
+                            <td class="text-nowrap">{{ $suara->tanggal }}</td>
+                            <td>{{ $suara->pemohon }}</td>-->
+                            <td>{{ $suara->perihal }}</td>
+    
+    
+                                <!-- bagian deskripsi -->
+                            <!-- <td>
+                                <a href="#"class="lihat-detail" 
+                                data-deskripsi="{{ $suara->deskripsi}}">Lihat Detail</a>
+                            </td> -->
+    
+                            <!-- bagian detail -->
+                            <td>
+                                <a href="#" 
+                                    class="lihat-detail" 
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#deskripsiModal" 
+                                    data-judul="{{ $suara->perihal }}" 
+                                    data-deskripsi="{{ $suara->deskripsi }}" 
+                                    data-gambar="{{ asset($suara->gambar) }}" 
+                                    data-tanggal="{{ $suara->tanggal }}" 
+                                    data-pemohon="{{ $suara->pemohon }}"
+                                    data-nomor="{{ $suara->nomorSuara }}">Lihat Detail</a>
+                            </td>
+    
+    
+    
                             @if(is_null($suara->tindakLanjut))
-                                <span class="badge bg-warning">Tindak Lanjut</span>
+                                <td class="text-danger">Dinsos : ✖ Belum di TL</td>
                             @else
-                                <span class="badge bg-success">Sudah Tindak Lanjut</span>
+                            <td class="text-danger">Dinsos : ✅  Sudah di TL</td>
                             @endif
-                        </td>
-                        <td class="d-flex align-items-center justify-content-center gap-2 py-2">
-                            <!-- Tombol Edit -->
-                            @if (auth()->user()->hasPermissionTo('pemantauan suara anak-edit')) 
-                            <button class="btn btn-sm btn-primary edit-usulan" 
-                                data-bs-toggle="modal" 
-                                data-bs-target="#editForm"
-                                data-id="{{ $suara->id }}"
-                                data-perihal="{{ $suara->perihal }}"
-                                data-deskripsi="{{ $suara->deskripsi }}">
-                                <i class="bi bi-pencil-square"></i>
-                            </button>
-                            @endif
-                            <!-- Tombol Tindak Lanjut -->
-                            @if (auth()->user()->hasPermissionTo('pemantauan suara anak-verifikasi')) 
-                            <button class="btn btn-sm rounded-circle edit-tindakan"
-                                    style="background-color: #6A0DAD; width: 36px; height: 36px;"
-                                    data-bs-toggle="modal" data-bs-target="#tindakLanjutModal"
+                               
+                            <td>
+                                @if(is_null($suara->tindakLanjut))
+                                    <span class="badge bg-warning">Tindak Lanjut</span>
+                                @else
+                                    <span class="badge bg-success">Sudah Tindak Lanjut</span>
+                                @endif
+                            </td>
+                            <td class="d-flex align-items-center justify-content-center gap-2 py-2">
+                                <!-- Tombol Edit -->
+                                @if (auth()->user()->hasPermissionTo('pemantauan suara anak-edit')) 
+                                <button class="btn btn-sm btn-primary edit-usulan" 
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#editForm"
                                     data-id="{{ $suara->id }}"
-                                    data-tanggalTindakLanjut="{{ $suara->tanggalTindakLanjut }}"
-                                    data-file="{{ asset('storage/' . $suara->file) }}"
-                                    data-tindakLanjut="{{ $suara->tindakLanjut }}">
-                                <i class="bi bi-calendar text-white fs-6"></i>
-                            </button>
-                            @endif
-                    
-                            
-                            <!-- Tombol Finalisasi -->
-                            @if (auth()->user()->hasPermissionTo('pemantauan suara anak-verifikasi')) 
-                            <button class="btn btn-sm rounded-circle edit-verifikasi" style="background-color: #FFC107; width: 36px; height: 36px;"
-                                data-bs-toggle="modal" data-bs-target="#finalisasiModal"
-                                data-id="{{ $suara->id }}"
-                                data-status="{{ $suara->is_active }}">
-                                <i class="bi bi-list-task text-white fs-6"></i>
-                            </button>
-                            @endif
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                                    data-perihal="{{ $suara->perihal }}"
+                                    data-deskripsi="{{ $suara->deskripsi }}">
+                                    <i class="bi bi-pencil-square"></i>
+                                </button>
+                                @endif
+                                <!-- Tombol Tindak Lanjut -->
+                                @if (auth()->user()->hasPermissionTo('pemantauan suara anak-verifikasi')) 
+                                <button class="btn btn-sm rounded-circle edit-tindakan"
+                                        style="background-color: #6A0DAD; width: 36px; height: 36px;"
+                                        data-bs-toggle="modal" data-bs-target="#tindakLanjutModal"
+                                        data-id="{{ $suara->id }}"
+                                        data-tanggalTindakLanjut="{{ $suara->tanggalTindakLanjut }}"
+                                        data-file="{{ asset('storage/' . $suara->file) }}"
+                                        data-tindakLanjut="{{ $suara->tindakLanjut }}">
+                                    <i class="bi bi-calendar text-white fs-6"></i>
+                                </button>
+                                @endif
+                        
+                                
+                                <!-- Tombol Finalisasi -->
+                                @if (auth()->user()->hasPermissionTo('pemantauan suara anak-verifikasi')) 
+                                <button class="btn btn-sm rounded-circle edit-verifikasi" style="background-color: #FFC107; width: 36px; height: 36px;"
+                                    data-bs-toggle="modal" data-bs-target="#finalisasiModal"
+                                    data-id="{{ $suara->id }}"
+                                    data-status="{{ $suara->is_active }}">
+                                    <i class="bi bi-list-task text-white fs-6"></i>
+                                </button>
+                                @endif
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
-
-
-<!-- Modal Tambah Pemantauan -->
-<div class="modal fade" id="tambahPemantauanModal" tabindex="-1" aria-labelledby="tambahPemantauanModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header d-flex flex-column align-items-center">
-            <h5 class="modal-title fw-bold text-center mb-0" id="tambahPemantauanModalLabel">Tambah Pemantauan Baru</h5>
-                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
-            </div>
-            <div class="modal-body">
-                <form method="POST" action="{{ route('createPemantauanSuara') }}" >
-                    @csrf 
-                <div class="mb-3">
-                    <label class="form-label">Perihal</label>
-                    <input type="text" class="form-control" name="perihal" required placeholder="Masukkan perihal">
+    
+    
+    <!-- Modal Tambah Pemantauan -->
+    <div class="modal fade" id="tambahPemantauanModal" tabindex="-1" aria-labelledby="tambahPemantauanModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header d-flex flex-column align-items-center">
+                <h5 class="modal-title fw-bold text-center mb-0" id="tambahPemantauanModalLabel">Tambah Pemantauan Baru</h5>
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
                 </div>
-                <div class="mb-3">
-                    <label class="form-label">Deskripsi</label>
-                    <textarea class="form-control" name="deskripsi" rows="3" required placeholder="Masukkan deskripsi"></textarea>
+                <div class="modal-body">
+                    <form method="POST" action="{{ route('createPemantauanSuara') }}" >
+                        @csrf 
+                    <div class="mb-3">
+                        <label class="form-label">Perihal</label>
+                        <input type="text" class="form-control" name="perihal"  placeholder="Masukkan perihal" value="{{ old('perihal') }}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Deskripsi</label>
+                        <textarea class="form-control" name="deskripsi" rows="3"  placeholder="Masukkan deskripsi">{{ old('deskripsi') }}</textarea>
+                    </div>
+                    <input type="hidden" name="pemohon" value="{{ Auth::user()->id }}">
                 </div>
-                <input type="hidden" name="pemohon" value="{{ Auth::user()->name }}">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Simpan</button>
-            </div>
-        </form>
-        </div>
-    </div>
-</div>
-<!-- Modal Edit Pemantauan -->
-<div class="modal fade" id="editForm" tabindex="-1" aria-labelledby="editForm" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header d-flex flex-column align-items-center">
-            <h5 class="modal-title fw-bold text-center mb-0" id="tambahPemantauanModalLabel">Tambah Pemantauan Baru</h5>
-                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
-            </div>
-            <div class="modal-body">
-              <form id="editUsulanForm" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
-                <input type="hidden" id="editId" name="id">
-                <div class="mb-3">
-                    <label class="form-label">Perihal</label>
-                    <input type="text" class="form-control" id="editPerihal" name="perihal" required placeholder="Masukkan perihal">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label">Deskripsi</label>
-                    <textarea class="form-control" name="deskripsi" id="editDeskripsi" rows="3" required placeholder="Masukkan deskripsi"></textarea>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Simpan</button>
-            </div>
             </form>
-       
+            </div>
+        </div>
+    </div>
+    <!-- Modal Edit Pemantauan -->
+    <div class="modal fade" id="editForm" tabindex="-1" aria-labelledby="editForm" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header d-flex flex-column align-items-center">
+                <h5 class="modal-title fw-bold text-center mb-0" id="tambahPemantauanModalLabel">Tambah Pemantauan Baru</h5>
+                </div>
+                <div class="modal-body">
+                  <form id="editUsulanForm" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+                    <input type="hidden" id="editId" name="id">
+                    <div class="mb-3">
+                        <label class="form-label">Perihal</label>
+                        <input type="text" class="form-control" id="editPerihal" name="perihal" required placeholder="Masukkan perihal">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Deskripsi</label>
+                        <textarea class="form-control" name="deskripsi" id="editDeskripsi" rows="3" required placeholder="Masukkan deskripsi"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+                </form>
+           
+            </div>
         </div>
     </div>
 </div>

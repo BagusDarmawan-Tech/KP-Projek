@@ -152,13 +152,17 @@ class PusatInformasiSahabatController extends Controller
             'deskripsi' => 'required|string|max:500',
             'is_active' => 'required|boolean',
         ],[
-            'nama.required' => 'nama wajib diisi.',
-            'nama.max' => 'nama maksimal 255 karakter.',
+            'nama.required' => 'Nama wajib diisi.',
+            'nama.max' => 'Nama maksimal 255 karakter.',
             
-            'deskripsi.required' => 'deskripsi wajib diisi.',
-            'deskripsi.max' => 'deskripsi maksimal 500 karakter.',
+            'deskripsi.required' => 'Deskripsi wajib diisi.',
+            'deskripsi.max' => 'Deskripsi maksimal 500 karakter.',
+
+            'caption.required' => 'Caption wajib diisi.',
+            'caption.max' => 'Caption maksimal 500 karakter.',
             
-            'gambar.mimes' => 'gambar harus berformat PNG JPG JPEG.',
+            'gambar.mimes' => 'Gambar harus berformat PNG JPG JPEG.',
+            'gambar.required' => 'Gambar Wajib diisi.',
             'gambar.max' => 'Ukuran gambar maksimal 6 MB.',
             
         ]);

@@ -6,23 +6,18 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <div class="container mt-5">
     @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
+    @foreach ($errors->all() as $error)
+        <div class="alert alert-danger text-center p-1 px-2 small">  
+                    {{ $error }}
+        </div>
+    @endforeach
     @endif
     @if(session('success'))
-    <div class="alert alert-success">
-        <ul>
-                <li>{{ session('success') }}</li>
-        </ul>
-    </div>
+        <div class="alert alert-success text-center">
+            {{ session('success')}}
+        
+        </div>
     @endif
-    </div>
-
     <div class="card shadow-lg border-0 position-relative overflow-hidden p-3">
         <div class="card-body">
             <div class="d-flex justify-content-between align-items-center mb-3">
@@ -122,7 +117,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="namaKegiatan" class="form-label fw-semibold">Nama</label>
-                            <input type="text" name="nama" class="form-control" id="namaKegiatan" placeholder="Masukkan nama kegiatan">
+                            <input type="text" name="nama" class="form-control" id="namaKegiatan" placeholder="Masukkan nama kegiatan" value="{{ old('nama') }}" >
                         </div>
                         <div class="mb-3">
                             <label for="gambarKegiatan" class="form-label fw-semibold">Gambar</label>
@@ -130,7 +125,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="keteranganKegiatan" class="form-label fw-semibold">Keterangan</label>
-                            <textarea class="form-control" name="keterangan" id="keteranganKegiatan" rows="3" placeholder="Tambahkan keterangan kegiatan"></textarea>
+                            <textarea class="form-control" name="keterangan" id="keteranganKegiatan" rows="3" placeholder="Tambahkan keterangan kegiatan">{{ old('keterangan') }}</textarea>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Status</label>
@@ -168,7 +163,7 @@
                 <input type="hidden" id="editId" name="id">
                     <div class="mb-3">
                         <label for="namaKegiatan" class="form-label">Nama</label>
-                        <input type="text" class="form-control" name="nama" id="editNama">
+                        <input type="text" class="form-control" name="nama" id="editNama" >
                     </div>
                     <div class="mb-3">
                         <label for="kegiatan" class="form-label">Kelurahan</label>

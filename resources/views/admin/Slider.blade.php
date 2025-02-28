@@ -6,20 +6,24 @@
 
 <div class="container mt-5">
     @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
+    @foreach ($errors->all() as $error)
+        <div class="alert alert-danger text-center p-1 px-2 small">  
+                    {{ $error }}
+        </div>
+    @endforeach
+    @endif
+    @if(session('success'))
+        <div class="alert alert-success text-center">
+            {{ session('success')}}
+        
+        </div>
     @endif
     <div class="card shadow-lg border-0 position-relative overflow-hidden mb-5"> 
         <div class="card-body mt-4">
-            <div class="text-center mb-4">
+            <div class="text-center">
                 <h4 class="fw-bold">Slider</h4>
             </div>
-            <div class="d-flex justify-content-between align-items-center mb-3">
+            <div class="d-flex justify-content-between align-items-center">
                 <div></div> <!-- Spacer -->
                 @if (auth()->user()->hasPermissionTo('slider-add'))
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#sliderModal">
@@ -112,39 +116,31 @@
                 <h5 class="modal-title fw-bold text-center" id="sliderModalLabel">Tambah Menu Slider Baru</h5>
             </div>
             <div class="modal-body">
-                @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-                @endif
                 <form method="POST" action="{{ route('createSlider') }}" enctype="multipart/form-data">
                     @csrf 
                     <div class="mb-3">
                         <label class="form-label">Nama</label>
-                        <input type="text" class="form-control" name="nama" required>
+                        <input type="text" class="form-control" name="nama" value="{{ old('nama') }}" >
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Caption</label>
-                        <input type="text" class="form-control" name="caption" required>
+                        <input type="text" class="form-control" name="caption" value="{{ old('caption') }}" >
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Deskripsi</label>
-                        <textarea class="form-control" name="deskripsi" required></textarea>
+                        <textarea class="form-control" name="deskripsi" >{{ old('deskripsi') }}</textarea>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Gambar</label>
-                        <input type="file" class="form-control" name="gambar" required>
+                        <input type="file" class="form-control" name="gambar" >
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Status</label>
-                        <select class="form-select" name="is_active" required>
-                            <option value="1">Aktif</option>
-                            <option value="0">Non-Aktif</option>
-                        </select>
+                        <div class="form-check form-switch">
+                            <input type="hidden" name="is_active" value="0"> <!-- Fallback jika checkbox tidak dicentang -->
+                            <input class="form-check-input" type="checkbox" id="status" name="is_active" value="1" checked>
+                            <label class="form-check-label" for="status">Aktif</label>
+                        </div>
                     </div>
                     <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->id }}">
             </div>

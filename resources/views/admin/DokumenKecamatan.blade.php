@@ -7,24 +7,18 @@
 
 <div class="container mt-5">
     @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
+    @foreach ($errors->all() as $error)
+        <div class="alert alert-danger text-center p-1 px-2 small">  
+                    {{ $error }}
+        </div>
+    @endforeach
     @endif
     @if(session('success'))
-    <div class="alert alert-success">
-        <ul>
-                <li>{{ session('success') }}</li>
-        </ul>
-    </div>
+        <div class="alert alert-success text-center">
+            {{ session('success')}}
+        
+        </div>
     @endif
-</div>
-
-
     <div class="card shadow-lg border-0 position-relative overflow-hidden p-3">
         <div class="card-body">
             <div class="d-flex justify-content-end mb-1">
@@ -100,7 +94,7 @@
             </table>
         </div>
     </div>
-</div>
+
 
 <!-- Modal Tambah Dokumen Kecamatan -->
 <div class="modal fade" id="dokumenKelurahanModal" tabindex="-1" aria-labelledby="dokumenKelurahanModalLabel" aria-hidden="true">
@@ -266,7 +260,7 @@
         </div>
     </div>
   </div>
-
+</div>
 {{-- //update --}}
 <script>
     document.addEventListener("DOMContentLoaded", function () {

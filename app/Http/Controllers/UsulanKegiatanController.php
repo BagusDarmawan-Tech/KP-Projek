@@ -214,20 +214,23 @@ class UsulanKegiatanController extends Controller
             'kreator' => 'required|string|max:255',
             'judul' => 'required|string|max:255',
             'gambar' => 'required|mimes:png,jpg,jpeg|max:2048',
-            'deskripsi' => 'required|string|max:500'
+            'deskripsi' => 'required|string|max:500',
+            'tingkatKarya' => 'required||string'
         ],[
-            'judul.required' => 'judul wajib diisi.',
-            'judul.max' => 'judul maksimal 255 karakter.',
+            'judul.required' => 'Judul wajib diisi.',
+            'judul.max' => 'Judul maksimal 255 karakter.',
 
-            'kreator.required' => 'kreator wajib diisi.',
-            'kreator.max' => 'kreator maksimal 255 karakter.',
+            'kreator.required' => 'Kreator wajib diisi.',
+            'kreator.max' => 'Kreator maksimal 255 karakter.',
 
-            'deskripsi.required' => 'deskripsi wajib diisi.',
-            'deskripsi.max' => 'deskripsi maksimal 500 karakter.',
+            'deskripsi.required' => 'Deskripsi wajib diisi.',
+            'deskripsi.max' => 'Deskripsi maksimal 500 karakter.',
             
             'gambar.required' => 'Gambar wajib diisi.',
             'gambar.mimes' => 'Gambar harus berformat JPG, PNG, atau JPEG.',
             'gambar.max' => 'Ukuran gambar maksimal 6 MB.',
+
+            'tingkatKarya' => 'Tingkatan wajib dipilih'
             
         ]);
 
@@ -261,20 +264,22 @@ class UsulanKegiatanController extends Controller
             'kreator' => 'required|string|max:255',
             'judul' => 'required|string|max:255',
             'gambar' => 'mimes:png,jpg,jpeg|max:2048',
-            'deskripsi' => 'required|string|max:500'
+            'deskripsi' => 'required|string|max:500',
+            'tingkatKarya' => 'required||string'
         ],[
-            'judul.required' => 'judul wajib diisi.',
-            'judul.max' => 'judul maksimal 255 karakter.',
+            'judul.required' => 'Judul wajib diisi.',
+            'judul.max' => 'Judul maksimal 255 karakter.',
 
-            'kreator.required' => 'kreator wajib diisi.',
-            'kreator.max' => 'kreator maksimal 255 karakter.',
+            'kreator.required' => 'Kreator wajib diisi.',
+            'kreator.max' => 'Kreator maksimal 255 karakter.',
 
-            'deskripsi.required' => 'deskripsi wajib diisi.',
-            'deskripsi.max' => 'deskripsi maksimal 500 karakter.',
+            'deskripsi.required' => 'Deskripsi wajib diisi.',
+            'deskripsi.max' => 'Deskripsi maksimal 500 karakter.',
             
             'gambar.mimes' => 'Gambar harus berformat JPG, PNG, atau JPEG.',
             'gambar.max' => 'Ukuran gambar maksimal 6 MB.',
             
+            'tingkatKarya' => 'Tingkatan wajib dipilih'
         ]);
     
         $karya = KaryaAnak::findOrFail($id);

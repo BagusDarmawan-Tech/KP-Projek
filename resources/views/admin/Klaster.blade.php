@@ -5,20 +5,17 @@
 
 <div class="container mt-5">
     @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
+    @foreach ($errors->all() as $error)
+        <div class="alert alert-danger text-center p-1 px-2 small">  
+                    {{ $error }}
+        </div>
+    @endforeach
     @endif
     @if(session('success'))
-    <div class="alert alert-success">
-        <ul>
-                <li>{{ session('success') }}</li>
-        </ul>
-    </div>
+        <div class="alert alert-success text-center">
+            {{ session('success')}}
+        
+        </div>
     @endif
     <div class="card shadow-lg border-0 position-relative overflow-hidden mb-5"> 
         <div class="card-body mt-4">
@@ -130,16 +127,16 @@
 
                     <div class="mb-3">
                         <label for="kategoriGambar" class="form-label">Gambar</label>
-                        <input type="file" class="form-control" id="gambar" name="gambar" value="{{ old('gambar') }}">
+                        <input type="file" class="form-control" id="gambar" name="gambar">
                     </div>
                     
                     <div class="mb-3">
-                        <label for="kategoriStatus" class="form-label">Status</label>
-                        <select class="form-select" id="kategoriStatus" name="is_active" required>
-                            <option value="" disabled selected>--- Pilih Status ---</option>
-                            <option value="1" {{ old('is_active') == "1" ? 'selected' : '' }}>Aktif</option>
-                            <option value="0" {{ old('is_active') == "0" ? 'selected' : '' }}>Non-Aktif</option>
-                        </select>
+                        <label class="form-label">Status</label>
+                        <div class="form-check form-switch">
+                            <input type="hidden" name="is_active" value="0"> <!-- Fallback jika checkbox tidak dicentang -->
+                            <input class="form-check-input" type="checkbox" id="status" name="is_active" value="1" checked>
+                            <label class="form-check-label" for="status">Aktif</label>
+                        </div>
                     </div>
                     </div>
                     <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->id }}">

@@ -5,23 +5,19 @@
 
 <div class="container mt-5">
     @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
+    @foreach ($errors->all() as $error)
+        <div class="alert alert-danger text-center p-1 px-2 small">  
+                    {{ $error }}
+        </div>
+    @endforeach
     @endif
-
     @if(session('success'))
-    <div class="alert alert-success">
-        <ul>
-                <li>{{ session('success') }}</li>
-        </ul>
-    </div>
+        <div class="alert alert-success text-center">
+            {{ session('success')}}
+        
+        </div>
     @endif
-    <div class="card shadow-lg border-0 position-relative overflow-hidden mb-5">
+        <div class="card shadow-lg border-0 position-relative overflow-hidden mb-5">
         <div class="card-body mt-4">
             <div class="text-center mb-4">
                 <h4 class="fw-bold">Pemantauan Usulan Anak</h4>

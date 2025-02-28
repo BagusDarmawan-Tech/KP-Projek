@@ -8,22 +8,18 @@
 
 <div class="container mt-5">
     @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
+    @foreach ($errors->all() as $error)
+        <div class="alert alert-danger text-center p-1 px-2 small">  
+                    {{ $error }}
+        </div>
+    @endforeach
     @endif
     @if(session('success'))
-    <div class="alert alert-success">
-        <ul>
-                <li>{{ session('success') }}</li>
-        </ul>
-    </div>
+        <div class="alert alert-success text-center">
+            {{ session('success')}}
+        
+        </div>
     @endif
-    </div>
 
     <div class="card shadow-lg border-0 position-relative overflow-hidden p-3">
         <div class="card-body">
@@ -100,21 +96,91 @@
             </div>
         </div>
     </div>
-</div>
 
-<!-- Modal Tambahan Dokumen Kelurahan -->
-<div class="modal fade" id="TambahDokumenModal" tabindex="-1" aria-labelledby="TambahDokumenModalLabel" aria-hidden="true">
+
+    <!-- Modal Tambahan Dokumen Kelurahan -->
+    <div class="modal fade" id="TambahDokumenModal" tabindex="-1" aria-labelledby="TambahDokumenModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header d-flex justify-content-center w-100 ">
+                        <h5 class="modal-title fw-bold text-center" id="TambahDokumenModalLabel">Tambah Menu Dokumen Kelurahan Baru</h5>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" action="{{ route('createDokumenKelurahan') }}" enctype="multipart/form-data">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="kegiatan" class="form-label">Jenis Surat</label>
+                                <select class="form-select" id="kegiatan" name="jenis_suratid" required>
+                                    <option value="" disabled selected>-- Pilih Surat --</option>
+                                    @foreach ($surats as $surat)
+                                        <option value="{{ $surat->id }}" {{ old('subkegiatanid') == $surat->id ? 'selected' : '' }} >
+                                            {{ $surat->nama }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="kegiatan" class="form-label">Kelurahan</label>
+                                <select class="form-select" id="kegiatan" name="kelurahanid" required>
+                                    <option value="" disabled selected>-- Pilih Kelurahan --</option>
+                                    @foreach ($kelurahans as $kelurahan)
+                                        <option value="{{ $kelurahan->id }}" {{ old('subkegiatanid') == $kelurahan->id ? 'selected' : '' }} >
+                                            {{ $kelurahan->nama }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Nama</label>
+                                <input type="text" class="form-control" name="nama">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Data Dukung</label>
+                                <input type="file" class="form-control" name="dataPendukung"  accept="application/pdf">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Keterangan</label>
+                                <textarea class="form-control" name="keterangan"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Status</label>
+                                <div class="form-check form-switch">
+                                    <!-- Hidden input sebagai fallback jika checkbox tidak dicentang -->
+                                    <input type="hidden" name="is_active" value="0">
+                                    
+                                    <input class="form-check-input" name="is_active" type="checkbox" id="status" value="1" checked>
+                                    <label class="form-check-label" for="status">Aktif</label>
+                                </div>
+                            </div>
+                        
+                    </div>
+                    <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->id }}">
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+    </div>
+
+
+    <!-- Modal Edit Dokumen Kelurahan -->
+    <div class="modal fade" id="editDokumenModal" tabindex="-1" aria-labelledby="editDokumenModalLabel" aria-hidden="true">
     <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header d-flex justify-content-center w-100 ">
-                    <h5 class="modal-title fw-bold text-center" id="TambahDokumenModalLabel">Tambah Menu Dokumen Kelurahan Baru</h5>
+                    <h5 class="modal-title fw-bold text-center" id="editDokumenModalLabel">Edit Menu Dokumen Kelurahan</h5>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="{{ route('createDokumenKelurahan') }}" enctype="multipart/form-data">
+                    <form id="editDokumenForm" method="POST" enctype="multipart/form-data">
                         @csrf
+                        @method('PUT')
+                        <input type="hidden" id="editId" name="id">
                         <div class="mb-3">
                             <label for="kegiatan" class="form-label">Jenis Surat</label>
-                            <select class="form-select" id="kegiatan" name="jenis_suratid" required>
+                            <select class="form-select" id="editJenisSurat" name="jenis_suratid" required>
                                 <option value="" disabled selected>-- Pilih Surat --</option>
                                 @foreach ($surats as $surat)
                                     <option value="{{ $surat->id }}" {{ old('subkegiatanid') == $surat->id ? 'selected' : '' }} >
@@ -125,7 +191,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="kegiatan" class="form-label">Kelurahan</label>
-                            <select class="form-select" id="kegiatan" name="kelurahanid" required>
+                            <select class="form-select" id="editKelurahan" name="kelurahanid" required>
                                 <option value="" disabled selected>-- Pilih Kelurahan --</option>
                                 @foreach ($kelurahans as $kelurahan)
                                     <option value="{{ $kelurahan->id }}" {{ old('subkegiatanid') == $kelurahan->id ? 'selected' : '' }} >
@@ -133,19 +199,22 @@
                                     </option>
                                 @endforeach
                             </select>
-                         </div>
+                        </div>
                         <div class="mb-3">
                             <label class="form-label">Nama</label>
-                            <input type="text" class="form-control" name="nama">
+                            <input type="text" class="form-control" id="editNama" name="nama">
                         </div>
-                        
                         <div class="mb-3">
-                            <label class="form-label">Data Dukung</label>
-                            <input type="file" class="form-control" name="dataPendukung"  accept="application/pdf">
+                            <label for="editFile" class="form-label">Edit File Data Pendukung</label>
+                            <div class="mb-2">
+                                <a id="previewFile" href="#" target="_blank" class="btn btn-secondary btn-sm">Lihat File Saat Ini</a>
+                            </div>
+                            <input type="file" class="form-control" id="editFile" name="dataPendukung">
+                            <small class="text-muted">Biarkan kosong jika tidak ingin mengubah file.</small>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Keterangan</label>
-                            <textarea class="form-control" name="keterangan"></textarea>
+                            <textarea id="editKeterangan" class="form-control" name="keterangan" ></textarea>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Status</label>
@@ -153,116 +222,45 @@
                                 <!-- Hidden input sebagai fallback jika checkbox tidak dicentang -->
                                 <input type="hidden" name="is_active" value="0">
                                 
-                                <input class="form-check-input" name="is_active" type="checkbox" id="status" value="1" checked>
+                                <input class="form-check-input" name="is_active" type="checkbox" id="editStatus" value="1" checked>
                                 <label class="form-check-label" for="status">Aktif</label>
                             </div>
                         </div>
-                    
-                </div>
-                <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->id }}">
+                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                     </div>
                 </form>
             </div>
         </div>
-</div>
+    </div>
 
-
-<!-- Modal Edit Dokumen Kelurahan -->
-<div class="modal fade" id="editDokumenModal" tabindex="-1" aria-labelledby="editDokumenModalLabel" aria-hidden="true">
-<div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header d-flex justify-content-center w-100 ">
-                <h5 class="modal-title fw-bold text-center" id="editDokumenModalLabel">Edit Menu Dokumen Kelurahan</h5>
-            </div>
-            <div class="modal-body">
-                <form id="editDokumenForm" method="POST" enctype="multipart/form-data">
+    <!-- Modal Delete Menu -->
+    <div class="modal fade" id="deleteMenuModal" tabindex="-1" aria-labelledby="deleteMenuModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteMenuModalLabel">Hapus Menu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="deleteForm" method="POST">
                     @csrf
-                    @method('PUT')
-                    <input type="hidden" id="editId" name="id">
-                    <div class="mb-3">
-                        <label for="kegiatan" class="form-label">Jenis Surat</label>
-                        <select class="form-select" id="editJenisSurat" name="jenis_suratid" required>
-                            <option value="" disabled selected>-- Pilih Surat --</option>
-                            @foreach ($surats as $surat)
-                                <option value="{{ $surat->id }}" {{ old('subkegiatanid') == $surat->id ? 'selected' : '' }} >
-                                    {{ $surat->nama }}
-                                </option>
-                            @endforeach
-                        </select>
+                    @method('DELETE')
+                    <div class="modal-body">
+                        <input type="hidden" id="deleteId" name="id">
+                        <p>Apakah Anda yakin ingin menghapus record<br> <strong id="deleteNama"></strong>?</p>
                     </div>
-                    <div class="mb-3">
-                        <label for="kegiatan" class="form-label">Kelurahan</label>
-                        <select class="form-select" id="editKelurahan" name="kelurahanid" required>
-                            <option value="" disabled selected>-- Pilih Kelurahan --</option>
-                            @foreach ($kelurahans as $kelurahan)
-                                <option value="{{ $kelurahan->id }}" {{ old('subkegiatanid') == $kelurahan->id ? 'selected' : '' }} >
-                                    {{ $kelurahan->nama }}
-                                </option>
-                            @endforeach
-                        </select>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-danger">Hapus</button>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">Nama</label>
-                        <input type="text" class="form-control" id="editNama" name="nama">
-                    </div>
-                    <div class="mb-3">
-                        <label for="editFile" class="form-label">Edit File Data Pendukung</label>
-                        <div class="mb-2">
-                            <a id="previewFile" href="#" target="_blank" class="btn btn-secondary btn-sm">Lihat File Saat Ini</a>
-                        </div>
-                        <input type="file" class="form-control" id="editFile" name="dataPendukung">
-                        <small class="text-muted">Biarkan kosong jika tidak ingin mengubah file.</small>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Keterangan</label>
-                        <textarea id="editKeterangan" class="form-control" name="keterangan" ></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Status</label>
-                        <div class="form-check form-switch">
-                            <!-- Hidden input sebagai fallback jika checkbox tidak dicentang -->
-                            <input type="hidden" name="is_active" value="0">
-                            
-                            <input class="form-check-input" name="is_active" type="checkbox" id="editStatus" value="1" checked>
-                            <label class="form-check-label" for="status">Aktif</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Delete Menu -->
-<div class="modal fade" id="deleteMenuModal" tabindex="-1" aria-labelledby="deleteMenuModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteMenuModalLabel">Hapus Menu</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </form>
             </div>
-            <form id="deleteForm" method="POST">
-                @csrf
-                @method('DELETE')
-                <div class="modal-body">
-                    <input type="hidden" id="deleteId" name="id">
-                    <p>Apakah Anda yakin ingin menghapus record<br> <strong id="deleteNama"></strong>?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-danger">Hapus</button>
-                </div>
-            </form>
         </div>
     </div>
-  </div>
+
+</div>
 
 {{-- //update --}}
 <script>

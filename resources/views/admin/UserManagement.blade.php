@@ -8,70 +8,66 @@
 
 <div class="container mt-5">
     @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
+    @foreach ($errors->all() as $error)
+        <div class="alert alert-danger text-center p-1 px-2 small">  
+                    {{ $error }}
+        </div>
+    @endforeach
     @endif
     @if(session('success'))
-    <div class="alert alert-success">
-        <ul>
-                <li>{{ session('success') }}</li>
-        </ul>
-    </div>
-    @endif
-</div>
-
-<div class="card shadow-lg border-0 position-relative overflow-hidden mb-5">
-    <div class="card-body mt-4">
-        <div class="text-center">
-            <h4 class="fw-bold">Users Management</h4>
+        <div class="alert alert-success text-center">
+            {{ session('success')}}
+        
         </div>
-
-
-        <!-- Kontrol Atas -->
-        <!-- Tombol + Dokumen Kecamatan di kanan atas -->
-        <div class="row mb-3">
-            <div class="col-md-12 d-flex justify-content-end">
-                @if (auth()->user()->hasPermissionTo('user management-add'))
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#subKegiatanModal">
-                    Registrasi User
-                </button>
-                @endif
+    @endif
+    <div class="card shadow-lg border-0 position-relative overflow-hidden mb-5">
+        <div class="card-body mt-4">
+            <div class="text-center">
+                <h4 class="fw-bold">Users Management</h4>
+            </div>
+            <!-- Kontrol Atas -->
+            <!-- Tombol + Dokumen Kecamatan di kanan atas -->
+            <div class="row mb-3">
+                <div class="col-md-12 d-flex justify-content-end">
+                    @if (auth()->user()->hasPermissionTo('user management-add'))
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#subKegiatanModal">
+                        Registrasi User
+                    </button>
+                    @endif
+                </div>
+            </div>
+    
+            <!-- Kontrol Atas (Show Entries & Search) -->
+    
+    
+            <!-- Tabel -->
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered align-middle text-center" id="myTable">
+                    <thead class="table-primary">
+                        <tr>
+                            <th class="text-center">No</th>
+                            <th class="text-center">Email</th>
+                            <th class="text-center">Nama</th>
+                            <th class="text-center">Role</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($user as $person)
+                        <tr>
+                            <td style="text-align: center;">{{ $loop->iteration }}</td>
+                            <td>{{ $person->name }}</td>
+                            <td>{{ $person->email }}</td>
+                            <td>{{ $person->getRoleNames()->implode(', ') }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
-
-        <!-- Kontrol Atas (Show Entries & Search) -->
-
-
-        <!-- Tabel -->
-        <div class="table-responsive">
-            <table class="table table-hover table-bordered align-middle text-center" id="myTable">
-                <thead class="table-primary">
-                    <tr>
-                        <th class="text-center">No</th>
-                        <th class="text-center">Email</th>
-                        <th class="text-center">Nama</th>
-                        <th class="text-center">Role</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($user as $person)
-                    <tr>
-                        <td style="text-align: center;">{{ $loop->iteration }}</td>
-                        <td>{{ $person->name }}</td>
-                        <td>{{ $person->email }}</td>
-                        <td>{{ $person->getRoleNames()->implode(', ') }}</td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
     </div>
+
 </div>
+
 
 <!-- Modal Tambah Sub Kegiatan -->
 <div class="modal fade" id="subKegiatanModal" tabindex="-1" aria-labelledby="subKegiatanModalLabel" aria-hidden="true">

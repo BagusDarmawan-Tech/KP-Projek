@@ -7,20 +7,17 @@
 
 <div class="container mt-5">
     @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
+    @foreach ($errors->all() as $error)
+        <div class="alert alert-danger text-center p-1 px-2 small">  
+                    {{ $error }}
+        </div>
+    @endforeach
     @endif
     @if(session('success'))
-    <div class="alert alert-success">
-        <ul>
-                <li>{{ session('success') }}</li>
-        </ul>
-    </div>
+        <div class="alert alert-success text-center">
+            {{ session('success')}}
+        
+        </div>
     @endif
     <div class="card shadow-lg border-0 position-relative overflow-hidden p-3">
         <div class="card-body">
@@ -95,8 +92,9 @@
                 </table>
             </div>
         </div>
-    </div>
-</div>
+    </div> 
+</div>  
+
 
 <!-- Modal Tambah Dokumen Kelurahan -->
 <div class="modal fade" id="DokumenPisaModal" tabindex="-1" aria-labelledby="DokumenPisaModalLabel" aria-hidden="true">
@@ -119,7 +117,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label" name="nama">Nama Surat</label>
-                    <input type="text" class="form-control" name="nama">
+                    <input type="text" class="form-control" name="nama" value="{{ old('nama') }}">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">File</label>
@@ -127,7 +125,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Keterangan</label>
-                    <textarea class="form-control" name="keterangan"></textarea>
+                    <textarea class="form-control" name="keterangan">{{ old('keterangan') }}</textarea>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Status</label>
@@ -225,7 +223,8 @@
         </div>
     </div>
 </div>
-</div>
+
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".btn-edit-dokumen").forEach(button => {

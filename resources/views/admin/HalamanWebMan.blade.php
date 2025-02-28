@@ -5,20 +5,17 @@
 
 <div class="container mt-5">
     @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
+    @foreach ($errors->all() as $error)
+        <div class="alert alert-danger text-center p-1 px-2 small">  
+                    {{ $error }}
+        </div>
+    @endforeach
     @endif
     @if(session('success'))
-    <div class="alert alert-success">
-        <ul>
-                <li>{{ session('success') }}</li>
-        </ul>
-    </div>
+        <div class="alert alert-success text-center">
+            {{ session('success')}}
+        
+        </div>
     @endif
     <div class="card shadow-lg border-0 position-relative overflow-hidden mb-5">
         <div class="card-body mt-4">
@@ -99,15 +96,6 @@
                 <h5 class="modal-title fw-bold text-center" id="menuModalLabel">Tambah Menu Halaman Baru</h5>
             </div>
             <div class="modal-body">
-                @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-                @endif
                 <form method="POST" action="{{ route('createHalaman') }}" enctype="multipart/form-data">
                     @csrf 
                     <div class="mb-3">
@@ -116,7 +104,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="gambar" class="form-label">Gambar</label>
-                        <input type="file" class="form-control" id="gambar" name="gambar" value="{{ old('gambar') }}" >
+                        <input type="file" class="form-control" id="gambar" name="gambar" >
                     </div>
                     <div class="mb-3">
                         <label for="konten" class="form-label">Konten</label>

@@ -24,19 +24,17 @@
 </style>
 
 @if ($errors->any())
-<div class="alert alert-danger">
-    <ul>
-        @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-</div>
+    @foreach ($errors->all() as $error)
+        <div class="alert alert-danger text-center p-1 px-2 small">  
+                    {{ $error }}
+        </div>
+    @endforeach
 @endif
 @if(session('success'))
-<div class="alert alert-success text-center">
-    {{ session('success')}}
-  
-</div>
+    <div class="alert alert-success text-center">
+        {{ session('success')}}
+    
+    </div>
 @endif
 <div class="card shadow-lg border-0 position-relative overflow-hidden mb-5">
     <div class="card-body mt-4">
@@ -157,28 +155,28 @@
                     @csrf 
                 <div class="mb-3">
                     <label class="form-label">Kreator</label>
-                    <input type="text" name="kreator" class="form-control"  placeholder="Masukkan nama kreator">
+                    <input type="text" name="kreator" class="form-control"  placeholder="Masukkan nama kreator" value="{{ old('kreator') }}" >
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Judul</label>
-                    <input type="text" name="judul" class="form-control"  placeholder="Masukkan judul">
+                    <input type="text" name="judul" class="form-control"  placeholder="Masukkan judul" value="{{ old('judul') }}" >
                 </div>
                 <div class="mb-3">
                     <label for="kegiatan" class="form-label">Tingkatan</label>
-                    <select class="form-select" id="editTingkatKarya" name="tingkatKarya" required>
+                    <select class="form-select" id="editTingkatKarya" name="tingkatKarya">
                         <option value="" disabled selected>-- Pilih Tingkat Karya --</option>
-                            <option value="kelurahan">Kelurahan</option>
-                            <option value="kecamatan">Kecamatan</option>
-                            <option value="kota">Kota</option>
+                            <option value="kelurahan" {{ old('tingkatKarya') == 'kelurahan' ? 'selected' : '' }}>Kelurahan</option>
+                            <option value="kecamatan" {{ old('tingkatKarya') == 'kecamatan' ? 'selected' : '' }}>Kecamatan</option>
+                            <option value="kota" {{ old('tingkatKarya') == 'kota' ? 'selected' : '' }}>Kota</option>
                     </select>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Deskripsi</label>
-                    <textarea class="form-control" name="deskripsi" rows="3"  placeholder="Masukkan deskripsi"></textarea>
+                    <textarea class="form-control" name="deskripsi" rows="3"  placeholder="Masukkan deskripsi">{{ old('deskripsi') }}</textarea>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Upload Foto</label>
-                    <input type="file" name="gambar" class="form-control" accept=".jpg, .png">
+                    <input type="file" name="gambar" class="form-control" accept=".jpg, .png , .jpeg">
                 </div>
                 <input type="hidden" name="pemohon" value="{{ Auth::user()->id }}">
             </div>
@@ -214,7 +212,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="editStatus" class="form-label">Status</label>
-                        <select class="form-select" id="editTingkat" name="tingkatKarya" required>
+                        <select class="form-select" id="editTingkat" name="tingkatKarya">
                             <option value="kelurahan">Kelurahan</option>
                             <option value="kecamatan">Kecamatan</option>
                             <option value="kota">Kota</option>
