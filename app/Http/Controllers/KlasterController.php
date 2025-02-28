@@ -9,28 +9,39 @@ class KlasterController extends Controller
     public function haksipildankebebasan() {
 
         $datas = SubKegiatan::where('is_active', true)
-        ->where('klusterid', 16)
-        ->get();        
+        ->whereHas('klaster', function ($query) {
+            $query->where('nama', 'Hak Sipil dan Kebebasan');
+        })
+        ->get();
+
         return view('frontend.content.HakSipilDanKebebasan', compact('datas')); 
     }
 
     public function kelembagaan() {
+
         $datas = SubKegiatan::where('is_active', true)
-        ->where('klusterid', 17)
+        ->whereHas('klaster', function ($query) {
+            $query->where('nama', 'Kelembagaan');
+        })
         ->get();
+
         return view('frontend.content.kelembagaan', compact('datas')); 
     }
-
+    
     public function kesehatandasar() {
         $datas = SubKegiatan::where('is_active', true)
-        ->where('klusterid', 18)
+        ->whereHas('klaster', function ($query) {
+            $query->where('nama', 'Kesehatan Dasar dan Kesejahteraan');
+        })
         ->get();
         return view('frontend.content.KesehatanDasar', compact('datas')); 
     }
-
+    
     public function lingkungankeluarga() {
         $datas = SubKegiatan::where('is_active', true)
-        ->where('klusterid', 19)
+        ->whereHas('klaster', function ($query) {
+            $query->where('nama', 'Lingkungan Keluarga dan Pengasuhan Alternatif');
+        })
         ->get();
         return view('frontend.content.LingkunganKeluarga', compact('datas')); 
     }
@@ -38,15 +49,21 @@ class KlasterController extends Controller
     public function pendidikanpemanfaatan() {
         
         $datas = SubKegiatan::where('is_active', true)
-        ->where('klusterid', 20)
+        ->whereHas('klaster', function ($query) {
+            $query->where('nama', 'Pendidikan, Pemanfaatan Waktu Luang dan Kegiatan Budaya');
+        })
         ->get();
         return view('frontend.content.PendidikanPemanfaatan', compact('datas')); 
     }
 
+    
+    
     public function perlindungankhusus() {
         
         $datas = SubKegiatan::where('is_active', true)
-        ->where('klusterid', 21)
+        ->whereHas('klaster', function ($query) {
+            $query->where('nama', 'Perlindungan Khusus');
+        })
         ->get();
         
         return view('frontend.content.PerlindunganKhusus', compact('datas')); 

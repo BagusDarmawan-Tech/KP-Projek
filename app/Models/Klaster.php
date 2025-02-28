@@ -17,4 +17,8 @@ class Klaster extends Model
     {
         return $this->belongsTo(User::class, 'dibuatOleh');
     }
+    public function subKegiatans()
+    {
+        return $this->hasMany(SubKegiatan::class, 'klusterid');
+    }
 }
