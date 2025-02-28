@@ -1,6 +1,9 @@
 @extends('frontend.user-main')
 @section('content')
 
+<!-- Tambahkan Glightbox CSS -->
+<link href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" rel="stylesheet">
+
 <style>
     /* Gaya untuk Filter Kategori */
     .portfolio-filters li {
@@ -32,25 +35,20 @@
         text-align: center;
     }
 
-    /* CSS untuk modal */
-    .modal-dialog {
-        max-width: 700px; /* Maksimal lebar modal */
-        width: 90%; /* Pastikan modal fleksibel pada layar kecil */
+    /* Tambahan styling untuk Glightbox */
+    .glightbox-container {
+        background-color: rgba(0, 0, 0, 0.85); /* Warna latar modal */
     }
-    .modal-body img {
-        max-height: 350px; /* Batas tinggi gambar dalam modal */
-        object-fit: cover;
-        width: 100%; /* Pastikan gambar dalam modal responsif */
+    .gtitle {
+        font-size: 20px; /* Ukuran font untuk judul */
+        font-weight: bold;
+        color: #fff; /* Warna teks judul */
     }
-
-    /* Tambahan responsivitas */
-    @media (max-width: 768px) {
-        .card-img-top {
-            height: 150px; /* Gambar lebih kecil pada layar kecil */
-        }
-        .modal-dialog {
-            max-width: 90%; /* Modal lebih kecil pada layar kecil */
-        }
+    .gdesc {
+        font-size: 16px; /* Ukuran font untuk deskripsi */
+        color: #fff; /* Warna teks deskripsi */
+        text-align: center;
+        margin-top: 10px;
     }
 </style>
 
@@ -85,50 +83,35 @@
                             <p class="card-text">{{ Str::limit($article->konten, 100) }}</p>
                             
                             <!-- Tombol Lihat -->
-                            <button type="button" 
-                                    class="btn btn-sm btn-outline-secondary" 
-                                    data-bs-toggle="modal" 
-                                    data-bs-target="#modalArtikel{{ $article->id }}">
-                                <i class="bi bi-zoom-in"></i> Lihat
-                            </button>
-                        </div>
-                    </div>
-                </div><!-- End Portfolio Item -->
-
-                <!-- Modal untuk Artikel -->
-                <div class="modal fade" id="modalArtikel{{ $article->id }}" tabindex="-1" aria-labelledby="modalLabel{{ $article->id }}" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title text-center w-100 text-dark fw-bold" id="modalLabel{{ $article->id }}">{{ $article->judul }}</h5>
-                            <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
-                        </div>
-
-                            <div class="modal-body text-center text-dark fs-4">
-                                <!-- Gambar -->
-                                <img src="{{ asset($article->gambar) }}" class="img-fluid mb-3" alt="{{ $article->judul }}">
-                                <!-- Deskripsi -->
-                                <p>{{ $article->konten }}</p>
-                                <!-- Kategori -->
-                                <p><strong>Kategori :</strong> 
-                                    @if ($article->kategori)
-                                        {{ $article->kategori->nama }}
-                                    @else
-                                        Tidak ada kategori
-                                    @endif
-                                </p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                            </div>
+                            <a href="{{ asset($article->gambar) }}" 
+                               class="glightbox" 
+                               data-gallery="portfolio-gallery" 
+                               data-title="{{ $article->judul }}" 
+                               data-description="{{ $article->konten }}">
+                                <button class="btn btn-sm btn-outline-secondary">
+                                    <i class="bi bi-zoom-in"></i> Lihat
+                                </button>
+                            </a>
                         </div>
                     </div>
                 </div>
-                <!-- End Modal -->
                 @endforeach
             </div><!-- End Artikel -->
         </div>
     </div>
 </section>
+
+<!-- Tambahkan Glightbox JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const lightbox = GLightbox({
+        touchNavigation: true,
+        loop: true,
+        closeOnOutsideClick: true,
+        selector: '.glightbox',
+    });
+});
+</script>
 
 @endsection

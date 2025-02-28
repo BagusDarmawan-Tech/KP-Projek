@@ -4,153 +4,100 @@
 <div class="container section-title" data-aos="fade-up">
         <span>KARYA ANAK SURABAYA</span>
         <h2>KARYA ANAK SURABAYA</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
+        <p>Temukan artikel kegiatan terbaru yang bermanfaat dan menarik untuk dibaca.</p>
+    </div>
 
+  <div class="container">
+    <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
 
-      <div class="container">
+      <!-- Portfolio Filters -->
+      <ul class="portfolio-filters isotope-filters d-flex justify-content-center gap-3" data-aos="fade-up" data-aos-delay="100" style="margin-bottom: 30px;">
+        <li data-filter="*" class="filter-active">All</li>
+        <li data-filter=".filter-kota">Kota</li>
+        <li data-filter=".filter-kecamatan">Kecamatan</li>
+        <li data-filter=".filter-kelurahan">Kelurahan</li>
+      </ul>
+      <!-- End Portfolio Filters -->
 
-<div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
-
-  <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
-    <li data-filter="*" class="filter-active">All</li>
-    <li data-filter=".filter-app">App</li>
-    <li data-filter=".filter-product">Product</li>
-    <li data-filter=".filter-branding">Branding</li>
-    <li data-filter=".filter-books">Books</li>
-  </ul><!-- End Portfolio Filters -->
-
-
-  <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
-
-<div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-  <img src="{{asset('assets/img/portfolio/app-1.jpg')}}" class="img-fluid" alt="">
-  <div class="portfolio-info">
-    <h4>App 1</h4>
-    <p>Lorem ipsum, dolor sit amet consectetur</p>
-    <a href="{{asset('assets/img/portfolio/app-1.jpg')}}" title="App 1" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-    <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-  </div>
-</div>
-
-<div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-              <img src="{{asset('assets/img/portfolio/product-1.jpg')}}" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Product 1</h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-                <a href="{{asset('assets/img/portfolio/product-1.jpg')}}" title="Product 1" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
+      <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
+        <!-- Loop through $datas -->
+        @foreach ($datas as $data)
+        <div class="col-lg-4 col-md-6 col-sm-12 portfolio-item isotope-item filter-{{ strtolower($data->tingkatKarya) }}">
+          <div class="card border-0 shadow-sm h-100">
+            <div class="card-img">
+              <img src="{{ asset($data->gambar) }}" class="img-fluid rounded-top" alt="{{ $data->judul }}" style="height: 250px; object-fit: cover;">
             </div>
-
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-              <img src="{{asset('assets/img/portfolio/branding-1.jpg')}}" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Branding 1</h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-                <a href="{{asset('assets/img/portfolio/branding-1.jpg')}}" title="Branding 1" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
+            <div class="card-body text-center">
+              <h5 class="card-title font-weight-bold">{{ $data->judul }}</h5>
+              <a href="{{ asset($data->gambar) }}" 
+                 title="{{ $data->judul }}" 
+                 data-description="{{ $data->deskripsi }}" 
+                 data-gallery="portfolio-gallery-{{ strtolower($data->tingkatKarya) }}" 
+                 class="glightbox btn btn-outline-primary btn-sm">
+                <i class="bi bi-zoom-in"></i> Lihat Detail
+              </a>
             </div>
-
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
-              <img src="{{asset('assets/img/portfolio/books-1.jpg')}}" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Books 1</h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-                <a href="assets/img/portfolio/books-1.jpg" title="Branding 1" data-gallery="portfolio-gallery-book" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div>
-
-            
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-              <img src="{{asset('assets/img/portfolio/app-2.jpg')}}" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>App 2</h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-                <a href="{{asset('assets/img/portfolio/app-2.jpg')}}" title="App 2" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-              <img src="{{asset('assets/img/portfolio/product-2.jpg')}}" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Product 2</h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-                <a href="assets/img/portfolio/product-2.jpg" title="Product 2" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-              <img src="{{asset('assets/img/portfolio/branding-2.jpg')}}" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Branding 2</h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-                <a href="{{asset('assets/img/portfolio/branding-2.jpg')}}" title="Branding 2" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
-              <img src="{{asset('assets/img/portfolio/books-2.jpg')}}" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Books 2</h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-                <a href="{{asset('assets/img/portfolio/books-2.jpg')}}" title="Branding 2" data-gallery="portfolio-gallery-book" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-              <img src="{{asset('assets/img/portfolio/app-3.jpg')}}" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>App 3</h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-                <a href="{{asset('assets/img/portfolio/app-3.jpg')}}" title="App 3" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-              <img src="{{asset('assets/img/portfolio/product-3.jpg')}}" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Product 3</h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-                <a href="{{asset('assets/img/portfolio/product-3.jpg')}}" title="Product 3" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-              <img src="{{asset('assets/img/portfolio/branding-3.jpg')}}" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Branding 3</h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-                <a href="{{asset('assets/img/portfolio/branding-3.jpg')}}" title="Branding 2" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
-              <img src="{{asset('assets/img/portfolio/books-3.jpg')}}" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Books 3</h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-                <a href="{{asset('assets/img/portfolio/books-3.jpg')}}" title="Branding 3" data-gallery="portfolio-gallery-book" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-          </div><!-- End Portfolio Container -->
-
+          </div>
         </div>
+        @endforeach
+        <!-- End Loop -->
+      </div><!-- End Portfolio Container -->
 
-      </div>
+    </div>
+  </div>
+</section>
 
-    </section><!-- /Portfolio Section -->
-      @endsection
+<!-- CSS for styling -->
+<style>
+  /* CSS untuk menyamakan ukuran card */
+  .portfolio-item .card {
+    height: 100%; /* Pastikan card mengambil ketinggian penuh */
+    display: flex;
+    flex-direction: column;
+  }
+
+  .portfolio-item img {
+    height: 250px; /* Tinggi gambar */
+    object-fit: cover; /* Gambar selalu memenuhi area */
+    width: 100%; /* Pastikan gambar memenuhi lebar */
+  }
+
+  /* CSS untuk menyempurnakan filter */
+  .portfolio-filters li {
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 8px 15px;
+    border: none; /* Menghapus border */
+    color: #000; /* Teks hitam */
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+  }
+
+  .portfolio-filters .filter-active {
+    font-weight: bold; /* Teks bold untuk filter aktif */
+    color: #000; /* Teks aktif tetap hitam */
+    background: none; /* Menghapus background */
+  }
+
+  .portfolio-filters li:hover {
+    color: #007bff; /* Teks biru saat hover */
+  }
+</style>
+
+<!-- JavaScript for Glightbox -->
+<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const lightbox = GLightbox({
+      touchNavigation: true,
+      loop: true,
+      closeOnOutsideClick: true,
+      selector: '.glightbox',
+      description: true, // Memunculkan deskripsi dalam lightbox
+    });
+  });
+</script>
+
+<!-- Link Glightbox CSS -->
+<link href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" rel="stylesheet">
+@endsection

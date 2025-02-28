@@ -19,22 +19,25 @@
                     <thead class="text-center">
                         <tr>
                             <th>No</th>
+                            <th>Kategori</th>
                             <th>Nama</th>
                             <th>Keterangan</th>
                             <th>File</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($datas as $data)
+                        @foreach ($dataAktif as $data)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
+                            <td> {{ $data->surat ? $data->surat->nama : 'Tidak ada surat' }}</td>                            
                             <td>{{ $data->nama }}</td>
                             <td>{{ $data->keterangan }}</td>
                             <td>
                                 <a href="{{ asset($data->dataPendukung) }}" target="_blank">
-                                    <i class="fas fa-file-pdf text-danger "></i>
+                                    <i download class="btn btn-sm btn-primary">Download"></i>
                                 </a>
-                            </td>                        </tr>
+                            </td>                        
+                        </tr>
                         @endforeach
                     </tbody>
                     

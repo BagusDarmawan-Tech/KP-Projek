@@ -1,48 +1,54 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\SubKegiatan;
 use Illuminate\Http\Request;
 
 class KlasterController extends Controller
 {
     public function haksipildankebebasan() {
 
-        
-        return view('frontend.content.HakSipilDanKebebasan'); 
+        $datas = SubKegiatan::where('is_active', true)
+        ->where('klusterid', 16)
+        ->get();        
+        return view('frontend.content.HakSipilDanKebebasan', compact('datas')); 
     }
 
     public function kelembagaan() {
- 
-        return view('frontend.content.kelembagaan'); 
+        $datas = SubKegiatan::where('is_active', true)
+        ->where('klusterid', 17)
+        ->get();
+        return view('frontend.content.kelembagaan', compact('datas')); 
     }
 
     public function kesehatandasar() {
-
-        return view('frontend.content.KesehatanDasar'); 
+        $datas = SubKegiatan::where('is_active', true)
+        ->where('klusterid', 18)
+        ->get();
+        return view('frontend.content.KesehatanDasar', compact('datas')); 
     }
 
     public function lingkungankeluarga() {
-        
-        //$documents = lingkungankeluarga::paginate(10);
-
-        
-        return view('frontend.content.LingkunganKeluarga'); 
+        $datas = SubKegiatan::where('is_active', true)
+        ->where('klusterid', 19)
+        ->get();
+        return view('frontend.content.LingkunganKeluarga', compact('datas')); 
     }
 
     public function pendidikanpemanfaatan() {
         
-        // $documents = pendidikanpemanfaatan::paginate(10);
-
-        
-        return view('frontend.content.PendidikanPemanfaatan'); 
+        $datas = SubKegiatan::where('is_active', true)
+        ->where('klusterid', 20)
+        ->get();
+        return view('frontend.content.PendidikanPemanfaatan', compact('datas')); 
     }
 
     public function perlindungankhusus() {
         
-        // $documents = perlindungankhusus::paginate(10);
-
+        $datas = SubKegiatan::where('is_active', true)
+        ->where('klusterid', 21)
+        ->get();
         
-        return view('frontend.content.PerlindunganKhusus'); 
+        return view('frontend.content.PerlindunganKhusus', compact('datas')); 
     }
 }

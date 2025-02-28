@@ -32,9 +32,6 @@ class forumanakController extends Controller
         return view('frontend.content.SkFasKelurahan', compact('dataAktif')); 
     }
 
-    
-
-
     public function pemantauananak()
     {
         // $documents = skkel::paginate(10);
@@ -52,13 +49,20 @@ class forumanakController extends Controller
 
     public function kegiatanforumanakkelurahan()
     {
-        return view('frontend.content.KegiatanForumAnakKelurahan'); 
+        $dataAktif = ForumAnakSurabaya::where('is_active', true)
+        ->where('dibuatOleh', 19) // Role ID kelurahan
+        ->get();
+        return view('frontend.content.KegiatanForumAnakKelurahan', compact('dataAktif')); 
     }
 
 
     public function kegiatanforumanakkecamatan()
     {
+        $dataAktif = ForumAnakSurabaya::where('is_active', true)
+                ->where('dibuatOleh', 18) // Role ID kecamatan
+                ->get();
 
-    return view('frontend.content.kegareksby');
+        return view('frontend.content.KegiatanForumAnakKecamatan', compact('dataAktif'));
+
     }
 }

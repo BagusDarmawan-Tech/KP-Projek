@@ -1,118 +1,139 @@
 @extends('frontend.user-main')
-
 @section('content')
 
-<!-- Main Content -->
-<div class="container mt-5 pt-4">
-    <div class="card shadow-lg border-0 rounded-4 text-center p-3" style="background: rgb(233, 36,103);">
-        <h2 class="fw-bold text-white m-0">Artikel Kegiatan</h2>
-    </div>
-</div>
+<!-- Tambahkan Glightbox CSS -->
+<link href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" rel="stylesheet">
 
-<section id="gallery">
+<style>
+    /* Gaya untuk Filter Kategori */
+    .portfolio-filters li {
+        cursor: pointer;
+        font-weight: normal; /* Font normal untuk yang tidak aktif */
+        color: black; /* Warna teks default */
+        text-transform: uppercase; /* Huruf besar semua */
+        list-style: none;
+    }
+
+    .portfolio-filters li.filter-active {
+        color: #ff0077; /* Warna pink untuk yang aktif */
+        font-weight: bold; /* Font tebal untuk yang aktif */
+    }
+
+    .portfolio-filters li:hover {
+        color: #ff0077; /* Warna pink saat hover */
+    }
+
+    /* CSS untuk ukuran card */
+    .card {
+        height: 100%;
+    }
+    .card-img-top {
+        height: 200px; /* Tinggi tetap untuk gambar */
+        object-fit: cover; /* Gambar di-crop untuk memenuhi ukuran */
+    }
+    .card-body {
+        text-align: center;
+    }
+
+    /* Tambahan styling untuk Glightbox */
+    .glightbox-container {
+        background-color: rgba(0, 0, 0, 0.85); /* Warna latar modal */
+    }
+    .gtitle {
+        font-size: 20px; /* Ukuran font untuk judul */
+        font-weight: bold;
+        color: #fff; /* Warna teks judul */
+    }
+    .gdesc {
+        font-size: 16px; /* Ukuran font untuk deskripsi */
+        color: #fff; /* Warna teks deskripsi */
+        text-align: center;
+        margin-top: 10px;
+    }
+</style>
+
+<section id="portfolio" class="portfolio section">
+    <div class="container section-title" data-aos="fade-up">
+        <span>ARTIKEL MITRA ANAK</span>
+        <h2>ARTIKEL MITRA ANAK</h2>
+        <p>Kumpulan karya inspiratif dari anak-anak yang kreatif dan inovatif.</p>
+    </div><!-- End Section Title -->
+
     <div class="container">
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            <!-- First Activity -->
-            <div class="col">
-                <div class="card shadow-lg border-0 rounded-4 overflow-hidden hover-shadow">
-                    <img src="https://suarapubliknews.net/wp-content/uploads/2024/08/YNU_7150-1.jpg" alt="Sosialisasi dan Simulasi Kebakaran" class="card-img-top">
-                    
-                    <div class="card-body">
-                        <h5 class="card-title text-danger">Sosialisasi dan Simulasi Kebakaran</h5>
-                        <p class="card-text text-secondary">Pelajari langkah-langkah dalam sosialisasi dan simulasi kebakaran di Surabaya...</p>
-                        <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal1">Selengkapnya</button>
-                    </div>
-                </div>
-            </div>
+        <!-- Filter Kategori -->
+        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+            <ul class="portfolio-filters isotope-filters d-flex justify-content-center gap-3 mb-4" data-aos="fade-up" data-aos-delay="100">
+                <li data-filter="*" class="filter-active">All</li>
+                @foreach ($categories as $category)
+                    <li data-filter=".filter-{{ Str::slug($category->nama) }}">{{ $category->nama }}</li>
+                @endforeach
+            </ul><!-- End Portfolio Filters -->
 
-            <!-- Modal for First Activity -->
-            <div class="modal fade" id="modal1" tabindex="-1" aria-labelledby="modalLabel1" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title text-danger">Sosialisasi dan Simulasi Kebakaran</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <img src="https://suarapubliknews.net/wp-content/uploads/2024/08/YNU_7150-1.jpg" alt="Sosialisasi dan Simulasi Kebakaran" class="img-fluid rounded mb-3">
-                            <p class="text-secondary">Kegiatan ini bertujuan untuk memberikan pemahaman kepada masyarakat tentang cara menghadapi situasi darurat kebakaran, termasuk teknik pemadaman api awal dan evakuasi.</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Second Activity -->
-            <div class="col">
-                <div class="card shadow-lg border-0 rounded-4 overflow-hidden hover-shadow">
-                    <img src="https://asset.kompas.com/crops/u2_wc8ieb_2BzqsnPtkeCoZkolk=/0x0:1278x852/1200x800/data/photo/2023/07/02/64a15afcb55ce.jpeg" alt="Simulasi Bencana Gempa Bumi" class="card-img-top">
-                    
-                    <div class="card-body">
-                        <h5 class="card-title text-danger">Simulasi Bencana Gempa Bumi</h5>
-                        <p class="card-text text-secondary">Bagaimana cara aman menghadapi gempa bumi? Yuk, simak panduannya...</p>
-                        <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal2">Selengkapnya</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Modal for Second Activity -->
-            <div class="modal fade" id="modal2" tabindex="-1" aria-labelledby="modalLabel2" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title text-danger">Simulasi Bencana Gempa Bumi</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <img src="https://asset.kompas.com/crops/u2_wc8ieb_2BzqsnPtkeCoZkolk=/0x0:1278x852/1200x800/data/photo/2023/07/02/64a15afcb55ce.jpeg" alt="Simulasi Bencana Gempa Bumi" class="img-fluid rounded mb-3">
-                            <p class="text-secondary">Kegiatan ini mengajarkan langkah-langkah penyelamatan saat gempa bumi terjadi, termasuk teknik "Drop, Cover, and Hold" serta jalur evakuasi yang aman.</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+            <!-- Artikel -->
+            <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
+                @foreach ($datas as $data)
+                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-{{ $data->kategori ? Str::slug($data->kategori->nama) : 'default' }}">
+                    <div class="card shadow-sm">
+                        <!-- Gambar Artikel -->
+                        <img src="{{ asset($data->gambar) }}" class="card-img-top img-fluid" alt="{{ $data->judul }}">
+                        
+                        <!-- Konten Artikel -->
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $data->judul }}</h5>
+                            <p class="card-text">{{ Str::limit($data->konten, 100) }}</p>
+                            
+                            <!-- Tombol Lihat -->
+                            <a href="{{ asset($data->gambar) }}" 
+                               class="glightbox" 
+                               data-gallery="portfolio-gallery" 
+                               data-title="{{ $data->judul }}" 
+                               data-description="{{ $data->konten }}">
+                                <button class="btn btn-sm btn-outline-secondary">
+                                    <i class="bi bi-zoom-in"></i> Lihat
+                                </button>
+                            </a>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Third Activity -->
-            <div class="col">
-                <div class="card shadow-lg border-0 rounded-4 overflow-hidden hover-shadow">
-                    <img src="https://cdn.antaranews.com/cache/1200x800/2023/09/15/eri-dan-RAP-Sonokwijenan-Surabaya-9.jpg.webp" alt="Pencegahan Pekerja Anak" class="card-img-top">
-                    
-                    <div class="card-body">
-                        <h5 class="card-title text-danger">Pencegahan Pekerja Anak</h5>
-                        <p class="card-text text-secondary">Pemerintah Surabaya berkomitmen untuk mengurangi pekerja anak melalui Aplikasi ASSIK...</p>
-                        <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal3">Selengkapnya</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Modal for Third Activity -->
-            <div class="modal fade" id="modal3" tabindex="-1" aria-labelledby="modalLabel3" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title text-danger">Pencegahan Pekerja Anak</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <img src="https://cdn.antaranews.com/cache/1200x800/2023/09/15/eri-dan-RAP-Sonokwijenan-Surabaya-9.jpg.webp" alt="Pencegahan Pekerja Anak" class="img-fluid rounded mb-3">
-                            <p class="text-secondary">Melalui Aplikasi ASSIK (Arek Suroboyo Siap Kerjo), Pemerintah Kota Surabaya berupaya mencegah eksploitasi anak dengan menyediakan akses pendidikan dan pelatihan kerja yang lebih baik.</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+                @endforeach
+            </div><!-- End Artikel -->
         </div>
     </div>
 </section>
 
-<!-- Bootstrap JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Tambahkan Glightbox JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const lightbox = GLightbox({
+        touchNavigation: true,
+        loop: true,
+        closeOnOutsideClick: true,
+        selector: '.glightbox',
+    });
+
+    // Filter functionality
+    const filterButtons = document.querySelectorAll('.portfolio-filters li');
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Set active class
+            document.querySelector('.portfolio-filters .filter-active').classList.remove('filter-active');
+            button.classList.add('filter-active');
+
+            const filter = button.getAttribute('data-filter');
+
+            portfolioItems.forEach(item => {
+                if (filter === '*' || item.classList.contains(filter.slice(1))) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    });
+});
+</script>
 
 @endsection

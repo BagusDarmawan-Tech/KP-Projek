@@ -131,7 +131,9 @@ class UsulanKegiatanController extends Controller
             $file = $request->file('file');
             $fileName = date('Y-m-d-His') . '-' . uniqid() . '.' . $file->getClientOriginalExtension();
             $path = $file->storeAs('public/suara-anak', $fileName);
-            $data['file'] = 'suara-anak/' . $fileName;
+            $data['file'] = 'storage/suara-anak/' . $fileName;
+
+            
         }
     
         // Update dokumen

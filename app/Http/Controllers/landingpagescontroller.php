@@ -29,5 +29,15 @@ class landingpagescontroller extends Controller
   
 
     }
+    public function haksipil(){
+        $subkegiatans = SubKegiatan::join('kluster', 'sub_kegiatan.klusterid', '=', 'kluster.id')
+        ->where('kluster.nama', 'Hak Sipil dan Kebebasan')
+        ->where('sub_kegiatan.kategori', 'Hak Sipil dan Kebebasan')
+        ->select('sub_kegiatan.*') // Pastikan hanya memilih kolom yang diperlukan
+        ->get();
+    
+      
+    return view('frontend.content.landing-page', compact('subKegiatans'));
+    }
 
 }

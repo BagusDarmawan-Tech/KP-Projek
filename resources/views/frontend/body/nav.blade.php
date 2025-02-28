@@ -90,7 +90,7 @@
                         </li>
                         <li><a href="{{route('HalamanArtikel')}}">Artikel Kegiatan</a></li>
                         <li><a href="{{route('CFCIKegiatan')}}">Kegiatan</a></li>
-                        <li><a href="{{route('HalamanGaleri')}}">Galeri CFCI</a></li>
+                        <li><a href="{{route('HalamanGaleri')}}">Kegiatan Arek Suroboyo</a></li>
                     </ul>
                 </li>
                 <!-- Selesai Bagian CFCI -->

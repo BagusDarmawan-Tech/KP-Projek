@@ -50,7 +50,7 @@ use App\Http\Controllers\KegiatanForumArekSurabayaController;
 Route::get('/CFCI/Kegiatan', [CFCIController::class, 'Kegiatan'])->name('CFCIKegiatan');
 Route::get('/CFCI/SK', [CFCIController::class, 'HalamanCFCISk'])->name('CFCISK');
 Route::get('/CFCI/ArtikelKegiatan', [CFCIController::class, 'CFCIArtikel'])->name('HalamanArtikel');
-Route::get('/CFCI/Galeri', [CFCIController::class, 'galeri'])->name('HalamanGaleri');
+Route::get('/CFCI/Kegiatan-arek-suroboyo', [CFCIController::class, 'kegiatanSuroboyo'])->name('HalamanGaleri');
 Route::get('/CFCI/SkKecamatan', [CFCIController::class, 'CFCIKecamatann'])->name('CFCIKecamatann'); //bagian kecamatan 
 Route::get('/CFCI/SKKelurahan', [CFCIController::class, 'CFCIKelurahan'])->name('SkKelurahan');
 

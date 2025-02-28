@@ -33,17 +33,18 @@
 
             <!-- Modal -->
             <div class="modal fade" id="modal{{ $index }}" tabindex="-1" aria-labelledby="modalLabel{{ $index }}" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title text-danger">{{ $kegiatan->nama }}</h5>
+                            <h5 class="modal-title text-danger" id="modalLabel{{ $index }}">{{ $kegiatan->nama }}</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <!-- Gambar dalam Modal -->
                             <img src="{{ asset($kegiatan->gambar) }}" 
                                  alt="{{ $kegiatan->nama }}" 
-                                 class="img-fluid rounded mb-3">
+                                 class="img-fluid rounded mb-3 w-100">
+                            <!-- Teks dalam Modal -->
                             <p class="text-secondary">{{ $kegiatan->keterangan }}</p>
                         </div>
                         <div class="modal-footer">
