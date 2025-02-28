@@ -11,4 +11,9 @@ class Slider extends Model
     protected $table = 'slider';
 
     protected $fillable = ['nama', 'caption','deskripsi','gambar','is_active', 'dibuatOleh'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'dibuatOleh');
+    }
 }

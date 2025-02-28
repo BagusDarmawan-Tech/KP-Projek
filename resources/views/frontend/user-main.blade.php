@@ -7,6 +7,8 @@
   <title>SITALAS</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
+  <link rel="stylesheet" href="//cdn.datatables.net/2.2.2/css/dataTables.dataTables.min.css">
+
 
   <!-- Favicons -->
   <link href="{{ asset('assets/img/favicon.png')}}" rel="icon">
@@ -77,7 +79,14 @@
   
 <!-- baru -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+  <script src="//cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
+  <script>
+    $(document).ready(function(){
 
+        $('#myTable').DataTable();
+    })
+</script>
 </body>
 
 </html>

@@ -132,7 +132,7 @@ class KecamatanLayakController extends Controller
 
         $dokumen->delete();
 
-        return redirect()->route('dokumen-kec')->with('success', 'Kegiatan berhasil dihapus!');
+        return redirect()->route('dokumen-kec')->with('success', 'Dokumen berhasil dihapus!');
     }
     //======================END crud dokumen kecamatan
 

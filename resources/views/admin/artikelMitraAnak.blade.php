@@ -52,7 +52,7 @@
                             <td><img src="{{ asset($artikel->gambar) }}" alt="Slider Image" width="80"></td>
                             <td> {{ $artikel->kategori ? $artikel->kategori->nama : 'Tidak ada kategori' }}</td>
                             <td>{{ $artikel->judul }}</td>
-                            <td>{{ $artikel->dibuatOleh}}</td>
+                            <td>{{ $artikel->user ? $artikel->user->name : 'Tidak ada pengguna' }}</td>
                             <td>
                                 @if($artikel->is_active == 0)
                                 <span class="badge bg-warning">Non Aktif</span>
@@ -136,7 +136,7 @@
                         </select>
                     </div>
                     </div>
-                    <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
+                    <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->id }}">
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>

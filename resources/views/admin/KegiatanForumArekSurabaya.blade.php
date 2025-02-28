@@ -5,67 +5,6 @@
 <link href="{{ asset('assets/css/tabel.css') }}" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <div class="container mt-5">
-    <div class="card shadow-lg border-0 position-relative overflow-hidden mb-4 p-3">
-        <div class="card-body">
-            <h4 class="fw-bold mb-3 text-center">Kegiatan Forum arek Surabaya</h4>
-            <div class="row">
-                <div class="col-md-6 ">
-                    <label for="userEntri" class="form-label">User Entri</label>
-                    <select id="userEntri" class="form-select">
-                        <option selected disabled>--- Pilih User Entri ---</option>
-                        @php
-                            $users = [
-                                'dispusip_kla' => 'DISPUSIP KLA',
-                                'dp3a' => 'DP3A',
-                                'ihsan' => 'Ihsan',
-                                'kecamatan_asemrowo' => 'Kecamatan Asemrowo',
-                                'kecamatan_benowo' => 'Kecamatan Benowo',
-                                'kecamatan_bubutan' => 'Kecamatan Bubutan',
-                                'kecamatan_bulak' => 'Kecamatan Bulak',
-                                'kecamatan_dukuh_pakis' => 'Kecamatan Dukuh Pakis',
-                                'kecamatan_gayungan' => 'Kecamatan Gayungan',
-                                'kecamatan_genteng' => 'Kecamatan Genteng',
-                                'kecamatan_gubeng' => 'Kecamatan Gubeng',
-                                'kecamatan_gunung_anyar' => 'Kecamatan Gunung Anyar',
-                                'kecamatan_jambangan' => 'Kecamatan Jambangan',
-                                'kecamatan_karang_pilang' => 'Kecamatan Karang Pilang',
-                                'kecamatan_kenjeran' => 'Kecamatan Kenjeran',
-                                'kecamatan_krembangan' => 'Kecamatan Krembangan',
-                                'kecamatan_lakarsantri' => 'Kecamatan Lakarsantri',
-                                'kecamatan_mulyorejo' => 'Kecamatan Mulyorejo',
-                                'kecamatan_pabean_cantian' => 'Kecamatan Pabean Cantian',
-                                'kecamatan_pakal' => 'Kecamatan Pakal',
-                                'kecamatan_sambikerep' => 'Kecamatan Sambikerep',
-                                'kecamatan_sawahan' => 'Kecamatan Sawahan',
-                                'kecamatan_semampir' => 'Kecamatan Semampir',
-                                'kecamatan_simokerto' => 'Kecamatan Simokerto',
-                                'kecamatan_sukolilo' => 'Kecamatan Sukolilo',
-                                'kecamatan_sukomanunggal' => 'Kecamatan Sukomanunggal',
-                                'kecamatan_tambaksari' => 'Kecamatan Tambaksari',
-                                'kecamatan_tandes' => 'Kecamatan Tandes',
-                                'kecamatan_tegalsari' => 'Kecamatan Tegalsari',
-                                'kecamatan_tenggilis_mejoyo' => 'Kecamatan Tenggilis Mejoyo',
-                                'kecamatan_wiyung' => 'Kecamatan Wiyung',
-                                'kecamatan_wonocolo' => 'Kecamatan Wonocolo',
-                                'kecamatan_wonokromo' => 'Kecamatan Wonokromo'
-                            ];
-                        @endphp
-                        @foreach($users as $value => $label)
-                            <option value="{{ $value }}">{{ $label }}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-            <div class="row mt-3">
-                <div class="col-md-6">
-                    <button class="btn btn-primary" id="btnCari" style="width: 150px;">
-                        <i class="bi bi-search"></i> Cari
-                    </button>
-                </div>
-            </div>
-            </div>
-        </div>
-    </div>
     @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -301,7 +240,7 @@
         </div>
     </div>
 </div>
-
+</div>
 
 
 

@@ -12,4 +12,9 @@ class KaryaAnak extends Model
     protected $table = 'karya_anak';
 
     protected $fillable = ['kreator','tingkatKarya', 'tanggal','judul','gambar','pemohon','deskripsi','status'];
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'pemohon');
+    }
+
 }

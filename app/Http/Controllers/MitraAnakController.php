@@ -27,7 +27,6 @@ class MitraAnakController extends Controller
             'caption' => 'required|string|max:500',
             'deskripsi' => 'required|string|max:500',
             'gambar' => 'required|mimes:png,jpg,jpeg|max:6048',
-            'dibuatOleh' => 'required|string|max:255',
             'is_active' => 'required|boolean',
         ],[
             'nama.required' => 'Nama wajib diisi.',

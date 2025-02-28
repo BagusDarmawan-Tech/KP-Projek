@@ -16,5 +16,9 @@ class KegiatanKelurahan extends Model
     {
         return $this->belongsTo(Kelurahan::class, 'kelurahanid');
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'dibuatOleh');
+    }
 
 }

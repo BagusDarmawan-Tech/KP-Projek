@@ -55,7 +55,7 @@
                             <td><img src="{{ asset($galeri->gambar) }}" alt="Gambar Galeri" width="80"></td>
                             <td class="nama">{{ $galeri->nama }}</td>
                             <td class="caption">{{ $galeri->caption }}</td>
-                            <td>{{ $galeri->dibuatOleh }}</td>
+                            <td>{{ $galeri->user ? $galeri->user->name : 'Tidak ada pengguna' }}</td>
                             <td>
                                 <span class="badge {{ $galeri->is_active ? 'bg-success' : 'bg-danger' }}">
                                     {{ $galeri->is_active ? 'Aktif' : 'Non-Aktif' }}
@@ -140,7 +140,7 @@
                             <option value="0">Non-Aktif</option>
                         </select>
                     </div>
-                    <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
+                    <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->id }}">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>

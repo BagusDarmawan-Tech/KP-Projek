@@ -130,7 +130,7 @@
                             <option value="0" {{ old('is_active') == "0" ? 'selected' : '' }}>Non-Aktif</option>
                         </select>
                     </div>
-                    <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
+                    <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->id }}">
                     </div>
                     <div class="modal-footer border-top pt-3 d-flex justify-content-end"> <!-- Tambahan border-top dan padding -->
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>

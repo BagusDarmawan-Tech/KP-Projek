@@ -21,4 +21,9 @@ class DokumenKelurahan extends Model
     {
         return $this->belongsTo(JenisSurat::class, 'jenis_suratid');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'dibuatOleh');
+    }
 }

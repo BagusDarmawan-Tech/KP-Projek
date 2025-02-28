@@ -12,8 +12,13 @@ class SubKegiatan extends Model
 
     protected $fillable = ['klusterid','nama','dataPendukung', 'keterangan','is_active', 'dibuatOleh'];
 
-    public function user()
+    public function klaster()
     {
         return $this->belongsTo(Klaster::class, 'klusterid');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'dibuatOleh');
     }
 }

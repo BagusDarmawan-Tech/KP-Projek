@@ -33,7 +33,6 @@ class WebManagementController extends Controller
             'deskripsi' => 'required|string|max:500',
             'gambar' => 'required|mimes:png,jpg,jpeg|max:2048',
             'is_active' => 'required|boolean',
-            'dibuatOleh' => 'required|string|max:255',
         ],[
             'nama.required' => 'Nama wajib diisi.',
             'nama.max' => 'Nama maksimal 255 karakter.',
@@ -199,7 +198,7 @@ class WebManagementController extends Controller
             'dibuatOleh' => $request->dibuatOleh, 
         ]);
     
-        return redirect()->route('sub-kegiatan')->with('success', 'Kategori berhasil ditambahkan!');
+        return redirect()->route('sub-kegiatan')->with('success', 'Sub Kegiatan berhasil ditambahkan!');
     }    
 
     public function updateSubKegiatan(Request $request, $id)
@@ -569,7 +568,6 @@ class WebManagementController extends Controller
         $request->validate([
             'nama' => 'required|string|max:255|unique:kategori_artikel,nama',
             'is_active' => 'required|boolean',
-            'dibuatOleh' => 'required|string|max:255',
         ],[
             'nama.unique' => 'Nama kategori sudah digunakan, silakan pilih yang lain.',
         ]);
@@ -583,14 +581,18 @@ class WebManagementController extends Controller
     $request->validate([
         'nama' => 'required|string|max:255|unique:kategori_artikel,nama,' . $id,
         'is_active' => 'required|boolean',
-        'dibuatOleh' => 'required|string|max:255',
     ], [
         'nama.unique' => 'Nama kategori sudah digunakan, silakan pilih yang lain.',
     ]);
 
     $kategori = KategoriArtikel::findOrFail($id);
 
-    $kategori->update($request->all());
+    $data = [
+        'nama' => $request->nama,
+        'is_active' => $request->is_active
+    ];
+
+    $kategori->update( $data );
 
     return redirect()->route('kategoriArtikel')->with('success', 'Kategori berhasil diperbarui!');
     }
@@ -965,7 +967,6 @@ class WebManagementController extends Controller
             'subkegiatanid' => 'required|integer',
             'konten' => 'required|string|max:500',
             'kategoriartikelid' => 'required|integer',
-            'dibuatOleh' => 'required|string|max:255',
             'is_active' => 'required|boolean',
         ],
         [

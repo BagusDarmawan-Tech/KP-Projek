@@ -11,4 +11,8 @@ class DokumenPisa extends Model
     protected $table = 'dokumen_pisa';
 
     protected $fillable = ['nama', 'dataPendukung','keterangan','dibuatOleh','is_active','jenisSurat'];
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'dibuatOleh');
+    }
 }

@@ -16,5 +16,9 @@ class Artikel extends Model
     {
         return $this->belongsTo(KategoriArtikel::class, 'kategoriartikelid');
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'dibuatOleh');
+    }
 }
 

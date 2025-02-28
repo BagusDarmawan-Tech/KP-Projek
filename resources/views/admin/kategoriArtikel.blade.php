@@ -53,7 +53,7 @@
                         <tr>
                             <td style="text-align: center;">{{ $loop->iteration }}</td>
                             <td>{{ $kategori->nama }}</td>
-                            <td>{{ $kategori->dibuatOleh }}</td>
+                            <td>{{ $kategori->user ? $kategori->user->name : 'Tidak ada pengguna' }}</td>
                             <td>
                                 @if($kategori->is_active == 0)
                                 <span class="badge bg-warning">Non Aktif</span>
@@ -124,7 +124,7 @@
                         </select>
                     </div>
             
-                    <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
+                    <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->id }}">
             
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>

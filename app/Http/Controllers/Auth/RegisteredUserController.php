@@ -35,7 +35,7 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'role' => ['required', 'string','unique','max:15']
+            'role' => ['required', 'string','max:15']
         ], [
             'name.required' => 'Nama wajib diisi.',
             'name.string' => 'Nama harus berupa teks.',
@@ -52,7 +52,6 @@ class RegisteredUserController extends Controller
             'password.confirmed' => 'Konfirmasi password tidak cocok.',
 
             'role.required' => 'Role wajib dipilih.',
-            'role.unique' => 'Role sudah ada pakai nama lainnya.',
             'role.max' => 'Role tidak boleh lebih dari 15 karakter.',
         ]);
 

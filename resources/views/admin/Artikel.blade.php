@@ -53,8 +53,7 @@
                             <td><img src="{{ asset($artikel->gambar) }}" alt="Artikel Image" width="80"></td>
                             <td>{{ $artikel->kategori ? $artikel->kategori->nama : 'Tidak ada Kategori' }}</td>
                             <td>{{ $artikel->judul }}</td>
-                            <td>{{ $artikel->dibuatOleh }}</td>
-                            <td>
+                            <td> {{ $artikel->user ? $artikel->user->name : 'Tidak ada pengguna' }}</td>                            <td>
                                 @if($artikel->is_active == 0)
                                     <span class="badge bg-warning">Non Aktif</span>
                                 @else
@@ -168,7 +167,7 @@
                             <option value="0" {{ old('is_active') == "0" ? 'selected' : '' }}>Non-Aktif</option>
                         </select>
                     </div>
-                    <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
+                    <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->id}}">
                     </div>
 
              <div class="modal-footer border-top pt-3 d-flex justify-content-end"> <!-- Tambahan border-top dan padding -->

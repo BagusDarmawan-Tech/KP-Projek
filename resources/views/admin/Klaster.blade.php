@@ -56,7 +56,9 @@
                             <td><i class="{{ $klaster->icon }}"></i></td>
                             <td>{{ $klaster->nama }}</td>
                             <td><img src="{{ asset($klaster->gambar) }}" alt="Gambar" width="50"></td>
-                            <td>{{ $klaster->dibuatOleh }}</td>
+                            <td>
+                             {{ $klaster->user ? $klaster->user->name : 'Tidak ada pengguna' }}  
+                            </td>                           
                             <td>
                                 @if($klaster->is_active == 0)
                                 <span class="badge bg-warning">Non Aktif</span>
@@ -140,7 +142,7 @@
                         </select>
                     </div>
                     </div>
-                    <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
+                    <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->id }}">
             
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>

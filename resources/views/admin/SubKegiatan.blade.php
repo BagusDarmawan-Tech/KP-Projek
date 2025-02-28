@@ -54,14 +54,14 @@
                         @foreach ($subKegiatans as $subKegiatan)
                         <tr>
                             <td style="text-align: center;">{{ $loop->iteration }}</td>
-                            <td>{{ $subKegiatan->user ? $subKegiatan->user->nama : 'Tidak ada pengguna' }}</td>
+                            <td>{{ $subKegiatan->klaster ? $subKegiatan->klaster->nama : 'Tidak ada Klaster' }}</td>
                             <td>{{ $subKegiatan->nama }}</td>
                             <td>
                                 <a href="{{ asset($subKegiatan->dataPendukung) }}" target="_blank">
                                     <i class="fas fa-file-pdf text-danger fa-2x"></i>
                                 </a>
                             </td>
-                            <td>{{ $subKegiatan->dibuatOleh }}</td>
+                            <td>{{ $subKegiatan->user ? $subKegiatan->user->name : 'Tidak ada Klaster' }}</td>
                             <td>
                                 <span class="badge {{ $subKegiatan->is_active ? 'bg-success' : 'bg-warning' }}">
                                     {{ $subKegiatan->is_active ? 'Aktif' : 'Non-Aktif' }}
@@ -153,7 +153,7 @@
                             <option value="0" {{ old('is_active') == "0" ? 'selected' : '' }}>Non-Aktif</option>
                         </select>
                     </div>
-                    <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
+                    <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->id }}">
                 </div>
                     <div class="modal-footer border-top pt-3 d-flex justify-content-end"> <!-- Tambahan border-top dan padding -->
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>

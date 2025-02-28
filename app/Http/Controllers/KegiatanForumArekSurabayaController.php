@@ -56,7 +56,7 @@ class KegiatanForumArekSurabayaController extends Controller
             'tanggal' => $tanggal
         ]);
 
-        return redirect()->route('KegiatanForumSurabaya')->with('success', 'Kategori berhasil ditambahkan!');
+        return redirect()->route('KegiatanForumSurabaya')->with('success', 'Kegiatan Forum berhasil ditambahkan!');
     }
 
     public function updateHalamanForum(Request $request, $id)
@@ -112,7 +112,7 @@ class KegiatanForumArekSurabayaController extends Controller
         // Update slider
         $artikel->update($data);
     
-        return redirect()->route('KegiatanForumSurabaya')->with('success', 'Artikel Anak berhasil diperbarui!');
+        return redirect()->route('KegiatanForumSurabaya')->with('success', 'Kegiatan Forum berhasil diperbarui!');
     }
 
     public function destroyHalamanForum($id)

@@ -11,4 +11,9 @@ class KegiatanPisa extends Model
     protected $table = 'kegiatan_pisa';
 
     protected $fillable = ['nama', 'caption','deskripsi','gambar','dibuatOleh','is_active'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'dibuatOleh');
+    }
 }

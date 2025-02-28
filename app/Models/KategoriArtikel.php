@@ -16,4 +16,8 @@ class KategoriArtikel extends Model
     {
         return $this->hasMany(Artikel::class, 'kategoriartikelid');
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'dibuatOleh');
+    }
 }

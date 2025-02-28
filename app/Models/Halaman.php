@@ -12,4 +12,10 @@ class Halaman extends Model
     protected $table = 'halaman';
 
     protected $fillable = ['judul','slug','gambar', 'konten','is_active', 'dibuatOleh'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'dibuatOleh');
+    }
+
 }

@@ -11,4 +11,9 @@ class KegiatanArekSuroboyo extends Model
     protected $table = 'kegiatan_arek_suroboyo';
 
     protected $fillable = ['judul', 'slug','tag','konten','gambar','dibuatOleh','is_active'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'dibuatOleh');
+    }
 }

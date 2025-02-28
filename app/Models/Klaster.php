@@ -12,4 +12,9 @@ class Klaster extends Model
     protected $table = 'kluster';
 
     protected $fillable = ['icon','nama','gambar','slug', 'is_active', 'dibuatOleh'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'dibuatOleh');
+    }
 }

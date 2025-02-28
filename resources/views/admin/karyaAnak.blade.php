@@ -74,7 +74,7 @@
                     <tr>
                         <td style="text-align: center;">{{ $loop->iteration }}</td>
                         <td class="text-nowrap">{{ $karya->tanggal }}</td>
-                        <td>{{ $karya->pemohon }}</td>
+                        <td>{{ $karya->user ? $karya->user->name : 'Tidak ada pengguna' }}</td>
                         <td>{{ $karya->kreator }}</td>
                     
                         <!-- bagian detail -->
@@ -164,7 +164,7 @@
                     <input type="text" name="judul" class="form-control"  placeholder="Masukkan judul">
                 </div>
                 <div class="mb-3">
-                    <label for="kegiatan" class="form-label">Kecamatan</label>
+                    <label for="kegiatan" class="form-label">Tingkatan</label>
                     <select class="form-select" id="editTingkatKarya" name="tingkatKarya" required>
                         <option value="" disabled selected>-- Pilih Tingkat Karya --</option>
                             <option value="kelurahan">Kelurahan</option>
@@ -180,7 +180,7 @@
                     <label class="form-label">Upload Foto</label>
                     <input type="file" name="gambar" class="form-control" accept=".jpg, .png">
                 </div>
-                <input type="hidden" name="pemohon" value="{{ Auth::user()->name }}">
+                <input type="hidden" name="pemohon" value="{{ Auth::user()->id }}">
             </div>
             <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

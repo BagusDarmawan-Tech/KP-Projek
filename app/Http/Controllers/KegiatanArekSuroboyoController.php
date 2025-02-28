@@ -117,7 +117,7 @@ class KegiatanArekSuroboyoController extends Controller
         // Update slider
         $kegiatan->update($data);
     
-        return redirect()->route('kegiatan-arek')->with('success', 'Artikel Anak berhasil diperbarui!');
+        return redirect()->route('kegiatan-arek')->with('success', 'Kegiatan Surabaya berhasil diperbarui!');
     }
 
     public function destroyKegiatanArekSuroboyo($id)
