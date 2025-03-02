@@ -10,6 +10,7 @@ class pisaController extends Controller
 {
     public function dokumenPisa(){
         $details = DokumenPisa::where('is_active', true)->get();
+        // dd($details);
         return view('frontend.content.HalamanPisa', compact('details')); 
     }
     public function KegiatanPisa(){

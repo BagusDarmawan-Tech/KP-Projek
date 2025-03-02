@@ -121,13 +121,15 @@
                         
                                 
                                 <!-- Tombol Finalisasi -->
-                                @if (auth()->user()->hasPermissionTo('pemantauan suara anak-verifikasi')) 
-                                <button class="btn btn-sm rounded-circle edit-verifikasi" style="background-color: #FFC107; width: 36px; height: 36px;"
-                                    data-bs-toggle="modal" data-bs-target="#finalisasiModal"
-                                    data-id="{{ $suara->id }}"
-                                    data-status="{{ $suara->is_active }}">
-                                    <i class="bi bi-list-task text-white fs-6"></i>
-                                </button>
+                                @if(!is_null($suara->tindakLanjut))
+                                    @if (auth()->user()->hasPermissionTo('pemantauan suara anak-verifikasi')) 
+                                    <button class="btn btn-sm rounded-circle edit-verifikasi" style="background-color: #FFC107; width: 36px; height: 36px;"
+                                        data-bs-toggle="modal" data-bs-target="#finalisasiModal"
+                                        data-id="{{ $suara->id }}"
+                                        data-status="{{ $suara->is_active }}">
+                                        <i class="bi bi-list-task text-white fs-6"></i>
+                                    </button>
+                                    @endif
                                 @endif
                             </td>
                         </tr>

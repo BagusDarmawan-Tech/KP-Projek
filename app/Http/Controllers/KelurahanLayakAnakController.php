@@ -1,12 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Spatie\Permission\Traits\HasRoles;
+use view;
 use App\Models\Kelurahan;
 use App\Models\JenisSurat;
 use Illuminate\Http\Request;
 use App\Models\DokumenKelurahan;
 use App\Models\KegiatanKelurahan;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class KelurahanLayakAnakController extends Controller
@@ -14,9 +17,20 @@ class KelurahanLayakAnakController extends Controller
 
     // CRUD DOKUMEN KELURAHAN
     public function HalamanDokumenLayakAnak() {
+        $user = Auth::user();
+        if ($user instanceof \App\Models\User && $user->hasPermissionTo('super admin-Full Control')) {
+            // Jika user punya izin 'super admin', ambil semua data
+            $dokumens = DokumenKelurahan::all();
+        } else {
+            // Jika bukan 'super admin', hanya ambil data yang dibuat oleh user
+            $dokumens = DokumenKelurahan::whereHas('user', function ($query) {
+                    $query->where('name', Auth::user()->name);
+                })
+                ->get();
+        }
+        
 
         $kelurahans = Kelurahan::all();
-        $dokumens = DokumenKelurahan::all();
         $surats = JenisSurat::all();
         return view('admin.dokumenKelurahan',compact('dokumens','kelurahans','surats'));
     }
@@ -150,8 +164,19 @@ class KelurahanLayakAnakController extends Controller
 
 // CRUD KEGIATAN KELURAHAN
     public function KegiatanKelurahanAnak() {
+
+        $user = Auth::user();
+        if ($user instanceof \App\Models\User && $user->hasPermissionTo('super admin-Full Control')) {
+            // Jika user punya izin 'super admin', ambil semua data
+            $kegiatans = KegiatanKelurahan::all();
+        } else {
+            // Jika bukan 'super admin', hanya ambil data yang dibuat oleh user
+            $kegiatans = KegiatanKelurahan::whereHas('user', function ($query) {
+                    $query->where('name', Auth::user()->name);
+                })
+                ->get();
+        }
         $kelurahans = Kelurahan::all();
-        $kegiatans = KegiatanKelurahan::all();
         return view('admin.KegiatanKelurahan',compact('kegiatans','kelurahans'));  
     }
     public function storeKegiatanKelurahan(Request $request)

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\KategoriArtikel;
 use App\Models\ArtikelMitraAnak;
 use App\Models\KegiatanMitraAnak;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class MitraAnakController extends Controller
@@ -14,8 +15,18 @@ class MitraAnakController extends Controller
 
 // ================================ CRUD Kegiatan CFCI
     public function kegiatanCfci() {
+        $user = Auth::user();
+        if ($user instanceof \App\Models\User && $user->hasPermissionTo('super admin-Full Control')) {
+            // Jika user punya izin 'super admin', ambil semua data
+            $cfcis = KegiatanCfci::all();
+        } else {
+            // Jika bukan 'super admin', hanya ambil data yang dibuat oleh user
+            $cfcis = KegiatanCfci::whereHas('user', function ($query) {
+                    $query->where('name', Auth::user()->name);
+                })
+                ->get();
+        }
         
-        $cfcis = KegiatanCfci::all();
         return view('admin.kegiatanCfci',compact(('cfcis'))); 
 
     }
@@ -146,8 +157,20 @@ class MitraAnakController extends Controller
 
 //========================CRUD ArtikelMitra ANAk
     public function artikelmitraanak() {
+        $user = Auth::user();
+        if ($user instanceof \App\Models\User && $user->hasPermissionTo('super admin-Full Control')) {
+            // Jika user punya izin 'super admin', ambil semua data
+            $artikels = ArtikelMitraAnak::all();
+        } else {
+            // Jika bukan 'super admin', hanya ambil data yang dibuat oleh user
+            $artikels = ArtikelMitraAnak::whereHas('user', function ($query) {
+                    $query->where('name', Auth::user()->name);
+                })
+                ->get();
+        }
+
         $kategoris = KategoriArtikel::where('is_active', true)->get();
-        $artikels = ArtikelMitraAnak::all();
+        
         return view('admin.artikelMitraAnak', compact('kategoris', 'artikels'));        
     }
 
@@ -280,7 +303,18 @@ class MitraAnakController extends Controller
 
     //========================CRUD KEGIATAN MITRA ANAK 
     public function kegiatanMitraAnak() {
-        $mitras = KegiatanMitraAnak::all();
+        $user = Auth::user();
+        if ($user instanceof \App\Models\User && $user->hasPermissionTo('super admin-Full Control')) {
+            // Jika user punya izin 'super admin', ambil semua data
+            $mitras = KegiatanMitraAnak::all();
+        } else {
+            // Jika bukan 'super admin', hanya ambil data yang dibuat oleh user
+            $mitras = KegiatanMitraAnak::whereHas('user', function ($query) {
+                    $query->where('name', Auth::user()->name);
+                })
+                ->get();
+        }
+        
         return view('admin.kegiatanMitraAnak',compact(('mitras'))); 
     }
 

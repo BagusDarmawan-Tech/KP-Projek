@@ -11,4 +11,8 @@ class SuaraAnak extends Model
     protected $table = 'suara_anak';
 
     protected $fillable = ['nomorSuara', 'is_active','tanggal','perihal','deskripsi','pemohon','tanggalTindakLanjut','tindakLanjut','file'];
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'pemohon');
+    }
 }

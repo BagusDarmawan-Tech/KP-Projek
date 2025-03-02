@@ -134,7 +134,7 @@
                      </div>
                     <div class="mb-3">
                         <label class="form-label">Nama</label>
-                        <input type="text" class="form-control" name="nama">
+                        <input type="text" class="form-control" name="nama" value="{{ old('nama') }}">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Data Dukung</label>
@@ -142,7 +142,7 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Keterangan</label>
-                        <textarea class="form-control" name="keterangan"></textarea>
+                        <textarea class="form-control" name="keterangan">{{ old('keterangan') }}</textarea>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Status</label>

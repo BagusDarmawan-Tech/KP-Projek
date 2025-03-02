@@ -7,15 +7,27 @@ use App\Models\JenisSurat;
 use Illuminate\Http\Request;
 use App\Models\DokumenKecamatan;
 use App\Models\KegiatanKecamatan;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class KecamatanLayakController extends Controller
 {
     //================crud dokumen kecamatan
     public function dokumenkec() {
+        $user = Auth::user();
+        if ($user instanceof \App\Models\User && $user->hasPermissionTo('super admin-Full Control')) {
+            // Jika user punya izin 'super admin', ambil semua data
+            $dokumens = DokumenKecamatan::all();
+        } else {
+            // Jika bukan 'super admin', hanya ambil data yang dibuat oleh user
+            $dokumens = DokumenKecamatan::whereHas('user', function ($query) {
+                    $query->where('name', Auth::user()->name);
+                })
+                ->get();
+        }
         $kecamatans = Kecamatan::all();
         $surats = JenisSurat::all();
-        $dokumens = DokumenKecamatan::all();
+
         return view('admin.DokumenKecamatan',compact('kecamatans','surats','dokumens')); 
     }
     public function storeDokumenKecamatan(Request $request)
@@ -141,8 +153,19 @@ class KecamatanLayakController extends Controller
 
     //============crud kegiatan kecamatan
     public function kegiatanKecamatan() {
+        $user = Auth::user();
+        if ($user instanceof \App\Models\User && $user->hasPermissionTo('super admin-Full Control')) {
+            // Jika user punya izin 'super admin', ambil semua data
+            $kegiatans = KegiatanKecamatan::all();
+        } else {
+            // Jika bukan 'super admin', hanya ambil data yang dibuat oleh user
+            $kegiatans = KegiatanKecamatan::whereHas('user', function ($query) {
+                    $query->where('name', Auth::user()->name);
+                })
+                ->get();
+        }
         $kecamatans = Kecamatan::all();
-        $kegiatans = KegiatanKecamatan::all();
+        
         return view('admin.KegiatanKecamatan',compact('kecamatans','kegiatans'));
     }
     public function storeKegiatanKecamatan(Request $request)

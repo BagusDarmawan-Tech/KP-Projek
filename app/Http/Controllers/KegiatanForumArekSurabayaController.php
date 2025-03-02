@@ -5,14 +5,26 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\ForumAnakSurabaya;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 
 class KegiatanForumArekSurabayaController extends Controller
 {
     public function HalamanForum() {
+        $user = Auth::user();
+        if ($user instanceof \App\Models\User && $user->hasPermissionTo('super admin-Full Control')) {
+            // Jika user punya izin 'super admin', ambil semua data
+            $kegiatans = ForumAnakSurabaya::all();
+        } else {
+            // Jika bukan 'super admin', hanya ambil data yang dibuat oleh user
+            $kegiatans = ForumAnakSurabaya::whereHas('user', function ($query) {
+                    $query->where('name', Auth::user()->name);
+                })
+                ->get();
+        }
       
-        $kegiatans = ForumAnakSurabaya::all();
+        
         return view('admin.KegiatanForumArekSurabaya',compact('kegiatans'));
     }
 

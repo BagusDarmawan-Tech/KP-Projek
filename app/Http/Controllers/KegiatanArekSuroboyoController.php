@@ -4,12 +4,25 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\KegiatanArekSuroboyo;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class KegiatanArekSuroboyoController extends Controller
 {
     public function kegiatanarek() {
-        $kegiatans = KegiatanArekSuroboyo::all();
+        
+        $user = Auth::user();
+        if ($user instanceof \App\Models\User && $user->hasPermissionTo('super admin-Full Control')) {
+            // Jika user punya izin 'super admin', ambil semua data
+            $kegiatans = KegiatanArekSuroboyo::all();
+        } else {
+            // Jika bukan 'super admin', hanya ambil data yang dibuat oleh user
+            $kegiatans = KegiatanArekSuroboyo::whereHas('user', function ($query) {
+                    $query->where('name', Auth::user()->name);
+                })
+                ->get();
+        }
+
         return view('admin.kegiatanArekSuroboyo',compact('kegiatans')); 
     }
 

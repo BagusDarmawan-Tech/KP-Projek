@@ -6,6 +6,7 @@ use App\Models\JenisSurat;
 use App\Models\DokumenPisa;
 use App\Models\KegiatanPisa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class PusatInformasiSahabatController extends Controller
@@ -13,8 +14,19 @@ class PusatInformasiSahabatController extends Controller
 
     // =========== CRUD dokumen pisa
     public function HalamanDokumen() {
+        $user = Auth::user();
+        if ($user instanceof \App\Models\User && $user->hasPermissionTo('super admin-Full Control')) {
+            // Jika user punya izin 'super admin', ambil semua data
+            $dokumens = DokumenPisa::all();
+        } else {
+            // Jika bukan 'super admin', hanya ambil data yang dibuat oleh user
+            $dokumens = DokumenPisa::whereHas('user', function ($query) {
+                    $query->where('name', Auth::user()->name);
+                })
+                ->get();
+        }
         $surats = JenisSurat::all();
-        $dokumens = DokumenPisa::all();
+        
         return view('admin.DokumenPisaa',compact('surats','dokumens')); 
     }
 
@@ -138,7 +150,18 @@ class PusatInformasiSahabatController extends Controller
 
     // =========== CRUD kegiatan pisa
     public function HalamanKegiatan() {
-        $kegiatans = KegiatanPisa::all();
+        $user = Auth::user();
+        if ($user instanceof \App\Models\User && $user->hasPermissionTo('super admin-Full Control')) {
+            // Jika user punya izin 'super admin', ambil semua data
+            $kegiatans = KegiatanPisa::all();
+        } else {
+            // Jika bukan 'super admin', hanya ambil data yang dibuat oleh user
+            $kegiatans = KegiatanPisa::whereHas('user', function ($query) {
+                    $query->where('name', Auth::user()->name);
+                })
+                ->get();
+        }
+        
         return view('admin.KegiatanPisaa',compact('kegiatans'));
     }
 

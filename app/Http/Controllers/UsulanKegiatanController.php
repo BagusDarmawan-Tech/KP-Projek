@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PemantauanUsulan;
 use Carbon\Carbon;
 use App\Models\KaryaAnak;
 use App\Models\SuaraAnak;
 use Illuminate\Http\Request;
+use App\Models\PemantauanUsulan;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -14,7 +15,18 @@ class UsulanKegiatanController extends Controller
 {
 // ================================= CRUD suara anak
     public function pemantauansuara() {
-        $suaras = SuaraAnak::all();
+        $user = Auth::user();
+        if ($user instanceof \App\Models\User && $user->hasPermissionTo('super admin-Full Control')) {
+            // Jika user punya izin 'super admin', ambil semua data
+            $suaras = SuaraAnak::all();
+        } else {
+            // Jika bukan 'super admin', hanya ambil data yang dibuat oleh user
+            $suaras = SuaraAnak::whereHas('user', function ($query) {
+                    $query->where('name', Auth::user()->name);
+                })
+                ->get();
+        }
+        
         return view('admin.pemantauanSuaraAnak',compact(('suaras'))); 
     }
 
@@ -22,10 +34,17 @@ class UsulanKegiatanController extends Controller
     {
         // dd($request->all());
         $request->validate([
-            'perihal' => 'required|string|max:500',
-            'deskripsi' => 'required|string|max:500'
-,
+            'perihal'   => 'required|string|max:500',
+            'deskripsi' => 'required|string|max:500',
+        ], [
+            'perihal.required'   => 'Perihal wajib diisi.',
+            'perihal.string'     => 'Perihal harus berupa teks.',
+            'perihal.max'        => 'Perihal tidak boleh lebih dari 500 karakter.',
+            'deskripsi.required' => 'Deskripsi wajib diisi.',
+            'deskripsi.string'   => 'Deskripsi harus berupa teks.',
+            'deskripsi.max'      => 'Deskripsi tidak boleh lebih dari 500 karakter.',
         ]);
+        ;
 
         // dd($path);
         $tanggal = Carbon::now()->toDateString(); // Format: YYYY-MM-DD
@@ -191,7 +210,18 @@ class UsulanKegiatanController extends Controller
 
 // =================================CRUD Karya Anak
     public function karyaanak() {
-        $karyas = KaryaAnak::all();
+        $user = Auth::user();
+        if ($user instanceof \App\Models\User && $user->hasPermissionTo('super admin-Full Control')) {
+            // Jika user punya izin 'super admin', ambil semua data
+            $karyas = KaryaAnak::all();;
+        } else {
+            // Jika bukan 'super admin', hanya ambil data yang dibuat oleh user
+            $karyas = KaryaAnak::whereHas('user', function ($query) {
+                    $query->where('name', Auth::user()->name);
+                })
+                ->get();
+        }
+        
         return view('admin.karyaAnak',compact(('karyas'))); 
     }
 
