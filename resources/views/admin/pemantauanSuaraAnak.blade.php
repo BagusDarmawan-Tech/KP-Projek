@@ -75,7 +75,7 @@
                                     data-deskripsi="{{ $suara->deskripsi }}" 
                                     data-gambar="{{ asset($suara->gambar) }}" 
                                     data-tanggal="{{ $suara->tanggal }}" 
-                                    data-pemohon="{{ $suara->pemohon }}"
+                                    data-pemohon="{{ $suara->user ? $suara->user->name : 'Tidak ada pengguna' }}"
                                     data-nomor="{{ $suara->nomorSuara }}">Lihat Detail</a>
                             </td>
     
