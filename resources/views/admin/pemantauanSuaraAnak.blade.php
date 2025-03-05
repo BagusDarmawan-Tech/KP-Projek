@@ -160,7 +160,7 @@
                         <label class="form-label">Deskripsi</label>
                         <textarea class="form-control" name="deskripsi" rows="3"  placeholder="Masukkan deskripsi">{{ old('deskripsi') }}</textarea>
                     </div>
-                    <input type="hidden" name="pemohon" value="{{ Auth::user()->id }}">
+                    <input type="hidden" name="pemohon" value="{{ Auth::user()->id}}">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

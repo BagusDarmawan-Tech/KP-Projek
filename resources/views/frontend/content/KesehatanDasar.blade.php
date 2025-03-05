@@ -19,10 +19,10 @@
                     <table class="table table-hover table-bordered align-middle"  id="myTable">
                         <thead class="text-center">
                             <tr>
-                                <th>No</th>
-                                <th>Nama</th>
-                                <th>Keterangan</th>
-                                <th>File</th>
+                                <th class="text-center">No</th>
+                                <th class="text-center">Nama</th>
+                                <th class="text-center">Keterangan</th>
+                                <th class="text-center">File</th>
                             </tr>
                         </thead>
                         <tbody>

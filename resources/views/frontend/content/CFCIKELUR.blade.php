@@ -19,11 +19,11 @@
                 <table class="table table-hover table-bordered align-middle text-center" id="myTable">
                     <thead class="text-center">
                         <tr>
-                            <th>No</th>
-                            <th>Kategori</th>
-                            <th>Nama</th>
-                            <th>Keterangan</th>
-                            <th>File</th>
+                            <th class="text-center">No</th>
+                            <th  class="text-center">Kategori</th>
+                            <th  class="text-center">Nama</th>
+                            <th  class="text-center">Keterangan</th>
+                            <th  class="text-center">File</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -35,7 +35,8 @@
                             <td>{{ $data->keterangan }}</td>
                             <td>
                                 <a href="{{ asset($data->dataPendukung) }}" target="_blank">
-                                    <i download class="btn btn-sm btn-primary">Download</i>
+                                    <i download class="btn btn-sm btn-success" download>
+                                        <i class="bi bi-download"></i> Download</i>
                                 </a>
                             </td>                        
                         </tr>

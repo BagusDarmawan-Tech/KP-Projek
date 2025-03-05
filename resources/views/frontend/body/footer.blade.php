@@ -13,12 +13,11 @@
             <!-- About Section -->
             <div class="col-lg-5 col-md-6 col-12 text-center text-md-start">
                 <div class="d-flex justify-content-center justify-content-md-start">
-                    <img class="img-fluid" src="{{ asset('assets/img/logo.png') }}" alt="Logo" width="180">
+                <img class="img-fluid" src="{{ asset('assets/img/logo.png') }}" alt="Logo" width="180">
                 </div>
-                <p class="mt-3">Kota Layak Anak adalah Kota yang mempunyai sistem pembangunan berbasis hak anak melalui pengintegrasian komitmen dan sumber daya pemerintah.</p>
-                <p><strong>Lokasi:</strong> Jl. Jimerto No. 25-27, Ketabang, Kec. Genteng, Kota SBY, Jawa Timur 60272</p>
-                <p><strong>Phone:</strong> +(031) 5475600</p>
-                <p><strong>Email:</strong> info@example.com</p>
+                <p class="mt-3">{{ $configApps['footer'] ?? 'Kota Layak Anak adalah Kota yang mempunyai sistem pembangunan berbasis hak anak melalui pengintegrasian komitmen dan sumber daya pemerintah.' }}</p>
+                <p><strong>Lokasi:</strong> {{ $configApps['head_office'] ?? 'Jl. Jimerto No. 25-27, Ketabang, Kec. Genteng, Kota SBY, Jawa Timur 60272' }}</p>
+                <p><strong>Phone:</strong> {{ $configApps['phone'] ?? '(031) 5475600' }}</p>
             </div>
 
             <!-- Map Section -->

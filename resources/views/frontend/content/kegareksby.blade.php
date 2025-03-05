@@ -21,7 +21,7 @@
                          style="height: 200px; object-fit: cover;">
 
                     <!-- Konten Card -->
-                    <div class="card-body">
+                    <div class="card-body text-center">
                         <h5 class="card-title text-danger">{{ $kegiatan->nama }}</h5>
                         <p class="card-text text-secondary">{{ Str::limit($kegiatan->keterangan, 100) }}</p>
                         <button class="btn btn-outline-danger btn-sm" 
@@ -37,15 +37,14 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title text-danger" id="modalLabel{{ $index }}">{{ $kegiatan->nama }}</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
+                            <div class="modal-body text-center">
                             <!-- Gambar dalam Modal -->
                             <img src="{{ asset($kegiatan->gambar) }}" 
                                  alt="{{ $kegiatan->nama }}" 
                                  class="img-fluid rounded mb-3 w-100">
                             <!-- Teks dalam Modal -->
-                            <p class="text-secondary">{{ $kegiatan->keterangan }}</p>
+                            <p class="text-secondary text-dark">{{ $kegiatan->keterangan }}</p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>

@@ -36,7 +36,8 @@
                             <td class="text-center">{{ $data->nama }}</td>
                             <td class="text-center">{{ $data->keterangan }}</td>
                             <td class="text-center">
-                            <a href="{{ asset('/' . $data->dataPendukung) }}" download class="btn btn-sm btn-primary">Download</a>
+                            <a href="{{ asset('/' . $data->dataPendukung) }}" download class="btn btn-sm btn-success" download>
+                                        <i class="bi bi-download"></i>Download</a>
                         </td>
 
                         </tr>

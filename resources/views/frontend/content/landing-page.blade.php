@@ -217,27 +217,26 @@
 
         <!-- Text Area -->
         <div class="col-lg-6 col-md-12" data-aos="fade-left">
-            <div class="content">
-                <!-- Query di Blade untuk Judul -->
-                @php
-                    $judulKotaLayakAnak = $configApps->firstWhere('nama', 'Judul_kota_layak_anak');
-                    $deskripsiKotaLayakAnak = $configApps->firstWhere('nama', 'deskripsi_kota_layak_anak');
-                @endphp
+    <div class="content">
+        <!-- Query di Blade untuk Judul -->
+        @php
+            // Ambil data dari koleksi berdasarkan nama
+            $judulKotaLayakAnak = $kotaLayakAnak->firstWhere('nama', 'Judul_kota_layak_anak');
+            $deskripsiKotaLayakAnak = $kotaLayakAnak->firstWhere('nama', 'deskripsi_kota_layak_anak');
+        @endphp
 
-                <!-- Tampilkan Judul -->
-                <h3 class="fw-bold text-center mb-4">
-                    {{ $judulKotaLayakAnak->detail ?? 'Judul Kota Layak Anak belum tersedia.' }}
-                </h3>
+        <!-- Tampilkan Judul -->
+        <h3 class="fw-bold text-center mb-4">
+            {{ $judulKotaLayakAnak->detail ?? 'Judul Kota Layak Anak belum tersedia.' }}
+        </h3>
 
-                <!-- Tampilkan Deskripsi -->
-                <p class="text-muted fst-italic">
-                    {{ $deskripsiKotaLayakAnak->detail ?? 'Deskripsi tentang Kota Layak Anak belum tersedia.' }}
-                </p>
-            </div>
-        </div>
-        <!-- End Text Area -->
+        <!-- Tampilkan Deskripsi -->
+        <p class="text-muted fst-italic">
+            {{ $deskripsiKotaLayakAnak->detail ?? 'Deskripsi tentang Kota Layak Anak belum tersedia.' }}
+        </p>
     </div>
 </div>
+
 
 </section>
 
@@ -245,98 +244,57 @@
     </section><!-- /Stats Section -->
 
     <!-- Services Section -->
-    <section id="services" class="services section light-background">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
+     <section id="services" class="services section py-5" style="background-color: #f9f9f9;">
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
         <span>GALERI</span>
         <h2>GALERI</h2>
       </div><!-- End Section Title -->
 
-      <div class="container">
-
+    <div class="container">
         <div class="row gy-4">
+            @foreach ($galeri as $gambar)
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 + 100 }}">
+                    <div class="service-item position-relative overflow-hidden shadow rounded bg-white" style="border: 1px solid #ddd;">
+                        <!-- Thumbnail Image -->
+                        <img src="{{ asset($gambar->gambar) }}" alt="Galeri Image" 
+                            class="img-fluid w-100 rounded-top" 
+                            style="height: 250px; object-fit: cover; cursor: pointer;" 
+                            data-bs-toggle="modal" data-bs-target="#modal{{ $loop->index }}">
 
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-            <div class="service-item position-relative">
-              <div class="icon">
-                <i class="bi bi-activity"></i>
-              </div>
-              <a href="service-details.html" class="stretched-link">
-                <h3>Nesciunt Mete</h3>
-              </a>
-              <p>Provident nihil minus qui consequatur non omnis maiores. Eos accusantium minus dolores iure perferendis tempore et consequatur.</p>
-            </div>
-          </div><!-- End Service Item -->
+                        <!-- Title -->
+                        <div style="padding: 15px; text-align: center;">
+                            <h3 class="text-primary" style="font-size: 18px; font-weight: 600;">{{ $gambar->judul }}</h3>
+                        </div>
+                    </div>
+                </div>
 
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="service-item position-relative">
-              <div class="icon">
-                <i class="bi bi-broadcast"></i>
-              </div>
-              <a href="service-details.html" class="stretched-link">
-                <h3>Eosle Commodi</h3>
-              </a>
-              <p>Ut autem aut autem non a. Sint sint sit facilis nam iusto sint. Libero corrupti neque eum hic non ut nesciunt dolorem.</p>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="service-item position-relative">
-              <div class="icon">
-                <i class="bi bi-easel"></i>
-              </div>
-              <a href="service-details.html" class="stretched-link">
-                <h3>Ledo Markt</h3>
-              </a>
-              <p>Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus ea aut. Vel qui id voluptas adipisci eos earum corrupti.</p>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-            <div class="service-item position-relative">
-              <div class="icon">
-                <i class="bi bi-bounding-box-circles"></i>
-              </div>
-              <a href="service-details.html" class="stretched-link">
-                <h3>Asperiores Commodit</h3>
-              </a>
-              <p>Non et temporibus minus omnis sed dolor esse consequatur. Cupiditate sed error ea fuga sit provident adipisci neque.</p>
-              <a href="service-details.html" class="stretched-link"></a>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
-            <div class="service-item position-relative">
-              <div class="icon">
-                <i class="bi bi-calendar4-week"></i>
-              </div>
-              <a href="service-details.html" class="stretched-link">
-                <h3>Velit Doloremque</h3>
-              </a>
-              <p>Cumque et suscipit saepe. Est maiores autem enim facilis ut aut ipsam corporis aut. Sed animi at autem alias eius labore.</p>
-              <a href="service-details.html" class="stretched-link"></a>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
-            <div class="service-item position-relative">
-              <div class="icon">
-                <i class="bi bi-chat-square-text"></i>
-              </div>
-              <a href="service-details.html" class="stretched-link">
-                <h3>Dolori Architecto</h3>
-              </a>
-              <p>Hic molestias ea quibusdam eos. Fugiat enim doloremque aut neque non et debitis iure. Corrupti recusandae ducimus enim.</p>
-              <a href="service-details.html" class="stretched-link"></a>
-            </div>
-          </div><!-- End Service Item -->
-
+                <!-- Modal for Image -->
+                <div class="modal fade" id="modal{{ $loop->index }}" tabindex="-1" aria-labelledby="modalLabel{{ $loop->index }}" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" style="max-width: 400px;">
+                        <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
+                            <div class="modal-body p-0">
+                                <div class="d-flex justify-content-center align-items-center" style="height: 300px; background-color: white;">
+                                    <img src="{{ asset($gambar->gambar) }}" alt="Galeri Image" 
+                                        class="img-fluid" 
+                                        style="max-height: 100%; max-width: 100%; object-fit: contain;">
+                                </div>
+                                <div style="padding: 15px;">
+                                    <h5 class="text-primary" style="font-size: 16px; font-weight: 600;">{{ $gambar->judul }}</h5>
+                                    <p style="font-size: 14px; color: #555; text-align: center;">{{ $gambar->keterangan }}</p>
+                                </div>
+                            </div>
+                            <div class="modal-footer" style="border-top: none; justify-content: center;">
+                                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal" style="padding: 5px 20px;">Tutup</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
         </div>
+    </div>
+</section>
 
-      </div>
-
-    </section><!-- /Services Section -->
 
     <!-- Portfolio Section -->
     <section id="portfolio" class="portfolio section">
