@@ -11,5 +11,5 @@ class OPD extends Model
 
     protected $table = 'OPD';
 
-    protected $fillable = ['nama'];
+    protected $fillable = ['nama','is_active'];
 }

@@ -106,15 +106,15 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="nama" class="form-label">Nama</label>
-                        <input type="text" class="form-control" id="nama" name="nama" value="{{ old('nama') }}">
+                        <input type="text" class="form-control" id="nama" name="nama" value="{{ old('nama') }}" placeholder="Isi nama galeri">
                     </div>
                     <div class="mb-3">
                         <label for="caption" class="form-label">Caption</label>
-                        <input type="text" class="form-control" id="caption" name="caption" value="{{ old('caption') }}">
+                        <input type="text" class="form-control" id="caption" name="caption" value="{{ old('caption') }}" placeholder="Isi caption yang sesuai ">
                     </div>
                     <div class="mb-3">
                         <label for="deskripsi" class="form-label">Deskripsi</label>
-                        <input type="text" class="form-control" id="deskripsi" name="deskripsi" value="{{ old('deskripsi') }}>
+                        <input type="text" class="form-control" id="deskripsi" name="deskripsi" value="{{ old('deskripsi') }}" placeholder="Isi deskripsi galeri">
                     </div>
                     <div class="mb-3">
                         <label for="gambar" class="form-label">Gambar</label>

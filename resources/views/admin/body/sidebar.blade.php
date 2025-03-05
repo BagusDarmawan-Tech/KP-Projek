@@ -9,6 +9,7 @@
       </a>
     </li><!-- End Dashboard Nav -->
 
+
     {{-- CONFIG --}}
     @if (auth()->user()->hasAnyPermission(['configurasi app-list', 'user management-list', 'role management-list']))
     <li class="nav-item {{ request()->is('config/*') ? 'active' : '' }}">
@@ -57,7 +58,7 @@
     {{-- END CONFIG --}}
 
     {{-- WEB MANAGEMENT --}}
-    @if (auth()->user()->hasAnyPermission(['artikel-list', 'kategori artikel-list','slider-list','klaster-list','sub kegiatan-list','galeri-list','forum anak-list','halaman-list','pemantauan usulan-list']))
+    @if (auth()->user()->hasAnyPermission(['artikel-list', 'kategori artikel-list','slider-list','klaster-list','sub kegiatan-list','galeri-list','forum anak-list','halaman-list','pemantauan usulan-list','surat-list','opd-list']))
     <li class="nav-item {{ request()->is('web-management/*') ? 'active' : '' }}">
       <a class="nav-link {{ request()->is('web-management/*') ? '' : 'collapsed' }}" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-keyboard"></i><span>Web Management</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -136,17 +137,17 @@
         </li>
         @endif
 
-        @if (auth()->user()->hasPermissionTo('pemantauan usulan-list'))
+        @if (auth()->user()->hasPermissionTo('opd-list'))
         <li>
-          <a class="{{ request()->routeIs('OPD') ? 'active' : '' }}" href="">
+          <a class="{{ request()->routeIs('opd') ? 'active' : '' }}" href="{{route('opd')}}">
             <i class="bi bi-circle"></i><span>OPD</span>
           </a>
         </li>
         @endif
 
-        @if (auth()->user()->hasPermissionTo('pemantauan usulan-list'))
+        @if (auth()->user()->hasPermissionTo('surat-list'))
         <li>
-          <a class="{{ request()->routeIs('suratJenis') ? 'active' : '' }}" href="">
+          <a class="{{ request()->routeIs('suratJenis') ? 'active' : '' }}" href="{{route('suratJenis')}}">
             <i class="bi bi-circle"></i><span>Surat Jenis</span>
           </a>
         </li>
@@ -330,9 +331,21 @@
     @endif
     {{-- END DOKUMEN FAS DLL --}}
     <!-- End Icons Nav -->
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="pages-login.html">
+        <i class="bi bi-box-arrow-left text-danger"></i>
+        <span class="text-danger">Logout</span>
+      </a>
+    </li><!-- End Logout Page Nav -->
 
-
-    <li class="nav-heading">Pages</li>
+    <li class="nav-heading">Action</li>
+    
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="pages-login.html">
+        <i class="bi bi-box-arrow-left text-danger"></i>
+        <span class="text-danger">Logout</span>
+      </a>
+    </li><!-- End Logout Page Nav -->
 
     <li class="nav-item">
       <a class="nav-link collapsed" href="users-profile.html">
@@ -362,14 +375,8 @@
       </a>
     </li><!-- End Register Page Nav -->
 
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="pages-login.html">
-        <i class="bi bi-box-arrow-in-right"></i>
-        <span>Login</span>
-      </a>
-    </li><!-- End Login Page Nav -->
 
-    <li class="nav-item">
+    <li class="nav-item ">
       <a class="nav-link collapsed" href="pages-error-404.html">
         <i class="bi bi-dash-circle"></i>
         <span>Error 404</span>

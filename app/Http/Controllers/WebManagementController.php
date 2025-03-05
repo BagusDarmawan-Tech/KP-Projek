@@ -6,6 +6,7 @@ use App\Models\Artikel;
 use App\Models\ForumAnak;
 use App\Models\Galeri;
 use App\Models\Halaman;
+use App\Models\JenisSurat;
 use App\Models\Klaster;
 use App\Models\OPD;
 use App\Models\PemantauanUsulan;
@@ -747,7 +748,7 @@ class WebManagementController extends Controller
      //=================CRUD PemantauanUsulan
     public function pemantauanUsulan() {
         $usulans = PemantauanUsulan::all();
-        $opds = OPD::all();
+        $opds = OPD::where('is_active', 1)->get();
         return view('admin.PemantauanUsulan',compact('usulans','opds')); 
     }
 
@@ -952,8 +953,8 @@ class WebManagementController extends Controller
     public function bagianArtikel() {
         $artikels = Artikel::all();
         $kategoris = KategoriArtikel::where('is_active', true)->get();
-        $klasters = Klaster::where('is_active', true)->get();;
-        $subKegiatans = SubKegiatan::where('is_active', true)->get();;
+        $klasters = Klaster::where('is_active', true)->get();
+        $subKegiatans = SubKegiatan::where('is_active', true)->get();
         return view('admin.Artikel', compact('artikels','kategoris','subKegiatans','klasters'));
 
     }
@@ -1102,4 +1103,152 @@ class WebManagementController extends Controller
         return view('admin.MenuManagement'); 
     }
 
+    //=======================OPD CRUD
+    public function opd() {
+        $opds = OPD::all();
+        return view('admin.opd', compact('opds'));
+       
+    }
+
+    //tambah
+    public function storeOPD(Request $request)
+    {
+        // dd($request->all());
+        $request->validate([
+            'nama' => 'required|string|max:255|unique:opd,nama',
+            'is_active' => 'required|boolean',
+        ],
+        [
+            'nama.required' => 'Nama wajib diisi.',
+            'nama.max' => 'Nama maksimal 255 karakter.',
+            'nama.unique' => 'Gagal menambahkan OPD ini sudah ada.',
+
+            'is_active.required' => 'Status wajib dipilih.',
+            'is_active.boolean' => 'Status wajib diisi.',
+        ]
+    );
+
+        OPD::create([
+            'nama' => $request->nama,
+            'is_active' => $request->is_active,
+        ]);
+
+        return redirect()->route('opd')->with('success', 'OPD berhasil ditambahkan!');
+    }
+
+    //edit
+    public function updateOPD(Request $request, $id)
+    {
+        // dd($request->all());
+        $request->validate([
+            'nama' => 'required|string|max:255|unique:opd,nama',
+            'is_active' => 'required|boolean',
+        ],
+        [
+            'nama.required' => 'Nama wajib diisi.',
+            'nama.max' => 'Nama maksimal 255 karakter.',
+            'nama.unique' => 'Gagal menambahkan OPD ini sudah ada.',
+
+            'is_active.required' => 'Status wajib dipilih.',
+            'is_active.boolean' => 'Status wajib diisi.',
+        ]
+    );
+
+    
+        $opd = OPD::findOrFail($id);
+    
+        // Simpan data baru
+        $data = [
+            'nama' => $request->nama,
+            'is_active' => $request->is_active,
+        ];
+    
+        // Update 
+        $opd->update($data);
+    
+        return redirect()->route('opd')->with('success', 'OPD berhasil diperbarui!');
+    }
+
+
+    //delete
+    public function destroyOPD($id)
+    {
+        $opd = OPD::findOrFail($id);
+    
+        // Hapus dari database
+        $opd->delete();
+    
+        return redirect()->route('opd')->with('success', 'OPD berhasil dihapus!');
+    }
+
+        //=======================END OPD CRUD
+
+        //=======================surat CRUD
+        public function suratJenis() {
+            $surats = JenisSurat::all();
+            return view('admin.surat', compact('surats'));
+           
+        }
+
+        public function storeSuratJenis(Request $request)
+        {
+            $request->validate([
+                'nama' => 'required|string|max:255|unique:jenis_surat,nama',
+                'is_active' => 'required|boolean',
+            ], [
+                'nama.required' => 'Nama wajib diisi.',
+                'nama.max' => 'Nama maksimal 255 karakter.',
+                'nama.unique' => 'Gagal menambahkan Surat ini sudah ada, silakan pilih yang lain.',
+        
+                'is_active.required' => 'Status wajib dipilih.',
+                'is_active.boolean' => 'Status wajib diisi.',
+            ]);
+        
+            JenisSurat::create([
+                'nama' => $request->nama,
+                'is_active' => $request->is_active,
+            ]);
+        
+            return redirect()->route('suratJenis')->with('success', 'Jenis Surat berhasil ditambahkan!');
+        }
+        
+
+    public function updatesuratJenis(Request $request, $id)
+    {
+        // dd($request->all());
+        $request->validate([
+            'nama' => 'required|string|max:255|unique:jenis_surat,nama',
+            'is_active' => 'required|boolean',
+        ], [
+            'nama.required' => 'Nama wajib diisi.',
+            'nama.max' => 'Nama maksimal 255 karakter.',
+            'nama.unique' => 'Gagal menambahkan Surat ini sudah ada, silakan pilih yang lain.',
+    
+            'is_active.required' => 'Status wajib dipilih.',
+            'is_active.boolean' => 'Status wajib diisi.',
+        ]);
+
+    
+        $opd = JenisSurat::findOrFail($id);
+    
+        // Simpan data baru
+        $data = [
+            'nama' => $request->nama,
+            'is_active' => $request->is_active,
+        ];
+    
+        // Update 
+        $opd->update($data);
+    
+        return redirect()->route('suratJenis')->with('success', 'Surat Jenis berhasil diperbarui!');
+    }
+    public function destroysuratJenis($id)
+    {
+        $opd = JenisSurat::findOrFail($id);
+    
+        // Hapus dari database
+        $opd->delete();
+    
+        return redirect()->route('suratJenis')->with('success', 'Surat berhasil dihapus!');
+    }
 }

@@ -40,6 +40,8 @@ class ConfigController extends Controller
             'Pemantauan Suara Anak' => ['list', 'add', 'edit', 'delete', 'verifikasi'],
             'Karya' => ['list', 'add', 'edit', 'delete', 'verifikasi'],
             'Dokumen SK FAS, CFCI dan KLA' => ['list', 'add', 'edit', 'delete', 'verifikasi'],
+            'OPD' => ['list', 'add', 'edit', 'delete', 'verifikasi'],
+            'Surat' => ['list', 'add', 'edit', 'delete', 'verifikasi'],
             'Super Admin' => ['Full Control ']
         ];
         
@@ -102,7 +104,9 @@ class ConfigController extends Controller
             'Pemantauan Suara Anak' => ['list', 'add', 'edit', 'delete', 'verifikasi'],
             'Karya' => ['list', 'add', 'edit', 'delete', 'verifikasi'],
             'Dokumen SK FAS, CFCI dan KLA' => ['list', 'add', 'edit', 'delete', 'verifikasi'],
-            'Super Admin' => ['Full Control ']
+            'OPD' => ['list', 'add', 'edit', 'delete', 'verifikasi'],
+            'Surat' => ['list', 'add', 'edit', 'delete', 'verifikasi'],
+            'Super Admin' => ['Full Control']
         ];
     
 

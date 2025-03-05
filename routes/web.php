@@ -321,6 +321,14 @@ Route::middleware('auth')->group(function () {
         ->name('Artikel')
         ->middleware(['auth', 'verified', 'can:artikel-list']);
 
+    Route::get('/opd', [WebManagementController::class, 'opd'])
+        ->name('opd')
+        ->middleware(['auth', 'verified', 'can:opd-list']);
+
+    Route::get('/suratJenis', [WebManagementController::class, 'suratJenis'])
+        ->name('suratJenis')
+        ->middleware(['auth', 'verified', 'can:surat-list']);
+
     //Tambah data
     Route::post('/createKategoriArtikel', [WebManagementController::class, 'storeKategoriArtikel'])
         ->name('createKategoriArtikel')
@@ -357,6 +365,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/createArtikel', [WebManagementController::class, 'storeArtikel'])
         ->name('createArtikel')
         ->middleware(['auth', 'verified', 'can:artikel-add']);
+
+    Route::post('/createOPD', [WebManagementController::class, 'storeOPD'])
+        ->name('createOPD')
+        ->middleware(['auth', 'verified', 'can:opd-add']);
+
+    Route::post('/createSuratJenis', [WebManagementController::class, 'storeSuratJenis'])
+        ->name('createSuratJenis')
+        ->middleware(['auth', 'verified', 'can:surat-add']);
 
     //Edit data
     Route::put('/kategori-artikel/update/{id}', [WebManagementController::class, 'updateKategoriArtikel'])
@@ -395,6 +411,14 @@ Route::middleware('auth')->group(function () {
         ->name('updatePemantauaUsulan')
         ->middleware(['auth', 'verified', 'can:pemantauan usulan-edit']);
 
+    Route::put('/opd/update/{id}', [WebManagementController::class, 'updateOPD'])
+        ->name('updateOPD')
+        ->middleware(['auth', 'verified', 'can:opd-edit']);
+
+    Route::put('/suratJenis/update/{id}', [WebManagementController::class, 'updatesuratJenis'])
+        ->name('updatesuratJenis')
+        ->middleware(['auth', 'verified', 'can:surat-edit']);
+
 
     //Delete data
     Route::delete('/kategori/hapus/{id}', [WebManagementController::class, 'destroyKategoriArtikel'])
@@ -432,6 +456,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/artikel/hapus/{id}', [WebManagementController::class, 'destroyArtikel'])
         ->name('destroyArtikel')
         ->middleware(['auth', 'verified', 'can:artikel-delete']);
+
+    Route::delete('/opd/hapus/{id}', [WebManagementController::class, 'destroyOPD'])
+        ->name('destroyOPD')
+        ->middleware(['auth', 'verified', 'can:opd-delete']);
+
+    Route::delete('/suratJenis/hapus/{id}', [WebManagementController::class, 'destroysuratJenis'])
+        ->name('destroysuratJenis')
+        ->middleware(['auth', 'verified', 'can:surat-delete']);
 
 });
 

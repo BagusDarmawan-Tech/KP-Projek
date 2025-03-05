@@ -36,19 +36,19 @@
 
             <!-- Tabel -->
             <div class="table-responsive">
-                <table class="table table-hover table-bordered align-middle text-center" id="myTable">
+                <table class="table table-hover table-bordered align-middle text-center" id="myTable" style="table-layout: auto; width: 100%;">
                     <thead class="table-primary">
                         <tr>
-                            <th class="text-center">No</th>
-                            <th class="text-center">Nama</th>
-                            <th class="text-center">Actions</th>
+                            <th class="text-center" style="width: 5%;">No</th>
+                            <th class="text-center" style="width: 50%;">Nama</th>
+                            <th class="text-center" style="width: 20%;">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($roles as $role )
+                        @foreach ($roles as $role)
                         <tr>
                             <td style="text-align: center;">{{ $loop->iteration }}</td>
-                            <td>{{ $role->name }}</td>
+                            <td class="text-start">{{ $role->name }}</td>
                             <td>
                                 @if (auth()->user()->hasPermissionTo('role management-edit'))
                                 <a href="{{ route('EditRole', $role->id) }}">
@@ -72,6 +72,7 @@
                     </tbody>
                 </table>
             </div>
+            
         </div>
     </div>
 </div>
