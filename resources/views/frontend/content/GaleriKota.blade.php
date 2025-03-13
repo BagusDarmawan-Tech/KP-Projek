@@ -6,13 +6,14 @@
     <div class="card shadow-lg border-0 position-relative overflow-hidden mb-5">
         <!-- Card Pembatas Besar dengan Judul dan Galeri -->
         <div class="card shadow-lg border-0 rounded-4 p-4">
-            <div class="card-header text-center" style="background: rgb(233, 36,103);">
+            <div class="card-header text-center bg-danger">
                 <h2 class="fw-bold text-white m-0">GALERI KOTA LAYAK ANAK</h2>
             </div>
             <div class="card-body">
-                <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
+                <!-- Galeri Grid -->
+                <div class="row g-4">
                     @foreach($gambars as $index => $gambar)
-                    <div class="col-lg-4 col-md-6">
+                    <div class="col-lg-4 col-md-6 col-sm-12">
                         <div class="card-gallery">
                             <!-- Gambar -->
                             <img src="{{ asset($gambar->gambar) }}" 
@@ -24,7 +25,8 @@
                                  data-bs-toggle="modal" 
                                  data-bs-target="#imageModal">
                             <!-- Overlay -->
-                            <div class="overlay" data-img-src="{{ asset($gambar->gambar) }}" 
+                            <div class="overlay" 
+                                 data-img-src="{{ asset($gambar->gambar) }}" 
                                  data-description="{{ $gambar->deskripsi }}" 
                                  data-bs-toggle="modal" 
                                  data-bs-target="#imageModal">
@@ -51,18 +53,19 @@
                 <h5 class="modal-title" id="imageModalLabel">Lihat Gambar</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body text-center">
+            <div class="modal-body text-center position-relative">
                 <!-- Tombol Navigasi Kiri -->
-                <button id="prevBtn" class="btn btn-light position-absolute" style="left: 0; top: 50%; transform: translateY(-50%); font-size: 30px; z-index: 100;">
+                <button id="prevBtn" class="btn btn-light position-absolute" style="left: 10px; top: 50%; transform: translateY(-50%); z-index: 100;">
                     &lt;
                 </button>
+                <!-- Gambar -->
                 <img id="modalImage" class="img-fluid rounded" src="" alt="Selected Image" style="max-width: 100%; max-height: 80vh;">
                 <!-- Tombol Navigasi Kanan -->
-                <button id="nextBtn" class="btn btn-light position-absolute" style="right: 0; top: 50%; transform: translateY(-50%); font-size: 30px; z-index: 100;">
+                <button id="nextBtn" class="btn btn-light position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%); z-index: 100;">
                     &gt;
                 </button>
                 <!-- Deskripsi Gambar -->
-                <div id="imageDescription" class="mt-3 text-center"></div>
+                <div id="imageDescription" class="mt-3"></div>
                 <div id="imageCounter" class="mt-3"></div>
             </div>
         </div>
@@ -117,28 +120,6 @@
         color: white;
         font-size: 26px;
         font-weight: bold;
-    }
-
-    /* Responsif */
-    @media (max-width: 768px) {
-        .col-md-6 {
-            flex: 0 0 50%;
-            max-width: 50%;
-        }
-    }
-
-    @media (max-width: 576px) {
-        .col-sm-6 {
-            flex: 0 0 100%;
-            max-width: 100%;
-        }
-    }
-
-    /* Modal */
-    #modalImage {
-        width: auto;
-        max-width: 90vw;
-        max-height: 80vh;
     }
 </style>
 

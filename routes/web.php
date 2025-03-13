@@ -61,7 +61,7 @@ Route::get('/CFCI/SK-Kecamatan', [CFCIController::class, 'Ckecamatan'])->name('C
 
 // ROUTE HALAMAN GALERI
 Route::get('/Galeri-Kota-Layak-Anak', [GaleriController::class, 'galeriKotaLayakAnak'])->name('galeri-kota-layakanak');
-Route::get('/Galeri-Anak', [GaleriController::class, 'GaleriAnak'])->name('GaleriAnak');
+// Route::get('/Galeri-Anak', [GaleriController::class, 'GaleriAnak'])->name('GaleriAnak');
 // SELESAI HALAMAN GALERI
 
 

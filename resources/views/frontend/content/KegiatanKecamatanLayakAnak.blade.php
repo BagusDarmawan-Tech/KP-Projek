@@ -6,14 +6,15 @@
     <div class="card shadow-lg border-0 position-relative overflow-hidden mb-5">
         <!-- Header Card -->
         <div class="card shadow-lg border-0 rounded-4 p-4">
-            <div class="card-header text-center" style="background: rgb(233, 36,103);">
+            <div class="card-header text-center bg-danger">
                 <h2 class="fw-bold text-white m-0">KEGIATAN KECAMATAN KOTA LAYAK ANAK</h2>
             </div>
             <div class="card-body">
-                <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
+                <!-- Galeri Grid -->
+                <div class="row g-4">
                     <!-- Looping Data dari Database -->
                     @foreach($gambars as $index => $gambar)
-                    <div class="col-lg-4 col-md-6">
+                    <div class="col-lg-4 col-md-6 col-sm-12">
                         <div class="card gallery-card shadow-sm border-0">
                             <!-- Gambar -->
                             <div class="card-gallery position-relative overflow-hidden">
@@ -50,6 +51,7 @@
                     &lt;
                 </button>
 
+                <!-- Gambar Modal -->
                 <img id="modalImage" class="img-fluid rounded" src="" alt="Selected Image" style="max-width: 100%; max-height: 80vh;">
                 
                 <!-- Tombol Navigasi Kanan -->
@@ -120,21 +122,6 @@
         font-size: 26px;
         font-weight: bold;
     }
-
-    /* Responsif */
-    @media (max-width: 768px) {
-        .col-md-6 {
-            flex: 0 0 50%;
-            max-width: 50%;
-        }
-    }
-
-    @media (max-width: 576px) {
-        .col-sm-6 {
-            flex: 0 0 100%;
-            max-width: 100%;
-        }
-    }
 </style>
 
 <!-- Skrip -->
@@ -157,8 +144,8 @@
 
     // Update counter gambar di modal
     function updateImageCounter() {
-        const counter = document.getElementById("imageCounter");
-        counter.textContent = `Foto ${parseInt(currentIndex) + 1} dari {{ $gambars->count() }}`;
+        const totalImages = document.querySelectorAll('.gallery-image').length;
+        document.getElementById("imageCounter").textContent = `Foto ${parseInt(currentIndex) + 1} dari ${totalImages}`;
     }
 
     // Navigasi ke gambar sebelumnya

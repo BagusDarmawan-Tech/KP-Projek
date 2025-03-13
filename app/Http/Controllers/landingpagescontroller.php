@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\Slider;
 use App\Models\ConfigApp;
 use App\Models\klaster;
+use App\Models\KategoriArtikel;
 use App\Models\ForumAnakSurabaya;
 use App\Models\SubKegiatan;
+use App\Models\ArtikelMitraAnak;
 
 class landingpagescontroller extends Controller
 {
@@ -23,35 +25,22 @@ class landingpagescontroller extends Controller
             'maps',
         ])->pluck('detail', 'nama');
         
-        $galeri = ForumAnakSurabaya::where('is_active', true)->take(6)->get(); // Membatasi hasil menjadi 6 data
-    
-        return view('frontend.content.landing-page', compact('gambars', 'configApps', 'galeri', 'kotaLayakAnak' ));
+        $galeri = ForumAnakSurabaya::where('is_active', true)->take(6)->get();
+
+        $kategoriArtikel = KategoriArtikel::where('is_active', true)
+        ->take(4) 
+        ->get();
+
+        $karyaAnak = ArtikelMitraAnak::where('is_active', true)
+            ->with('kategori') 
+            ->orderBy('created_at', 'desc')
+            ->take(12) 
+            ->get();
+
+            
+
+        return view('frontend.content.landing-page', compact('gambars', 'configApps', 'galeri', 'kotaLayakAnak', 'kategoriArtikel', 'karyaAnak' ));
     }
     
-    
-
-
-
-
-
-    // public function klaster(){
-    //     $gambars = klaster::where('is_active', true)->get();
-
-    //     $subKegiatans = SubKegiatan::all();
-     
-    // return view('frontend.content.landing-page', compact('gambars', 'subKegiatans'));
-  
-
-    // }
-    // public function haksipil(){
-    //     $subkegiatans = SubKegiatan::join('kluster', 'sub_kegiatan.klusterid', '=', 'kluster.id')
-    //     ->where('kluster.nama', 'Hak Sipil dan Kebebasan')
-    //     ->where('sub_kegiatan.kategori', 'Hak Sipil dan Kebebasan')
-    //     ->select('sub_kegiatan.*') // Pastikan hanya memilih kolom yang diperlukan
-    //     ->get();
-    
-      
-    // return view('frontend.content.landing-page', compact('subKegiatans'));
-    // }
 
 }

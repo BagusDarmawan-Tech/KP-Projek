@@ -299,156 +299,54 @@
     <!-- Portfolio Section -->
     <section id="portfolio" class="portfolio section">
 
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <span>BERITA DAN ARTIKEL</span>
-        <h2>BERITA DAN ARTIKEL</h2>
-      </div><!-- End Section Title -->
+<!-- Section Title -->
+<div class="container section-title" data-aos="fade-up">
+    <span>BERITA DAN ARTIKEL</span>
+    <h2>BERITA DAN ARTIKEL</h2>
+</div><!-- End Section Title -->
 
-      <div class="container">
+<div class="container">
+    <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
 
-        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
-
-          <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
+        <!-- Filter Kategori -->
+        <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
             <li data-filter="*" class="filter-active">All</li>
-            <li data-filter=".filter-Kesehatan">Kesehatan Anak</li>
-            <li data-filter=".filter-Kegiatan">Kegiatan Arek Surabaya</li>
-            <li data-filter=".filter-Perlindungan">Perlindungan Anak</li>
-            <li data-filter=".filter-Teknologi">Teknologi dan Enovasi</li>
-          </ul><!-- End Portfolio Filters -->
+            @foreach ($kategoriArtikel as $kategori)
+                <li data-filter=".filter-{{ $kategori->id }}">{{ $kategori->nama }}</li>
+            @endforeach
+        </ul><!-- End Portfolio Filters -->
 
-          <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
+        <!-- Portfolio Items -->
+        <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
+            @foreach ($karyaAnak as $artikel)
+                <div class="col-lg-4 col-md-6 col-sm-12 portfolio-item isotope-item filter-{{ $artikel->kategoriartikelid }}">
+                    <div class="card h-100 text-center d-flex flex-column justify-content-between align-items-center p-3">
+                        <!-- Gambar Artikel -->
+                        <img src="{{ asset($artikel->gambar) }}" class="card-img-top img-fluid" alt="{{ $artikel->judul }}" style="height: 200px; object-fit: cover; border-radius: 10px;">
+                        
+                        <!-- Judul Artikel -->
+                        <h4 class="card-title mt-3">{{ $artikel->judul }}</h4>
+                        
+                        <!-- Tombol Preview -->
+                        <div class="mt-4">
+                            <a href="{{ asset($artikel->gambar) }}" 
+                               title="{{ $artikel->judul }}" 
+                               data-gallery="portfolio-gallery-{{ $artikel->kategoriartikelid }}" 
+                               class="glightbox preview-link btn btn-primary btn-sm" 
+                               data-description="{{ $artikel->judul }}">
+                               <i class="bi bi-zoom-in"></i> Preview
+                            </a>
+                        </div>
+                    </div>
+                </div><!-- End Portfolio Item -->
+            @endforeach
+        </div><!-- End Portfolio Container -->
 
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-Kesehatan text-center">
-              <img src="assets/img/portfolio/app-1.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info text-center">
-                <h4>App 1</h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-                <a href="assets/img/portfolio/app-1.jpg" title="App 1" data-gallery="portfolio-gallery-Kesehatan"
-                class="glightbox preview-link" 
-                data-description="abcdefghij"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div><!-- End Portfolio Item -->
+    </div>
+</div>
 
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-Kegiatan">
-              <img src="{{ asset('assets/img/portfolio/product-1.jpg')}}" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Product 1</h4>
-                <p>Lorem ipsum, dolor sit amet consecteturmanbnvsasjahbdsnmjasghgvc nmjyausyudhsdg</p>
-                <a href="{{ asset('assets/img/portfolio/product-1.jpg')}}" title="Product 1" data-gallery="portfolio-gallery-product" class="glightbox preview-link"
-                data-description="abcdefghijklyou"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div><!-- End Portfolio Item -->
+</section>
 
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-Perlindungan">
-              <img src="{{ asset('assets/img/portfolio/branding-1.jpg')}}" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Branding 1</h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-                <a href="assets/img/portfolio/branding-1.jpg" title="Branding 1" data-gallery="portfolio-gallery-branding" class="glightbox preview-link" data-description="abcdefghijklyou"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-Teknologi">
-              <img src="assets/img/portfolio/books-1.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Books 1</h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-                <a href="assets/img/portfolio/books-1.jpg" title="Branding 1" data-gallery="portfolio-gallery-book" class="glightbox preview-link" data-description="abcdefghijklyou"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-Kesehatan">
-              <img src="assets/img/portfolio/app-2.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>App 2</h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-                <a href="assets/img/portfolio/app-2.jpg" title="App 2" data-gallery="portfolio-gallery-Kesehatan" class="glightbox preview-link" data-description="abcdefghijklyou"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-Kegiatan">
-              <img src="assets/img/portfolio/product-2.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Product 2</h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-                <a href="assets/img/portfolio/product-2.jpg" title="Product 2" data-gallery="portfolio-gallery-product" class="glightbox preview-link" data-description="abcdefghijklyou"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-Perlindungan">
-              <img src="assets/img/portfolio/branding-2.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Branding 2</h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-                <a href="assets/img/portfolio/branding-2.jpg" title="Branding 2" data-gallery="portfolio-gallery-branding" class="glightbox preview-link" data-description="abcdefghijklyou"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-Teknologi">
-              <img src="assets/img/portfolio/books-2.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Books 2</h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-                <a href="assets/img/portfolio/books-2.jpg" title="Branding 2" data-gallery="portfolio-gallery-book" class="glightbox preview-link" data-description="abcdefghijklyou"><i class="bi bi-zoom-in" ></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-Kesehatan">
-              <img src="assets/img/portfolio/app-3.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>App 3</h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-                <a href="assets/img/portfolio/app-3.jpg" title="App 3" data-gallery="portfolio-gallery-Kesehatan" class="glightbox preview-link" data-description="abcdefghijklyou"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-Kegiatan">
-              <img src="assets/img/portfolio/product-3.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Product 3</h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-                <a href="assets/img/portfolio/product-3.jpg" title="Product 3" data-gallery="portfolio-gallery-product" class="glightbox preview-link" data-description="abcdefghijklyou"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-Perlindungan">
-              <img src="assets/img/portfolio/branding-3.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Branding 3</h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-                <a href="assets/img/portfolio/branding-3.jpg" title="Branding 2" data-gallery="portfolio-gallery-branding" class="glightbox preview-link" data-description="abcdefghijklyou"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-Teknologi">
-              <img src="assets/img/portfolio/books-3.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Books 3</h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-                <a href="assets/img/portfolio/books-3.jpg" title="Branding 3" data-gallery="portfolio-gallery-book" class="glightbox preview-link" data-description="abcdefghijklyou"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-          </div><!-- End Portfolio Container -->
-
-        </div>
-
-      </div>
-
-    </section><!-- /Portfolio Section -->
 
     <!-- BAGIAN KUNJUNGAN WEB -->
     <!-- Stats Section -->
