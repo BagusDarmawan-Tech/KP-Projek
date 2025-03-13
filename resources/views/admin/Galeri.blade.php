@@ -47,7 +47,7 @@
                     </thead>
                     <tbody>
                         @foreach ($galeris as $galeri)
-                        <tr>
+                        <tr class="text-start">
                             <td style="text-align: center;">{{ $loop->iteration }}</td>
                             <td><img src="{{ asset($galeri->gambar) }}" alt="Gambar Galeri" width="80"></td>
                             <td class="nama">{{ $galeri->nama }}</td>
@@ -106,27 +106,27 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="nama" class="form-label">Nama</label>
-                        <input type="text" class="form-control" id="nama" name="nama" value="{{ old('nama') }}" placeholder="Isi nama galeri">
+                        <input type="text" class="form-control" id="nama" name="nama" value="{{ old('nama') }}" placeholder="Isi nama kegiatan ">
                     </div>
                     <div class="mb-3">
                         <label for="caption" class="form-label">Caption</label>
-                        <input type="text" class="form-control" id="caption" name="caption" value="{{ old('caption') }}" placeholder="Isi caption yang sesuai ">
+                        <textarea class="form-control" name="caption" placeholder="Isi caption yang sesuai dengan kegiatan ">{{ old('caption') }}</textarea>
                     </div>
                     <div class="mb-3">
                         <label for="deskripsi" class="form-label">Deskripsi</label>
-                        <input type="text" class="form-control" id="deskripsi" name="deskripsi" value="{{ old('deskripsi') }}" placeholder="Isi deskripsi galeri">
+                        <textarea class="form-control" name="deskripsi" placeholder="Isi deskripsi kegiatan">{{ old('deskripsi') }}</textarea>
                     </div>
                     <div class="mb-3">
                         <label for="gambar" class="form-label">Gambar</label>
-                        <input type="file" class="form-control" id="gambar" name="gambar" accept="image/*" required>
+                        <input type="file" class="form-control" id="gambar" name="gambar" accept="image/*">
                     </div>
                     <div class="mb-3">
-                        <label for="status" class="form-label">Status</label>
-                        <select class="form-select" id="status" name="is_active" required>
-                            <option value="" disabled selected>--- Pilih Status ---</option>
-                            <option value="1">Aktif</option>
-                            <option value="0">Non-Aktif</option>
-                        </select>
+                        <label class="form-label">Status</label>
+                        <div class="form-check form-switch">
+                            <input type="hidden" name="is_active" value="0"> <!-- Fallback jika checkbox tidak dicentang -->
+                            <input class="form-check-input" type="checkbox" id="status" name="is_active" value="1" checked>
+                            <label class="form-check-label" for="status">Aktif</label>
+                        </div>
                     </div>
                     <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->id }}">
                 </div>

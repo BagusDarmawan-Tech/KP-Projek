@@ -298,22 +298,26 @@
     {{-- END FORUM ANAK SUROBOYO --}}
 
     {{-- PEMANTAUAN SUARA --}}
-    @if (auth()->user()->hasPermissionTo('pemantauan suara anak-list'))
+    @if (auth()->user()->hasAnyPermission(['pemantauan suara anak-list','karya-list']))
     <li class="nav-item {{ request()->is('Usulan-Kegiatan/*') ? 'active' : '' }}">
       <a class="nav-link {{ request()->is('Usulan-Kegiatan/*') ? '' : 'collapsed' }}" data-bs-target="#usulan-kegiatan" data-bs-toggle="collapse" href="#">
         <i class="bi bi-gem"></i><span>Usulan Kegiatan</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
       <ul id="usulan-kegiatan" class="nav-content collapse {{ request()->is('Usulan-Kegiatan/*') ? 'show' : '' }} " data-bs-parent="#sidebar-nav">
+        @if (auth()->user()->hasPermissionTo('pemantauan suara anak-list'))
         <li>
           <a class="{{ request()->routeIs('pemantauan-suara') ? 'active' : '' }}"href="{{route('pemantauan-suara')}}">
             <i class="bi bi-circle"></i><span>Pemantauan Suara Anak</span>
           </a>
         </li>
         <li>
+        @endif
+        @if (auth()->user()->hasPermissionTo('karya-list'))
           <a class="{{ request()->routeIs('karya-anak') ? 'active' : '' }}"href="{{route('karya-anak')}}">
             <i class="bi bi-circle"></i><span>Karya</span>
           </a>
         </li>
+        @endif
       </ul>
     </li><!-- End Icons Nav -->
     @endif

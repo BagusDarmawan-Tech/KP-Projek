@@ -39,33 +39,33 @@
                             <th class="text-center">No</th>
                             <th class="text-center">OPD</th>
                             <th class="text-center">Nama Usulan</th>
-                            <th class="text-center">Keterangan</th>
                             <th class="text-center">Tindak Lanjut</th>
+                            <th class="text-center">Keterangan</th>
                             <th class="text-center">Status</th>
                             <th class="text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($usulans as $usulan )
-                        <tr>
+                        <tr class="text-start">
                             <td style="text-align: center;">{{ $loop->iteration }}</td>
 
                             <td> {{ $usulan->opd ? $usulan->opd->nama : 'Tidak ada pengguna' }}</td>
                             <td>{{ $usulan->namaUsulan }}</td>
 
+                            <td>{{ $usulan->tindakLanjut }}</td>
                             <!-- Keterangan -->
-                            <td>
+                            <td class="text-center">
                                 <a href="#" 
                                 class="lihat-keterangan" 
                                 data-bs-toggle="modal" 
                                 data-bs-target="#keteranganModal"
                                 data-keterangan="{{ $usulan->keterangan }}">
-                                    Lihat Keterangan
+                                <i class="bi bi-eye-fill fs-3"></i>
                                 </a>
                             </td>
-                            <!-- <td>{{ $usulan->keterangan }}</td> -->
-                            <td>{{ $usulan->tindakLanjut }}</td>
-                            <td>
+                            
+                            <td class="text-center">
                                 @if($usulan->is_active == 0)
                                 <span class="badge bg-warning">Non Aktif</span>
                                 @else
@@ -111,21 +111,12 @@
                 <h5 class="modal-title fw-bold text-center" id="menuModalLabel">Tambah Menu Pemantauan Usulan Anak</h5>
             </div>
             <div class="modal-body">
-                @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-                @endif
                 <form method="POST" action="{{ route('createPemantauanUsulan') }}" >
                     @csrf 
                     <input type="hidden" name="userid" value="{{ Auth::user()->id }}">
                     <div class="mb-3">
                         <label for="opdId" class="form-label">OPD</label>
-                         <select class="form-select select2" id="opdId" name="opdId" >
+                         <select class="form-select select2" id="opdId" name="opdId" required >
                             <option value="" disabled selected>Pilih OPD</option> <!-- Tidak bisa dipilih -->
                             @foreach ($opds as $opd)
                                 <option value="{{ $opd->id }}">{{ $opd->nama }}</option>
@@ -136,15 +127,15 @@
                     
                     <div class="mb-3">
                         <label for="namaUsulan" class="form-label">Nama Usulan</label>
-                        <input type="text" class="form-control"  id="namaUsulan" name="namaUsulan" value="{{ old('namaUsulan') }}">
+                        <input type="text" class="form-control"  id="namaUsulan" name="namaUsulan" placeholder="Isi nama usulan" value="{{ old('namaUsulan') }}">
                     </div>
                     <div class="mb-3">
                         <label for="keterangan" class="form-label">Tindak Lanjut</label>
-                        <textarea class="form-control" id="" rows="2" name="tindakLanjut" value="{{ old('tindakLanjut') }}"></textarea>
+                        <textarea class="form-control" id="" rows="2" name="tindakLanjut" placeholder="Isi Tindak Lanjut yang terjadi" value="{{ old('tindakLanjut') }}"></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="keterangan" class="form-label">Keterangan</label>
-                        <textarea class="form-control" id="keterangan" rows="2" name="keterangan" value="{{ old('keterangan') }}"></textarea>
+                        <textarea class="form-control" id="keterangan" rows="2" name="keterangan" placeholder="Jelaskan rincian usulan">{{ old('keterangan') }}</textarea>
                     </div>
                 </div>
                 <div class="modal-footer">

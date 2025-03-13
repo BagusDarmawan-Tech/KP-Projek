@@ -111,12 +111,12 @@
                         <textarea class="form-control" id="konten" rows="3" name="konten" >{{ old('konten') }}</textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="kategoriStatus" class="form-label">Status</label>
-                        <select class="form-select" id="kategoriStatus" name="is_active" required>
-                            <option value="" disabled selected>--- Pilih Status ---</option>
-                            <option value="1" {{ old('is_active') == "1" ? 'selected' : '' }}>Aktif</option>
-                            <option value="0" {{ old('is_active') == "0" ? 'selected' : '' }}>Non-Aktif</option>
-                        </select>
+                        <label class="form-label">Status</label>
+                        <div class="form-check form-switch">
+                            <input type="hidden" name="is_active" value="0"> <!-- Fallback jika checkbox tidak dicentang -->
+                            <input class="form-check-input" type="checkbox" id="status" name="is_active" value="1" checked>
+                            <label class="form-check-label" for="status">Aktif</label>
+                        </div>
                     </div>
                     <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->id }}">
                     </div>

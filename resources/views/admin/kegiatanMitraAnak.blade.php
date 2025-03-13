@@ -118,12 +118,12 @@
             <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan nama kegiatan" value="{{ old('nama') }}"    >
           </div>
           <div class="mb-3">
-            <label for="keteranganKegiatan" class="form-label fw-semibold">Deskripsi</label>
-            <textarea class="form-control" id="keteranganKegiatan" rows="3" name="deskripsi" placeholder="Tambahkan keterangan kegiatan" >{{ old('deskripsi') }}</textarea>
-          </div>
-          <div class="mb-3">
             <label for="keteranganKegiatan" class="form-label fw-semibold">Caption</label>
             <textarea class="form-control" id="keteranganKegiatan" rows="3" name="caption" placeholder="Tambahkan keterangan kegiatan">{{ old('caption') }}</textarea>
+          </div>
+          <div class="mb-3">
+            <label for="keteranganKegiatan" class="form-label fw-semibold">Deskripsi</label>
+            <textarea class="form-control" id="keteranganKegiatan" rows="3" name="deskripsi" placeholder="Tambahkan keterangan kegiatan" >{{ old('deskripsi') }}</textarea>
           </div>
           <div class="mb-3">
             <label for="gambarKegiatan" class="form-label fw-semibold">Gambar</label>

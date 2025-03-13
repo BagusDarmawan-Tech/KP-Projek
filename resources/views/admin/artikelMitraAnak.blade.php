@@ -100,15 +100,16 @@
                     @csrf
                     <div class="mb-3">
                         <label for="judul" class="form-label">Judul</label>
-                        <input type="text" class="form-control" id="judul" name="judul" value="{{ old('judul') }}">
+                        <input type="text" class="form-control" id="judul" name="judul" placeholder="Masukan Judul Artikel" value="{{ old('judul') }}">
                     </div>
                     <div class="mb-3">
                         <label for="tag" class="form-label">Tag</label>
-                        <input type="text" class="form-control" id="tag" name="tag" value="{{ old('tag') }}">
+                        <input type="text" class="form-control" id="tag" placeholder="Masukan Tag yang sesuai artikel" name="tag" value="{{ old('tag') }}">
                     </div>
                     <div class="mb-3">
                         <label for="kategoriartikelid" class="form-label">Kategori Artikel</label>
                         <select class="form-select" id="kategoriartikelid" name="kategoriartikelid">
+                            <option value="" disabled selected>-- Pilih Kategori Artikel--</option>
                             @foreach ($kategoris as $kategori)
                                 <option value="{{ $kategori->id }}" {{ old('kategoriartikelid') == $kategori->id ? 'selected' : '' }}>
                                     {{ $kategori->nama }}
@@ -122,15 +123,15 @@
                     </div>
                     <div class="mb-3">
                         <label for="konten" class="form-label">Konten</label>
-                        <textarea class="form-control" id="konten" rows="3" name="konten" value="{{ old('konten') }}"></textarea>
+                        <textarea class="form-control" placeholder="Masukan deskripsi konten dari artikel" id="konten" rows="3" name="konten" value="{{ old('konten') }}"></textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="kategoriStatus" class="form-label">Status</label>
-                        <select class="form-select" id="kategoriStatus" name="is_active" required>
-                            <option value="" disabled selected>--- Pilih Status ---</option>
-                            <option value="1" {{ old('is_active') == "1" ? 'selected' : '' }}>Aktif</option>
-                            <option value="0" {{ old('is_active') == "0" ? 'selected' : '' }}>Non-Aktif</option>
-                        </select>
+                        <label class="form-label">Status</label>
+                        <div class="form-check form-switch">
+                            <input type="hidden" name="is_active" value="0"> <!-- Fallback jika checkbox tidak dicentang -->
+                            <input class="form-check-input" type="checkbox" id="status" name="is_active" value="1" checked>
+                            <label class="form-check-label" for="status">Aktif</label>
+                        </div>
                     </div>
                     </div>
                     <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->id }}">

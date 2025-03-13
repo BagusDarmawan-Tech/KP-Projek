@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Artikel;
-use App\Models\ForumAnak;
-use App\Models\Galeri;
-use App\Models\Halaman;
-use App\Models\JenisSurat;
-use App\Models\Klaster;
+use view;
 use App\Models\OPD;
-use App\Models\PemantauanUsulan;
+use App\Models\Galeri;
 use App\Models\Slider;
+use App\Models\Artikel;
+use App\Models\Halaman;
+use App\Models\Klaster;
+use App\Models\ForumAnak;
+use App\Models\JenisSurat;
+use App\Models\SubKegiatan;
 use Illuminate\Http\Request;
 use App\Models\KategoriArtikel;
-use App\Models\SubKegiatan;
+use App\Models\PemantauanUsulan;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class WebManagementController extends Controller
@@ -430,7 +432,17 @@ class WebManagementController extends Controller
 
     //=============== CRUD Galeri
     public function galeri() {
-        $galeris = Galeri::all();
+        $user = Auth::user();
+        if ($user instanceof \App\Models\User && $user->hasPermissionTo('super admin-Full Control')) {
+            // Jika user punya izin 'super admin', ambil semua data
+            $galeris = Galeri::all();
+        } else {
+            // Jika bukan 'super admin', hanya ambil data yang dibuat oleh user
+            $galeris = Galeri::whereHas('user', function ($query) {
+                    $query->where('name', Auth::user()->name);
+                })
+                ->get();
+        }
         return view('admin.Galeri', compact('galeris'));
     }
 

@@ -51,7 +51,7 @@
                     </thead>
                     <tbody>
                         @foreach($suaras as $index => $suara)
-                        <tr>
+                        <tr class="text-start">
                             <td style="text-align: center;">{{ $loop->iteration }}</td>
                             <!-- <td>{{ $suara->nomorSuara }}</td>
                             <td class="text-nowrap">{{ $suara->tanggal }}</td>
@@ -154,7 +154,7 @@
                         @csrf 
                     <div class="mb-3">
                         <label class="form-label">Perihal</label>
-                        <input type="text" class="form-control" name="perihal"  placeholder="Masukkan perihal" value="{{ old('perihal') }}">
+                        <textarea class="form-control" name="perihal" rows="3"   placeholder="Masukkan perihal">{{ old('perihal') }}</textarea>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Deskripsi</label>

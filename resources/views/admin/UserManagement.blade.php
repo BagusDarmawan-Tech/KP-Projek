@@ -53,10 +53,10 @@
                     </thead>
                     <tbody>
                         @foreach($user as $person)
-                        <tr>
+                        <tr class="text-start">
                             <td style="text-align: center;">{{ $loop->iteration }}</td>
-                            <td>{{ $person->name }}</td>
                             <td>{{ $person->email }}</td>
+                            <td>{{ $person->name }}</td>
                             <td>{{ $person->getRoleNames()->implode(', ') }}</td>
                         </tr>
                         @endforeach

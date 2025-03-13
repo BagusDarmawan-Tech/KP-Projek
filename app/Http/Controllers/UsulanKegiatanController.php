@@ -34,8 +34,8 @@ class UsulanKegiatanController extends Controller
     {
         // dd($request->all());
         $request->validate([
-            'perihal'   => 'required|string|max:500',
-            'deskripsi' => 'required|string|max:500',
+            'perihal'   => 'required|string|max:1000',
+            'deskripsi' => 'required|string|max:1000',
         ], [
             'perihal.required'   => 'Perihal wajib diisi.',
             'perihal.string'     => 'Perihal harus berupa teks.',
