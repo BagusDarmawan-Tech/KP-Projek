@@ -61,7 +61,7 @@ class UsulanKegiatanController extends Controller
             'pemohon' => $request->pemohon,
         ]);;
 
-        return redirect()->route('pemantauan-suara')->with('success', 'Kategori berhasil ditambahkan!');
+        return redirect()->route('pemantauan-suara')->with('success', 'Suara usulan berhasil ditambahkan!');
     }
 
     public function destroyPemantauanSuara($id)
