@@ -35,7 +35,7 @@
 
 
   <!-- bagian landing pages -->
-  <link rel="stylesheet" href="{{ asset('css/landing.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/landing.css') }}">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
 
 

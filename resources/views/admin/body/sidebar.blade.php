@@ -335,68 +335,37 @@
     @endif
     {{-- END DOKUMEN FAS DLL --}}
     <!-- End Icons Nav -->
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="pages-login.html">
-        <i class="bi bi-box-arrow-left text-danger"></i>
-        <span class="text-danger">Logout</span>
-      </a>
-    </li><!-- End Logout Page Nav -->
-
-    <li class="nav-heading">Action</li>
     
+    <!-- Logout Button -->
     <li class="nav-item">
-      <a class="nav-link collapsed" href="pages-login.html">
-        <i class="bi bi-box-arrow-left text-danger"></i>
-        <span class="text-danger">Logout</span>
-      </a>
-    </li><!-- End Logout Page Nav -->
+  <a class="nav-link collapsed" href="#" data-bs-toggle="modal" data-bs-target="#logoutModal">
+    <i class="bi bi-box-arrow-left text-danger"></i>
+    <span class="text-danger">Logout</span>
+  </a>
+</li>
 
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="users-profile.html">
-        <i class="bi bi-person"></i>
-        <span>Pusat Informasi Sahabat Anak</span>
-      </a>
-    </li><!-- End Profile Page Nav -->
-
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="pages-faq.html">
-        <i class="bi bi-question-circle"></i>
-        <span>F.A.Q</span>
-      </a>
-    </li><!-- End F.A.Q Page Nav -->
-
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="pages-contact.html">
-        <i class="bi bi-envelope"></i>
-        <span>Contact</span>
-      </a>
-    </li><!-- End Contact Page Nav -->
-
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="pages-register.html">
-        <i class="bi bi-card-list"></i>
-        <span>Register</span>
-      </a>
-    </li><!-- End Register Page Nav -->
-
-
-    <li class="nav-item ">
-      <a class="nav-link collapsed" href="pages-error-404.html">
-        <i class="bi bi-dash-circle"></i>
-        <span>Error 404</span>
-      </a>
-    </li><!-- End Error 404 Page Nav -->
-
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="pages-blank.html">
-        <i class="bi bi-file-earmark"></i>
-        <span>Blank</span>
-      </a>
-    </li><!-- End Blank Page Nav -->
-
-  </ul>
-
+<!-- Logout Modal -->
+<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="logoutModalLabel">Konfirmasi Logout</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Apakah Anda yakin ingin keluar?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+        <a href="{{ route('logout') }}" class="btn btn-danger">Logout</a>
+      </div>
+    </div>
+  </div>
+</div>
+</ul>
   <!-- untuk menyimpan status sidebar -->
+
+
   <script>
 document.addEventListener("DOMContentLoaded", function () {
     let sidebarNav = document.querySelector("#sidebar-nav");

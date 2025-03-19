@@ -24,60 +24,6 @@
     
    <!-- Testimonials Section -->
 <section id="testimonials" class="testimonials section light-background">
-  <style>
-    /* Efek hover untuk kartu testimonial */
-    .testimonial-item {
-      transition: transform 0.3s, box-shadow 0.3s;
-      text-align: center;
-      background: #f9f9f9; /* Latar belakang default */
-      border-radius: 15px;
-      padding: 20px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      color: #333; /* Warna teks default */
-    }
-
-    .testimonial-item:hover {
-      transform: translateY(-10px); /* Naik sedikit saat hover */
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    }
-
-    /* Ikon menggantikan gambar */
-    .icon-wrapper {
-      font-size: 3rem; /* Ukuran ikon */
-      margin-bottom: 15px;
-      transition: color 0.3s, transform 0.3s;
-    }
-
-    /* Warna ikon default */
-    .testimonial-item .icon-wrapper {
-      color: #888;
-    }
-
-    /* Hover efek pada ikon */
-    .testimonial-item:hover .icon-wrapper {
-      color: rgb(233, 36, 103); /* Warna ikon berubah saat hover */
-      transform: scale(1.2); /* Membesar sedikit */
-    }
-
-    /* Font styling */
-    h3 {
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
-
-    h4 {
-      font-size: 1rem;
-      font-weight: normal;
-      color: #555; /* Warna teks subjudul */
-    }
-
-    p {
-      font-size: 0.9rem;
-      color: #666;
-      margin: 10px 0;
-    }
-  </style>
-
   <div class="container section-title" data-aos="fade-up"></div>
   <div class="container" data-aos="fade-up" data-aos-delay="100">
     <div class="swiper init-swiper">
