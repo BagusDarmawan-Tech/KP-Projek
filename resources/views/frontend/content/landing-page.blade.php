@@ -22,133 +22,181 @@
 
 
     
-    <!-- bagian Carosel -->
-    <style>
-  /* Atur ukuran gambar carousel */
-  .carousel-inner img {
-    width: 100%; /* Gambar akan menyesuaikan lebar container */
-    height: 500px; /* Tinggi tetap */
-    object-fit: cover; /* Memastikan gambar tidak terdistorsi */
-  }
-</style>
+   <!-- Testimonials Section -->
+<section id="testimonials" class="testimonials section light-background">
+  <style>
+    /* Efek hover untuk kartu testimonial */
+    .testimonial-item {
+      transition: transform 0.3s, box-shadow 0.3s;
+      text-align: center;
+      background: #f9f9f9; /* Latar belakang default */
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      color: #333; /* Warna teks default */
+    }
 
+    .testimonial-item:hover {
+      transform: translateY(-10px); /* Naik sedikit saat hover */
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
 
+    /* Ikon menggantikan gambar */
+    .icon-wrapper {
+      font-size: 3rem; /* Ukuran ikon */
+      margin-bottom: 15px;
+      transition: color 0.3s, transform 0.3s;
+    }
 
+    /* Warna ikon default */
+    .testimonial-item .icon-wrapper {
+      color: #888;
+    }
 
-    <!-- batas selesesai -->  
+    /* Hover efek pada ikon */
+    .testimonial-item:hover .icon-wrapper {
+      color: rgb(233, 36, 103); /* Warna ikon berubah saat hover */
+      transform: scale(1.2); /* Membesar sedikit */
+    }
 
+    /* Font styling */
+    h3 {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
 
+    h4 {
+      font-size: 1rem;
+      font-weight: normal;
+      color: #555; /* Warna teks subjudul */
+    }
 
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="testimonials section light-background">
+    p {
+      font-size: 0.9rem;
+      color: #666;
+      margin: 10px 0;
+    }
+  </style>
 
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-          <!-- <span>Testimonials</span>
-          <h2>Testimonials</h2> -->
-      </div><!-- End Section Title -->
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="swiper init-swiper" data-speed="600" data-delay="5000" data-breakpoints="{ &quot;320&quot;: { &quot;slidesPerView&quot;: 1, &quot;spaceBetween&quot;: 40 }, &quot;1200&quot;: { &quot;slidesPerView&quot;: 3, &quot;spaceBetween&quot;: 40 } }">
-          <script type="application/json" class="swiper-config">
-            {
-              "loop": true,
-              "speed": 600,
-              "autoplay": {
-                "delay": 5000
-              },
-              "slidesPerView": "auto",
-              "pagination": {
-                "el": ".swiper-pagination",
-                "type": "bullets",
-                "clickable": true
-              },
-              "breakpoints": {
-                "320": {
-                  "slidesPerView": 1,
-                  "spaceBetween": 40
-                },
-                "1200": {
-                  "slidesPerView": 3,
-                  "spaceBetween": 20
-                }
-              }
+  <div class="container section-title" data-aos="fade-up"></div>
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="swiper init-swiper">
+      <script type="application/json" class="swiper-config">
+        {
+          "loop": true,
+          "speed": 600,
+          "autoplay": {
+            "delay": 5000
+          },
+          "slidesPerView": "auto",
+          "pagination": {
+            "el": ".swiper-pagination",
+            "type": "bullets",
+            "clickable": true
+          },
+          "breakpoints": {
+            "320": {
+              "slidesPerView": 1,
+              "spaceBetween": 40
+            },
+            "1200": {
+              "slidesPerView": 3,
+              "spaceBetween": 20
             }
-          </script>
-          <div class="swiper-wrapper">
+          }
+        }
+      </script>
 
-            <div class="swiper-slide">
-              <div class="testimonial-item" "="">
-            <p>
-              <i class=" bi bi-quote quote-icon-left"></i>
-                <span>Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.</span>
-                <i class="bi bi-quote quote-icon-right"></i>
-                </p>
-                <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                <h3>Saul Goodman</h3>
-                <h4>Ceo &amp; Founder</h4>
+      <div class="swiper-wrapper">
+        <!-- Perlindungan Khusus -->
+        <div class="swiper-slide">
+          <a href="{{ route('perlindungan-khusus') }}" class="card-link">
+            <div class="testimonial-item">
+              <div class="icon-wrapper">
+                <i class="bi bi-shield-fill"></i> <!-- Ikon -->
               </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bi bi-quote quote-icon-left"></i>
-                  <span>Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.</span>
-                  <i class="bi bi-quote quote-icon-right"></i>
-                </p>
-                <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-                <h3>Sara Wilsson</h3>
-                <h4>Designer</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bi bi-quote quote-icon-left"></i>
-                  <span>Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.</span>
-                  <i class="bi bi-quote quote-icon-right"></i>
-                </p>
-                <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
-                <h3>Jena Karlis</h3>
-                <h4>Store Owner</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bi bi-quote quote-icon-left"></i>
-                  <span>Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.</span>
-                  <i class="bi bi-quote quote-icon-right"></i>
-                </p>
-                <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
-                <h3>Matt Brandon</h3>
-                <h4>Freelancer</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bi bi-quote quote-icon-left"></i>
-                  <span>Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.</span>
-                  <i class="bi bi-quote quote-icon-right"></i>
-                </p>
-                <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
-                <h3>John Larson</h3>
-                <h4>Entrepreneur</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-          </div>
-          <div class="swiper-pagination"></div>
+              <h3>Perlindungan Khusus</h3>
+              <h4>Subkegiatan Khusus</h4>
+              <p>Melindungi anak-anak dalam kondisi tertentu.</p>
+            </div>
+          </a>
         </div>
 
-      </div>
+        <!-- Hak Sipil dan Kebebasan -->
+        <div class="swiper-slide">
+          <a href="{{ route('haksipil') }}" class="card-link">
+            <div class="testimonial-item">
+              <div class="icon-wrapper">
+                <i class="bi bi-person-fill"></i> <!-- Ikon -->
+              </div>
+              <h3>Hak Sipil dan Kebebasan</h3>
+              <h4>Subkegiatan Sipil</h4>
+              <p>Hak sipil dan kebebasan untuk mendukung hak fundamental.</p>
+            </div>
+          </a>
+        </div>
 
-    </section><!-- /Testimonials Section -->
+        <!-- Kelembagaan -->
+        <div class="swiper-slide">
+          <a href="{{ route('kelembagaan') }}" class="card-link">
+            <div class="testimonial-item">
+              <div class="icon-wrapper">
+                <i class="bi bi-building"></i> <!-- Ikon -->
+              </div>
+              <h3>Kelembagaan</h3>
+              <h4>Subkegiatan Organisasi</h4>
+              <p>Penguatan organisasi masyarakat.</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- Lingkungan Keluarga -->
+        <div class="swiper-slide">
+          <a href="{{ route('lingkungan-keluarga') }}" class="card-link">
+            <div class="testimonial-item">
+              <div class="icon-wrapper">
+                <i class="bi bi-house-door-fill"></i> <!-- Ikon -->
+              </div>
+              <h3>Lingkungan Keluarga</h3>
+              <h4>Subkegiatan Keluarga</h4>
+              <p>Lingkungan keluarga untuk pengasuhan alternatif.</p>
+            </div>
+          </a>
+        </div>
+
+        <div class="swiper-slide">
+          <a href="{{ route('kesehatan-dasar') }}" class="card-link">
+            <div class="testimonial-item">
+              <div class="icon-wrapper">
+                <i class="bi bi-person-fill"></i> <!-- Ikon -->
+              </div>
+              <h3>Kesehatan Dasar dan Kesejahteraan</h3>
+              <h4>Subkegiatan Sipil</h4>
+              <p>Kesehatan bagi Hak Anak anak </p>
+            </div>
+          </a>
+        </div>
+
+        <!-- Pendidikan dan Pemanfaatan -->
+        <div class="swiper-slide">
+          <a href="{{ route('pendidikan-pemanfaatan') }}" class="card-link">
+            <div class="testimonial-item">
+              <div class="icon-wrapper">
+                <i class="bi bi-book-fill"></i> <!-- Ikon -->
+              </div>
+              <h3>Pendidikan dan Pemanfaatan</h3>
+              <h4>Subkegiatan Pendidikan</h4>
+              <p>Pendidikan dan kegiatan budaya untuk kesejahteraan anak.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
+</section>
+
+
  
     <!-- bagian kota layak anak -->
      
@@ -236,7 +284,6 @@
         </p>
     </div>
 </div>
-
 
 </section>
 

@@ -33,6 +33,18 @@
   <!-- Main CSS File -->
   <link href="{{ asset('assets/css/main.css')}}" rel="stylesheet">
 
+
+  <!-- bagian landing pages -->
+  <link rel="stylesheet" href="{{ asset('css/landing.css') }}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
+
+
+
+  
+
+
+
+
   <!-- =======================================================
   * Template Name: eNno
   * Template URL: https://bootstrapmade.com/enno-free-simple-bootstrap-template/
@@ -77,6 +89,9 @@
   <!-- Main JS File -->
   <script src="{{ asset('assets/js/main.js')}}"></script>
   
+  <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+
 <!-- baru -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
