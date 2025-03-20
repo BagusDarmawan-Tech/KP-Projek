@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -32,19 +33,33 @@
                         @endif
                         @csrf
                         <div data-mdb-input-init class="form-outline mb-4">
-                            <label for="floatingInputDisabled" :value="__('Email')">Email</label>
-                            <input id="email" class="form-control" type="email" name="email" :value="old('email')" required autofocus autocomplete="username">
+                            <label for="floatingInputDisabled" :value="__('Email')" class=" ">Email</label>
+                            <input id="email" class="form-control border border-dark" type="email" name="email" :value="old('email')" required autofocus autocomplete="username">
                         </div>
       
                         <div data-mdb-input-init class="form-outline mb-4">
-                            <labelfor="password" :value="__('Password')">Password</labelfor=>
-                          <input id="password" class="form-control"
+                            <labelfor="password" :value="__('Password')" class=" ">Password</labelfor=>
+                          <input id="password" class="form-control border border-dark"
                           type="password"
                           name="password"
                           required autocomplete="current-password" />
                         </div>
                         <x-input-error :messages="$errors->get('password')" class="mt-2" />
-                        
+
+                        <div>
+                            <label for="captcha" class="">Masukkan Kode Validasi</label>
+                            @error('captcha')
+                                <p style="color: red;">{{ $message }}</p>
+                            @enderror
+                            <div class="d-flex align-items-center gap-2">
+                              <img src="{{ captcha_src() }}" alt="captcha" id="captcha-img" class="img-fluid rounded mb-1">
+                              <button type="button" onclick="refreshCaptcha()"><i class="bi bi-arrow-clockwise"></i></button>
+                          </div>
+                          
+                            <input type="text" name="captcha" class="border border-dark form-control w-50 mb-4">
+                    
+                        </div>
+
                         <div class="d-grid gap-2 text-center">
                           <x-primary-button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3">
                               {{ __('Log in') }}        
@@ -79,6 +94,14 @@
           </div>
         </div>
       </section>
+      <script>
+        function refreshCaptcha() {
+            document.getElementById('captcha-img').src = "/captcha/default?" + Date.now();
+        }
+    </script>
+    
+    
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
 </html>
