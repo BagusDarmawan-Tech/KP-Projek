@@ -28,21 +28,15 @@
                     </thead>
                     <tbody>
                         @forelse($datas as $key => $data)
-                            <tr>
-                                <td class="text-center">{{ $key + 1 }}</td>
-                                <td class ="text-center">{{ $data->namaUsulan }} <!-- Kolom "usulan" -->
-                                <td class ="text-center">{{ $data -> user ? $data -> user -> name : 'Tidak ada pengguna' }}</td>
-                                <td class ="text-center">{{ $data->keterangan }}</td> <!-- Kolom "keterangan" -->
-                                <td class="text-center">
+                            <tr class="text-start">
+                                <td class="">{{ $key + 1 }}</td>
+                                <td class ="">{{ $data->namaUsulan }} <!-- Kolom "usulan" -->
+                                <td class ="">{{ $data -> user ? $data -> user -> name : 'Tidak ada pengguna' }}</td>
+                                <td class ="">{{ $data->keterangan }}</td> <!-- Kolom "keterangan" -->
+                                <td class="">
                                         <!-- Cek nilai 'tindakLanjut' dan tampilkan badge -->
-                                        @if($data->tindakLanjut === 'Diproses')
-                                            <span class="badge bg-success">Belom di Tindak Lanjut</span>
-                                        @elseif($data->tindakLanjut === 'Telah Diproses')
-                                            <span class="badge bg-warning">Sudah di Tindak Lanjut</span>
-                                        @else
-                                            <span class="badge bg-secondary">Tidak Ada Status</span>
-                                        @endif
-                                    </td>
+                                        {{ $data->tindakLanjut }}
+                                </td>
                             </tr>
                         @empty
                             <tr>
