@@ -40,7 +40,7 @@
                             <th class="text-center">OPD</th>
                             <th class="text-center">Nama Usulan</th>
                             <th class="text-center">Tindak Lanjut</th>
-                            <th class="text-center">Keterangan</th>
+                            <!-- <th class="text-center">Keterangan</th> -->
                             <th class="text-center">Status</th>
                             <th class="text-center">Actions</th>
                         </tr>
@@ -55,15 +55,9 @@
 
                             <td>{{ $usulan->tindakLanjut }}</td>
                             <!-- Keterangan -->
-                            <td class="text-center">
-                                <a href="#" 
-                                class="lihat-keterangan" 
-                                data-bs-toggle="modal" 
-                                data-bs-target="#keteranganModal"
-                                data-keterangan="{{ $usulan->keterangan }}">
-                                <i class="bi bi-eye-fill fs-3"></i>
-                                </a>
-                            </td>
+                            <!-- <td class="text-center">
+                             
+                            </td> -->
                             
                             <td class="text-center">
                                 @if($usulan->is_active == 0)
@@ -93,6 +87,17 @@
                                     data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i>
                                 </button> 
                                 @endif
+
+                                <!-- buttom lihat detail -->
+                                <a href="#"
+                                class="lihat-keterangan btn btn-sm rounded-circle edit-verifikasi" style="background-color: #FFC107; width: 36px; height: 36px;"
+                                data-bs-toggle="modal"
+                                data-bs-target="#keteranganModal"
+                                data-keterangan="{{ $usulan->keterangan }}"
+                                style="width: 50px; height: 50px;">
+                                <i class="bi bi-list-task text-white fs-6"></i>
+                                </a>
+                            
                             </td>
                         </tr>
                         @endforeach

@@ -54,7 +54,7 @@
                             <td class="caption">{{ $galeri->caption }}</td>
                             <td>{{ $galeri->user ? $galeri->user->name : 'Tidak ada pengguna' }}</td>
                             <td>
-                                <span class="badge {{ $galeri->is_active ? 'bg-success' : 'bg-danger' }}">
+                                <span class="badge {{ $galeri->is_active ? 'bg-success' : 'bg-warning' }}">
                                     {{ $galeri->is_active ? 'Aktif' : 'Non-Aktif' }}
                                 </span>
                             </td>

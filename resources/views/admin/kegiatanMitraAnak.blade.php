@@ -38,7 +38,6 @@
                         <tr>
                             <th class="text-center">No</th>
                             <th class="text-center">Nama</th>
-                            <th class="text-center">Detail</th>
                             <th class="text-center">Dibuat Oleh</th>
                             <th class="text-center">Status</th>
                             <th class="text-center">Actions</th>
@@ -48,23 +47,10 @@
                       @foreach($mitras as $index => $mitra)
                       <tr>
                           <td style="text-align: center;">{{ $loop->iteration }}</td>
-                            <!-- <td>
-                                <img src="{{ asset($mitra->gambar) }}" alt="Gambar" style="width: 50px; height: 50px; object-fit: cover;">
-                            </td> -->
-                            <td>{{ $mitra->nama }}</td>
+                            <td>{{ $mitra->nama }}
 
-                            <td>
-                                <a href="#" 
-                                class="lihat-keterangan" 
-                                data-bs-toggle="modal" 
-                                data-bs-target="#keteranganModal"
-                                data-caption="{{ $mitra->caption }}" 
-                                data-deskripsi="{{ $mitra->deskripsi }}"
-                                data-gambar="{{ asset($mitra->gambar) }}">Lihat Detail</a>
                             </td>
 
-
-                            <!-- <td>{{ $mitra->deskripsi }}</td> -->
                             <td>{{ $mitra->user ? $mitra->user->name : 'Tidak ada pengguna' }}</td>
                             <td>
                               @if($mitra->is_active == 0)
@@ -92,6 +78,17 @@
                                     data-bs-toggle="modal" 
                                     data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i>
                              </button>
+
+                             <a href="#" 
+                                class="lihat-keterangan btn btn-sm rounded-circle edit-verifikasi" style="background-color: #FFC107; width: 36px; height: 36px;" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#keteranganModal"
+                                data-caption="{{ $mitra->caption }}" 
+                                data-deskripsi="{{ $mitra->deskripsi }}"
+                                data-gambar="{{ asset($mitra->gambar) }}">
+                                <i class="bi bi-list-task text-white fs-6"></i>
+                            </a>
+
                             </td>
                         </tr>                            
                         @endforeach

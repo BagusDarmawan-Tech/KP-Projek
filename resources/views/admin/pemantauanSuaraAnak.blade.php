@@ -43,50 +43,17 @@
                         <tr>
                             <th class="text-center">No</th>
                             <th class="text-center">Perihal</th>
-                            <th class="text-center">Data Detail</th>
-                            <th class="text-center">Hasil TL</th>
                             <th class="text-center">Status</th>
                             <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($suaras as $index => $suara)
-                        <tr class="text-start">
+                        <tr class="text-center">
                             <td style="text-align: center;">{{ $loop->iteration }}</td>
-                            <!-- <td>{{ $suara->nomorSuara }}</td>
-                            <td class="text-nowrap">{{ $suara->tanggal }}</td>
-                            <td>{{ $suara->pemohon }}</td>-->
+
                             <td>{{ $suara->perihal }}</td>
-    
-    
-                                <!-- bagian deskripsi -->
-                            <!-- <td>
-                                <a href="#"class="lihat-detail" 
-                                data-deskripsi="{{ $suara->deskripsi}}">Lihat Detail</a>
-                            </td> -->
-    
-                            <!-- bagian detail -->
-                            <td>
-                                <a href="#" 
-                                    class="lihat-detail" 
-                                    data-bs-toggle="modal" 
-                                    data-bs-target="#deskripsiModal" 
-                                    data-judul="{{ $suara->perihal }}" 
-                                    data-deskripsi="{{ $suara->deskripsi }}" 
-                                    data-gambar="{{ asset($suara->gambar) }}" 
-                                    data-tanggal="{{ $suara->tanggal }}" 
-                                    data-pemohon="{{ $suara->user ? $suara->user->name : 'Tidak ada pengguna' }}"
-                                    data-nomor="{{ $suara->nomorSuara }}">Lihat Detail</a>
-                            </td>
-    
-    
-    
-                            @if(is_null($suara->tindakLanjut))
-                                <td class="text-danger">Dinsos : ✖ Belum di TL</td>
-                            @else
-                            <td class="text-danger">Dinsos : ✅  Sudah di TL</td>
-                            @endif
-                               
+                                  
                             <td>
                                 @if(is_null($suara->tindakLanjut))
                                     <span class="badge bg-warning">Tindak Lanjut</span>
@@ -94,7 +61,7 @@
                                     <span class="badge bg-success">Sudah Tindak Lanjut</span>
                                 @endif
                             </td>
-                            <td class="d-flex align-items-center justify-content-center gap-2 py-2">
+                            <td class="d-flex text-start gap-2 py-2">
                                 <!-- Tombol Edit -->
                                 @if (auth()->user()->hasPermissionTo('pemantauan suara anak-edit')) 
                                 <button class="btn btn-sm btn-primary edit-usulan" 
@@ -123,14 +90,27 @@
                                 <!-- Tombol Finalisasi -->
                                 @if(!is_null($suara->tindakLanjut))
                                     @if (auth()->user()->hasPermissionTo('pemantauan suara anak-verifikasi')) 
-                                    <button class="btn btn-sm rounded-circle edit-verifikasi" style="background-color: #FFC107; width: 36px; height: 36px;"
+                                    <button class="btn btn-sm rounded-circle edit-verifikasi" style="background-color:rgb(61, 196, 102); width: 36px; height: 36px;"
                                         data-bs-toggle="modal" data-bs-target="#finalisasiModal"
                                         data-id="{{ $suara->id }}"
                                         data-status="{{ $suara->is_active }}">
-                                        <i class="bi bi-list-task text-white fs-6"></i>
+                                        <i class="bi bi-file-earmark-arrow-up-fill text-white fs-6"></i>
                                     </button>
                                     @endif
                                 @endif
+
+                                <a href="#" 
+                                    class="lihat-detail btn btn-sm rounded-circle edit-verifikasi" style="background-color: #FFC107; width: 36px; height: 36px;" 
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#deskripsiModal" 
+                                    data-judul="{{ $suara->perihal }}" 
+                                    data-deskripsi="{{ $suara->deskripsi }}" 
+                                    data-gambar="{{ asset($suara->gambar) }}" 
+                                    data-tanggal="{{ $suara->tanggal }}" 
+                                    data-pemohon="{{ $suara->user ? $suara->user->name : 'Tidak ada pengguna' }}"
+                                    data-nomor="{{ $suara->nomorSuara }}">
+                                <i class="bi bi-list-task text-white fs-6"></i>
+                                </a>
                             </td>
                         </tr>
                         @endforeach

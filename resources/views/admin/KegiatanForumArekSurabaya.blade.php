@@ -36,7 +36,6 @@
                         <tr>
                             <th class="text-center">No</th>
                             <th class="text-center">Nama</th>
-                            <th class="text-center">Keterangan</th>
                             <th class="text-center">Dibuat Oleh</th>
                             <th class="text-center">Status</th>
                             <th class="text-center">Actions</th>
@@ -46,19 +45,9 @@
                       @foreach($kegiatans as $index => $kegiatan)
                       <tr>
                           <td style="text-align: center;">{{ $loop->iteration }}</td>
-                          <!-- <td><img src="{{ asset($kegiatan->gambar) }}" alt="Kegiatan CFCI" width="80"></td> -->
+
                           <td>{{ $kegiatan->nama }}</td>
                 
-                          <td>
-                                <a href="#" 
-                                class="lihat-keterangan" 
-                                data-bs-toggle="modal" 
-                                data-bs-target="#keteranganModal"
-                                data-deskripsi="{{ $kegiatan->keterangan}}"
-                                data-gambar="{{ asset($kegiatan->gambar) }}">Lihat Detail</a>
-                            </td>
-
-                            <!-- <td>{{ $kegiatan->keterangan }}</td> -->
                             <td> {{ $kegiatan->user ? $kegiatan->user->name : 'Tidak ada pengguna' }}</td>                            <td>
                               @if($kegiatan->is_active == 0)
                               <span class="badge bg-warning">Non Aktif</span>
@@ -87,6 +76,16 @@
                                     data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i>
                                 </button> 
                             @endif  
+                            
+                            <a href="#" 
+                                class="lihat-keterangan btn btn-sm rounded-circle edit-verifikasi" style="background-color: #FFC107; width: 36px; height: 36px;" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#keteranganModal"
+                                data-deskripsi="{{ $kegiatan->keterangan}}"
+                                data-gambar="{{ asset($kegiatan->gambar) }}">
+                                <i class="bi bi-list-task text-white fs-6"></i>
+                            </a>
+
                             </td>
                         </tr>
                         @endforeach

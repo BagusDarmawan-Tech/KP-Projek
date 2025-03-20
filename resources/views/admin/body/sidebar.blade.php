@@ -324,7 +324,7 @@
     {{-- END PEMANTAUAN SUARA --}}
 
 
-    {{-- DOKUMEN FAS DLL --}}
+    <!-- {{-- DOKUMEN FAS DLL --}}
     @if (auth()->user()->hasPermissionTo('dokumen sk fas, cfci dan kla-list'))
     <li class="nav-item">
       <a class="nav-link {{ request()->routeIs('dokumen-skcfci') ? '' : 'collapsed' }}" href="{{ route('dokumen-skcfci') }}">
@@ -333,39 +333,17 @@
       </a>
     </li>
     @endif
-    {{-- END DOKUMEN FAS DLL --}}
-    <!-- End Icons Nav -->
+    {{-- END DOKUMEN FAS DLL --}} -->
+
     
-    <!-- Logout Button -->
+    <!-- End Icons Nav -->
     <li class="nav-item">
-  <a class="nav-link collapsed" href="#" data-bs-toggle="modal" data-bs-target="#logoutModal">
+  <a class="nav-link collapsed" href="#logoutModal" data-bs-toggle="modal">
     <i class="bi bi-box-arrow-left text-danger"></i>
-    <span class="text-danger">Logout</span>
+    <span class="text-danger">Logout</span>        
   </a>
 </li>
-
-<!-- Logout Modal -->
-<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="logoutModalLabel">Konfirmasi Logout</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Apakah Anda yakin ingin keluar?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-        <a href="{{ route('logout') }}" class="btn btn-danger">Logout</a>
-      </div>
-    </div>
-  </div>
-</div>
-</ul>
-  <!-- untuk menyimpan status sidebar -->
-
-
+  
   <script>
 document.addEventListener("DOMContentLoaded", function () {
     let sidebarNav = document.querySelector("#sidebar-nav");
@@ -392,14 +370,30 @@ document.addEventListener("DOMContentLoaded", function () {
             } else {
                 collapseInstance.show();
             }
+
         });
     });
 });
-
-
 </script>
-
-
-
-
 </aside>
+
+<!-- Modal Structure -->
+<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="logoutModalLabel">Konfirmasi keluar</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Apakah Anda yakin untuk keluar Halaman?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+        <a href="pages-login.html" class="btn btn-danger">Keluar</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+

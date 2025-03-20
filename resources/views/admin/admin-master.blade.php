@@ -39,6 +39,8 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+
+  <link rel="stylesheet" href="{{ asset('assets/css/admin.css') }}">
 </head>
 
 <body>

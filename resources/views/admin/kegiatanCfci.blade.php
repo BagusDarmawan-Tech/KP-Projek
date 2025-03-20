@@ -36,7 +36,7 @@
                             <th class="text-center">No</th>
                             <th class="text-center">Nama</th>
                             <th class="text-center">Status</th>
-                            <th class="text-center">Detail</th>
+                            <!-- <th class="text-center">Detail</th> -->
                             <th class="text-center">Actions</th>
                         </tr>
                     </thead>
@@ -56,16 +56,7 @@
                                     <span class="badge bg-success">Aktif</span>
                                 @endif
                             </td>
-                            <!-- bagian detail -->
-                            <td>
-                                <a href="#" 
-                                class="lihat-keterangan" 
-                                data-bs-toggle="modal" 
-                                data-bs-target="#keteranganModal"
-                                data-caption="{{ $cfci->caption }}" 
-                                data-deskripsi="{{ $cfci->deskripsi }}"
-                                data-gambar="{{ asset($cfci->gambar) }}">Lihat Keterangan</a>
-                            </td>
+                            
                             <td>
                                 <button class="btn btn-sm btn-primary edit-cfci" data-bs-toggle="modal" data-bs-target="#editKegiatanModal" 
                                     data-id="{{ $cfci->id }}" 
@@ -82,7 +73,18 @@
                                     data-nama ="{{ $cfci->nama }}"
                                     data-bs-toggle="modal" 
                                     data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i>
-                                </button>                              
+                                </button>  
+                                
+                                <!-- bagian lihat detail -->
+                                <a href="#" 
+                                class="lihat-keterangan btn btn-sm rounded-circle edit-verifikasi" style="background-color: #FFC107; width: 36px; height: 36px;"" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#keteranganModal"
+                                data-caption="{{ $cfci->caption }}" 
+                                data-deskripsi="{{ $cfci->deskripsi }}"
+                                data-gambar="{{ asset($cfci->gambar) }}">
+                                <i class="bi bi-list-task text-white fs-6"></i>
+                            </a>
                             </td>
                         </tr>
                         @endforeach

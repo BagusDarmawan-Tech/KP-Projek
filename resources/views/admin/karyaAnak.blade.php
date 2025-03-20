@@ -62,7 +62,6 @@
                         <th class="text-nowrap text-center">Tanggal</th>
                         <th class="text-center">Pemohon</th>
                         <th class="text-center">Kreator</th>
-                        <th class="text-center">Detail</th>
                         <th class="text-center">Status</th>
                         <th class="text-center">Actions</th>
                     </tr>
@@ -75,19 +74,6 @@
                         <td>{{ $karya->user ? $karya->user->name : 'Tidak ada pengguna' }}</td>
                         <td>{{ $karya->kreator }}</td>
                     
-                        <!-- bagian detail -->
-                        <td>
-                            <a href="#" 
-                            class="lihat-detail" 
-                            data-bs-toggle="modal" 
-                            data-bs-target="#deskripsiModal" 
-                            data-id="{{ $karya->id }}" 
-                            data-judul="{{ $karya->judul }}" 
-                            data-deskripsi="{{ $karya->deskripsi }}" 
-                            data-gambar="{{ asset($karya->gambar) }}">Lihat Detail</a>
-                        </td>
-
-    
                         <!-- <td>{{ $karya->deskripsi }}</td> -->
                         <td>
                             @if($karya->status == 0)
@@ -132,6 +118,17 @@
                                     <i class="bi bi-check-lg"></i>
                                 </button>
                                 @endif
+
+                                <a href="#" 
+                                class="lihat-detail btn btn-sm rounded-circle edit-verifikasi" style="background-color: #FFC107; width: 36px; height: 36px;"" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#deskripsiModal" 
+                                data-id="{{ $karya->id }}" 
+                                data-judul="{{ $karya->judul }}" 
+                                data-deskripsi="{{ $karya->deskripsi }}" 
+                                data-gambar="{{ asset($karya->gambar) }}">
+                                <i class="bi bi-list-task text-white fs-6"></i>
+                                </a>
                             </div>
                         </td>
                     </tr>

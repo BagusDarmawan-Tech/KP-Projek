@@ -1,0 +1,11 @@
+.modal.show .modal-content {
+    z-index: 1055; /* Modal on top */
+    position: relative; /* Ensure proper stacking */
+  }
+  .modal-backdrop.show {
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1050; /* Shadow behind modal */
+  }
+  body.modal-open {
+    overflow: hidden; /* Prevent scrolling when modal is open */
+  }
