@@ -273,6 +273,10 @@ Route::middleware('auth')->group(function () {
 
 //Backend autentikasi 
 //sesi waktu login
+Route::get('/captcha', function () {
+    return response()->json(['captcha' => captcha_src()]);
+});
+
 Route::get('/session-keep-alive', function () {
     session()->put('lastActivityTime', time());
     session()->put('sessionExpiresAt', time() + (config('session.lifetime') * 60));

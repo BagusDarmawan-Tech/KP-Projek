@@ -29,9 +29,17 @@ class LoginRequest extends FormRequest
         return [
             'email' => ['required', 'string', 'email'],
             'password' => ['required', 'string'],
+            'captcha' => ['required', 'captcha'],
         ];
     }
 
+    public function messages(): array
+    {
+        return [
+            'captcha.required' => 'CAPTCHA wajib diisi.',
+            'captcha.captcha' => 'CAPTCHA tidak valid.',
+        ];
+    }
     /**
      * Attempt to authenticate the request's credentials.
      *
