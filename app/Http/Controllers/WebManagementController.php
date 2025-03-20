@@ -759,7 +759,17 @@ class WebManagementController extends Controller
 
      //=================CRUD PemantauanUsulan
     public function pemantauanUsulan() {
-        $usulans = PemantauanUsulan::all();
+        $user = Auth::user();
+        if ($user instanceof \App\Models\User && $user->hasPermissionTo('super admin-Full Control')) {
+            // Jika user punya izin 'super admin', ambil semua data
+            $usulans = PemantauanUsulan::all();
+        } else {
+            // Jika bukan 'super admin', hanya ambil data yang dibuat oleh user
+            $usulans = PemantauanUsulan::whereHas('user', function ($query) {
+                    $query->where('name', Auth::user()->name);
+                })
+                ->get();
+        }
         $opds = OPD::where('is_active', 1)->get();
         return view('admin.PemantauanUsulan',compact('usulans','opds')); 
     }
@@ -963,7 +973,17 @@ class WebManagementController extends Controller
 
     //================== CRUD Artikel
     public function bagianArtikel() {
-        $artikels = Artikel::all();
+        $user = Auth::user();
+        if ($user instanceof \App\Models\User && $user->hasPermissionTo('super admin-Full Control')) {
+            // Jika user punya izin 'super admin', ambil semua data
+            $usulans = Artikel::all();
+        } else {
+            // Jika bukan 'super admin', hanya ambil data yang dibuat oleh user
+            $usulans = Artikel::whereHas('user', function ($query) {
+                    $query->where('name', Auth::user()->name);
+                })
+                ->get();
+        }
         $kategoris = KategoriArtikel::where('is_active', true)->get();
         $klasters = Klaster::where('is_active', true)->get();
         $subKegiatans = SubKegiatan::where('is_active', true)->get();
