@@ -988,10 +988,12 @@ class WebManagementController extends Controller
         $user = Auth::user();
         if ($user instanceof \App\Models\User && $user->hasPermissionTo('super admin-Full Control')) {
             // Jika user punya izin 'super admin', ambil semua data
-            $usulans = Artikel::orderBy('created_at', 'desc')->get();
+
+           $artikels = Artikel::orderBy('created_at', 'desc')->get();
+
         } else {
             // Jika bukan 'super admin', hanya ambil data yang dibuat oleh user
-            $usulans = Artikel::whereHas('user', function ($query) {
+            $artikels = Artikel::whereHas('user', function ($query) {
                     $query->where('name', Auth::user()->name);
                 })
                 ->orderBy('created_at', 'desc')

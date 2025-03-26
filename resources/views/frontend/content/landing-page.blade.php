@@ -4,21 +4,19 @@
 
     <!-- Hero Section -->
     <section id="hero" class="hero section">
-
-      <div class="container">
-        <div class="row gy-1">
-          <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center" data-aos="fade-up">
-           <center> <h1>SELAMAT DATANG DI WEBSITE SITALAS</h1></center>
-          
-          </div>
-          <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="100">
-            <img src="{{asset('assets/img/hero-img.jpg')}}" class="img-fluid animated" alt="">
-          </div>
-          <div>
-        </div>
+  <div class="container">
+    <div class="row gy-1">
+      <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center" data-aos="fade-up">
+        <center>
+          <h1 >SELAMAT DATANG DI WEBSITE SITALAS</h1>
+        </center>
       </div>
-
-    </section><!-- /Hero Section -->
+      <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="100">
+        <img src="{{asset('assets/img/hero-img.jpg')}}" class="img-fluid animated" alt="">
+      </div>
+    </div>
+  </div>
+</section>
 
 
     
@@ -91,7 +89,7 @@
               </div>
               <h3>Kelembagaan</h3>
               <h4>Subkegiatan Organisasi</h4>
-              <p>Penguatan organisasi masyarakat.</p>
+              <p >Penguatan organisasi masyarakat.</p>
             </div>
           </a>
         </div>
@@ -144,6 +142,8 @@
 
 
  
+
+
     <!-- bagian kota layak anak -->
      
     <!-- About Section -->
@@ -292,11 +292,12 @@
     <!-- Portfolio Section -->
     <section id="portfolio" class="portfolio section">
 
-<!-- Section Title -->
-<div class="container section-title" data-aos="fade-up">
-    <span>BERITA DAN ARTIKEL</span>
-    <h2>BERITA DAN ARTIKEL</h2>
-</div><!-- End Section Title -->
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+        <span>BERITA DAN ARTIKEL</span>
+        <h2>BERITA DAN ARTIKEL</h2>
+    </div>
+    <!-- End Section Title -->
 
 <div class="container">
     <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
@@ -339,49 +340,5 @@
 </div>
 
 </section>
-
-
-    <!-- BAGIAN KUNJUNGAN WEB -->
-    <!-- Stats Section -->
-    <section id="stats" class="stats section">
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row gy-4">
-
-          <div class="col-lg-3 col-md-6">
-            <div class="stats-item text-center w-100 h-100">
-              <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Pengujung</p>
-            </div>
-          </div><!-- End Stats Item -->
-
-          <div class="col-lg-3 col-md-6">
-            <div class="stats-item text-center w-100 h-100">
-              <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Projects</p>
-            </div>
-          </div><!-- End Stats Item -->
-
-          <div class="col-lg-3 col-md-6">
-            <div class="stats-item text-center w-100 h-100">
-              <span data-purecounter-start="0" data-purecounter-end="1453" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Hours Of Support</p>
-            </div>
-          </div><!-- End Stats Item -->
-
-          <div class="col-lg-3 col-md-6">
-            <div class="stats-item text-center w-100 h-100">
-              <span data-purecounter-start="0" data-purecounter-end="32" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Workers</p>
-            </div>
-          </div><!-- End Stats Item -->
-            <!-- BAGIAN KUNJUNGAN WEB -->
-
-     <!-- bagian halaman kontak -->
-              
-    </section><!-- /Contact Section -->
-
-
-    
+        
 @endsection

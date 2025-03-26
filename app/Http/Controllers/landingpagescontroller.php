@@ -28,7 +28,7 @@ class landingpagescontroller extends Controller
         $galeri = ForumAnakSurabaya::where('is_active', true)->take(6)->get();
 
         $kategoriArtikel = KategoriArtikel::where('is_active', true)
-        ->take(4) 
+        ->take(5) 
         ->get();
 
         $karyaAnak = ArtikelMitraAnak::where('is_active', true)

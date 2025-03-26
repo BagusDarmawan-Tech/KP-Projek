@@ -30,13 +30,14 @@
 
     <!-- Social Media Section -->
     <div class="container text-center mt-4">
-        <h4>Follow Us</h4>
-        <div class="d-flex justify-content-center gap-3">
-            <a href="#" class="text-dark fs-4"><i class="bi bi-twitter-x"></i></a>
-            <a href="#" class="text-dark fs-4"><i class="bi bi-facebook"></i></a>
-            <a href="#" class="text-dark fs-4"><i class="bi bi-instagram"></i></a>
-            <a href="#" class="text-dark fs-4"><i class="bi bi-linkedin"></i></a>
-        </div>
+    <h4>Follow Us</h4>
+    <div class="d-flex justify-content-center gap-3">
+        <a href="https://x.com/i/flow/login?redirect_after_login=%2Ffa_surabaya" class="social-link"><i class="bi bi-twitter"></i></a>
+        <a href="https://www.tiktok.com/@fa_surabaya" class="social-link"><i class="bi bi-tiktok"></i></a>
+        <a href="https://www.instagram.com/fasuroboyo/?igshid=MzRlODBiNWFlZA%3D%3D" class="social-link"><i class="bi bi-instagram"></i></a>
+        <a href="https://www.youtube.com/@forumanaksurabaya3094" class="social-link"><i class="bi bi-youtube"></i></a>
     </div>
+</div>
+
 </footer>
 

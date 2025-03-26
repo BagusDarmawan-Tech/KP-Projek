@@ -24,12 +24,13 @@
 
 /* Warna ikon default */
 .testimonial-item .icon-wrapper {
-  color: #888;
+  color:rgb(233, 36, 103) ;
 }
 
 /* Hover efek pada ikon */
 .testimonial-item:hover .icon-wrapper {
-  color: rgb(233, 36, 103); /* Warna ikon berubah saat hover */
+  color: #00BFFF;
+   /* Warna ikon berubah saat hover */
   transform: scale(1.2); /* Membesar sedikit */
 }
 
@@ -49,4 +50,33 @@ p {
   font-size: 0.9rem;
   color: #666;
   margin: 10px 0;
+}
+
+/* bagian footer */
+
+/* Warna dasar ikon */
+.social-link {
+  color: #212529; /* Warna teks hitam */
+  font-size: 1.5rem;
+  transition: color 0.3s ease, transform 0.2s ease; /* Animasi halus */
+}
+
+/* Warna saat diarahkan dengan kursor */
+.social-link:hover {
+  color: rgb(233, 36, 103); /* Biru muda */
+}
+
+/* Warna saat di-klik */
+.social-link:active {
+  color: #dc3545; /* Merah */
+  transform: scale(1); /* Kembali ke ukuran semula */
+}
+
+
+.custom-font {
+  font-family: 'Bangers', cursive;
+ /* Menggunakan font Poppins */
+  font-size: 2rem; /* Ukuran font */
+  font-weight: 1000; /* Ketebalan font */
+  color: rgb(233, 36, 103); /* Warna teks */
 }

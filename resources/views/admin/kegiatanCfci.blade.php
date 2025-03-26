@@ -36,7 +36,6 @@
                             <th class="text-center">No</th>
                             <th class="text-center">Nama</th>
                             <th class="text-center">Status</th>
-                            <!-- <th class="text-center">Detail</th> -->
                             <th class="text-center">Actions</th>
                         </tr>
                     </thead>
@@ -44,10 +43,7 @@
                         @foreach($cfcis as $index => $cfci)
                         <tr>
                             <td style="text-align: center;">{{ $loop->iteration }}</td>
-                            <!-- <td><img src="{{ asset($cfci->gambar) }}" alt="Kegiatan CFCI" width="80"></td> -->
                             <td>{{ $cfci->nama }}</td>
-
-                            <!-- <td>{{ $cfci->caption }}</td> -->
                              
                             <td>
                                 @if($cfci->is_active == 0)
