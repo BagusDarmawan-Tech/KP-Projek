@@ -182,12 +182,15 @@
                       <small class="text-muted">Biarkan kosong jika tidak ingin mengubah gambar.</small>
                   </div>
                   <div class="mb-3">
-                      <label class="form-label">Status</label>
-                      <select class="form-select" id="editStatus" name="is_active" required>
-                          <option value="1">Aktif</option>
-                          <option value="0">Non-Aktif</option>
-                      </select>
-                  </div>
+                    <label class="form-label">Status</label>
+                    <div class="form-check form-switch">
+                        <!-- Hidden input sebagai fallback jika checkbox tidak dicentang -->
+                        <input type="hidden" name="is_active" value="0">
+                        
+                        <input class="form-check-input" name="is_active" type="checkbox" id="editStatus" value="1" checked>
+                        <label class="form-check-label" for="status">Aktif</label>
+                    </div>
+                </div>
                   </div>
                   <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
@@ -276,7 +279,7 @@
         // Set nilai form dalam modal
         document.getElementById("editNamaKegiatan").value = nama;
         document.getElementById("editDeskripsi").value = deskripsi;
-        document.getElementById("editStatus").value = status;
+        document.getElementById("editStatus").checked = status == "1";
         document.getElementById("editCaption").value = caption;
 
         // Set preview gambar

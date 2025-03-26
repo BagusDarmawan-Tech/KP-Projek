@@ -273,8 +273,7 @@
             let file = this.getAttribute("data-file");
             let keterangan = this.getAttribute("data-keterangan");
             let status = this.getAttribute("data-status");
-
-            console.log(status)
+            
             document.getElementById("editId").value = id;
             document.getElementById("editNama").value = nama;
             document.getElementById("editJenisSurat").value = jenisSurat;

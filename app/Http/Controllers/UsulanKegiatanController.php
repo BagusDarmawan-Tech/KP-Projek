@@ -47,17 +47,20 @@ class UsulanKegiatanController extends Controller
         ]);
         ;
 
-        // dd($path);
-        $tanggal = Carbon::now()->toDateString(); // Format: YYYY-MM-DD
+        // Ambil tanggal hari ini
+        $tanggalHariIni = Carbon::now()->format('Y-m-d');
 
-        // Format nomor suara: KLA-YYYY-MM-DD
-        $nomorSuara = 'KLA-' . Carbon::now()->format('Y-m-d');
+        // Hitung jumlah data yang sudah ada di hari ini
+        $jumlahHariIni = SuaraAnak::whereDate('created_at', Carbon::today())->count() + 1;
+
+        // Format nomor suara: KLA-YYYY-MM-DD-XX
+        $nomorSuara = 'KLA-' . $tanggalHariIni . '-' . str_pad($jumlahHariIni, 2, '0', STR_PAD_LEFT);
     
         // Simpan ke database
         SuaraAnak::create([
             'perihal' => $request->perihal,
             'deskripsi' => $request->deskripsi,
-            'tanggal' => $tanggal,
+            'tanggal' => $tanggalHariIni,
             'nomorSuara' => $nomorSuara,
             'pemohon' => $request->pemohon,
         ]);;

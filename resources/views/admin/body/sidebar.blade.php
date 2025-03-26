@@ -390,7 +390,7 @@ document.addEventListener("DOMContentLoaded", function () {
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
-        <a href="pages-login.html" class="btn btn-danger">Keluar</a>
+        <a href="{{ route('admin.logout') }}" class="btn btn-danger">Keluar</a>
       </div>
     </div>
   </div>

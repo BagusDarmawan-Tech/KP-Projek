@@ -186,15 +186,18 @@
         <label for="editKeterangan" class="form-label">Keterangan</label>
         <textarea class="form-control" id="editKeterangan" rows="2" name="keterangan"></textarea>
     </div>
-@if (auth()->user()->hasPermissionTo('pemantauan usulan-verifikasi'))
-    <div class="mb-3">
-        <label for="editStatus" class="form-label">Status</label>
-        <select class="form-select" id="editStatus" name="is_active" required>
-            <option value="1">Aktif</option>
-            <option value="0">Non-Aktif</option>
-        </select>
-    </div>
-@else
+    @if (auth()->user()->hasPermissionTo('pemantauan usulan-verifikasi'))
+        <div class="mb-3">
+            <label class="form-label">Status</label>
+            <div class="form-check form-switch">
+                <!-- Hidden input sebagai fallback jika checkbox tidak dicentang -->
+                <input type="hidden" name="is_active" value="0">
+                
+                <input class="form-check-input" name="is_active" type="checkbox" id="editStatus" value="1" checked>
+                <label class="form-check-label" for="status">Aktif</label>
+            </div>
+        </div>
+    @else
     <input type="hidden" name="is_active" id="editStatus">
 @endif
 
@@ -275,7 +278,7 @@
             document.getElementById("editNamaUsulan").value = namaUsulan;
             document.getElementById("editTindakLanjut").value = tindakLanjut;
             document.getElementById("editKeterangan").value = keterangan;
-            document.getElementById("editStatus").value = status; // Pastikan status diubah ke boolean
+            document.getElementById("editStatus").checked = status == "1"; // Pastikan status diubah ke boolean
 
             // Set action form update sesuai ID
             document.getElementById("editForm").action = `/pemantauan/update/${id}`;

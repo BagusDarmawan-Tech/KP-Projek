@@ -86,7 +86,7 @@
     </div>
 </div>
 
-<!-- Modal Tambah kegiatan Kelurahan -->
+<!-- Modal Tambah -->
 <div class="modal fade" id="modalTambahKegiatan" tabindex="-1" aria-labelledby="modalTambahKegiatanLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -134,7 +134,7 @@
     </div>
 </div>
 
-<!-- Modal Edit Dokumen Kelurahan -->
+<!-- Modal Edit -->
 <div class="modal fade" id="modaEditKegiatan" tabindex="-1" aria-labelledby="modaEditKegiatanLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -142,10 +142,9 @@
                 <h5 class="modal-title fw-bold text-center" id="modaEditKegiatanLabel">Edit Menu Kegiatan Pisa</h5>
             </div>
             <div class="modal-body">
-                <form method="POST" id="editKegiatanPisa" action="" enctype="multipart/form-data">
+                <form method="POST" id="editKegiatanPisa" enctype="multipart/form-data">
                     @csrf
                     @method('PUT') 
-                    
                     <!-- Input ID (tersembunyi) -->
                     <input type="hidden" id="editId" name="id">
                     
@@ -169,13 +168,13 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="editStatus" class="form-label">Status</label>
-                        <select class="form-select" id="editStatus" name="is_active">
-                            <option value="1">Aktif</option>
-                            <option value="0">Non-Aktif</option>
-                        </select>
+                        <label class="form-label">Status</label>
+                        <div class="form-check form-switch">
+                            <input type="hidden" name="is_active" value="0">
+                            <input class="form-check-input" name="is_active" type="checkbox" id="editStatus" value="1" checked>
+                            <label class="form-check-label" for="editStatus">Aktif</label>
+                        </div>
                     </div>
-                    
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                         <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
@@ -213,7 +212,7 @@
     </div>
 </div>
 
-<script>
+<script> 
     document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll(".edit-arekSuroboyo").forEach(button => {
             button.addEventListener("click", function () {
@@ -223,13 +222,11 @@
                 let gambar = this.getAttribute("data-gambar");
                 let status = this.getAttribute("data-status");
 
-                console.log("Gambar URL:", gambar); // Debugging untuk memastikan gambar ada
-
                 // Isi nilai form dalam modal
                 document.getElementById("editId").value = id;
                 document.getElementById("editNama").value = nama;
                 document.getElementById("editDeskripsi").value = decodeURIComponent(deskripsi);
-                document.getElementById("editStatus").value = status; 
+                document.getElementById("editStatus").checked = status == "1";
 
                 // Set preview gambar
                 let previewGambar = document.getElementById("previewGambar");

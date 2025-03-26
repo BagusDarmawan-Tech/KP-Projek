@@ -163,10 +163,13 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Status</label>
-                        <select class="form-select" name="is_active" id="editStatus" required>
-                            <option value="1">Aktif</option>
-                            <option value="0">Non-Aktif</option>
-                        </select>
+                        <div class="form-check form-switch">
+                            <!-- Hidden input sebagai fallback jika checkbox tidak dicentang -->
+                            <input type="hidden" name="is_active" value="0">
+                            
+                            <input class="form-check-input" name="is_active" type="checkbox" id="editStatus" value="1" checked>
+                            <label class="form-check-label" for="status">Aktif</label>
+                        </div>
                     </div>
                 </div>
                 <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
@@ -219,7 +222,7 @@
                 document.getElementById("editJudul").value = judul;
                 document.getElementById("editTag").value = tag;
                 document.getElementById("editKonten").value = konten;
-                document.getElementById("editStatus").value = status; // Pastikan select memiliki id="editStatus"
+                document.getElementById("editStatus").checked = status == "1";
 
                 // Set preview gambar
                 let previewGambar = document.getElementById("previewGambar");
