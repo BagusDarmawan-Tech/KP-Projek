@@ -114,7 +114,7 @@
                 <h5 class="modal-title fw-bold text-center" id="sliderModalLabel">Tambah Menu Slider Baru</h5>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('createSlider') }}" enctype="multipart/form-data">
+                <form method="POST" id="myForm" action="{{ route('createSlider') }}" enctype="multipart/form-data">
                     @csrf 
                     <div class="mb-3">
                         <label class="form-label">Nama</label>
@@ -144,7 +144,7 @@
             </div>
                     <div class="modal-footer border-top pt-3 d-flex justify-content-end"> <!-- Tambahan border-top dan padding -->
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                <button type="submit" class="btn btn-primary">Simpan</button>
+                <button type="submit" id="submitBtn" class="btn btn-primary">Simpan</button>
             </div>
                 </form>
 
@@ -152,6 +152,11 @@
         </div>
     </div>
 </div>
+<script>
+    document.getElementById('myForm').addEventListener('submit', function() {
+        document.getElementById('submitBtn').disabled = true;
+    });
+</script>
 
 <!-- Modal Edit Slider -->
 <div class="modal fade" id="editSliderModal" tabindex="-1" aria-labelledby="editSliderModalLabel" aria-hidden="true">

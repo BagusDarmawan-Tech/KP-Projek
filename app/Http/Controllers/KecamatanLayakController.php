@@ -17,13 +17,13 @@ class KecamatanLayakController extends Controller
         $user = Auth::user();
         if ($user instanceof \App\Models\User && $user->hasPermissionTo('super admin-Full Control')) {
             // Jika user punya izin 'super admin', ambil semua data
-            $dokumens = DokumenKecamatan::all();
+            $dokumens = DokumenKecamatan::orderBy('created_at', 'desc')->get();
         } else {
             // Jika bukan 'super admin', hanya ambil data yang dibuat oleh user
             $dokumens = DokumenKecamatan::whereHas('user', function ($query) {
                     $query->where('name', Auth::user()->name);
                 })
-                ->get();
+                ->orderBy('created_at', 'desc')->get();
         }
         $kecamatans = Kecamatan::all();
         $surats = JenisSurat::all();
@@ -156,13 +156,13 @@ class KecamatanLayakController extends Controller
         $user = Auth::user();
         if ($user instanceof \App\Models\User && $user->hasPermissionTo('super admin-Full Control')) {
             // Jika user punya izin 'super admin', ambil semua data
-            $kegiatans = KegiatanKecamatan::all();
+            $kegiatans = KegiatanKecamatan::orderBy('created_at', 'desc')->get();
         } else {
             // Jika bukan 'super admin', hanya ambil data yang dibuat oleh user
             $kegiatans = KegiatanKecamatan::whereHas('user', function ($query) {
                     $query->where('name', Auth::user()->name);
                 })
-                ->get();
+                ->orderBy('created_at', 'desc')->get();
         }
         $kecamatans = Kecamatan::all();
         

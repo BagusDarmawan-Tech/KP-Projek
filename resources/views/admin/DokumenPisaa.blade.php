@@ -104,7 +104,7 @@
                 <h5 class="modal-title fw-bold text-center" id="DokumenPisaModalLabel">Tambah Dokumen Pisa Baru</h5>
             </div>
             <div class="modal-body">
-            <form method="POST" action="{{ route('createDokumenPisa') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('createDokumenPisa') }}" enctype="multipart/form-data" id="myForm">
                     @csrf 
                 <div class="mb-3">
                     <label class="form-label">Jenis Surat</label>
@@ -139,12 +139,18 @@
             <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->id }}">
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Simpan</button>
+                <button type="submit" id="submitBtn" class="btn btn-primary">Simpan</button>
             </div>
         </form>
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('myForm').addEventListener('submit', function() {
+        document.getElementById('submitBtn').disabled = true;
+    });
+</script>
 
 <!-- Modal Edit Dokumen Kelurahan -->
 <div class="modal fade" id="editDokumenModal" tabindex="-1" aria-labelledby="editDokumenModalLabel" aria-hidden="true">

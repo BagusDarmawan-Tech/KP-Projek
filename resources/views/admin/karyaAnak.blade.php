@@ -154,7 +154,7 @@
                 <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
             </div>
             <div class="modal-body">
-            <form method="POST" action="{{ route('createKaryaAnak') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('createKaryaAnak') }}" enctype="multipart/form-data" id="myForm">
                     @csrf 
                 <div class="mb-3">
                     <label class="form-label">Kreator</label>
@@ -185,12 +185,18 @@
             </div>
             <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="submit" id="submitBtn" class="btn btn-primary">Simpan</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('myForm').addEventListener('submit', function() {
+        document.getElementById('submitBtn').disabled = true;
+    });
+</script>
 
 <!-- Modal Edit Karya -->
 <div class="modal fade" id="editKaryaModal" tabindex="-1" aria-labelledby="editKaryaModalLabel" aria-hidden="true">

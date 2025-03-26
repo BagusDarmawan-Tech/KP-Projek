@@ -110,16 +110,16 @@
                 </div>
                 @endif
 
-                <form method="POST" action="{{ route('createArtikel') }}" enctype="multipart/form-data">
+                <form method="POST" id="myForm" action="{{ route('createArtikel') }}" enctype="multipart/form-data">
                     @csrf 
                     <div class="mb-3">
                         <label for="judul" class="form-label">Judul</label>
-                        <input type="text" class="form-control" id="judul" name="judul" value="{{ old('judul') }}" required>
+                        <input type="text" placeholder="Masukan Judul Artikel" class="form-control" id="judul" name="judul" value="{{ old('judul') }}" required>
                     </div>
                 
                     <div class="mb-3">
                         <label for="tag" class="form-label">Tag</label>
-                        <input type="text" class="form-control" id="tag" name="tag" value="{{ old('tag') }}">
+                        <input type="text" placeholder="Masukan Tag Artikel" class="form-control" id="tag" name="tag" value="{{ old('tag') }}">
                     </div>
                 
                     <div class="mb-3">
@@ -129,7 +129,7 @@
                 
                     <div class="mb-3">
                         <label for="konten" class="form-label">Konten</label>
-                        <textarea class="form-control" id="konten" rows="3" name="konten" required>{{ old('konten') }}</textarea>
+                        <textarea placeholder="Masukan Konten Artikel" class="form-control" id="konten" rows="3" name="konten" required>{{ old('konten') }}</textarea>
                     </div>
                 
                     <div class="mb-3">
@@ -168,13 +168,19 @@
 
              <div class="modal-footer border-top pt-3 d-flex justify-content-end"> <!-- Tambahan border-top dan padding -->
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                <button type="submit" class="btn btn-primary">Simpan</button>
+                <button type="submit" id="submitBtn" class="btn btn-primary">Simpan</button>
             </div>
                 </form>
         </div>
     </div>
 </div>
 </div>
+
+<script>
+    document.getElementById('myForm').addEventListener('submit', function() {
+        document.getElementById('submitBtn').disabled = true;
+    });
+</script>
 
 <!-- Modal Edit Artikel -->
 <div class="modal fade" id="halamanModal" tabindex="-1" aria-labelledby="halamanModalLabel" aria-hidden="true">

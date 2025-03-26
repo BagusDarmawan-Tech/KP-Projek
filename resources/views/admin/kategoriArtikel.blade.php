@@ -94,7 +94,7 @@
                 <h5 class="modal-title fw-bold text-center" id="kategoriModalLabel">Tambah Menu Kategori Baru</h5>
             </div>
             <div class="modal-body"> 
-                <form method="POST" action="{{ route('createKategoriArtikel') }}">
+                <form method="POST" id="myForm" action="{{ route('createKategoriArtikel') }}">
                     @csrf    
                     <div class="mb-3">
                         <label for="nama" class="form-label">Nama</label>
@@ -115,14 +115,18 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
 
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="submit" id="submitBtn" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
+<script>
+    document.getElementById('myForm').addEventListener('submit', function() {
+        document.getElementById('submitBtn').disabled = true;
+    });
+</script>
 
 {{-- END Modal Succes --}}
 

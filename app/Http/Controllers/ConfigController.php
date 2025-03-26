@@ -148,7 +148,7 @@ public function destroy(Role $role)
     //CRUD CONFIG APP
     
     public function ConfigurasiAPP() {
-        $komponents = ConfigApp::all();
+        $komponents = ConfigApp::orderBy('created_at', 'desc')->get();
         return view('admin.ConfigurasiAPP' ,compact('komponents')); 
     }
 

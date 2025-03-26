@@ -116,7 +116,7 @@
                 <h5 class="modal-title fw-bold text-center" id="menuModalLabel">Tambah Menu Pemantauan Usulan Anak</h5>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('createPemantauanUsulan') }}" >
+                <form method="POST" action="{{ route('createPemantauanUsulan') }}"  id="myForm">
                     @csrf 
                     <input type="hidden" name="userid" value="{{ Auth::user()->id }}">
                     <div class="mb-3">
@@ -145,12 +145,17 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="submit" id="submitBtn" class="btn btn-primary">Simpan</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+<script>
+    document.getElementById('myForm').addEventListener('submit', function() {
+        document.getElementById('submitBtn').disabled = true;
+    });
+</script>
 
 <!-- Modal Edit Usulan -->
 <div class="modal fade" id="editPemantauanModal" tabindex="-1" aria-labelledby="editPemantauanModalLabel" aria-hidden="true">
@@ -287,6 +292,17 @@
 });
 
 </script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("editKegiatanPisa").addEventListener("submit", function (event) {
+            let submitButton = this.querySelector("button[type='submit']");
+            submitButton.disabled = true;
+            submitButton.innerText = "Menyimpan...";
+        });
+    });
+</script>
+
 
 <!-- Script Delete Data ke Modal -->
 <script>

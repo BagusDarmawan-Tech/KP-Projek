@@ -10,7 +10,7 @@ class UserManagement extends Controller
 {
     public function UserManagement() {
         $roles = Role::all();
-        $user = User::all();
+        $user = User::orderBy('created_at', 'desc')->get();
         return view('admin.UserManagement', compact('user','roles'));
     }   
 }

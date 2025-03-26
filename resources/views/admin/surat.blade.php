@@ -92,7 +92,7 @@
                 <!-- <button type="button" class="btn-close" data-bs-dismiss="modal"></button> -->
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('createSuratJenis') }}" enctype="multipart/form-data">
+                <form method="POST" id="myForm" action="{{ route('createSuratJenis') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label for="judul" class="form-label">Nama Organisasi Perangkat Daerah</label>
@@ -111,13 +111,18 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="submit" id="submitBtn" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>  
+<script>
+    document.getElementById('myForm').addEventListener('submit', function() {
+        document.getElementById('submitBtn').disabled = true;
+    });
+</script>
 
 <!-- Modal Edit Artikel -->
 <div class="modal fade" id="editArtikelModal" tabindex="-1" aria-hidden="true">

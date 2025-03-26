@@ -98,7 +98,7 @@
 <div class="modal fade" id="sliderModal" tabindex="-1" aria-labelledby="sliderModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form method="POST" action="{{ route('createGaleri') }}" enctype="multipart/form-data">
+            <form method="POST" id="myForm" action="{{ route('createGaleri') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-header d-flex justify-content-center w-100 ">
                     <h5 class="modal-title fw-bold text-center" id="sliderModalLabel">Tambah Galeri Baru</h5>
@@ -132,12 +132,18 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="submit" id="submitBtn" class="btn btn-primary">Simpan</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('myForm').addEventListener('submit', function() {
+        document.getElementById('submitBtn').disabled = true;
+    });
+</script>
 
 
 <!-- Modal Edit Galeri -->

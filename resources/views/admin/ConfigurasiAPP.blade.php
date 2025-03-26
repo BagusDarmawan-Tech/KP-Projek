@@ -87,7 +87,7 @@
                 <h5 class="modal-title fw-bold text-center" id="kategoriModalLabel">Tambah Menu Configurasi APP</h5>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('createConfigurasiAPP') }}" >
+                <form method="POST" id="myForm" action="{{ route('createConfigurasiAPP') }}" >
                     @csrf 
                     <div class="mb-3">
                         <label for="kategoriNama" class="form-label">Nama</label>
@@ -99,7 +99,7 @@
                     </div>
                   <div class="modal-footer">
                 <button type="button" class="btn btn-light" data-bs-dismiss="modal">Tutup</button>
-                <button type="submit" class="btn btn-primary">Simpan</button>
+                <button type="submit" id="submitBtn" class="btn btn-primary">Simpan</button>
             </div>
                 </form>
             </div>
@@ -107,6 +107,12 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('myForm').addEventListener('submit', function() {
+        document.getElementById('submitBtn').disabled = true;
+    });
+</script>
 
 <!-- bagian edit -->
 <div class="modal fade" id="EditModal" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">

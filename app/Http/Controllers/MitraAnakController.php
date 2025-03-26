@@ -18,12 +18,13 @@ class MitraAnakController extends Controller
         $user = Auth::user();
         if ($user instanceof \App\Models\User && $user->hasPermissionTo('super admin-Full Control')) {
             // Jika user punya izin 'super admin', ambil semua data
-            $cfcis = KegiatanCfci::all();
+            $cfcis = KegiatanCfci::orderBy('created_at', 'desc')->get();
         } else {
             // Jika bukan 'super admin', hanya ambil data yang dibuat oleh user
             $cfcis = KegiatanCfci::whereHas('user', function ($query) {
                     $query->where('name', Auth::user()->name);
                 })
+                ->orderBy('created_at', 'desc')
                 ->get();
         }
         
@@ -160,12 +161,13 @@ class MitraAnakController extends Controller
         $user = Auth::user();
         if ($user instanceof \App\Models\User && $user->hasPermissionTo('super admin-Full Control')) {
             // Jika user punya izin 'super admin', ambil semua data
-            $artikels = ArtikelMitraAnak::all();
+            $artikels = ArtikelMitraAnak::orderBy('created_at', 'desc')->get();
         } else {
             // Jika bukan 'super admin', hanya ambil data yang dibuat oleh user
             $artikels = ArtikelMitraAnak::whereHas('user', function ($query) {
                     $query->where('name', Auth::user()->name);
                 })
+                ->orderBy('created_at', 'desc')
                 ->get();
         }
 
@@ -306,13 +308,13 @@ class MitraAnakController extends Controller
         $user = Auth::user();
         if ($user instanceof \App\Models\User && $user->hasPermissionTo('super admin-Full Control')) {
             // Jika user punya izin 'super admin', ambil semua data
-            $mitras = KegiatanMitraAnak::all();
+            $mitras = KegiatanMitraAnak::orderBy('created_at', 'desc')->get();
         } else {
             // Jika bukan 'super admin', hanya ambil data yang dibuat oleh user
             $mitras = KegiatanMitraAnak::whereHas('user', function ($query) {
                     $query->where('name', Auth::user()->name);
                 })
-                ->get();
+                ->orderBy('created_at', 'desc')->get();
         }
         
         return view('admin.kegiatanMitraAnak',compact(('mitras'))); 

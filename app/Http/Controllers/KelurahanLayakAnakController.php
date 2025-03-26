@@ -20,13 +20,13 @@ class KelurahanLayakAnakController extends Controller
         $user = Auth::user();
         if ($user instanceof \App\Models\User && $user->hasPermissionTo('super admin-Full Control')) {
             // Jika user punya izin 'super admin', ambil semua data
-            $dokumens = DokumenKelurahan::all();
+            $dokumens = DokumenKelurahan::orderBy('created_at', 'desc')->get();
         } else {
             // Jika bukan 'super admin', hanya ambil data yang dibuat oleh user
             $dokumens = DokumenKelurahan::whereHas('user', function ($query) {
                     $query->where('name', Auth::user()->name);
                 })
-                ->get();
+                ->orderBy('created_at', 'desc')->get();
         }
         
 
@@ -168,13 +168,13 @@ class KelurahanLayakAnakController extends Controller
         $user = Auth::user();
         if ($user instanceof \App\Models\User && $user->hasPermissionTo('super admin-Full Control')) {
             // Jika user punya izin 'super admin', ambil semua data
-            $kegiatans = KegiatanKelurahan::all();
+            $kegiatans = KegiatanKelurahan::orderBy('created_at', 'desc')->get();
         } else {
             // Jika bukan 'super admin', hanya ambil data yang dibuat oleh user
             $kegiatans = KegiatanKelurahan::whereHas('user', function ($query) {
                     $query->where('name', Auth::user()->name);
                 })
-                ->get();
+                ->orderBy('created_at', 'desc')->get();
         }
         $kelurahans = Kelurahan::all();
         return view('admin.KegiatanKelurahan',compact('kegiatans','kelurahans'));  

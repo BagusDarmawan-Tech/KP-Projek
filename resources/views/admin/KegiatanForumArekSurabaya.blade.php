@@ -104,7 +104,7 @@
                 <h5 class="modal-title fw-bold text-center" id="modalTambahKegiatanLabel">Tambah Menu Kegiatan Forum Arek Surabaya</h5>
             </div>
             <div class="modal-body">
-      <form method="POST" action="{{ route('createForumAnakSurabaya') }}" enctype="multipart/form-data">
+      <form method="POST" action="{{ route('createForumAnakSurabaya') }}" id="myForm" enctype="multipart/form-data">
           @csrf 
           <div class="mb-3">
             <label for="namaKegiatan" class="form-label fw-semibold">Nama</label>
@@ -131,12 +131,17 @@
     </div>
     <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-            <button type="submit" class="btn btn-primary">Simpan</button>
+            <button type="submit" id="submitBtn" class="btn btn-primary">Simpan</button>
         </div>
     </form>
   </div>
 </div>
 </div>
+<script>
+    document.getElementById('myForm').addEventListener('submit', function() {
+        document.getElementById('submitBtn').disabled = true;
+    });
+</script>
 
 <!-- Modal Edit Dokumen Kelurahan -->
 <div class="modal fade" id="modaEditKegiatan" tabindex="-1" aria-labelledby="modaEditKegiatanLabel" aria-hidden="true">

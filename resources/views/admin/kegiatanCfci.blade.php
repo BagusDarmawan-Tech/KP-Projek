@@ -100,7 +100,7 @@
                 <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('createMitraCfci') }}" enctype="multipart/form-data">
+                <form method="POST" id="myForm" action="{{ route('createMitraCfci') }}" enctype="multipart/form-data">
                     @csrf 
                     <div class="mb-3">
                         <label for="nama" class="form-label">Nama</label>
@@ -131,13 +131,19 @@
                     <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->id }}">
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="submit" id="submitBtn" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
         </div>
     </div>
 </div>
 </div>
+
+<script>
+    document.getElementById('myForm').addEventListener('submit', function() {
+        document.getElementById('submitBtn').disabled = true;
+    });
+</script>
 
 <!-- Modal Edit Kegiatan -->
 <div class="modal fade" id="editKegiatanModal" tabindex="-1" aria-labelledby="editKegiatanModalLabel" aria-hidden="true">
@@ -173,10 +179,13 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Status</label>
-                        <select class="form-select" id="editStatus" name="is_active" required>
-                            <option value="1">Aktif</option>
-                            <option value="0">Non-Aktif</option>
-                        </select>
+                        <div class="form-check form-switch">
+                            <!-- Hidden input sebagai fallback jika checkbox tidak dicentang -->
+                            <input type="hidden" name="is_active" value="0">
+                            
+                            <input class="form-check-input" name="is_active" type="checkbox" id="editStatus" value="1" checked>
+                            <label class="form-check-label" for="status">Aktif</label>
+                        </div>
                     </div>
             </div>
             <div class="modal-footer border-top pt-3 d-flex justify-content-end"> <!-- Tambahan border-top dan padding -->
@@ -268,7 +277,8 @@
           // Set nilai form dalam modal
           document.getElementById("editNamaKegiatan").value = nama;
           document.getElementById("editDeskripsi").value = deskripsi;
-          document.getElementById("editStatus").value = status;
+          document.getElementById("editStatus").checked = status == "1";
+
           document.getElementById("editCaption").value = caption;
   
           // Set preview gambar

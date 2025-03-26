@@ -81,7 +81,7 @@
                                             data-bs-toggle="modal" data-bs-target="#tindakLanjutModal"
                                             data-id="{{ $suara->id }}"
                                             data-tanggalTindakLanjut="{{ $suara->tanggalTindakLanjut }}"
-                                            data-file="{{ asset('storage/' . $suara->file) }}"
+                                            data-file="{{ asset( $suara->file) }}"
                                             data-tindakLanjut="{{ $suara->tindakLanjut }}">
                                         <i class="bi bi-calendar text-white fs-6"></i>
                                     </button>
@@ -111,7 +111,7 @@
                                     data-tanggal="{{ $suara->tanggal }}" 
                                     data-pemohon="{{ $suara->user ? $suara->user->name : 'Tidak ada pengguna' }}"
                                     data-nomor="{{ $suara->nomorSuara }}"
-                                    data-file-deskripsi="{{ asset('storage/' . $suara->file) }}">
+                                    data-file-deskripsi="{{ asset($suara->file) }}">
                                 <i class="bi bi-list-task text-white fs-6"></i>
                                 </a>
                             </td>
@@ -133,7 +133,7 @@
                     <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="{{ route('createPemantauanSuara') }}" >
+                    <form method="POST" action="{{ route('createPemantauanSuara') }}" id="myForm">
                         @csrf 
                     <div class="mb-3">
                         <label class="form-label">Perihal</label>
@@ -147,12 +147,14 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="submit" id="submitBtn" class="btn btn-primary">Simpan</button>
                 </div>
             </form>
             </div>
         </div>
     </div>
+    
+
     <!-- Modal Edit Pemantauan -->
     <div class="modal fade" id="editForm" tabindex="-1" aria-labelledby="editForm" aria-hidden="true">
         <div class="modal-dialog">
@@ -302,7 +304,12 @@
     </div>
 </div>
 
-
+{{-- Mencegah double klik --}}
+<script>
+    document.getElementById('myForm').addEventListener('submit', function() {
+        document.getElementById('submitBtn').disabled = true;
+    });
+</script>
 
 {{-- Finalisasi --}}
 <script>
@@ -349,8 +356,6 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".edit-tindakan").forEach(button => {
         button.addEventListener("click", function () {
             let id = this.getAttribute("data-id");
-            console.log(id); // Cek apakah id terambil dengan benar
-
             let tindakLanjut = this.getAttribute("data-tindakLanjut");
             let tanggalTindakLanjut = this.getAttribute("data-tanggalTindakLanjut");
             let file = this.getAttribute("data-file");

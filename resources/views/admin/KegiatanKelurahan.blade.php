@@ -102,7 +102,7 @@
                     <h5 class="modal-title fw-bold text-center" id="menuModalLabel">Tambah Kegiatan Kelurahan</h5>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="{{ route('createKegiatanKelurahan') }}" enctype="multipart/form-data">
+                    <form method="POST" id="myForm" action="{{ route('createKegiatanKelurahan') }}" enctype="multipart/form-data">
                         @csrf 
                         <div class="mb-3">
                             <label for="kegiatan" class="form-label">Kelurahan</label>
@@ -141,13 +141,19 @@
                           <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->id }}">
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                            <button type="submit" id="submitBtn" class="btn btn-primary">Simpan</button>
                 </div>
                     </form>
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('myForm').addEventListener('submit', function() {
+        document.getElementById('submitBtn').disabled = true;
+    });
+</script>
 
 <!-- Modal Edit Dokumen Kelurahan -->
 <div class="modal fade" id="modaEditKegiatan" tabindex="-1" aria-labelledby="modaEditKegiatanLabel" aria-hidden="true">

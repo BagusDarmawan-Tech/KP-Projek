@@ -69,7 +69,7 @@
 </div>
 
 
-<!-- Modal Tambah Sub Kegiatan -->
+<!-- Modal Tambah user -->
 <div class="modal fade" id="subKegiatanModal" tabindex="-1" aria-labelledby="subKegiatanModalLabel" aria-hidden="true">
 <div class="modal-dialog">
         <div class="modal-content">
@@ -77,7 +77,7 @@
                 <h5 class="modal-title fw-bold text-center" id="subKegiatanModalLabel">Tambah User</h5>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('register') }}">
+                <form method="POST" action="{{ route('register') }}" id="myForm">
                 @csrf    
                     <div class="mb-3">
                         <label class="form-label" for="name" :value="__('Name')">Nama</label>
@@ -121,13 +121,17 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    <button type="submit" class="btn btn-primary">{{ __('Register') }}</button>
+                    <button type="submit" id="submitBtn" class="btn btn-primary">{{ __('Register') }}</button>
                 </div>
                         </form>
         </div>
     </div>
 </div>
-
+<script>
+    document.getElementById('myForm').addEventListener('submit', function() {
+        document.getElementById('submitBtn').disabled = true;
+    });
+</script>
 
 <!-- Modal Edit Kegiatan -->
 <div class="modal fade" id="EditKegiatanManModal" tabindex="-1" aria-labelledby="EditKegiatanManModalLabel" aria-hidden="true">

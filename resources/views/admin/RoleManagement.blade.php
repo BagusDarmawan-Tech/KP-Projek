@@ -85,7 +85,7 @@
                 @endif
             </div>
             <div class="modal-body">
-            <form action="{{ route('storeRoleManagement') }}" method="POST">
+            <form action="{{ route('storeRoleManagement') }}" id="myForm" method="POST">
                     @csrf
                     <!-- Input Nama -->
                     <div class="mb-3">
@@ -134,13 +134,17 @@
                 <!-- Tombol Footer -->
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Tutup</button>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="submit" id="submitBtn" class="btn btn-primary">Simpan</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-
+<script>
+    document.getElementById('myForm').addEventListener('submit', function() {
+        document.getElementById('submitBtn').disabled = true;
+    });
+</script>
 
 <!-- Modal Delete Menu -->
 <div class="modal fade" id="deleteMenuModal" tabindex="-1" aria-labelledby="deleteMenuModalLabel" aria-hidden="true">
