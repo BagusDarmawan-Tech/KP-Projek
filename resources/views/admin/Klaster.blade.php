@@ -118,7 +118,18 @@
                     @csrf
                     <div class="mb-3">
                         <label for="kategoriIcon" class="form-label">Icon</label>
-                        <input type="text" class="form-control" class="form-control" id="nama" name="icon" value="{{ old('icon') }}" placeholder="Masukkan Icon">
+                        <select class="form-select" id="kategoriIcon" name="icon">
+                            <option value="bi-house" {{ old('icon') == 'bi-house' ? 'selected' : '' }}>🏠 Home</option>
+                            <option value="bi-person" {{ old('icon') == 'bi-person' ? 'selected' : '' }}>👤 User</option>
+                            <option value="bi-gear" {{ old('icon') == 'bi-gear' ? 'selected' : '' }}>⚙️ Settings</option>
+                            <option value="bi-envelope" {{ old('icon') == 'bi-envelope' ? 'selected' : '' }}>✉️ Mail</option>
+                            <option value="bi-bell" {{ old('icon') == 'bi-bell' ? 'selected' : '' }}>🔔 Notification</option>
+                            <option value="bi-chat-dots" {{ old('icon') == 'bi-chat-dots' ? 'selected' : '' }}>💬 Chat</option>
+                            <option value="bi-calendar" {{ old('icon') == 'bi-calendar' ? 'selected' : '' }}>📅 Calendar</option>
+                            <option value="bi-camera" {{ old('icon') == 'bi-camera' ? 'selected' : '' }}>📷 Camera</option>
+                            <option value="bi-cart" {{ old('icon') == 'bi-cart' ? 'selected' : '' }}>🛒 Cart</option>
+                            <option value="bi-heart" {{ old('icon') == 'bi-heart' ? 'selected' : '' }}>❤️ Favorite</option>
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label for="kategoriNama" class="form-label">Nama</label>
@@ -185,10 +196,13 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Status</label>
-                        <select class="form-select" id="editIsActive" name="is_active" required>
-                            <option value="1">Aktif</option>
-                            <option value="0">Non-Aktif</option>
-                        </select>
+                        <div class="form-check form-switch">
+                            <!-- Hidden input sebagai fallback jika checkbox tidak dicentang -->
+                            <input type="hidden" name="is_active" value="0">
+                            
+                            <input class="form-check-input" name="is_active" type="checkbox" id="editStatus" value="1" checked>
+                            <label class="form-check-label" for="status">Aktif</label>
+                        </div>
                     </div>
                      </div>
                     <div class="modal-footer">
@@ -237,12 +251,12 @@
                 let nama = this.getAttribute("data-nama");
                 let icon = this.getAttribute("data-icon");
                 let gambar = this.getAttribute("data-gambar");
-                let isActive = this.getAttribute("data-is_active");
+                let status = this.getAttribute("data-is_active");
 
                 document.getElementById("editId").value = id;
                 document.getElementById("editNama").value = nama;
                 document.getElementById("editIcon").value = icon;
-                document.getElementById("editIsActive").value = isActive;
+                document.getElementById("editStatus").checked = status == "1";
                 document.getElementById("previewGambar").src = gambar;
 
                 // Atur action form agar mengarah ke URL update dengan ID

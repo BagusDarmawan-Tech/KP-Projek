@@ -85,38 +85,44 @@
                         <td>
                             <div class="d-flex align-items-center justify-content-center gap-1 py-1" style="min-height: 38px;">
                                 
-                                <!-- Tombol Edit -->
-                                @if (auth()->user()->hasPermissionTo('karya-edit')) 
-                                <button class="btn btn-sm btn-primary edit-karya" data-bs-toggle="modal" data-bs-target="#editKaryaModal"
-                                    data-id="{{ $karya->id }}" 
-                                    data-judul="{{ $karya->judul }}" 
-                                    data-kreator="{{ $karya->kreator }}" 
-                                    data-deskripsi="{{ $karya->deskripsi }}" 
-                                    data-karya="{{ $karya->tingkatKarya }}" 
-                                    data-gambar="{{ asset($karya->gambar) }}">
-                                    <i class="bi bi-pencil"></i>
-                                </button>
+                                @if(is_null($karya->status))
+                                    @if (auth()->user()->hasPermissionTo('karya-edit')) 
+                                    <button class="btn btn-sm btn-primary edit-karya" data-bs-toggle="modal" data-bs-target="#editKaryaModal"
+                                        data-id="{{ $karya->id }}" 
+                                        data-judul="{{ $karya->judul }}" 
+                                        data-kreator="{{ $karya->kreator }}" 
+                                        data-deskripsi="{{ $karya->deskripsi }}" 
+                                        data-karya="{{ $karya->tingkatKarya }}" 
+                                        data-gambar="{{ asset($karya->gambar) }}">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    @endif
                                 @endif
+                                <!-- Tombol Edit -->
 
                                 <!-- Tombol Hapus -->
-                                @if (auth()->user()->hasPermissionTo('karya-delete')) 
-                                <button class="btn btn-sm btn-danger delete-btn" 
-                                    data-id  ="{{ $karya->id }}"
-                                    data-nama ="{{ $karya->judul }}"
-                                    data-bs-toggle="modal" 
-                                    data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i>
-                                </button>  
+                                @if(is_null($karya->status))
+                                    @if (auth()->user()->hasPermissionTo('karya-delete')) 
+                                    <button class="btn btn-sm btn-danger delete-btn" 
+                                        data-id  ="{{ $karya->id }}"
+                                        data-nama ="{{ $karya->judul }}"
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i>
+                                    </button>  
+                                    @endif
                                 @endif
 
 
                                 <!-- Tombol Verifikasi -->
-                                @if (auth()->user()->hasPermissionTo('karya-verifikasi')) 
-                                <button class="btn btn-sm btn-success verifikasi-edit" data-bs-toggle="modal" data-bs-target="#verifikasiModal" 
-                                data-status="{{ $karya->status }}" 
-                                data-id="{{ $karya->id }}"
-                                dataID="{{ $karya->id }}">
-                                    <i class="bi bi-check-lg"></i>
-                                </button>
+                                @if(is_null($karya->status))
+                                    @if (auth()->user()->hasPermissionTo('karya-verifikasi')) 
+                                    <button class="btn btn-sm btn-success verifikasi-edit" data-bs-toggle="modal" data-bs-target="#verifikasiModal" 
+                                    data-status="{{ $karya->status }}" 
+                                    data-id="{{ $karya->id }}"
+                                    dataID="{{ $karya->id }}">
+                                        <i class="bi bi-check-lg"></i>
+                                    </button>
+                                    @endif
                                 @endif
 
                                 <a href="#" 

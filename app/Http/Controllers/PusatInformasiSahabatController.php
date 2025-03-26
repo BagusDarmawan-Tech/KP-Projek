@@ -17,12 +17,13 @@ class PusatInformasiSahabatController extends Controller
         $user = Auth::user();
         if ($user instanceof \App\Models\User && $user->hasPermissionTo('super admin-Full Control')) {
             // Jika user punya izin 'super admin', ambil semua data
-            $dokumens = DokumenPisa::all();
+            $dokumens = DokumenPisa::orderBy('created_at', 'desc')->get();
         } else {
             // Jika bukan 'super admin', hanya ambil data yang dibuat oleh user
             $dokumens = DokumenPisa::whereHas('user', function ($query) {
                     $query->where('name', Auth::user()->name);
                 })
+                ->orderBy('created_at', 'desc')
                 ->get();
         }
         $surats = JenisSurat::all();
@@ -153,12 +154,13 @@ class PusatInformasiSahabatController extends Controller
         $user = Auth::user();
         if ($user instanceof \App\Models\User && $user->hasPermissionTo('super admin-Full Control')) {
             // Jika user punya izin 'super admin', ambil semua data
-            $kegiatans = KegiatanPisa::all();
+            $kegiatans = KegiatanPisa::orderBy('created_at', 'desc')->get();
         } else {
             // Jika bukan 'super admin', hanya ambil data yang dibuat oleh user
             $kegiatans = KegiatanPisa::whereHas('user', function ($query) {
                     $query->where('name', Auth::user()->name);
                 })
+                ->orderBy('created_at', 'desc')
                 ->get();
         }
         

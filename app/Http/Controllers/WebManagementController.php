@@ -23,7 +23,7 @@ class WebManagementController extends Controller
     //=====================CRUD SLider
     //tampilkan data
     public function slider() {
-        $sliders = Slider::all();
+        $sliders = Slider::orderBy('created_at', 'desc')->get();
         return view('admin.Slider', compact('sliders'));
     }
 
@@ -161,7 +161,18 @@ class WebManagementController extends Controller
     //===========CRUD Sub Kegiatan
     public function subKegiatan() 
     {
-        $subKegiatans = SubKegiatan::all();
+        $user = Auth::user();
+        if ($user instanceof \App\Models\User && $user->hasPermissionTo('super admin-Full Control')) {
+            // Jika user punya izin 'super admin', ambil semua data
+            $subKegiatans = SubKegiatan::orderBy('created_at', 'desc')->get();
+        } else {
+            // Jika bukan 'super admin', hanya ambil data yang dibuat oleh user
+            $subKegiatans = SubKegiatan::whereHas('user', function ($query) {
+                    $query->where('name', Auth::user()->name);
+                })
+                ->orderBy('created_at', 'desc')
+                ->get();
+        }
         $klasters = Klaster::where('is_active', true)->get();
         return view('admin.SubKegiatan', compact('subKegiatans','klasters'));
     }
@@ -290,7 +301,7 @@ class WebManagementController extends Controller
 
     //===========CRUD FORUMANAK
     public function forumAnak() {
-        $forumAnaks = ForumAnak::all();
+        $forumAnaks = ForumAnak::orderBy('created_at', 'desc')->get();
         return view('admin.ForumAnak', compact('forumAnaks'));
     }
 
@@ -435,12 +446,13 @@ class WebManagementController extends Controller
         $user = Auth::user();
         if ($user instanceof \App\Models\User && $user->hasPermissionTo('super admin-Full Control')) {
             // Jika user punya izin 'super admin', ambil semua data
-            $galeris = Galeri::all();
+            $galeris = Galeri::orderBy('created_at', 'desc')->get();
         } else {
             // Jika bukan 'super admin', hanya ambil data yang dibuat oleh user
             $galeris = Galeri::whereHas('user', function ($query) {
                     $query->where('name', Auth::user()->name);
                 })
+                ->orderBy('created_at', 'desc')
                 ->get();
         }
         return view('admin.Galeri', compact('galeris'));
@@ -571,7 +583,7 @@ class WebManagementController extends Controller
 
     //=================CRUD KategoriArtikel
     public function kategoriArtikel() {
-        $kategori_artikel = KategoriArtikel::all();
+        $kategori_artikel = KategoriArtikel::orderBy('created_at', 'desc')->get();
         return view('admin.KategoriArtikel', compact('kategori_artikel'));
     }   
 
@@ -634,7 +646,7 @@ class WebManagementController extends Controller
 
     //================= CRUD klaster
     public function klaster1() {
-        $klasters = Klaster::all();
+        $klasters = Klaster::orderBy('created_at', 'desc')->get();
         return view('admin.Klaster', compact('klasters'));
        
     }
@@ -762,7 +774,7 @@ class WebManagementController extends Controller
         $user = Auth::user();
         if ($user instanceof \App\Models\User && $user->hasPermissionTo('super admin-Full Control')) {
             // Jika user punya izin 'super admin', ambil semua data
-            $usulans = PemantauanUsulan::all();
+            $usulans = PemantauanUsulan::orderBy('created_at', 'desc')->get();
         } else {
             // Jika bukan 'super admin', hanya ambil data yang dibuat oleh user
             $usulans = PemantauanUsulan::whereHas('user', function ($query) {
@@ -852,7 +864,7 @@ class WebManagementController extends Controller
 
      //=================CRUD Halaman
     public function bagianHalaman() {
-        $halamans = Halaman::all();
+        $halamans = Halaman::orderBy('created_at', 'desc')->get();
         return view('admin.HalamanWebMan',compact(('halamans'))); 
     }
     public function storeHalaman(Request $request)
@@ -976,12 +988,13 @@ class WebManagementController extends Controller
         $user = Auth::user();
         if ($user instanceof \App\Models\User && $user->hasPermissionTo('super admin-Full Control')) {
             // Jika user punya izin 'super admin', ambil semua data
-            $usulans = Artikel::all();
+            $usulans = Artikel::orderBy('created_at', 'desc')->get();
         } else {
             // Jika bukan 'super admin', hanya ambil data yang dibuat oleh user
             $usulans = Artikel::whereHas('user', function ($query) {
                     $query->where('name', Auth::user()->name);
                 })
+                ->orderBy('created_at', 'desc')
                 ->get();
         }
         $kategoris = KategoriArtikel::where('is_active', true)->get();
@@ -1137,7 +1150,7 @@ class WebManagementController extends Controller
 
     //=======================OPD CRUD
     public function opd() {
-        $opds = OPD::all();
+        $opds = OPD::orderBy('created_at', 'desc')->get();
         return view('admin.opd', compact('opds'));
        
     }
@@ -1173,7 +1186,7 @@ class WebManagementController extends Controller
     {
         // dd($request->all());
         $request->validate([
-            'nama' => 'required|string|max:255|unique:opd,nama',
+            'nama' => 'required|string|max:255',
             'is_active' => 'required|boolean',
         ],
         [
@@ -1217,7 +1230,7 @@ class WebManagementController extends Controller
 
         //=======================surat CRUD
         public function suratJenis() {
-            $surats = JenisSurat::all();
+            $surats = JenisSurat::orderBy('created_at', 'desc')->get();
             return view('admin.surat', compact('surats'));
            
         }
@@ -1249,7 +1262,7 @@ class WebManagementController extends Controller
     {
         // dd($request->all());
         $request->validate([
-            'nama' => 'required|string|max:255|unique:jenis_surat,nama',
+            'nama' => 'required|string|max:255',
             'is_active' => 'required|boolean',
         ], [
             'nama.required' => 'Nama wajib diisi.',

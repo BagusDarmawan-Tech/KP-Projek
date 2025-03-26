@@ -186,10 +186,13 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Status</label>
-                        <select class="form-select" name="is_active" id="editIsActive" required>
-                            <option value="1">Aktif</option>
-                            <option value="0">Non-Aktif</option>
-                        </select>
+                        <div class="form-check form-switch">
+                            <!-- Hidden input sebagai fallback jika checkbox tidak dicentang -->
+                            <input type="hidden" name="is_active" value="0">
+                            
+                            <input class="form-check-input" name="is_active" type="checkbox" id="editStatus" value="1" checked>
+                            <label class="form-check-label" for="status">Aktif</label>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -270,14 +273,14 @@
                 const nama = this.getAttribute("data-nama");
                 const caption = this.getAttribute("data-caption");
                 const deskripsi = this.getAttribute("data-deskripsi");
-                const isActive = this.getAttribute("data-is_active");
+                const status = this.getAttribute("data-is_active");
                 const gambar = this.getAttribute("data-gambar");
     
                 // Isi form dengan data dari tombol edit
                 document.getElementById("editNama").value = nama;
                 document.getElementById("editCaption").value = caption;
                 document.getElementById("editDeskripsi").value = deskripsi;
-                document.getElementById("editIsActive").value = isActive;
+                document.getElementById("editStatus").checked = status == "1";
     
                 // Tampilkan gambar yang ada
                 if (gambar) {

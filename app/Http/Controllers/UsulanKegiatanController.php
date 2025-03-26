@@ -18,12 +18,13 @@ class UsulanKegiatanController extends Controller
         $user = Auth::user();
         if ($user instanceof \App\Models\User && $user->hasPermissionTo('super admin-Full Control')) {
             // Jika user punya izin 'super admin', ambil semua data
-            $suaras = SuaraAnak::all();
+            $suaras = SuaraAnak::orderBy('created_at', 'desc')->get();
         } else {
             // Jika bukan 'super admin', hanya ambil data yang dibuat oleh user
             $suaras = SuaraAnak::whereHas('user', function ($query) {
                     $query->where('name', Auth::user()->name);
                 })
+                ->orderBy('created_at', 'desc')
                 ->get();
         }
         
@@ -213,12 +214,13 @@ class UsulanKegiatanController extends Controller
         $user = Auth::user();
         if ($user instanceof \App\Models\User && $user->hasPermissionTo('super admin-Full Control')) {
             // Jika user punya izin 'super admin', ambil semua data
-            $karyas = KaryaAnak::all();;
+            $karyas = KaryaAnak::orderBy('created_at', 'desc')->get();
         } else {
             // Jika bukan 'super admin', hanya ambil data yang dibuat oleh user
             $karyas = KaryaAnak::whereHas('user', function ($query) {
                     $query->where('name', Auth::user()->name);
                 })
+                ->orderBy('created_at', 'desc')
                 ->get();
         }
         

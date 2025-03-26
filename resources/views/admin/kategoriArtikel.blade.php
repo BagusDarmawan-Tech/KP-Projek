@@ -102,12 +102,12 @@
                     </div>
             
                     <div class="mb-3">
-                        <label for="kategoriStatus" class="form-label">Status</label>
-                        <select class="form-select" id="kategoriStatus" name="is_active" required>
-                            <!-- <option value="" disabled selected>--- Pilih Status ---</option> -->
-                            <option value="1" {{ old('is_active') == "1" ? 'selected' : '' }}>Aktif</option>
-                            <option value="0" {{ old('is_active') == "0" ? 'selected' : '' }}>Non-Aktif</option>
-                        </select>
+                        <label class="form-label">Status</label>
+                        <div class="form-check form-switch">
+                            <input type="hidden" name="is_active" value="0"> <!-- Fallback jika checkbox tidak dicentang -->
+                            <input class="form-check-input" type="checkbox" id="status" name="is_active" value="1" checked>
+                            <label class="form-check-label" for="status">Aktif</label>
+                        </div>
                     </div>
             
                     <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->id }}">
@@ -146,12 +146,16 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="editStatus" class="form-label">Status</label>
-                        <select class="form-select" id="editStatus" name="is_active" required>
-                            <option value="1">Aktif</option>
-                            <option value="0">Non-Aktif</option>
-                        </select>
+                        <label class="form-label">Status</label>
+                        <div class="form-check form-switch">
+                            <!-- Hidden input sebagai fallback jika checkbox tidak dicentang -->
+                            <input type="hidden" name="is_active" value="0">
+                            
+                            <input class="form-check-input" name="is_active" type="checkbox" id="editStatus" value="1" checked>
+                            <label class="form-check-label" for="status">Aktif</label>
+                        </div>
                     </div>
+
                     
                     <input type="hidden" name="dibuatOleh" value="{{ Auth::user()->name }}">
                 </form>
@@ -202,7 +206,7 @@
 
                 document.getElementById("editId").value = id;
                 document.getElementById("editNama").value = nama;
-                document.getElementById("editStatus").value = status;
+                document.getElementById("editStatus").checked = status == "1";;
 
                 // Set action form update sesuai ID kategori
                 document.getElementById("editForm").action = `/kategori-artikel/update/${id}`;

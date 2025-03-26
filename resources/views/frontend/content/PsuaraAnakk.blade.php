@@ -36,11 +36,11 @@
                     <tbody>
                         @forelse ($datas as $index => $data)
                             <tr>
-                                <td class="text-center">{{ $index + 1 }}</td>
-                                <td class="text-center">{{ $data->user ? $data->user->name : 'Tidak ada pemohon' }}</td>
-                                <td class="text-center">{{ $data->perihal }}</td>
-                                <td class="text-center">{{ $data->deskripsi }}</td>
-                                <td class="text-center">
+                                <td>{{ $index + 1 }}</td>
+                                <td>{{ $data->user ? $data->user->name : 'Tidak ada pemohon' }}</td>
+                                <td>{{ $data->perihal }}</td>
+                                <td>{{ $data->deskripsi }}</td>
+                                <td>
                                     <!-- Tombol Unduh -->
                                     <a href="{{ asset($data->file) }}" class="btn btn-sm btn-success" download>
                                         <i class="bi bi-download"></i> Download

@@ -41,18 +41,18 @@
                 <table class="table table-hover table-bordered align-middle text-center" id="myTable">
                     <thead class="table-primary">
                         <tr>
-                            <th class="text-center">No</th>
-                            <th class="text-center">Perihal</th>
-                            <th class="text-center">Status</th>
-                            <th class="text-center">Aksi</th>
+                            <th>No</th>
+                            <th>Perihal</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($suaras as $index => $suara)
-                        <tr class="text-center">
-                            <td style="text-align: center;">{{ $loop->iteration }}</td>
+                        <tr >
+                            <td>{{ $loop->iteration }}</td>
 
-                            <td>{{ $suara->perihal }}</td>
+                            <td class="text-start">{{ $suara->perihal }}</td>
                                   
                             <td>
                                 @if(is_null($suara->tindakLanjut))
@@ -62,40 +62,42 @@
                                 @endif
                             </td>
                             <td class="d-flex text-start gap-2 py-2">
+                                @if(is_null($suara->is_active))
                                 <!-- Tombol Edit -->
-                                @if (auth()->user()->hasPermissionTo('pemantauan suara anak-edit')) 
-                                <button class="btn btn-sm btn-primary edit-usulan" 
-                                    data-bs-toggle="modal" 
-                                    data-bs-target="#editForm"
-                                    data-id="{{ $suara->id }}"
-                                    data-perihal="{{ $suara->perihal }}"
-                                    data-deskripsi="{{ $suara->deskripsi }}">
-                                    <i class="bi bi-pencil-square"></i>
-                                </button>
-                                @endif
-                                <!-- Tombol Tindak Lanjut -->
-                                @if (auth()->user()->hasPermissionTo('pemantauan suara anak-verifikasi')) 
-                                <button class="btn btn-sm rounded-circle edit-tindakan"
-                                        style="background-color: #6A0DAD; width: 36px; height: 36px;"
-                                        data-bs-toggle="modal" data-bs-target="#tindakLanjutModal"
+                                    @if (auth()->user()->hasPermissionTo('pemantauan suara anak-edit')) 
+                                    <button class="btn btn-sm btn-primary edit-usulan" 
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#editForm"
                                         data-id="{{ $suara->id }}"
-                                        data-tanggalTindakLanjut="{{ $suara->tanggalTindakLanjut }}"
-                                        data-file="{{ asset('storage/' . $suara->file) }}"
-                                        data-tindakLanjut="{{ $suara->tindakLanjut }}">
-                                    <i class="bi bi-calendar text-white fs-6"></i>
-                                </button>
-                                @endif
-                        
-                                
-                                <!-- Tombol Finalisasi -->
-                                @if(!is_null($suara->tindakLanjut))
-                                    @if (auth()->user()->hasPermissionTo('pemantauan suara anak-verifikasi')) 
-                                    <button class="btn btn-sm rounded-circle edit-verifikasi" style="background-color:rgb(61, 196, 102); width: 36px; height: 36px;"
-                                        data-bs-toggle="modal" data-bs-target="#finalisasiModal"
-                                        data-id="{{ $suara->id }}"
-                                        data-status="{{ $suara->is_active }}">
-                                        <i class="bi bi-file-earmark-arrow-up-fill text-white fs-6"></i>
+                                        data-perihal="{{ $suara->perihal }}"
+                                        data-deskripsi="{{ $suara->deskripsi }}">
+                                        <i class="bi bi-pencil-square"></i>
                                     </button>
+                                    @endif
+                                    <!-- Tombol Tindak Lanjut -->
+                                    @if (auth()->user()->hasPermissionTo('pemantauan suara anak-verifikasi')) 
+                                    <button class="btn btn-sm rounded-circle edit-tindakan"
+                                            style="background-color: #6A0DAD; width: 36px; height: 36px;"
+                                            data-bs-toggle="modal" data-bs-target="#tindakLanjutModal"
+                                            data-id="{{ $suara->id }}"
+                                            data-tanggalTindakLanjut="{{ $suara->tanggalTindakLanjut }}"
+                                            data-file="{{ asset('storage/' . $suara->file) }}"
+                                            data-tindakLanjut="{{ $suara->tindakLanjut }}">
+                                        <i class="bi bi-calendar text-white fs-6"></i>
+                                    </button>
+                                    @endif
+                            
+                                    
+                                    <!-- Tombol Finalisasi -->
+                                    @if(!is_null($suara->tindakLanjut))
+                                        @if (auth()->user()->hasPermissionTo('pemantauan suara anak-verifikasi')) 
+                                        <button class="btn btn-sm rounded-circle edit-verifikasi" style="background-color:rgb(61, 196, 102); width: 36px; height: 36px;"
+                                            data-bs-toggle="modal" data-bs-target="#finalisasiModal"
+                                            data-id="{{ $suara->id }}"
+                                            data-status="{{ $suara->is_active }}">
+                                            <i class="bi bi-file-earmark-arrow-up-fill text-white fs-6"></i>
+                                        </button>
+                                        @endif
                                     @endif
                                 @endif
 
@@ -108,7 +110,8 @@
                                     data-gambar="{{ asset($suara->gambar) }}" 
                                     data-tanggal="{{ $suara->tanggal }}" 
                                     data-pemohon="{{ $suara->user ? $suara->user->name : 'Tidak ada pengguna' }}"
-                                    data-nomor="{{ $suara->nomorSuara }}">
+                                    data-nomor="{{ $suara->nomorSuara }}"
+                                    data-file-deskripsi="{{ asset('storage/' . $suara->file) }}">
                                 <i class="bi bi-list-task text-white fs-6"></i>
                                 </a>
                             </td>
@@ -262,6 +265,9 @@
             <p id="modalTanggal" class="info-row"></p>
             <p id="modalPemohon" class="info-row"></p>
             <p id="modalDeskripsi" class="card-text"></p>
+            <div class="mb-2">
+                <a id="modalFile" href="#" target="_blank" class="btn btn-secondary btn-sm">Lihat File Saat Ini</a>
+            </div>
         </div>
     </div>
 </div>
@@ -379,6 +385,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 let tanggal = this.getAttribute("data-tanggal");
                 let pemohon = this.getAttribute("data-pemohon");
                 let nomor = this.getAttribute("data-nomor");
+                let fileDeskripsi = this.getAttribute("data-file-deskripsi");
 
                 // Tetapkan teks header modal selalu "Detail"
                 document.getElementById("deskripsiModalLabel").innerText = "Detail";
@@ -389,6 +396,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.getElementById("modalTanggal").innerHTML   = `<strong> Tanggal   : </strong>  ${tanggal}`; // Tanggal
                 document.getElementById("modalPemohon").innerHTML   = `<strong> Pemohon   : </strong>  ${pemohon}`; // Pemohon
                 document.getElementById("modalNomor").innerHTML     = `<strong> Nomor       : </strong>  ${nomor}`; // Nomor
+                document.getElementById("modalFile").href     = fileDeskripsi;
                 document.getElementById("modalDeskripsi").style.textAlign = "justify";
             });
         });
