@@ -121,15 +121,16 @@
                             </div>
                             <div class="mb-3">
                                 <label for="kegiatan" class="form-label">Kelurahan</label>
-                                <select class="form-select" id="kegiatan" name="kelurahanid" required>
+                                <select class="form-select select2" id="kegiatan" name="kelurahanid" required>
                                     <option value="" disabled selected>-- Pilih Kelurahan --</option>
                                     @foreach ($kelurahans as $kelurahan)
-                                        <option value="{{ $kelurahan->id }}" {{ old('subkegiatanid') == $kelurahan->id ? 'selected' : '' }} >
+                                        <option value="{{ $kelurahan->id }}" {{ old('kelurahanid') == $kelurahan->id ? 'selected' : '' }}>
                                             {{ $kelurahan->nama }}
                                         </option>
                                     @endforeach
                                 </select>
-                            </div>
+                            </div>                            
+                        
                             <div class="mb-3">
                                 <label class="form-label">Nama</label>
                                 <input type="text" class="form-control" name="nama">
@@ -307,9 +308,6 @@
                 let id = this.getAttribute("data-id");
                 let nama = this.getAttribute("data-nama");
   
-                console.log(id)
-                console.log(nama)
-  
                 document.getElementById("deleteId").value = id;
                 document.getElementById("deleteNama").textContent = nama; // Tampilkan nama di modal
   
@@ -319,5 +317,16 @@
         });
     });
   </script>
+
+<script>
+    $(document).ready(function() {
+        $('.select2').select2({
+            placeholder: "-- Pilih Kelurahan --",
+            allowClear: true
+        });
+    });
+</script>
+
+
 
 @endsection

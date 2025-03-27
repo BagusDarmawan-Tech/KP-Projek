@@ -28,6 +28,11 @@
   <link rel="stylesheet" href="{{ asset('assets/vendor-bagus/remixicon/remixicon.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/vendor-bagus/simple-datatables/style.css') }}">
 
+  <!-- Select2 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+
+
+
   <!-- Template Main CSS File -->
   <link rel="stylesheet" href="{{ asset('assets/css/style-bagus.css') }}">
   {{-- <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}"> --}}
@@ -156,6 +161,10 @@
 
   <!-- Template Main JS File -->
   <script src="{{ asset('assets/js/main-bagus.js' ) }}"></script>
+  <!-- jQuery (diperlukan untuk Select2) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Select2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 
   <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
   <script src="//cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>

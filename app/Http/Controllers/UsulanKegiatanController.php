@@ -71,18 +71,10 @@ class UsulanKegiatanController extends Controller
     public function destroyPemantauanSuara($id)
     {
         $suara = SuaraAnak::findOrFail($id);
-        
-        if ($suara->gambar) {
-            // Konversi path dari 'storage/' ke 'public/' untuk Storage::delete
-            $filePath = str_replace('storage/', 'public/', $suara->gambar);
-            if (Storage::exists($filePath)) {
-                Storage::delete($filePath);
-            }
-        }
 
         $suara->delete();
 
-        return redirect()->route('pemantauan-suara')->with('success', 'Kegiatan berhasil dihapus!');
+        return redirect()->route('pemantauan-suara')->with('success', 'Suara berhasil dihapus!');
     }
 //=================crud pemnatauan suara
 
@@ -205,8 +197,17 @@ class UsulanKegiatanController extends Controller
             'dibuatOleh' => $request->dibuatOleh, // Pastikan dibuatOleh tidak null
         ]);
     
-        return redirect()->route('sub-kegiatan')->with('success', 'Kategori berhasil ditambahkan!');
+        return redirect()->route('pemantauan-suara')->with('success', 'Berhasil tindak lanjut!');
     }  
+
+    public function destroySuara($id)
+    {
+        $kegiatan = SuaraAnak::findOrFail($id);
+
+        $kegiatan->delete();
+
+        return redirect()->route('pemantauan-suara')->with('success', 'Suara berhasil dihapus!');
+    }
 
 // =================================END CRUD suara anak
 
