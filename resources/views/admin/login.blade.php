@@ -10,6 +10,37 @@
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
 </head>
   <body class="">
+   <!-- Gelombang atas -->
+    <svg class="wave top-wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+      <path fill="#FF69B4" fill-opacity="0.5" d="M0,240 C200,160,400,80,600,160 C800,240,1000,320,1200,200 C1440,80,1440,320,1440,320 L0,320Z"></path>
+      <path fill="#E53888" fill-opacity="1" d="M0,280 C200,200,400,120,600,200 C800,280,1000,320,1200,240 C1440,120,1440,320,1440,320 L0,320Z"></path>
+    </svg>
+
+  <!-- Gelombang bawah -->
+    <svg class="wave bottom-wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+      <path fill="#FF69B4" fill-opacity="0.5" d="M0,160 C240,320,720,0,960,160 C1200,320,1440,160,1440,320 L0,320Z"></path>
+      <path fill="#E53888" fill-opacity="1" d="M0,192 C240,320,720,64,960,192 C1200,320,1440,192,1440,320 L0,320Z"></path>
+    </svg>
+  
+  
+
+  <style>
+      .wave {
+          position: fixed;
+          width: 100%;
+          height: auto;
+      }
+
+      .top-wave {
+              top: 0;
+              transform: scale(-1,-1);
+      }
+
+      .bottom-wave {
+          bottom: 0;
+      }
+  </style>
+  
     <section class="h-100 gradient-form">
         <div class="container py-5 h-100">
           <div class="row d-flex justify-content-center align-items-center h-100">
@@ -22,7 +53,7 @@
                       <div class="text-center">
                         <img src="{{ asset('logo.png') }}"
                           style="width: 185px;" alt="logo">
-                        <h4 class="mt-1 mb-5 pb-1">Selamat Datang Admin</h4>
+                        <h4 class="mt-1 mb-5 pb-1">Selamat Datang</h4>
                       </div>
       
 
@@ -80,7 +111,7 @@
                   </div>
                   <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
                     <div class="row text-white px-3 py-4 p-md-5 mx-md-4">
-                      <img src="{{ asset('kids-cover.png') }}" alt="" width="220" height="280">
+                      <img src="{{ asset('kids-cover.png') }}" alt="" class="img-fluid" width="220" height="280">
                       <h4 class="mb-4 text-center">Silahkan Login untuk Mengoperasikan website
                         Kota Layak Anak</h4>
                     </div>
@@ -94,6 +125,7 @@
           </div>
         </div>
       </section>
+      
       <script>
         function refreshCaptcha() {
             document.getElementById('captcha-img').src = "/captcha/default?" + Date.now();
