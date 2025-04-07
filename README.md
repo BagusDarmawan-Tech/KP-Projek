@@ -4,63 +4,116 @@
 <a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## Tentang Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Laravel adalah framework aplikasi web dengan sintaks yang ekspresif dan elegan. Kami percaya bahwa pengembangan harus menjadi pengalaman yang menyenangkan dan kreatif agar benar-benar memuaskan. Laravel menghilangkan rasa sakit dari pengembangan dengan mempermudah tugas umum yang digunakan dalam banyak proyek web, seperti:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+-   [Mesin routing sederhana dan cepat](https://laravel.com/docs/routing).
+-   [Wadah injeksi ketergantungan yang kuat](https://laravel.com/docs/container).
+-   Beberapa back-end untuk penyimpanan [sesi](https://laravel.com/docs/session) dan [cache](https://laravel.com/docs/cache).
+-   [ORM database](https://laravel.com/docs/eloquent) yang ekspresif dan intuitif.
+-   [Migrasi skema](https://laravel.com/docs/migrations) database agnostik.
+-   [Pemrosesan pekerjaan latar belakang yang kuat](https://laravel.com/docs/queues).
+-   [Siaran acara waktu nyata](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Laravel dapat diakses, kuat, dan menyediakan alat yang diperlukan untuk aplikasi besar dan tangguh.
 
-## Learning Laravel
+## Mempelajari Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Laravel memiliki [dokumentasi](https://laravel.com/docs) dan perpustakaan tutorial video yang paling luas dan menyeluruh dari semua framework aplikasi web modern, sehingga mudah untuk memulai dengan framework ini.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Anda juga dapat mencoba [Laravel Bootcamp](https://bootcamp.laravel.com), di mana Anda akan dipandu dalam membangun aplikasi Laravel modern dari awal.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Jika Anda tidak ingin membaca, [Laracasts](https://laracasts.com) dapat membantu. Laracasts berisi ribuan tutorial video tentang berbagai topik termasuk Laravel, PHP modern, pengujian unit, dan JavaScript. Tingkatkan keterampilan Anda dengan menggali perpustakaan video komprehensif kami.
 
-## Laravel Sponsors
+## Sponsor Laravel
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Kami ingin mengucapkan terima kasih kepada sponsor berikut karena telah mendanai pengembangan Laravel. Jika Anda tertarik untuk menjadi sponsor, silakan kunjungi [program Mitra Laravel](https://partners.laravel.com).
 
-### Premium Partners
+### Mitra Premium
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+-   **[Vehikl](https://vehikl.com/)**
+-   **[Tighten Co.](https://tighten.co)**
+-   **[WebReinvent](https://webreinvent.com/)**
+-   **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
+-   **[64 Robots](https://64robots.com)**
+-   **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
+-   **[Cyber-Duck](https://cyber-duck.co.uk)**
+-   **[DevSquad](https://devsquad.com/hire-laravel-developers)**
+-   **[Jump24](https://jump24.co.uk)**
+-   **[Redberry](https://redberry.international/laravel/)**
+-   **[Active Logic](https://activelogic.com)**
+-   **[byte5](https://byte5.de)**
+-   **[OP.GG](https://op.gg)**
 
-## Contributing
+## Tutorial Instalasi Laravel dari Kloning GitHub
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Berikut adalah langkah-langkah untuk menginstal Laravel dari kloning repositori GitHub:
 
-## Code of Conduct
+1.  **Persyaratan:**
+    * Pastikan Anda memiliki PHP (versi 8.1 atau lebih tinggi) dan Composer terinstal di sistem Anda.
+    * Anda juga memerlukan Node.js dan npm jika Anda berencana menggunakan Laravel Mix untuk kompilasi aset frontend.
+    * Git sudah terinstal di komputer anda.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+2.  **Kloning Repositori:**
+    * Buka terminal atau command prompt Anda dan jalankan perintah berikut, ganti `[URL_REPOSITORI]` dengan URL repositori GitHub Laravel Anda:
+        ```bash
+        git clone [URL_REPOSITORI]
+        ```
 
-## Security Vulnerabilities
+3.  **Navigasi ke Direktori Proyek:**
+    * Pindah ke direktori proyek yang baru dikloning:
+        ```bash
+        cd [NAMA_PROYEK]
+        ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+4.  **Instal Dependensi Composer:**
+    * Jalankan perintah berikut untuk menginstal dependensi PHP:
+        ```bash
+        composer install
+        ```
 
-## License
+5.  **Salin File `.env.example`:**
+    * Salin file `.env.example` ke `.env`:
+        ```bash
+        cp .env.example .env
+        ```
+    * Buka file `.env` dan konfigurasi pengaturan database dan lainnya sesuai kebutuhan Anda.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+6.  **Hasilkan Kunci Aplikasi:**
+    * Jalankan perintah berikut untuk menghasilkan kunci aplikasi:
+        ```bash
+        php artisan key:generate
+        ```
+
+7.  **Jalankan Migrasi Database (Jika Diperlukan):**
+    * Jika proyek Anda menggunakan migrasi database, jalankan perintah berikut:
+        ```bash
+        php artisan migrate
+        ```
+
+8.  **Jalankan Server Pengembangan:**
+    * Jalankan server pengembangan Laravel:
+        ```bash
+        php artisan serve
+        ```
+    * Buka browser web Anda dan kunjungi `http://127.0.0.1:8000` untuk melihat aplikasi Laravel Anda.
+
+## Kontribusi
+
+Terima kasih telah mempertimbangkan untuk berkontribusi pada framework Laravel! Panduan kontribusi dapat ditemukan di [dokumentasi Laravel](https://laravel.com/docs/contributions).
+
+## Kode Etik
+
+Untuk memastikan bahwa komunitas Laravel ramah terhadap semua orang, harap tinjau dan patuhi [Kode Etik](https://laravel.com/docs/contributions#code-of-conduct).
+
+## Kerentanan Keamanan
+
+Jika Anda menemukan kerentanan keamanan dalam Laravel, kirimkan email ke Taylor Otwell melalui [taylor@laravel.com](mailto:taylor@laravel.com). Semua kerentanan keamanan akan segera ditangani.
+
+## Lisensi
+
+Framework Laravel adalah perangkat lunak sumber terbuka yang dilisensikan di bawah [lisensi MIT](https://opensource.org/licenses/MIT).
