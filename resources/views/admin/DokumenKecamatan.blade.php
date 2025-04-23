@@ -111,8 +111,8 @@
                 <form method="POST" id="myForm" action="{{ route('createDokumenKecamatan') }}" enctype="multipart/form-data">
                     @csrf 
                     <div class="mb-3">
-                        <label for="kegiatan" class="form-label">Kecamatan</label>
-                        <select class="form-select" id="kegiatan" name="kecamatanid" required>
+                        <label for="pilihan" class="form-label">Kecamatan</label>
+                        <select class="form-select"  id="pilihan"  name="kecamatanid" data-search="true"required>
                             <option value="" disabled selected>-- Pilih Kecamatan --</option>
                             @foreach ($kecamatans as $kecamatan)
                                 <option value="{{ $kecamatan->id }}" {{ old('subkegiatanid') == $kecamatan->id ? 'selected' : '' }} >

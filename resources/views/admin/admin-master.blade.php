@@ -33,6 +33,7 @@
 
 
 
+
   <!-- Template Main CSS File -->
   <link rel="stylesheet" href="{{ asset('assets/css/style-bagus.css') }}">
   {{-- <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}"> --}}
@@ -170,9 +171,25 @@
   <script src="//cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
   <script>
     $(document).ready(function(){
-
         $('#myTable').DataTable();
     })
+</script>
+
+<script>
+    (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="keXPF5k-mPuHOYyv9Bu0L";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('#pilihan').select2({
+            placeholder: "Pilih opsi", 
+            allowClear: true
+        });
+    });
+</script>
+
+<script>
+    $("[data-search='true']")
 </script>
 
 

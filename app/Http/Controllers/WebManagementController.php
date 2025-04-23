@@ -1157,6 +1157,18 @@ class WebManagementController extends Controller
        
     }
 
+    public function opdAPI()
+    {
+        $opds = OPD::orderBy('created_at', 'desc')->get();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data OPD retrieved successfully',
+            'data' => $opds
+        ], 200);
+    }
+
+    
     //tambah
     public function storeOPD(Request $request)
     {
@@ -1175,12 +1187,48 @@ class WebManagementController extends Controller
         ]
     );
 
+    
+
         OPD::create([
             'nama' => $request->nama,
             'is_active' => $request->is_active,
         ]);
 
         return redirect()->route('opd')->with('success', 'OPD berhasil ditambahkan!');
+    }
+
+    public function storeOPDAPI(Request $request)
+    {
+        try {
+            $validated = $request->validate([
+                'nama' => 'required|string|max:255|unique:opd,nama',
+                'is_active' => 'required|boolean',
+            ], [
+                'nama.required' => 'Nama wajib diisi.',
+                'nama.max' => 'Nama maksimal 255 karakter.',
+                'nama.unique' => 'Gagal menambahkan OPD, karena sudah ada.',
+
+                'is_active.required' => 'Status wajib dipilih.',
+                'is_active.boolean' => 'Status harus bernilai true atau false.',
+            ]);
+
+            $opd = OPD::create($validated);
+
+            return response()->json([
+                'message' => 'OPD berhasil ditambahkan.',
+                'data' => $opd,
+            ], 201);
+        } catch (ValidationException $e) {
+            return response()->json([
+                'message' => 'Validasi gagal.',
+                'errors' => $e->errors(),
+            ], 422);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Terjadi kesalahan.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
 
     //edit
@@ -1216,6 +1264,46 @@ class WebManagementController extends Controller
         return redirect()->route('opd')->with('success', 'OPD berhasil diperbarui!');
     }
 
+    public function updateOPDAPI(Request $request, $id)
+    {
+        try {
+            // Cari OPD berdasarkan ID
+            $opd = OPD::findOrFail($id);
+
+            // Validasi data request
+            $validated = $request->validate([
+                'nama' => 'required|string|max:255|unique:opd,nama,' . $id,
+                'is_active' => 'required|boolean',
+            ], [
+                'nama.required' => 'Nama wajib diisi.',
+                'nama.max' => 'Nama maksimal 255 karakter.',
+                'nama.unique' => 'Gagal memperbarui OPD, nama sudah digunakan.',
+                'is_active.required' => 'Status wajib dipilih.',
+                'is_active.boolean' => 'Status harus bernilai true atau false.',
+            ]);
+
+            // Update data OPD
+            $opd->update($validated);
+
+            return response()->json([
+                'message' => 'OPD berhasil diperbarui.',
+                'data' => $opd,
+            ], 200);
+
+        } catch (ValidationException $e) {
+            return response()->json([
+                'message' => 'Validasi gagal.',
+                'errors' => $e->errors(),
+            ], 422);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Terjadi kesalahan.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+
 
     //delete
     public function destroyOPD($id)
@@ -1226,6 +1314,27 @@ class WebManagementController extends Controller
         $opd->delete();
     
         return redirect()->route('opd')->with('success', 'OPD berhasil dihapus!');
+    }
+
+    public function destroyOPDAPI($id)
+    {
+        try {
+            // Cari OPD berdasarkan ID
+            $opd = OPD::findOrFail($id);
+
+            // Hapus OPD
+            $opd->delete();
+
+            return response()->json([
+                'message' => 'OPD berhasil dihapus.'
+            ], 200);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Terjadi kesalahan.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
 
         //=======================END OPD CRUD
