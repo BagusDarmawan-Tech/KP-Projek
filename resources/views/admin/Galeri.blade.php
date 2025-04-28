@@ -30,69 +30,62 @@
                 </button>
                 @endif
             </div>
-
-            <!-- Tabel -->
             <div class="table-responsive">
-                <table class="table table-hover table-bordered align-middle text-center"  id="myTable">
-                    <thead class="table-primary">
-                        <tr>
-                            <th class="text-center">No</th>
-                            <th class="text-center">Gambar</th>
-                            <th class="text-center">Nama</th>
-                            <th class="text-center">Caption</th>
-                            <th class="text-center">Dibuat Oleh</th>
-                            <th class="text-center">Status</th>
-                            <th class="text-center">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($galeris as $galeri)
-                        <tr class="text-start">
-                            <td style="text-align: center;">{{ $loop->iteration }}</td>
-                            <td><img src="{{ asset($galeri->gambar) }}" alt="Gambar Galeri" width="80"></td>
-                            <td class="nama">{{ $galeri->nama }}</td>
-                            <td class="caption">{{ $galeri->caption }}</td>
-                            <td>{{ $galeri->user ? $galeri->user->name : 'Tidak ada pengguna' }}</td>
-                            <td>
-                                <span class="badge {{ $galeri->is_active ? 'bg-success' : 'bg-warning' }}">
-                                    {{ $galeri->is_active ? 'Aktif' : 'Non-Aktif' }}
-                                </span>
-                            </td>
-                            <td>
-                                <!-- Button Edit Modal -->
-                                @if (auth()->user()->hasPermissionTo('galeri-edit'))
-                                <button class="btn btn-sm btn-primary btn-edit"
-                                    data-id="{{ $galeri->id }}"
-                                    data-nama="{{ $galeri->nama }}"
-                                    data-caption="{{ $galeri->caption }}"
-                                    data-deskripsi="{{ $galeri->deskripsi }}"
-                                    data-gambar="{{ asset($galeri->gambar) }}"
-                                    data-status="{{ $galeri->is_active }}"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#GaleriEditModal">
-                                    <i class="bi bi-pencil-square"></i>
-                                </button>
-                                @endif
-                        
-                                <!-- Tombol Hapus -->
-                                @if (auth()->user()->hasPermissionTo('galeri-delete'))
-                                <button class="btn btn-sm btn-danger delete-btn" 
-                                    data-id  ="{{ $galeri->id }}"
-                                    data-nama ="{{ $galeri->nama }}"
-                                    data-bs-toggle="modal" 
-                                    data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i>
-                                </button>    
-                                @endif                          
-                            </td>
-                        </tr>
-                        @endforeach
-                        
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
+    <table class="table table-hover table-bordered align-middle text-center" id="myTable">
+        <thead class="table-primary">
+            <tr>
+                <th>No</th>
+                <th>Gambar</th>
+                <th>Nama</th>
+                <th>Caption</th>
+                <th>Dibuat Oleh</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($galeris as $galeri)
+            <tr>
+                <td data-label="No">{{ $loop->iteration }}</td>
+                <td data-label="Gambar">
+                    <img src="{{ asset($galeri->gambar) }}" alt="Gambar Galeri" width="80">
+                </td>
+                <td data-label="Nama">{{ $galeri->nama }}</td>
+                <td data-label="Caption">{{ $galeri->caption }}</td>
+                <td data-label="Dibuat Oleh">{{ $galeri->user ? $galeri->user->name : 'Tidak ada pengguna' }}</td>
+                <td data-label="Status">
+                    <span class="badge {{ $galeri->is_active ? 'bg-success' : 'bg-warning' }}">
+                        {{ $galeri->is_active ? 'Aktif' : 'Non-Aktif' }}
+                    </span>
+                </td>
+                <td data-label="Actions">
+                    @if (auth()->user()->hasPermissionTo('galeri-edit'))
+                    <button class="btn btn-sm btn-primary btn-edit"
+                        data-id="{{ $galeri->id }}"
+                        data-nama="{{ $galeri->nama }}"
+                        data-caption="{{ $galeri->caption }}"
+                        data-deskripsi="{{ $galeri->deskripsi }}"
+                        data-gambar="{{ asset($galeri->gambar) }}"
+                        data-status="{{ $galeri->is_active }}"
+                        data-bs-toggle="modal"
+                        data-bs-target="#GaleriEditModal">
+                        <i class="bi bi-pencil-square"></i>
+                    </button>
+                    @endif
+                    @if (auth()->user()->hasPermissionTo('galeri-delete'))
+                    <button class="btn btn-sm btn-danger delete-btn" 
+                        data-id="{{ $galeri->id }}"
+                        data-nama="{{ $galeri->nama }}"
+                        data-bs-toggle="modal" 
+                        data-bs-target="#deleteMenuModal">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                    @endif
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
 
 <!-- Modal Tambah Galeri -->
 <div class="modal fade" id="sliderModal" tabindex="-1" aria-labelledby="sliderModalLabel" aria-hidden="true">
@@ -274,5 +267,17 @@
     });
 </script>
 
+
+<script>
+    $(document).ready(function() {
+    $('#myTable').DataTable({
+        responsive: true, // Mode responsive
+        autoWidth: false, // Hindari ukuran kolom tidak perlu
+        columnDefs: [
+            { orderable: false, targets: [1, 6] } // Nonaktifkan sorting di Gambar & Actions
+        ]
+    });
+});
+</script>
 
 @endsection

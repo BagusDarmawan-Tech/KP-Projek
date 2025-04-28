@@ -322,28 +322,6 @@
     </li><!-- End Icons Nav -->
     @endif
     {{-- END PEMANTAUAN SUARA --}}
-
-
-    <!-- {{-- DOKUMEN FAS DLL --}}
-    @if (auth()->user()->hasPermissionTo('dokumen sk fas, cfci dan kla-list'))
-    <li class="nav-item">
-      <a class="nav-link {{ request()->routeIs('dokumen-skcfci') ? '' : 'collapsed' }}" href="{{ route('dokumen-skcfci') }}">
-        <i class="bi bi-journal-text"></i>
-        <span>Dokumen SK FAS, CFCI Dan KLA</span>
-      </a>
-    </li>
-    @endif
-    {{-- END DOKUMEN FAS DLL --}} -->
-
-    
-    <!-- End Icons Nav -->
-    <li class="nav-item">
-  <a class="nav-link collapsed" href="#logoutModal" data-bs-toggle="modal">
-    <i class="bi bi-box-arrow-left text-danger"></i>
-    <span class="text-danger">Logout</span>        
-  </a>
-</li>
-  
   <script>
 document.addEventListener("DOMContentLoaded", function () {
     let sidebarNav = document.querySelector("#sidebar-nav");
@@ -395,5 +373,6 @@ document.addEventListener("DOMContentLoaded", function () {
     </div>
   </div>
 </div>
+
 
 

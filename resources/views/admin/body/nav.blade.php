@@ -39,28 +39,24 @@
           </li>
 
 
-            <!-- <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
-                <i class="bi bi-question-circle"></i>
-                <span>Need Help?</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li> -->
+          <li>
+    <a class="dropdown-item d-flex align-items-center" href="#" data-bs-toggle="modal" data-bs-target="#logoutModal">
+        <i class="bi bi-box-arrow-right"></i>
+        <span>Sign Out</span>
+    </a>
+</li>
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="{{ route('admin.logout') }}">
-                <i class="bi bi-box-arrow-right"></i>
-                <span>Sign Out</span>
-              </a>
-            </li>
 
           </ul><!-- End Profile Dropdown Items -->
+          
         </li>
         <!-- End Profile Nav -->
 
+        
       </ul>
+      
+
+
 
           <!-- Modal Account Settings -->
           <style>
@@ -122,7 +118,26 @@
 
 
     </nav>
+
+    
   <!-- End Icons Navigation -->
   
 
   </header>
+  <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="logoutModalLabel">Konfirmasi Keluar</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Apakah Anda yakin untuk keluar Halaman?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                <a href="{{ route('admin.logout') }}" class="btn btn-danger">Keluar</a>
+            </div>
+        </div>
+    </div>
+</div>

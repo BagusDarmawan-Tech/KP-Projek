@@ -37,13 +37,13 @@
                 <table class="table table-hover table-bordered align-middle text-center"  id="myTable">
                     <thead class="table-primary">
                         <tr>
-                            <th class="text-center" >No</th>
-                            <th class="text-center" >Klaster</th>
-                            <th class="text-center" >Nama Sub Kegiatan</th>
-                            <th class="text-center" >Data Dukung</th>
-                            <th class="text-center" >Dibuat Oleh</th>
-                            <th class="text-center" >Status</th>
-                            <th class="text-center" >Actions</th>
+                            <th class="text-center"width="10%" >No</th>
+                            <th class="text-center"width="18%">Klaster</th>
+                            <th class="text-center"width="20%" >Nama Sub Kegiatan</th>
+                            <th class="text-center"width="13%" >Data Dukung</th>
+                            <th class="text-center"width="20%" >Dibuat Oleh</th>
+                            <th class="text-center"width="12%" >Status</th>
+                            <th class="text-center"width="13%" >Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -52,7 +52,7 @@
                         <tr>
                             <td style="text-align: center;">{{ $loop->iteration }}</td>
                             <td>{{ $subKegiatan->klaster ? $subKegiatan->klaster->nama : 'Tidak ada Klaster' }}</td>
-                            <td>{{ $subKegiatan->nama }}</td>
+                            <td class="text-start">{{ $subKegiatan->nama }}</td>
                             <td>
                                 <a href="{{ asset($subKegiatan->dataPendukung) }}" target="_blank">
                                     <i class="fas fa-file-pdf text-danger fa-2x"></i>

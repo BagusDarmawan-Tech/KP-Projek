@@ -94,7 +94,7 @@
                                         data-deskripsi="{{ $karya->deskripsi }}" 
                                         data-karya="{{ $karya->tingkatKarya }}" 
                                         data-gambar="{{ asset($karya->gambar) }}">
-                                        <i class="bi bi-pencil"></i>
+                                        <i class="bi bi-pencil-square"></i>
                                     </button>
                                     @endif
                                 @endif

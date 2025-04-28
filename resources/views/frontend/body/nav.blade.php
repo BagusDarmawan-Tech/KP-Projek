@@ -1,15 +1,8 @@
-<style>
-.header {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow lembut */
-}
-</style>
-
 <header id="header" class="header d-flex align-items-center sticky-top">
-    <div class="container-fluid container-xl position-relative d-flex align-items-center">
-        <a href="/asset/img/logo.png" class="logo d-flex align-items-center me-auto">
-            <!-- Uncomment the line below if you also wish to use an image logo -->
-            <img class="img-fluid w-10" src="{{asset('assets/img/logo.png')}}" alt="Logo" width="120" height="300">
-        </a>
+        <div class="container-fluid container-xl position-relative d-flex align-items-center">
+            <a href="/" class="logo d-flex align-items-center me-auto">
+                <img class="logo-img" src="{{ asset('assets/img/logo.png') }}" alt="Logo">
+            </a>
 
         <nav id="navmenu" class="navmenu">
             <ul>
@@ -22,6 +15,7 @@
                         <li><a href="{{route('galeri-kota-layakanak')}}">Galeri Kota Layak Anak</a></li>
                     </ul>
                 </li>
+              
                 <!-- Selesai Halaman Galeri -->
 
                 <!-- Bagian Forum Anak -->

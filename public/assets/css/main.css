@@ -22,15 +22,16 @@
   --background-color: #ffffff; /* Background color for the entire website, including individual sections */
   --default-color: #444444; /* Default color used for the majority of the text content across the entire website */
   --heading-color: #5f687b; /* Color for headings, subheadings and title throughout the website */
-  --accent-color: rgb(233, 36,103); /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
+  --accent-color: rgb(33, 184, 176); /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
   --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
   --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
 }
+/* rgb(233, 36,103) warna pink */
 
 /* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
 :root {
-  --nav-color: #5f687b;  /* The default color of the main navmenu links */
-  --nav-hover-color: rgb(233, 36,103); /* Applied to main navmenu links when they are hovered over or active */
+  --nav-color: white;  /* The default color of the main navmenu links */
+  --nav-hover-color: white; /* Applied to main navmenu links when they are hovered over or active */
   --nav-mobile-background-color: #ffffff; /* Used as the background color for mobile navigation menu */
   --nav-dropdown-background-color: #ffffff; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
   --nav-dropdown-color: #5f687b; /* Used for navigation links of the dropdown items in the navigation menu. */
@@ -71,18 +72,23 @@
 body {
   color: var(--default-color);
   background-color: var(--background-color);
-  font-family: var(--default-font);
+  font-family:'Nunito', sans-serif;
 }
 
 a {
   color: var(--accent-color);
   text-decoration: none;
   transition: 0.3s;
+  font-family:'Nunito', sans-serif;
+
+
 }
 
 a:hover {
   color: color-mix(in srgb, var(--accent-color), transparent 25%);
   text-decoration: none;
+  font-family:'Nunito', sans-serif;
+
 }
 
 h1,
@@ -92,7 +98,9 @@ h4,
 h5,
 h6 {
   color: var(--heading-color);
-  font-family: var(--heading-font);
+  font-family:'Nunito', sans-serif;
+  /* background-color: #007bff; */
+
 }
 
 /* PHP Email Form Messages
@@ -231,10 +239,13 @@ h6 {
 --------------------------------------------------------------*/
 .header {
   color: var(--default-color);
-  background-color: var(--background-color);
+  /* background-color: var(--background-color); */
+  background-color: #57D1C9;
   padding: 15px 0;
   transition: all 0.5s;
   z-index: 997;
+  font-family:'Nunito', sans-serif;
+  
 }
 
 .header .logo {
@@ -242,7 +253,7 @@ h6 {
 }
 
 .header .logo img {
-  max-height: 36px;
+  max-height: 35px;
   margin-right: 8px;
 }
 
@@ -283,6 +294,7 @@ h6 {
 
   .header .navmenu {
     order: 10;
+    font-family:'Nunito', sans-serif;
   }
 }
 
@@ -299,6 +311,7 @@ h6 {
 @media (min-width: 40px) {
   .navmenu {
     padding: 0;
+    font-family:'Nunito', sans-serif;
   }
 
   .navmenu ul {
@@ -312,14 +325,14 @@ h6 {
   .navmenu li {
     position: relative;
   }
-
+/* bagian untuk mengatur font nav */
   .navmenu a,
   .navmenu a:focus {
     color: var(--nav-color);
     padding: 18px 15px;
     font-size: 16px;
     font-family: var(--nav-font);
-    font-weight: 400;
+    font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -348,7 +361,7 @@ h6 {
   .navmenu .dropdown ul {
     margin: 0;
     padding: 10px 0;
-    background: var(--nav-dropdown-background-color);
+    background: rgb(244, 244, 247);
     display: block;
     position: absolute;
     visibility: hidden;
@@ -359,17 +372,19 @@ h6 {
     border-radius: 4px;
     z-index: 99;
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
+    font-family: 'Nunito', sans-serif; /* Menambahkan font Nunito */
   }
 
   .navmenu .dropdown ul li {
     min-width: 200px;
+    font-family:'Nunito', sans-serif;
   }
 
   .navmenu .dropdown ul a {
     padding: 10px 20px;
     font-size: 15px;
     text-transform: none;
-    color: var(--nav-dropdown-color);
+    color: #152744;
   }
 
   .navmenu .dropdown ul a i {
@@ -379,7 +394,7 @@ h6 {
   .navmenu .dropdown ul a:hover,
   .navmenu .dropdown ul .active:hover,
   .navmenu .dropdown ul li:hover>a {
-    color: var(--nav-dropdown-hover-color);
+    color: #77D8D8;
   }
 
   .navmenu .dropdown:hover>ul {
@@ -403,8 +418,9 @@ h6 {
 }
 
 /* Navmenu - Mobile */
-@media (max-width: 1199px) {
+@media (max-width: 1200px) {
   .mobile-nav-toggle {
+    /* display: none;  */
     color: var(--nav-color);
     font-size: 28px;
     line-height: 0;
@@ -533,8 +549,8 @@ h6 {
 # Global Footer
 --------------------------------------------------------------*/
 .footer {
-  color: var(--default-color);
-  /* background-color: var(--background-color); */
+  color: white !important; /* Pastikan teks berwarna putih */
+  background-color: #57D1C9;
   font-size: 14px;
   position: relative;
 }
@@ -666,7 +682,7 @@ h6 {
   color: var(--heading-color);
   font-size: 24px;
   font-weight: 600;
-  font-family: var(--heading-font);
+  font-family: 'Nunito', Arial, sans-serif;
 }
 
 .footer .footer-contact p {
@@ -686,6 +702,17 @@ h6 {
   margin-top: 6px;
   font-size: 13px;
 }
+
+.social-link i {
+  color: white; /* Warna ikon putih */
+  font-size: 24px; /* Sesuaikan ukuran ikon jika diperlukan */
+  transition: color 0.3s ease; /* Efek transisi saat hover */
+}
+
+.social-link:hover i {
+  color: #152744; /* Warna ikon saat di-hover, opsional */
+}
+
 
 /*--------------------------------------------------------------
 # Preloader
@@ -757,7 +784,7 @@ h6 {
 }
 
 /*--------------------------------------------------------------
-# Disable aos animation delay on mobile devices
+# Nonaktifkan penundaan animasi AOS di perangkat seluler
 --------------------------------------------------------------*/
 @media screen and (max-width: 768px) {
   [data-aos-delay] {
@@ -766,7 +793,7 @@ h6 {
 }
 
 /*--------------------------------------------------------------
-# Global Page Titles & Breadcrumbs
+# Judul Halaman Global & Breadcrumb
 --------------------------------------------------------------*/
 .page-title {
   --background-color: color-mix(in srgb, var(--default-color), transparent 96%);
@@ -803,16 +830,31 @@ h6 {
 }
 
 /*--------------------------------------------------------------
-# Global Sections
+# Global Sections (berguna untuk membatasi setiap masing masing bagian )
 --------------------------------------------------------------*/
 section,
+
 .section {
   color: var(--default-color);
-  background-color: var(--background-color);
+  background: #ffff; 
+  /* bagian untuk 3 slide dari bawah  */
   padding: 60px 0;
   scroll-margin-top: 100px;
   overflow: clip;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
 }
+
+.section1 {
+  color: var(--default-color);
+  background: #D1F8EF; 
+  /* bagian untuk 3 slide dari bawah  */
+  padding: 60px 0;
+  scroll-margin-top: 100px;
+  overflow: clip;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
 
 @media (max-width: 1199px) {
 
@@ -823,13 +865,15 @@ section,
 }
 
 /*--------------------------------------------------------------
-# Global Section Titles
+# Global Section Titles (BERITA DAN ARTIKEL)
 --------------------------------------------------------------*/
 .section-title {
   text-align: center;
   padding: 30px 0;
   margin-bottom: 30px;
   position: relative;
+  /* font-family: 'Nunito', Arial, sans-serif; */
+
 }
 
 .section-title h2 {
@@ -840,12 +884,14 @@ section,
   padding-bottom: 0;
   position: relative;
   z-index: 2;
+  color: #152744;
+  font-family: 'Nunito', Arial, sans-serif;
 }
 
 .section-title span {
   position: absolute;
   top: 4px;
-  color: color-mix(in srgb, var(--heading-color), transparent 95%);
+  color: color-mix(in srgb, var(--heading-color), transparent 90%);
   left: 0;
   right: 0;
   z-index: 1;
@@ -853,6 +899,7 @@ section,
   font-size: 52px;
   text-transform: uppercase;
   line-height: 1;
+  font-family: 'Nunito', Arial, sans-serif;
 }
 
 .section-title p {
@@ -873,7 +920,7 @@ section,
 }
 
 /*--------------------------------------------------------------
-# Hero Section
+# Hero Section (untuk mengerakan hero gambar di halaman 1 / bagian untuk pengerakan gambar)
 --------------------------------------------------------------*/
 .hero {
   width: 100%;
@@ -884,7 +931,7 @@ section,
   align-items: center;
 }
 
-.hero h1 {
+/* .hero h1 {
   margin: 0;
   font-size: 48px;
   font-weight: 700;
@@ -896,12 +943,12 @@ section,
   margin: 5px 0 30px 0;
   font-size: 20px;
   font-weight: 400;
-}
+} */
 
 .hero .btn-get-started {
   color: var(--contrast-color);
   background: var(--accent-color);
-  font-family: var(--heading-font);
+  font-family:'Nunito', sans-serif;
   font-weight: 400;
   font-size: 15px;
   letter-spacing: 1px;
@@ -974,6 +1021,21 @@ section,
   }
 }
 
+
+/* bagian corosel */
+.hero-carousel {
+  height: 100vh;
+  margin-top: -80px; /* sesuaikan dengan tinggi navbar kamu */
+  padding-top: 80px;  /* biar kontennya tetap turun ke bawah */
+  overflow: hidden;
+  padding: 0;
+}
+
+.hero-carousel img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
 /*--------------------------------------------------------------
 # Featured Services Section
 --------------------------------------------------------------*/
@@ -986,7 +1048,7 @@ section,
   background-color: var(--surface-color);
   padding: 50px 30px;
   transition: all ease-in-out 0.4s;
-  height: 100%;
+  height: 10%;
 }
 
 .featured-services .service-item .icon {
@@ -1027,14 +1089,18 @@ section,
 /*--------------------------------------------------------------
 # About Section
 --------------------------------------------------------------*/
-.about .content h3 {
+ .about .content h2 {
   font-size: 1.75rem;
   font-weight: 700;
+  color: #152744;
+  font-family: 'Nunito', Arial, sans-serif;
+
 }
 
 .about .content ul {
   list-style: none;
   padding: 0;
+  color: #152744;
 }
 
 .about .content ul li {
@@ -1051,16 +1117,18 @@ section,
 
 .about .content p:last-child {
   margin-bottom: 0;
+  color: #152744;
+  font-family: 'Nunito', Arial, sans-serif;
 }
 
 .about .pulsating-play-btn {
   position: absolute;
   left: calc(50% - 47px);
   top: calc(50% - 47px);
-}
+} 
 
 /*--------------------------------------------------------------
-# Stats Section
+# Stats Section 
 --------------------------------------------------------------*/
 .stats {
   padding-top: 0;
@@ -1082,21 +1150,23 @@ section,
   color: color-mix(in srgb, var(--default-color), transparent 40%);
   padding: 0;
   margin: 0;
-  font-family: var(--heading-font);
+  font-family:'Nunito', sans-serif; 
   font-size: 15px;
   font-weight: 600;
-}
+} 
 
 /*--------------------------------------------------------------
-# Services Section
+# Services Section (Galeri)
 --------------------------------------------------------------*/
 .services .service-item {
   background-color: var(--surface-color);
   text-align: center;
   border: 1px solid color-mix(in srgb, var(--default-color), transparent 85%);
   padding: 80px 20px;
-  transition: border ease-in-out 0.3s;
+  transition: border ease-in-out 0.3s, box-shadow 0.3s;
   height: 100%;
+  border-radius: 15px; /* Lengkungan sudut */
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1); /* Shadow */
 }
 
 .services .service-item .icon {
@@ -1133,14 +1203,35 @@ section,
 
 .services .service-item:hover {
   border-color: var(--accent-color);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Bayangan saat hover */
 }
 
 .services .service-item:hover h3 {
   color: var(--accent-color);
 }
 
+.custom-btn-color {
+  background-color: rgb(33, 184, 176);
+  border-color: rgb(33, 184, 176);
+  color: white;
+  transition: background-color 0.2s ease;
+}
+
+/* Hover tetap bisa kamu sesuaikan atau hilangkan */
+.custom-btn-color:hover {
+  background-color: #4F7097;
+  border-color: #4F7097;
+  color: white;
+}
+
+/* .custom-btn-color:active {
+  background-color: #4F7097;
+  border-color: #4F7097;
+  color: white;
+} */
+
 /*--------------------------------------------------------------
-# Portfolio Section
+# Portfolio Section (BERITA DAN ARTIKEL)
 --------------------------------------------------------------*/
 .portfolio .portfolio-filters {
   padding: 0;
@@ -1148,6 +1239,7 @@ section,
   list-style: none;
   text-align: center;
 }
+
 
 .portfolio .portfolio-filters li {
   cursor: pointer;
@@ -1160,7 +1252,9 @@ section,
   text-transform: uppercase;
   margin-bottom: 5px;
   transition: all 0.3s ease-in-out;
+  
 }
+
 
 .portfolio .portfolio-filters li:hover,
 .portfolio .portfolio-filters li.filter-active {
@@ -1184,7 +1278,14 @@ section,
 
 .portfolio .portfolio-item {
   position: relative;
+
+
+
 }
+
+.portfolio .card {
+font-family: 'Nunito', sans-serif;  }
+
 
 .portfolio .portfolio-item .portfolio-info {
   background-color: color-mix(in srgb, var(--surface-color), transparent 10%);
@@ -1196,12 +1297,14 @@ section,
   z-index: 3;
   transition: all ease-in-out 0.3s;
   padding: 15px;
+  
 }
 
 .portfolio .portfolio-item .portfolio-info h4 {
   font-size: 18px;
   font-weight: 600;
   padding-right: 50px;
+  
 }
 
 .portfolio .portfolio-item .portfolio-info p {
@@ -1220,16 +1323,22 @@ section,
   color: color-mix(in srgb, var(--default-color), transparent 30%);
   transition: 0.3s;
   line-height: 0;
+  
+  
 }
 
 .portfolio .portfolio-item .portfolio-info .preview-link:hover,
 .portfolio .portfolio-item .portfolio-info .details-link:hover {
   color: var(--accent-color);
+  
+  
 }
 
 .portfolio .portfolio-item .portfolio-info .details-link {
   right: 14px;
   font-size: 28px;
+  
+  
 }
 
 .portfolio .portfolio-item:hover .portfolio-info {
@@ -1238,16 +1347,30 @@ section,
 }
 
 /*--------------------------------------------------------------
-# Testimonials Section
+# Testimonials Section (BERITA DAN ARTIKEL)
 --------------------------------------------------------------*/
 .testimonials .testimonials-carousel,
 .testimonials .testimonials-slider {
   overflow: hidden;
 }
 
+.swiper-slide {
+  display: flex;
+  height: auto;
+}
+
 .testimonials .testimonial-item {
-  box-sizing: content-box;
-  min-height: 320px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 340px;
+  border-radius: 16px;
+  padding: 24px;
+  /* background: #FFEBAD; */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .testimonials .testimonial-item .testimonial-img {
@@ -1261,14 +1384,22 @@ section,
 
 .testimonials .testimonial-item h3 {
   font-size: 18px;
+  color: white;
   font-weight: bold;
-  margin: 10px 0 5px 45px;
+  margin: 10px 0 5px 0; /* Ubah dari 45px jadi 0 agar rata tengah */
+  text-align: center;   /* Tambahkan ini */
+  font-family: 'Nunito', sans-serif;  
+
 }
 
 .testimonials .testimonial-item h4 {
+  color: white;
   font-size: 14px;
-  color: color-mix(in srgb, var(--default-color), transparent 20%);
-  margin: 0 0 0 45px;
+  /* color: color-mix(in srgb, var(--default-color), transparent 20%); */
+  margin: 10px 0 5px 0; /* Ubah dari 45px jadi 0 agar rata tengah */
+  text-align: center;   
+  font-family: 'Nunito', sans-serif;  
+
 }
 
 .testimonials .testimonial-item .quote-icon-left,
@@ -1292,19 +1423,23 @@ section,
   transform: scale(-1, -1);
 }
 
+/* bagian kotak di dalam card */
 .testimonials .testimonial-item p {
   font-style: italic;
-  margin: 0 15px 0 15px;
-  padding: 20px 20px 60px 20px;
-  background: color-mix(in srgb, var(--default-color), transparent 97%);
+  margin: 0 15px ;
+  padding: 20px;
+  background: #8ECDDD;
   position: relative;
-  border-radius: 6px;
+  border-radius: 12px;
   position: relative;
   z-index: 1;
+  color: black;
+  font-family: 'Nunito', sans-serif;  
+
 }
 
 .testimonials .swiper-wrapper {
-  height: auto;
+  align-items: stretch;
 }
 
 .testimonials .swiper-pagination {
@@ -1315,17 +1450,47 @@ section,
 .testimonials .swiper-pagination .swiper-pagination-bullet {
   width: 12px;
   height: 12px;
-  background-color: var(--background-color);
+  background-color: #4F7097;
   opacity: 1;
-  border: 1px solid var(--accent-color);
+  /* border: 5px salmon; */
 }
 
 .testimonials .swiper-pagination .swiper-pagination-bullet-active {
-  background-color: var(--accent-color);
+  background-color: #152744;
 }
 
+.card-link {
+  display: block;
+  border-radius: 16px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+}
+
+.card-link:hover .testimonial-item,
+.card-link:focus .testimonial-item {
+  border-radius: 16px;
+}
+
+/* bagian icon */
+/* Warna default (pink) */
+.swiper-slide .testimonial-item .icon-wrapper i {
+  color: #4F7097; /* Warna default */
+  transition: color 0.3s ease; /* Transisi warna untuk efek halus */
+}
+
+/* Warna saat card disentuh atau aktif (hitam) */
+.swiper-slide .testimonial-item:hover .icon-wrapper i,
+.swiper-slide .testimonial-item:focus .icon-wrapper i {
+  color: #152744; /* Warna hitam saat aktif */
+}
+
+
+
+
+
 /*--------------------------------------------------------------
-# Call To Action Section
+# Call To Action Section(BERITA DAN ARTIKEL)
 --------------------------------------------------------------*/
 .call-to-action {
   padding: 80px 0;
@@ -1368,7 +1533,7 @@ section,
 }
 
 .call-to-action .cta-btn {
-  font-family: var(--heading-font);
+  font-family:'Nunito', sans-serif;
   font-weight: 500;
   font-size: 16px;
   letter-spacing: 1px;
@@ -1386,7 +1551,7 @@ section,
 }
 
 /*--------------------------------------------------------------
-# Team Section
+# Team Section (BERITA DAN ARTIKEL)
 --------------------------------------------------------------*/
 .team .member {
   position: relative;
@@ -1458,7 +1623,7 @@ section,
 /*--------------------------------------------------------------
 # Contact Section
 --------------------------------------------------------------*/
-.contact .info-wrap {
+/* .contact .info-wrap {
   background-color: var(--surface-color);
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
   padding: 30px;
@@ -1555,11 +1720,13 @@ section,
 .contact .php-email-form button[type=submit]:hover {
   background: color-mix(in srgb, var(--accent-color), transparent 25%);
 }
+ */
+
 
 /*--------------------------------------------------------------
 # Portfolio Details Section
 --------------------------------------------------------------*/
-.portfolio-details .portfolio-details-slider img {
+/* .portfolio-details .portfolio-details-slider img {
   width: 100%;
 }
 
@@ -1616,12 +1783,12 @@ section,
 .portfolio-details .portfolio-description p {
   padding: 0;
   color: color-mix(in srgb, var(--default-color), transparent 30%);
-}
+} */
 
 /*--------------------------------------------------------------
 # Service Details Section
 --------------------------------------------------------------*/
-.service-details .service-box {
+/* .service-details .service-box {
   background-color: var(--surface-color);
   padding: 20px;
   box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.1);
@@ -1750,7 +1917,7 @@ section,
   font-size: 20px;
   margin-right: 8px;
   color: var(--accent-color);
-}
+} */
 
 /*--------------------------------------------------------------
 # Starter Section Section
@@ -1758,3 +1925,11 @@ section,
 /* .starter-section { */
   /* Add your styles here */
 /* } */
+
+
+
+/* css bagian galeri */
+.card-header {
+  background-color: #4F7097;
+  /* Ganti dengan warna yang diinginkan */
+}

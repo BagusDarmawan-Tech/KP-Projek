@@ -33,24 +33,21 @@
                 <table class="table table-hover table-bordered align-middle text-center" id="myTable">
                     <thead class="table-primary">
                         <tr>
-                            <th class="text-center">No</th>
-                            <th class="text-center">Gambar</th>
-                            <th class="text-center">Nama</th>
-                            <th class="text-center">Kelurahan</th>
-                            <th class="text-center">Keterangan</th>
-                            <th class="text-center">Dibuat Oleh</th>
-                            <th class="text-center">Status</th>
-                            <th class="text-center">Actions</th>
+                            <th class="text-center" width="10%">No</th>
+                            <th class="text-center" width="20%">Nama</th>
+                            <th class="text-center" width="17%">Kelurahan</th>
+                            <th class="text-center" width="17%">Dibuat Oleh</th>
+                            <th class="text-center" width="12%">Status</th>
+                            <th class="text-center" width="18%" >Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($kegiatans as $index => $kegiatan)
                         <tr>
                             <td style="text-align: center;">{{ $loop->iteration }}</td>
-                            <td><img src="{{ asset($kegiatan->gambar) }}" alt="Slider Image" width="80"></td>
-                            <td>{{ $kegiatan->nama }}</td>
-                            <td>{{ $kegiatan->kelurahan ? $kegiatan->kelurahan->nama : 'Tidak ada Nama' }}</td>
-                            <td>{{ $kegiatan->keterangan }}</td>
+                            <!-- <td><img src="{{ asset($kegiatan->gambar) }}" alt="Slider Image" width="80"></td> -->
+                            <td class="text-start">{{ $kegiatan->nama }}</td>
+                            <td class="text-start">{{ $kegiatan->kelurahan ? $kegiatan->kelurahan->nama : 'Tidak ada Nama' }}</td>
                             <td>{{ $kegiatan->user ? $kegiatan->user->name : 'Tidak ada pengguna' }}</td>
                             <td>
                                 @if($kegiatan->is_active == 0)
@@ -84,6 +81,17 @@
                                     data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i>
                                 </button>
                             @endif
+
+                            <!-- Tombol  detail -->
+                            <a href="#" 
+                            class="lihat-keterangan btn btn-sm rounded-circle edit-verifikasi" style="background-color: #FFC107; width: 36px; height: 36px;" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#keteranganModal"
+                                data-nama="{{ $kegiatan->nama }}"
+                                data-keterangan="{{ $kegiatan->keterangan }}"
+                                data-gambar="{{asset($kegiatan->gambar) }}">
+                               galer
+                            </a>
                             </td>                          
                         </tr>
                         @endforeach
@@ -235,6 +243,30 @@
     </div>
   </div>
 
+  <!-- modal detail -->
+   <!-- Modal -->
+<div class="modal fade" id="keteranganModal" tabindex="-1" aria-labelledby="keteranganModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="keteranganModalLabel">Detail Kegiatan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center mb-3">
+                    <img id="modal-gambar" src="" alt="Gambar Kegiatan" class="img-fluid rounded" style="max-width: 100%;">
+                </div>
+                <h5 id="modal-nama" class="text-center"></h5>
+                <p id="modal-keterangan" class="text-muted text-center"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".btn-edit-kegiatan").forEach(button => {
@@ -292,3 +324,28 @@
     });
   </script>
 @endsection
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var keteranganModal = document.getElementById("keteranganModal");
+
+        keteranganModal.addEventListener("show.bs.modal", function(event) {
+            var button = event.relatedTarget; // Tombol yang diklik
+            if (!button) return; // Jika button tidak ditemukan, hentikan eksekusi
+
+            var nama = button.getAttribute("data-nama");
+            var keterangan = button.getAttribute("data-keterangan");
+            var gambar = button.getAttribute("data-gambar");
+
+            // Debugging: Cek apakah data sudah diambil dengan benar
+            console.log("Nama:", nama);
+            console.log("Keterangan:", keterangan);
+            console.log("Gambar:", gambar);
+
+            // Isi modal dengan data yang diambil dari tombol
+            document.getElementById("modal-nama").textContent = nama || "Tidak Ada Nama";
+            document.getElementById("modal-keterangan").textContent = keterangan || "Tidak Ada Keterangan";
+            document.getElementById("modal-gambar").src = gambar || "https://via.placeholder.com/150";
+        });
+    });
+</script>

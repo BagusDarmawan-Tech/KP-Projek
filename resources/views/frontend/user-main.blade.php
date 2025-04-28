@@ -28,6 +28,7 @@
   <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
   <link href="{{ asset('assets/vendor/aos/aos.css')}}" rel="stylesheet">
   <link href="{{ asset('assets/vendor/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
+  
   <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
 
   <!-- Main CSS File -->
@@ -37,6 +38,13 @@
   <!-- bagian landing pages -->
   <link rel="stylesheet" href="{{ asset('assets/css/landing.css') }}">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
+<!-- bagian untuk gerak img -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+<!-- bagian font -->
+<link href="https://fonts.googleapis.com/css2?family=Baloo:wght@400;700&family=Comic+Sans+MS&family=Quicksand:wght@400;700&family=Poppins:wght@400;600&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+
 
 
 

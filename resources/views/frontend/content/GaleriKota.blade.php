@@ -6,7 +6,7 @@
     <div class="card shadow-lg border-0 position-relative overflow-hidden mb-5">
         <!-- Card Pembatas Besar dengan Judul dan Galeri -->
         <div class="card shadow-lg border-0 rounded-4 p-4">
-            <div class="card-header text-center bg-danger">
+            <div class="card-header text-center">
                 <h2 class="fw-bold text-white m-0">GALERI KOTA LAYAK ANAK</h2>
             </div>
             <div class="card-body">

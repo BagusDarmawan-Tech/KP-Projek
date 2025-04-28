@@ -49,9 +49,10 @@
                           <td style="text-align: center;">{{ $loop->iteration }}</td>
                             <td><img src="{{ asset($kegiatan->gambar) }}" alt="Slider Image" width="80"></td>
 
-                            <td>{{ $kegiatan->nama }}</td>
+                            <td  class="text-start">{{ $kegiatan->nama }}</td>
+                            <td class="text-start">{{ $kegiatan->keterangan }}</td>
                             <td>{{ $kegiatan->user ? $kegiatan->user->name : 'Tidak ada pengguna' }}</td>
-                            <td>{{ $kegiatan->keterangan }}</td>
+                           
                             <td>
                               @if($kegiatan->is_active == 0)
                                   <span class="badge bg-warning">Non Aktif</span>

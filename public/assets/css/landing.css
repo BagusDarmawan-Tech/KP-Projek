@@ -74,9 +74,18 @@ p {
 
 
 .custom-font {
-  font-family: 'Bangers', cursive;
+  font-family: "Nunito", sans-serif;
  /* Menggunakan font Poppins */
   font-size: 2rem; /* Ukuran font */
   font-weight: 1000; /* Ketebalan font */
-  color: rgb(233, 36, 103); /* Warna teks */
 }
+
+.gradient-text {
+  background: linear-gradient(90deg, rgb(0, 123, 255), rgb(255, 0, 150));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+/* bagian gelombang */
+

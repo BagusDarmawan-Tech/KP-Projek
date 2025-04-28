@@ -41,10 +41,10 @@
                 <table class="table table-hover table-bordered align-middle text-center" id="myTable">
                     <thead class="table-primary">
                         <tr>
-                            <th>No</th>
-                            <th>Perihal</th>
-                            <th>Status</th>
-                            <th>Aksi</th>
+                            <th class="text-center">No</th>
+                            <th class="text-center">Perihal</th>
+                            <th class="text-center">Status</th>
+                            <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -61,7 +61,7 @@
                                     <span class="badge bg-success">Sudah Tindak Lanjut</span>
                                 @endif
                             </td>
-                            <td class="d-flex text-start gap-2 py-2">
+                            <td class="d-flex align-items-center justify-content-center gap-2 py-2">
                                 @if(is_null($suara->is_active))
                                 <!-- Tombol Edit -->
                                     @if (auth()->user()->hasPermissionTo('pemantauan suara anak-edit')) 

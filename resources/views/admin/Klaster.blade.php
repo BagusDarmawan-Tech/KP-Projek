@@ -37,12 +37,12 @@
                 <table class="table table-hover table-bordered align-middle text-center"  id="myTable">
                     <thead class="table-primary">
                         <tr>
-                            <th class="text-center">No</th>
-                            <th class="text-center">Icon</th>
-                            <th class="text-center">Nama</th>
-                            <th class="text-center">Gambar</th>
+                            <th class="text-center"width="10%">No</th>
+                            <th class="text-center"width="10%">Icon</th>
+                            <th class="text-center"width="25%">Nama</th>
+                            <th class="text-center"width="15%">Gambar</th>
                             <th class="text-center">Dibuat Oleh</th>
-                            <th class="text-center">Status</th>
+                            <th class="text-center"width="11%">Status</th>
                             <th class="text-center">Actions</th>
                         </tr>
                     </thead>

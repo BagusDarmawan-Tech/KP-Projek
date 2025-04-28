@@ -33,22 +33,22 @@
                 <table class="table table-hover table-bordered align-middle text-center"  id="myTable">
                     <thead class="table-primary">
                         <tr>
-                            <th class="text-center">No</th>
+                            <th class="text-center"width="10%">No</th>
                             <th class="text-center">Gambar</th>
-                            <th class="text-center">Nama Kategori</th>
-                            <th class="text-center">Judul</th>
-                            <th class="text-center">Dibuat Oleh</th>
-                            <th class="text-center">Status</th>
-                            <th class="text-center">Actions</th>
+                            <th class="text-center"width="13%">Nama Kategori</th>
+                            <th class="text-center"width="25%">Judul</th>
+                            <th class="text-center"width="13%">Dibuat Oleh</th>
+                            <th class="text-center"width="12%">Status</th>
+                            <th class="text-center"width="13%">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($artikels as $artikel)
+                    @foreach ($artikels as $artikel)
                         <tr>
                             <td style="text-align: center;">{{ $loop->iteration }}</td>
                             <td><img src="{{ asset($artikel->gambar) }}" alt="Artikel Image" width="80"></td>
                             <td>{{ $artikel->kategori ? $artikel->kategori->nama : 'Tidak ada Kategori' }}</td>
-                            <td>{{ $artikel->judul }}</td>
+                            <td class="text-start">{{ $artikel->judul }}</td>
                             <td> {{ $artikel->user ? $artikel->user->name : 'Tidak ada pengguna' }}</td>                            <td>
                                 @if($artikel->is_active == 0)
                                     <span class="badge bg-warning">Non Aktif</span>

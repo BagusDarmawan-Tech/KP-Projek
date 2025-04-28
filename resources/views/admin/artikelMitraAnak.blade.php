@@ -68,7 +68,7 @@
                                     data-status="{{ $artikel->is_active }}"
                                     data-gambar="{{ asset($artikel->gambar) }}"
                                     data-kategoriartikelid="{{ $artikel->kategoriartikelid }}">
-                                    <i class="bi bi-pencil"></i>
+                                    <i class="bi bi-pencil-square"></i>
                                 </button>
                                 <!-- Button Delete Modal -->
                                 <button class="btn btn-sm btn-danger delete-btn" 
