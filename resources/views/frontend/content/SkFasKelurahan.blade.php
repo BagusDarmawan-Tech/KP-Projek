@@ -16,41 +16,52 @@
 
             <!-- Tabel -->
             <div class="table-responsive">
-                <table class="table table-hover table-bordered align-middle" id="myTable">
-                    <thead class="text-center">
-                        <tr>
-                            <th>No</th>
+            <table class="table table-hover table-bordered align-middle fixed-table" id="myTable">
+    <thead>
+        <tr>
+            <th class="text-center col-no">No</th>
+            <th class="text-center col-kategori">Kategori</th>
+            <th class="text-center col-nama">Nama</th>
+            <th class="text-center col-keterangan">Keterangan</th>
+            <th class="text-center col-file">File</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach($dataAktif as $index => $data)
+    <tr>
+        <td class="col-no" data-label="No">{{ $loop->iteration }}</td>
+        <td class=" text-center col-kategori" data-label="Kategori">
+            {{ $data->surat ? $data->surat->nama : 'Tidak ada surat' }}
+        </td>
+        <td class="col-nama" data-label="Nama">{{ $data->nama }}</td>
+        <td class="col-keterangan" data-label="Keterangan">{{ Str::limit($data->keterangan, 100, '...') }}</td>
+        <td class="col-file" data-label="File">
+            <a href="{{ asset('/' . $data->dataPendukung) }}" 
+               class="btn btn-sm btn-success btn-download-responsive" 
+               download title="Download">
+                <div class="download-icon-text">
+                    <i class="bi bi-download"></i>
+                    <span class="download-text">Download</span>
+                </div>
+            </a>
+        </td>
+    </tr>
+    @endforeach
+</tbody>
 
-                            <th>Kategori</th>
-                            <th>Nama</th>
-                            <th>Keterangan</th>
-                            <th>File</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($dataAktif as $index => $data)
-                        <tr>
-                            <td style="text-align: center;">{{ $loop->iteration }}</td>
-                            <td class="text-center"> {{ $data->surat ? $data->surat->nama : 'Tidak ada surat' }}</td>                            
-                           
-                            <td class="text-center">{{ $data->nama }}</td>
-                            <td class="text-center">{{ $data->keterangan }}</td>
-                            <td class="text-center">
-                            <a href="{{ asset('/' . $data->dataPendukung) }}" download class="btn btn-sm btn-success" download>
-                                        <i class="bi bi-download"></i>Download</a>
-                        </td>
+</table>
 
-                        </tr>
-                        @endforeach
-                        </tbody>
-                </table>
             </div>
 
             <!-- Paginasi -->
-            
+            {{-- @if(method_exists($dataAktif, 'links'))
+                    <div class="d-flex justify-content-center mt-3">
+                        {{ $dataAktif->links() }}
+                    </div>
+                @endif --}}
         </div>
     </div>
 </div>
-
+</div>
 
 @endsection

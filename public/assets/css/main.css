@@ -1927,9 +1927,256 @@ font-family: 'Nunito', sans-serif;  }
 /* } */
 
 
-
-/* css bagian galeri */
+/* ------------------------------------------ */
+/* css bagian galeri kota layak anak*/
+/* --------------------------------------------- */
+/* Card Header */
 .card-header {
   background-color: #4F7097;
-  /* Ganti dengan warna yang diinginkan */
+  padding: 1rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80px; /* atau sesuaikan tinggi minimum */
+}
+
+.card-gallery p {
+  color: #000; /* warna hitam */
+  font-weight: bold; /* opsional, biar tetap tebal */
+  text-align: center; /* opsional, biar tetap rata tengah */
+}
+
+/* Card Gallery */
+.card-gallery {
+  position: relative;
+  width: 100%;
+  height: 300px; /* Tinggi card */
+  border-radius: 15px;
+  overflow: hidden;
+  border: 2px solid #fff;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Shadow */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  color: #060606;
+}
+
+.card-gallery:hover {
+  transform: scale(1.05); /* Efek hover */
+  box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.4); /* Shadow lebih besar */
+}
+
+/* Gallery Image */
+.gallery-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Gambar proporsional */
+}
+
+/* Overlay */
+.overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.card-gallery:hover .overlay {
+  opacity: 1;
+}
+
+.plus-icon {
+  color: white;
+  font-size: 26px;
+  font-weight: bold;
+}
+
+/* Title Card Forum Anak Surabaya */
+.title-card {
+  background: rgb(233, 36, 103);
+  border: none;
+  border-radius: 1rem; /* rounded-4 */
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  color: black;
+}
+
+/* Gallery Card */
+.gallery-card {
+  border: none;
+  border-radius: 1rem; /* rounded-4 */
+  overflow: hidden;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  color: #000;
+}
+
+.gallery-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Gallery Image (on smaller cards) */
+.gallery-image {
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Modal Header */
+.modal-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 1rem;
+  position: relative;
+
+}
+
+/* Title Modal */
+
+.modal-title-center {
+  flex: 1;
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #000;
+}
+
+/* Modal Body */
+.modal-body {
+  position: relative;
+  text-align: center;
+  padding: 1rem;
+}
+
+/* Tombol Navigasi Modal */
+#prevBtn, #nextBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1056;
+  width: 50px;
+  height: 50px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  border-radius: 50%;
+  color: #4F7097; /* Warna merah Bootstrap */
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, background-color 0.2s, color 0.2s;
+}
+
+#prevBtn:hover, #nextBtn:hover {
+  background-color: #367591;
+  color: white;
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* Posisi Tombol */
+#prevBtn {
+  left: 10px;
+}
+
+#nextBtn {
+  right: 10px;
+}
+
+/* Gambar Modal */
+#modalImage {
+  max-width: 100%;
+  max-height: 80vh;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+/* Deskripsi Gambar */
+#imageDescription {
+  font-size: 1rem;
+  color: #010101;
+}
+
+/* Image Counter */
+#imageCounter {
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+@media (max-width: 768px) {
+  #modalImage {
+    max-height: 60vh;
+  }
+}
+
+/* ==================== */
+/*      RESPONSIVE      */
+/* ==================== */
+
+/* Tablet (≤768px) */
+@media (max-width: 768px) {
+  #modalImage {
+    max-height: 60vh;
+  }
+
+  #prevBtn,
+  #nextBtn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  .modal-title-center {
+    font-size: 1.1rem;
+  }
+
+  #imageDescription {
+    font-size: 0.95rem;
+  }
+
+  #imageCounter {
+    font-size: 0.85rem;
+  }
+}
+
+/* HP Kecil (≤480px) */
+@media (max-width: 480px) {
+  #modalImage {
+    max-height: 50vh;
+  }
+
+  #prevBtn,
+  #nextBtn {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+  }
+
+  .modal-title-center {
+    font-size: 1rem;
+  }
+
+  #imageDescription {
+    font-size: 0.9rem;
+  }
+
+  #imageCounter {
+    font-size: 0.8rem;
+  }
+}
+
+.text-wrap {
+  white-space: normal;
+  word-break: break-word;
+  font-size: 15px ;
 }

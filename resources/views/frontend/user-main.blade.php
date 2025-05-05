@@ -40,7 +40,8 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
 <!-- bagian untuk gerak img -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-
+<!-- bagian tabel -->
+<link href="{{ asset('assets/css/tabel.css') }}" rel="stylesheet">
 <!-- bagian font -->
 <link href="https://fonts.googleapis.com/css2?family=Baloo:wght@400;700&family=Comic+Sans+MS&family=Quicksand:wght@400;700&family=Poppins:wght@400;600&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
@@ -93,6 +94,11 @@
   <script src="{{ asset('assets/vendor/isotope-layout/isotope.pkgd.min.js')}}"></script>
   <script src="{{ asset('assets/vendor/swiper/swiper-bundle.min.js')}}"></script>
   
+
+  <!-- jsscrib landing -->
+<script src="{{ asset('assets/js/landing.js')}}"></script>
+
+
 
   <!-- Main JS File -->
   <script src="{{ asset('assets/js/main.js')}}"></script>

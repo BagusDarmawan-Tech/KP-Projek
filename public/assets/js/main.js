@@ -207,3 +207,53 @@
   document.addEventListener('scroll', navmenuScrollspy);
 
 })();
+
+
+
+// bagian galeri kotak Layak anak
+// let currentIndex = 0;
+
+// document.addEventListener("DOMContentLoaded", function () {
+//     // Event listener untuk klik gambar atau overlay
+//     document.addEventListener("click", function (event) {
+//         if (event.target.classList.contains("overlay") || event.target.classList.contains("gallery-image")) {
+//             const imgSrc = event.target.getAttribute("data-img-src");
+//             currentIndex = event.target.getAttribute("data-img-index");
+//             const description = event.target.getAttribute("data-img-description");
+
+//             // Update modal dengan gambar dan deskripsi
+//             document.getElementById("modalImage").setAttribute("src", imgSrc);
+//             document.getElementById("imageDescription").textContent = description;
+//             updateImageCounter();
+//         }
+//     });
+
+//     // Navigasi ke gambar sebelumnya
+//     document.getElementById("prevBtn").addEventListener("click", function () {
+//         if (currentIndex > 0) {
+//             currentIndex--;
+//             const img = document.querySelector(`[data-img-index="${currentIndex}"]`);
+//             document.getElementById("modalImage").setAttribute("src", img.getAttribute("data-img-src"));
+//             document.getElementById("imageDescription").textContent = img.getAttribute("data-img-description");
+//             updateImageCounter();
+//         }
+//     });
+
+//     // Navigasi ke gambar berikutnya
+//     document.getElementById("nextBtn").addEventListener("click", function () {
+//         const nextIndex = parseInt(currentIndex) + 1;
+//         const img = document.querySelector(`[data-img-index="${nextIndex}"]`);
+//         if (img) {
+//             currentIndex = nextIndex;
+//             document.getElementById("modalImage").setAttribute("src", img.getAttribute("data-img-src"));
+//             document.getElementById("imageDescription").textContent = img.getAttribute("data-img-description");
+//             updateImageCounter();
+//         }
+//     });
+
+//     // Update counter gambar di modal
+//     function updateImageCounter() {
+//         const totalImages = document.querySelectorAll(".gallery-image").length;
+//         document.getElementById("imageCounter").textContent = `Foto ${parseInt(currentIndex) + 1} dari ${totalImages}`;
+//     }
+// });

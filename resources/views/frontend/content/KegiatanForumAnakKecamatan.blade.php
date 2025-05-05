@@ -3,11 +3,10 @@
 @section('content')
 
 <div class="container mt-5 pt-4">
-    <div class="card shadow-lg border-0 rounded-4 text-center p-3" style="background: rgb(233, 36,103);">
+<div class="card shadow-lg border-0 rounded-4 p-4">
+<div class="card-header">
         <h2 class="fw-bold text-white m-0">KEGIATAN FORUM ANAK KECAMATAN</h2>
     </div>
-</div>
-
 <section id="gallery">
     <div class="container">
         <div class="row row-cols-1 row-cols-md-3 g-4">

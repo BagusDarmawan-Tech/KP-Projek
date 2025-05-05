@@ -16,22 +16,22 @@
 
                 <!-- Tabel -->
                 <div class="table-responsive">
-                    <table class="table table-hover table-bordered align-middle"  id="myTable">
+                    <table class="table table-hover table-bordered align-middle fixed-table"  id="myTable">
                         <thead class="text-center">
                             <tr>
-                                <th class="text-center">No</th>
-                                <th class="text-center">Nama</th>
-                                <th class="text-center">Keterangan</th>
-                                <th class="text-center">File</th>
+                                <th  class="text-center col-no">No</th>
+                                <th class="text-center col-nama">Nama</th>
+                                <th class="text-center col-keterangan">Keterangan</th>
+                                <th class="text-center col-file">File</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($datas as $index => $data)
                             <tr>
-                                <td class="text-center">{{ $index + 1 }}</td>
-                                <td class="text-center">{{ $data->nama }}</td>
-                                <td class="text-center">{{ $data->keterangan }}</td>
-                                <td class="text-center">
+                                <td class=" text-center col-no" data-label="No">{{ $index + 1 }}</td>
+                                <td class="col-nama" data-label="Nama">{{ $data->nama }}</td>
+                                <td class="col-keterangan" data-label="Keterangan">{{ Str::limit($data->keterangan, 100, '...') }}</td>
+                                <td class="text-center col-file" data-label="File">
                                     <a href="{{ asset('/' . $data->dataPendukung) }}" target="_blank" class="btn btn-sm btn-success" download>
                                         <i class="bi bi-download"></i> Download
                             

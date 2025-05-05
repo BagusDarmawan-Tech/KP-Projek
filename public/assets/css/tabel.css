@@ -1,43 +1,149 @@
+.custom-header {
+    font-size: 22px;
+    font-weight: bold;
+    padding: 15px;
+    border-radius: 15px 15px 50% 50%;
+    background: #4F7097;
+    color: white;
+}
 
-    .custom-header {
-        font-size: 22px;
-        font-weight: bold;
-        padding: 15px;
-        border-radius: 15px 15px 50% 50%;
-        background: rgb(233, 36, 103);
-        color: white;
-    }
+.table th {
+    font-weight: bold;
+    text-align: center;
+}
 
-    .table th {
-        font-weight: bold;
-        text-align: center;
-    }
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+    color: white;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 14px;
+}
 
-    .btn-success {
-        background-color: #28a745;
-        border-color: #28a745;
-        color: white;
-        border-radius: 8px;
-        padding: 6px 12px;
-        font-size: 14px;
-    }
+.btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
 
-    .btn-success:hover {
-        background-color: #218838;
-        border-color: #1e7e34;
-    }
+.card {
+    max-width: 100%;
+    overflow-x: auto;
+    word-wrap: break-word;
+}
 
-    .btn-success i {
-        margin-right: 5px;
-    }
+#userEntri {
+    max-width: 100%;
+    width: 100%;
+}
 
-    .card {
-        max-width: 100%;
-        overflow-x: auto; /* Agar bisa di-scroll secara horizontal */
-        word-wrap: break-word;
+/* Tabel Responsif */
+.fixed-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+th, td {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+th.col-no, td.col-no {
+    width: 7%;
+    white-space: nowrap;
+}
+
+.col-no::before {
+    min-width: 110px !important; /* pastikan lebar label "No" cukup */
+    text-align: left !important;
+}
+
+th.col-kategori, td.col-kategori {
+    width: 17%;
+}
+
+th.col-nama, td.col-nama {
+    width: 25%;
+}
+
+th.col-keterangan, td.col-keterangan {
+    width: 32%;
+    white-space: normal;
+    text-align: left;
+    line-height: 1.5;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+th.col-file, td.col-file {
+    width: 22%;
+    text-align: center;
+}
+
+/* Responsif: Tampilan Kecil */
+@media (max-width: 768px) {
+    .fixed-table th, .fixed-table td {
+        font-size: 0.85rem;
+        padding: 6px;
     }
-    #userEntri {
-        max-width: 100%;
+}
+
+@media (max-width: 576px) {
+    .fixed-table th, .fixed-table td {
+        display: block;
+        text-align: right; /* label kiri, isi kanan */
         width: 100%;
     }
+
+    .fixed-table th {
+        display: none;
+        text-align: left; 
+    }
+
+    .fixed-table td {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end; /* label dan isi ke kanan */
+        gap: 10px; /* Jarak antara label dan isi */
+        text-align: left; 
+        border-bottom: 1px solid #ddd;
+        padding: 6px 8px;
+        word-break: break-word;
+        
+    }
+
     
+
+    .fixed-table td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: #333;
+        min-width: 110px; /* Tambah agar "No" sejajar */
+        text-align: left;
+        flex-shrink: 0;
+    
+    }
+
+    .btn-download-responsive {
+        font-size: 0.7rem;
+        padding: 4px 6px;
+    }
+
+    .download-icon-text {
+        flex-direction: column;
+    }
+
+    .download-text {
+        font-size: 0.65rem;
+    }
+
+    .btn-download-responsive i {
+        font-size: 1rem;
+    }
+}
+
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}

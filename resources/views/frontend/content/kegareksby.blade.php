@@ -2,59 +2,64 @@
 
 @section('content')
 
+<!-- Seksi Kegiatan -->
 <div class="container mt-5 pt-4">
-    <div class="card shadow-lg border-0 rounded-4 text-center p-3" style="background: rgb(233, 36,103);">
-        <h2 class="fw-bold text-white m-0">KEGIATAN FORUM ANAK SURABAYA</h2>
+    <div class="card shadow-lg border-0 position-relative overflow-hidden mb-5">
+        <!-- Card Pembatas Besar dengan Judul dan Galeri -->
+        <div class="card shadow-lg border-0 rounded-4 p-4">
+            <div class="card-header">
+                <h2 class="fw-bold text-white m-0">KEGIATAN FORUM ANAK SURABAYA</h2>
+            </div>
+            <div class="card-body">
+                <!-- Grid Kegiatan -->
+                <div class="row g-4">
+                    @foreach($dataAktif as $index => $kegiatan)
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="card-gallery">
+                            <!-- Gambar -->
+                            <img src="{{ asset($kegiatan->gambar) }}"
+                                 class="gallery-image"
+                                 alt="{{ $kegiatan->nama }}"
+                                 data-img-src="{{ asset($kegiatan->gambar) }}"
+                                 data-img-index="{{ $index }}"
+                                 data-img-name="{{ $kegiatan->nama }}"
+                                 data-img-description="{{ $kegiatan->keterangan }}"
+                                 data-bs-toggle="modal"
+                                 data-bs-target="#imageModal">
+
+                            <!-- Deskripsi Gambar -->
+                            <div class="text-center mt-2">
+                                <p class="fw-bold text-wrap">{{ $kegiatan->nama }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<section id="gallery">
-    <div class="container">
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            @foreach($dataAktif as $index => $kegiatan)
-            <div class="col">
-                <div class="card shadow-lg border-0 rounded-4 overflow-hidden hover-shadow">
-                    <!-- Gambar -->
-                    <img src="{{ asset($kegiatan->gambar) }}" 
-                         alt="{{ $kegiatan->nama }}" 
-                         class="card-img-top" 
-                         style="height: 200px; object-fit: cover;">
-
-                    <!-- Konten Card -->
-                    <div class="card-body text-center">
-                        <h5 class="card-title text-danger">{{ $kegiatan->nama }}</h5>
-                        <p class="card-text text-secondary">{{ Str::limit($kegiatan->keterangan, 100) }}</p>
-                        <button class="btn btn-outline-danger btn-sm" 
-                                data-bs-toggle="modal" 
-                                data-bs-target="#modal{{ $index }}">Selengkapnya</button>
-                    </div>
-                </div>
+<!-- Modal Bootstrap -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="imageModalLabel" class="modal-title modal-title-center fw-bold"></h5>
             </div>
-
-            <!-- Modal -->
-            <div class="modal fade" id="modal{{ $index }}" tabindex="-1" aria-labelledby="modalLabel{{ $index }}" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title text-danger" id="modalLabel{{ $index }}">{{ $kegiatan->nama }}</h5>
-                        </div>
-                            <div class="modal-body text-center">
-                            <!-- Gambar dalam Modal -->
-                            <img src="{{ asset($kegiatan->gambar) }}" 
-                                 alt="{{ $kegiatan->nama }}" 
-                                 class="img-fluid rounded mb-3 w-100">
-                            <!-- Teks dalam Modal -->
-                            <p class="text-secondary text-dark">{{ $kegiatan->keterangan }}</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                        </div>
-                    </div>
-                </div>
+            <div class="modal-body text-center position-relative">
+                <!-- Tombol Navigasi Kiri -->
+                <button id="prevBtn" class="btn btn-light position-absolute"><i class="bi bi-chevron-left fs-2"></i></button>
+                <!-- Gambar -->
+                <img id="modalImage" class="img-fluid rounded" src="" alt="Selected Image">
+                <!-- Tombol Navigasi Kanan -->
+                <button id="nextBtn" class="btn btn-light position-absolute"><i class="bi bi-chevron-right fs-2"></i></button>
+                <!-- Deskripsi Gambar -->
+                <div id="imageDescription" class="mt-3"></div>
+                <div id="imageCounter" class="mt-3"></div>
             </div>
-            @endforeach
         </div>
     </div>
-</section>
+</div>
 
 @endsection
