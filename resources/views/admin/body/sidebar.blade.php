@@ -84,7 +84,7 @@
         @if (auth()->user()->hasPermissionTo('slider-list'))
         <li>
           <a class="{{ request()->routeIs('slider') ? 'active' : '' }}" href="{{route('slider')}}">
-            <i class="bi bi-circle"></i><span>Slider</span>
+            <i class="bi bi-circle"></i><span >Slider</span>
           </a>
         </li>
         @endif
@@ -113,29 +113,29 @@
         </li>
         @endif
 
-        @if (auth()->user()->hasPermissionTo('forum anak-list'))
+        {{-- @if (auth()->user()->hasPermissionTo('forum anak-list'))
         <li>
           <a class="{{ request()->routeIs('forum-anak') ? 'active' : '' }}" href="{{route('forum-anak')}}">
-            <i class="bi bi-circle"></i><span>Forum Anak</span>
+            <i class="bi bi-circle"></i><span class="text-danger">Forum Anak</span>
           </a>
         </li>
-        @endif
+        @endif --}}
 
-        @if (auth()->user()->hasPermissionTo('halaman-list'))
+        {{-- @if (auth()->user()->hasPermissionTo('halaman-list'))
         <li>
           <a class="{{ request()->routeIs('Halamandong') ? 'active' : '' }}" href="{{route('Halamandong')}}">
-            <i class="bi bi-circle"></i><span>Halaman </span>
+            <i class="bi bi-circle"></i><span class="text-danger">Halaman </span>
           </a>
         </li>
-        @endif
+        @endif --}}
 
-        @if (auth()->user()->hasPermissionTo('pemantauan usulan-list'))
+        {{-- @if (auth()->user()->hasPermissionTo('pemantauan usulan-list'))
         <li>
           <a class="{{ request()->routeIs('PemantauanUsulanAnak') ? 'active' : '' }}" href="{{route('PemantauanUsulanAnak')}}">
-            <i class="bi bi-circle"></i><span>Pemantauan Usulan </span>
+            <i class="bi bi-circle"></i><spa class="text-danger">Pemantauan Usulan </spa>
           </a>
         </li>
-        @endif
+        @endif --}}
 
         @if (auth()->user()->hasPermissionTo('opd-list'))
         <li>
