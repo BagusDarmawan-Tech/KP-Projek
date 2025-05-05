@@ -9,7 +9,7 @@
         <div class="card shadow-lg border-0 position-relative overflow-hidden">
             <!-- Bagian Header dengan Warna -->
             <div class="custom-header text-center py-4">
-                <h2 class="mb-0 text-white">Perlindungan Khusus</h2>
+                <h2 class="mb-0 text-white">PERLINDUNGAN KHUSUS</h2>
             </div>
 
             <div class="card-body mt-4">
