@@ -45,6 +45,7 @@
 <!-- bagian font -->
 <link href="https://fonts.googleapis.com/css2?family=Baloo:wght@400;700&family=Comic+Sans+MS&family=Quicksand:wght@400;700&family=Poppins:wght@400;600&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
 
 

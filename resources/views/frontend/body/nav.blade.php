@@ -6,31 +6,35 @@
 
         <nav id="navmenu" class="navmenu">
             <ul>
-                <li><a href="{{ route('content') }}">Home</a></li>
+              <li>
+                    <a href="{{ route('content') }}">Home</a></li>  
+                     
 
                 <!-- Halaman Galeri -->
                 <li class="dropdown">
-                    <a href="#"><span>Galeri</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                    <a href="#">Galeri<i class="bi bi-chevron-down toggle-dropdown"></i></a>
                     <ul>
-                        <li><a href="{{route('galeri-kota-layakanak')}}">Galeri Kota Layak Anak</a></li>
+                        <li class="dropdown">
+                            <a href="{{route('galeri-kota-layakanak')}}">Galeri Kota Layak Anak</a>
+                        </li>
                     </ul>
-                </li>
+                </li>   
               
                 <!-- Selesai Halaman Galeri -->
 
                 <!-- Bagian Forum Anak -->
                 <li class="dropdown">
-                    <a href="#"><span>Forum Anak</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                    <a href="#">Forum Anak <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                     <ul>
                         <li class="dropdown">
-                            <a href="#"><span>Forum Anak Kecamatan</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                            <a href="#">Forum Anak Kecamatan<i class="bi bi-chevron-down toggle-dropdown"></i></a>
                             <ul>
                                 <li><a href="{{route('Skkecam')}}">SK Fas Kecamatan</a></li>
                                 <li><a href="{{route('kegiatanforumanakkecamatan')}}">Kegiatan Forum Anak Kecamatan</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#"><span>Forum Anak Kelurahan</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                            <a href="#">Forum Anak Kelurahan<i class="bi bi-chevron-down toggle-dropdown"></i></a>
                             <ul>
                                 <li><a href="{{route('Skkel')}}">SK Fas Kelurahan</a></li>
                                 <li><a href="{{route('kegiatanforumanakkelurahan')}}">Kegiatan Forum Anak Kelurahan</a></li>
@@ -44,7 +48,7 @@
 
                 <!-- Bagian Klaster -->
                 <li class="dropdown">
-                    <a href="#"><span>Klaster</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                    <a href="#">Klaster<i class="bi bi-chevron-down toggle-dropdown"></i></a>
                     <ul>
                         <li><a href="{{route('haksipil')}}">Hak Sipil dan Kebebasan</a></li>
                         <li><a href="{{route('kelembagaan')}}">Kelembagaan</a></li>
@@ -58,10 +62,10 @@
 
                 <!-- Halaman Kota Layak Anak -->
                 <li class="dropdown">
-                    <a href="#"><span>Kota Layak Anak</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                    <a href="#">Kota Layak Anak<i class="bi bi-chevron-down toggle-dropdown"></i></a>
                     <ul>
                         <li class="dropdown">
-                            <a href="#"><span>Kegiatan</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                            <a href="#">Kegiatan<i class="bi bi-chevron-down toggle-dropdown"></i></a>
                             <ul>
                                 <li><a href="{{route('kegiatankecamatanlayakanak')}}">Kegiatan Kecamatan</a></li>
                                 <li><a href="{{route('kegiatankelurahanlayakanak')}}">Kegiatan Kelurahan</a></li>
@@ -73,10 +77,10 @@
 
                 <!-- Bagian CFCI -->
                 <li class="dropdown">
-                    <a href="#"><span>CFCI</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                    <a href="#">CFCI<i class="bi bi-chevron-down toggle-dropdown"></i></a>
                     <ul>
                         <li class="dropdown">
-                            <a href="#"><span>SK</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                            <a href="#">SK<i class="bi bi-chevron-down toggle-dropdown"></i></a>
                             <ul>
                                 <li><a href="{{route('CFCIKecamatann')}}">SK Kecamatan</a></li>
                                 <li><a href="{{route('SkKelurahan')}}">SK Kelurahan</a></li>
@@ -91,7 +95,7 @@
 
                 <!-- Halaman PISA -->
                 <li class="dropdown">
-                    <a href="#"><span>PISA</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                    <a href="#">PISA<i class="bi bi-chevron-down toggle-dropdown"></i></a>
                     <ul>
                         <li><a href="{{route('HalamanPisa')}}">Dokumen</a></li>
                         <li><a href="{{route('KegiatanPisa')}}">Kegiatan</a></li>
@@ -101,7 +105,7 @@
 
                 <!-- Bagian Suara Anak -->
                 <li class="dropdown">
-                    <a href="#"><span>Suara Anak</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                    <a href="#">Suara Anak<i class="bi bi-chevron-down toggle-dropdown"></i></a>
                     <ul>
                         <li><a href="{{route('suaraanak')}}">Pantau Suara Anak</a></li>
                         <li><a href="{{route('KaryaAnak')}}">Karya Anak</a></li>
@@ -111,7 +115,7 @@
 
                 <!-- Halaman Mitra Anak -->
                 <li class="dropdown">
-                    <a href="#"><span>Mitra Anak</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                    <a href="#">Mitra Anak<i class="bi bi-chevron-down toggle-dropdown"></i></a>
                     <ul>
                         <li><a href="{{route('HArtikelMitra')}}">Artikel Mitra Anak</a></li>
                         <li><a href="{{route('HKegiatanMitra')}}">Kegiatan Mitra Anak</a></li>

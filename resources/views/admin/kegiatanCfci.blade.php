@@ -3,6 +3,59 @@
 <link href="{{ asset('assets/css/tabel.css') }}" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- <script src="{{ asset('assets/js/hapus.js') }}"></script> -->
+
+<style>
+    .table {
+        table-layout: fixed;
+        width: 100%;
+    }
+
+    .table th, .table td {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        text-align: center;
+    }
+
+    .table th:first-child, .table td:first-child {
+        width: 50px; /* Kolom No */
+    }
+
+    .table th:nth-child(2), .table td:nth-child(2) {
+        width: 300px; /* Kolom Nama */
+    }
+
+    .table th:nth-child(3), .table td:nth-child(3) {
+        width: 100px; /* Kolom Status */
+    }
+
+    .table th:nth-child(4), .table td:nth-child(4) {
+        width: 150px; /* Kolom Actions */
+    }
+
+    .modal-header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+
+    .modal-header .btn-close {
+        position: absolute;
+        right: 10px;
+    }
+
+    .modal-body img {
+        max-width: 100%;
+        border-radius: 8px;
+    }
+
+    .modal-body p {
+        text-align: justify;
+    }
+</style>
+
+
 <div class="container mt-5">
     @if ($errors->any())
     @foreach ($errors->all() as $error)
@@ -42,7 +95,7 @@
                     <tbody>
                         @foreach($cfcis as $index => $cfci)
                         <tr>
-                            <td style="text-align: center;">{{ $loop->iteration }}</td>
+                            <td style="text-align: left;">{{ $loop->iteration }}</td>
                             <td>{{ $cfci->nama }}</td>
                              
                             <td>

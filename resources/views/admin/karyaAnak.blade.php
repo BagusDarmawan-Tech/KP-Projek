@@ -70,7 +70,7 @@
                     @foreach($karyas as $index => $karya)
                     <tr>
                         <td style="text-align: center;">{{ $loop->iteration }}</td>
-                        <td class="text-nowrap">{{ $karya->tanggal }}</td>
+                        <td style="text-align: center;">{{ $karya->tanggal }}</td>
                         <td>{{ $karya->user ? $karya->user->name : 'Tidak ada pengguna' }}</td>
                         <td>{{ $karya->kreator }}</td>
                     

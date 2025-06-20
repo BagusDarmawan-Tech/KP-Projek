@@ -19,6 +19,91 @@
 </section> -->
 
 
+<style>
+/* ==== SWIPER SLIDE ==== */
+/* ==== SWIPER SLIDE ==== */
+.swiper-slide {
+  display: flex;
+  height: 100%;
+  align-items: stretch;
+}
+
+/* ==== CARD ==== */
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 320px;
+  height: 100%;
+}
+
+/* ==== CARD BODY ==== */
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  text-align: center;
+}
+
+/* ==== ICON ==== */
+.icon-wrapper {
+  margin-bottom: 1rem;
+}
+
+/* ICON DEFAULT (belum diklik) = PINK */
+.icon-wrapper i {
+  color: #4F7097 !important; /* pink */
+  opacity: 1;
+  filter: none;
+  transition: all 0.3s ease;
+}
+
+/* ICON SAAT HOVER = BIRU GELAP */
+.swiper-slide:hover .icon-wrapper i {
+  color: #152744 !important; /* biru gelap */
+  transform: scale(1.1);
+}
+
+/* ==== BUTTON SELENGKAPNYA ==== */
+.btn-selengkapnya {
+  margin-top: auto;
+  background-color: #4F7097; /* pink */
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 500;
+  opacity: 0.95;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+/* HOVER BUTTON = BIRU GELAP */
+.swiper-slide:hover .btn-selengkapnya {
+  background-color: #152744;
+  color: #fff;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ==== TEKS ==== */
+.card-title {
+  color: #333;
+  font-weight: 600;
+}
+
+/* .card-text {
+  color: #666;
+} */
+
+
+
+
+</style>
+
+
 <section id="hero-carousel" class="position-relative w-100 hero-carousel ">
         <div id="carouselExampleIndicators" class="carousel slide h-100" data-bs-ride="carousel">
             
@@ -73,7 +158,9 @@
     
    <!-- Testimonials Section -->
 <section id="testimonials" class="testimonials section1">
-  <div class="container section-title" data-aos="fade-up"></div>
+  <!-- <div class="container section-title" data-aos="fade-up"> -->
+    <!-- <h2 class="text-center mb-5">Testimoni</h2> -->
+  </div>
   <div class="container" data-aos="fade-up" data-aos-delay="100">
     <div class="swiper init-swiper">
       <script type="application/json" class="swiper-config">
@@ -83,115 +170,117 @@
           "autoplay": {
             "delay": 5000
           },
-          "slidesPerView": "auto",
-          "pagination": {
-            "el": ".swiper-pagination",
-            "type": "bullets",
-            "clickable": true
-          },
+        
           "breakpoints": {
             "320": {
               "slidesPerView": 1,
-              "spaceBetween": 40
+              "spaceBetween": 20
+            },
+            "768": {
+              "slidesPerView": 2,
+              "spaceBetween": 30
             },
             "1200": {
               "slidesPerView": 3,
-              "spaceBetween": 20
+              "spaceBetween": 40
             }
           }
         }
       </script>
 
-      <div class="swiper-wrapper ">
-        <!-- Perlindungan Khusus -->
+      <!-- Swiper Wrapper -->
+      <div class="swiper-wrapper">
+        <!-- Card Perlindungan Khusus -->
         <div class="swiper-slide">
-          <a href="{{ route('perlindungan-khusus') }}" class="card-link">
-          <div class="testimonial-item ">
-              <div class="icon-wrapper">
-                <i class="bi bi-shield-fill"></i> <!-- Ikon -->
+          <div class="card h-100 shadow-sm border-0">
+            <div class="card-body text-center">
+              <div class="icon-wrapper mb-3">
+                <i class="bi bi-shield-fill fs-1 "></i>
               </div>
-              <h3 style="color: black;">Perlindungan Khusus</h3><br>
-              <!-- <h4 style="color: black;">Subkegiatan Khusus</h4> -->
-              <p style="color: black;">Melindungi anak-anak dalam kondisi tertentu.</p>
+              <h5 class="card-title text-dark">Perlindungan Khusus</h5>
+              <p class="card-text text-muted">Melindungi anak-anak dalam kondisi tertentu.</p>
+              <a href="{{ route('perlindungan-khusus') }}" class="btn btn-selengkapnya">Selengkapnya</a>
             </div>
-          </a>
+          </div>
         </div>
 
-        <!-- Hak Sipil dan Kebebasan -->
+        <!-- Card Hak Sipil dan Kebebasan -->
         <div class="swiper-slide">
-          <a href="{{ route('haksipil') }}" class="card-link">
-            <div class="testimonial-item">
-              <div class="icon-wrapper">
-                <i class="bi bi-person-fill"></i> <!-- Ikon -->
+          <div class="card h-100 shadow-sm border-0">
+            <div class="card-body text-center">
+              <div class="icon-wrapper mb-3">
+                <i class="bi bi-person-fill fs-1"></i>
               </div>
-              <h3 style="color: black;">Hak Sipil dan Kebebasan</h3><br>
-              <!-- <h4 style="color: black;">Subkegiatan Sipil</h4> -->
-              <p style="color: black;">Hak sipil dan kebebasan untuk mendukung hak fundamental.</p>
+              <h5 class="card-title text-dark">Hak Sipil dan Kebebasan</h5>
+              <p class="card-text text-muted">Hak sipil dan kebebasan untuk mendukung hak fundamental.</p>
+              <a href="{{ route('haksipil') }}" class="btn btn-selengkapnya">Selengkapnya</a>
             </div>
-          </a>
+          </div>
         </div>
 
-        <!-- Kelembagaan -->
+        <!-- Card Kelembagaan -->
         <div class="swiper-slide">
-          <a href="{{ route('kelembagaan') }}"class="card-link">
-            <div class="testimonial-item">
-              <div class="icon-wrapper">
-                <i class="bi bi-building"></i> <!-- Ikon -->
+          <div class="card h-100 shadow-sm border-0">
+            <div class="card-body text-center">
+              <div class="icon-wrapper mb-3">
+                <i class="bi bi-building fs-1 "></i>
               </div>
-              <h3 style="color: black;">Kelembagaan </h3><br>
-              <!-- <h4 style="color: black;">Subkegiatan Organisasi</h4> -->
-              <p style="color: black;">Penguatan organisasi masyarakat.</p>
+              <h5 class="card-title text-dark">Kelembagaan</h5>
+              <p class="card-text text-muted">Penguatan organisasi masyarakat.</p>
+              <a href="{{ route('kelembagaan') }}" class="btn btn-selengkapnya">Selengkapnya</a>
             </div>
-          </a>
+          </div>
         </div>
 
-        <!-- Lingkungan Keluarga -->
+        <!-- Card Lingkungan Keluarga -->
         <div class="swiper-slide">
-          <a href="{{ route('lingkungan-keluarga') }}" class="card-link">
-            <div class="testimonial-item card-yellow highlight-card">
-              <div class="icon-wrapper">
-                <i class="bi bi-house-door-fill"></i> <!-- Ikon -->
+          <div class="card h-100 shadow-sm border-0">
+            <div class="card-body text-center">
+              <div class="icon-wrapper mb-3">
+                <i class="bi bi-house-door-fill fs-1 "></i>
               </div>
-              <h3 style="color: black;">Lingkungan Keluarga</h3><br>
-              <!-- <h4 style="color: black;">Subkegiatan Keluarga</h4> -->
-              <p style="color: black;">Lingkungan keluarga untuk pengasuhan alternatif.</p>
+              <h5 class="card-title text-dark">Lingkungan Keluarga</h5>
+              <p class="card-text text-muted">Lingkungan keluarga untuk pengasuhan alternatif.</p>
+              <a href="{{ route('lingkungan-keluarga') }}" class="btn btn-selengkapnya">Selengkapnya</a>
             </div>
-          </a>
+          </div>
         </div>
 
+        <!-- Card Kesehatan Dasar -->
         <div class="swiper-slide">
-          <a href="{{ route('kesehatan-dasar') }}" class="card-link">
-            <div class="testimonial-item ">
-              <div class="icon-wrapper">
-                <i class="bi bi-person-fill"></i> 
+          <div class="card h-100 shadow-sm border-0">
+            <div class="card-body text-center">
+              <div class="icon-wrapper mb-3">
+                <i class="bi bi-person-fill fs-1"></i>
               </div>
-              <h3 style="color: black;">Kesehatan Dasar dan Kesejahteraan</h3><br>
-              <!-- <h4 style="color: black;">Subkegiatan Sipil</h4> -->
-              <div class="highlight-pink">
-              <p>Kesehatan bagi Hak Anak anak </p>
-                </div>
+              <h5 class="card-title text-dark">Kesehatan Dasar</h5>
+              <p class="card-text text-muted">Kesehatan bagi Hak Anak-anak.</p>
+              <a href="{{ route('kesehatan-dasar') }}" class="btn btn-selengkapnya">Selengkapnya</a>
             </div>
-          </a>
+          </div>
         </div>
 
-        <!-- Pendidikan dan Pemanfaatan -->
+        <!-- Card Pendidikan dan Pemanfaatan -->
         <div class="swiper-slide">
-          <a href="{{ route('pendidikan-pemanfaatan') }}" class="card-link">
-            <div class="testimonial-item">
-              <div class="icon-wrapper">
-                <i class="bi bi-book-fill"></i> <!-- Ikon -->
+          <div class="card h-100 shadow-sm border-0">
+            <div class="card-body text-center">
+              <div class="icon-wrapper mb-3">
+                <i class="bi bi-book-fill fs-1 "></i>
               </div>
-              <h3 style="color: black;">Pendidikan dan Pemanfaatan</h3><br>
-              <!-- <h4 style="color: black;">Subkegiatan Pendidikan</h4> -->
-              <p style="color: black;">Pendidikan dan kegiatan budaya untuk kesejahteraan anak.</p>
+              <h5 class="card-title text-dark">Pendidikan dan Pemanfaatan</h5>
+              <p class="card-text text-muted">Pendidikan dan kegiatan budaya untuk kesejahteraan anak.</p>
+              <a href="{{ route('pendidikan-pemanfaatan') }}" class="btn btn-selengkapnya">Selengkapnya</a>
             </div>
-          </a>
+          </div>
         </div>
       </div>
-      <div class="swiper-pagination"></div>
+
+      <!-- Swiper Pagination -->
+       <!-- <div class="swiper-pagination mt-4"></div> -->
     </div>
   </div>
 </section>
+
 
 
  
@@ -235,100 +324,50 @@
 
     <!-- Services Section -->
     <section id="services" class="services section1 py-5 galeri-section">
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up"style="color: red;">
-        <span>GALERI</span>
-        <h2>GALERI</h2>
-      </div>
-      <div class="container">
-        <div class="row gy-4">
-          @foreach ($galeri as $gambar)
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 + 100 }}">
-              <div class="service-item">
-                <!-- Thumbnail Image -->
-                <img src="{{ asset($gambar->gambar) }}" alt="Galeri Image" 
-                    class="img-fluid w-100"
-                    data-bs-toggle="modal" data-bs-target="#modal{{ $loop->index }}">
+  <!-- Section Title -->
+  <div class="container section-title" data-aos="fade-up" style="color: red;">
+    <span>GALERI</span>
+    <h2>GALERI</h2>
+  </div>
 
-                <!-- Title -->
-                  <div>
-                  <h3 >{{ $gambar->judul }}</h3>
-                </div>
-              </div>
-            </div>
+  <div class="container">
+    <div class="row gy-4">
+      @foreach ($galeri as $gambar)
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 + 100 }}">
+          <div class="card h-100 shadow-sm border-0" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#modal{{ $loop->index }}">
+            <!-- Gambar Thumbnail -->
+            <img src="{{ asset($gambar->gambar) }}" alt="Galeri Image" class="card-img-top img-fluid" style="height: 200px; object-fit: cover;">
 
-            <!-- Modal for Image -->
-            <div class="modal fade" id="modal{{ $loop->index }}" tabindex="-1" aria-labelledby="modalLabel{{ $loop->index }}" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                  <div class="modal-body">
-                    <div class="d-flex justify-content-center align-items-center">
-                      <img src="{{ asset($gambar->gambar) }}" alt="Galeri Image" class="img-fluid">
-                    </div>
-                    <div>
-                      <h5>{{ $gambar->judul }}</h5>
-                      <p  style="color: black;">{{ $gambar->keterangan }}</p>
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                  <button type="button" class="btn btn-sm custom-btn-color" data-bs-dismiss="modal">Tutup</button>
-                  </div>
-                </div>
-              </div>
+            <!-- Judul -->
+            <div class="card-body text-center">
+              <h5 style="color: black;" class="mb-0">{{ $gambar->nama }}</h5>
             </div>
-          @endforeach
+          </div>
         </div>
-      </div>
-    </section>
 
+        <!-- Modal -->
+        <div class="modal fade" id="modal{{ $loop->index }}" tabindex="-1" aria-labelledby="modalLabel{{ $loop->index }}" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" style="max-width: 600px;">
+            <div class="modal-content">
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h5 style="color: black;"class="modal-title" id="modalLabel{{ $loop->index }}">{{ $gambar->nama }}</h5>
+              </div>
 
+              <!-- Modal Body -->
+              <div class="modal-body text-center">
+                <img src="{{ asset($gambar->gambar) }}" alt="Galeri Image" class="img-fluid mb-3">
+                <p class="text-start" style="color: black;">{{ $gambar->keterangan }}</p>
+              </div>
 
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="portfolio section">
-
-    <!-- Section Title -->
-    <div class="container section-title" data-aos="fade-up">
-        <span>BERITA DAN ARTIKEL</span>
-        <h2>BERITA DAN ARTIKEL</h2>
-    </div>
-    <!-- End Section Title -->
-
-    <div class="container">
-        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
-    <!-- Filter Kategori -->
-        <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
-            <li data-filter="*" class="filter-active">All</li>
-            @foreach ($kategoriArtikel as $kategori)
-                <li data-filter=".filter-{{ $kategori->id }}">{{ $kategori->nama }}</li>
-            @endforeach
-        </ul><!-- End Portfolio Filters -->
-
-        <!-- Portfolio Items -->
-        <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
-            @foreach ($karyaAnak as $artikel)
-                <div class="col-lg-4 col-md-6 col-sm-12 portfolio-item isotope-item filter-{{ $artikel->kategoriartikelid }}">
-                    <div class="card h-100 text-center d-flex flex-column justify-content-between align-items-center p-3">
-                        <!-- Gambar Artikel -->
-                        <img src="{{ asset($artikel->gambar) }}" class="card-img-top img-fluid" alt="{{ $artikel->judul }}">
-                        
-                        <!-- Judul Artikel -->
-                        <h4 class="card-title mt-3">{{ $artikel->judul }}</h4>
-                        
-                        <!-- Tombol Preview -->
-                        <div class="mt-4">
-                            <a href="{{ asset($artikel->gambar) }}" 
-                               title="{{ $artikel->judul }}" 
-                               data-gallery="portfolio-gallery-{{ $artikel->kategoriartikelid }}" 
-                               class="glightbox preview-link btn btn-primary btn-sm" 
-                               data-description="{{ $artikel->judul }}">
-                               <i class="bi bi-zoom-in"></i> Preview
-                            </a>
-                        </div>
-                    </div>
-                </div><!-- End Portfolio Item -->
-            @endforeach
-        </div><!-- End Portfolio Container -->
-
+              <!-- Modal Footer -->
+              <div class="modal-footer">
+                <button type="button" class="btn btn-sm custom-btn-color" data-bs-dismiss="modal">Tutup</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      @endforeach
     </div>
   </div>
 </section>

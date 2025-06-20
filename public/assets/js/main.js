@@ -1,66 +1,74 @@
-/**
-* Template Name: eNno
-* Template URL: https://bootstrapmade.com/enno-free-simple-bootstrap-template/
-* Updated: Aug 07 2024 with Bootstrap v5.3.3
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-
-(function() {
+(function () {
   "use strict";
 
-  /**
-   * Apply .scrolled class to the body as the page is scrolled down
-   */
+  // Fungsi menambahkan class 'scrolled' pada body saat scroll
   function toggleScrolled() {
     const selectBody = document.querySelector('body');
     const selectHeader = document.querySelector('#header');
-    if (!selectHeader.classList.contains('scroll-up-sticky') && !selectHeader.classList.contains('sticky-top') && !selectHeader.classList.contains('fixed-top')) return;
+    if (!selectHeader.classList.contains('scroll-up-sticky') && 
+        !selectHeader.classList.contains('sticky-top') && 
+        !selectHeader.classList.contains('fixed-top')) return;
     window.scrollY > 100 ? selectBody.classList.add('scrolled') : selectBody.classList.remove('scrolled');
   }
 
   document.addEventListener('scroll', toggleScrolled);
   window.addEventListener('load', toggleScrolled);
 
-  /**
-   * Mobile nav toggle
-   */
+  // Tombol toggle mobile nav
   const mobileNavToggleBtn = document.querySelector('.mobile-nav-toggle');
 
-  function mobileNavToogle() {
+  function mobileNavToggle() {
     document.querySelector('body').classList.toggle('mobile-nav-active');
     mobileNavToggleBtn.classList.toggle('bi-list');
     mobileNavToggleBtn.classList.toggle('bi-x');
   }
-  mobileNavToggleBtn.addEventListener('click', mobileNavToogle);
 
-  /**
-   * Hide mobile nav on same-page/hash links
-   */
-  document.querySelectorAll('#navmenu a').forEach(navmenu => {
-    navmenu.addEventListener('click', () => {
-      if (document.querySelector('.mobile-nav-active')) {
-        mobileNavToogle();
+  mobileNavToggleBtn.addEventListener('click', mobileNavToggle);
+
+  // Menutup mobile nav saat klik link, kecuali toggle dropdown
+  document.querySelectorAll('#navmenu a').forEach(link => {
+    link.addEventListener('click', () => {
+      if (!link.classList.contains('toggle-dropdown')) {
+        if (document.querySelector('.mobile-nav-active')) {
+          mobileNavToggle();
+        }
       }
     });
-
   });
 
-  /**
-   * Toggle mobile nav dropdowns
-   */
-  document.querySelectorAll('.navmenu .toggle-dropdown').forEach(navmenu => {
-    navmenu.addEventListener('click', function(e) {
-      e.preventDefault();
-      this.parentNode.classList.toggle('active');
-      this.parentNode.nextElementSibling.classList.toggle('dropdown-active');
-      e.stopImmediatePropagation();
-    });
-  });
+  // Toggle dropdown individual di mobile
+document.querySelectorAll('.navmenu .toggle-dropdown').forEach(toggle => {
+  toggle.addEventListener('click', function (e) {
+    e.preventDefault();
+    e.stopPropagation();
 
-  /**
-   * Preloader
-   */
+    const parentLi = this.closest('li');
+    const submenu = parentLi.querySelector('ul');
+
+    // Tutup dropdown lain dalam level yang sama
+    const siblings = parentLi.parentElement.querySelectorAll(':scope > li');
+siblings.forEach(sib => {
+  if (sib !== parentLi) {
+    sib.classList.remove('active'); // <- tambahkan baris ini
+    const sibDropdown = sib.querySelector('ul');
+    if (sibDropdown) {
+      sibDropdown.classList.remove('dropdown-active');
+    }
+  }
+});
+
+    // Toggle dropdown ini
+    parentLi.classList.toggle('active');
+    if (submenu) {
+      submenu.classList.toggle('dropdown-active');
+    }
+  });
+});
+
+
+
+
+  // Preloader
   const preloader = document.querySelector('#preloader');
   if (preloader) {
     window.addEventListener('load', () => {
@@ -68,9 +76,7 @@
     });
   }
 
-  /**
-   * Scroll top button
-   */
+  // Scroll to top
   let scrollTop = document.querySelector('.scroll-top');
 
   function toggleScrollTop() {
@@ -78,20 +84,16 @@
       window.scrollY > 100 ? scrollTop.classList.add('active') : scrollTop.classList.remove('active');
     }
   }
+
   scrollTop.addEventListener('click', (e) => {
     e.preventDefault();
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
   window.addEventListener('load', toggleScrollTop);
   document.addEventListener('scroll', toggleScrollTop);
 
-  /**
-   * Animation on scroll function and init
-   */
+  // Inisialisasi AOS (Animation on Scroll)
   function aosInit() {
     AOS.init({
       duration: 600,
@@ -100,30 +102,23 @@
       mirror: false
     });
   }
+
   window.addEventListener('load', aosInit);
 
-  /**
-   * Initiate glightbox
-   */
-  const glightbox = GLightbox({
-    selector: '.glightbox'
-  });
+  // Inisialisasi GLightbox
+  const glightbox = GLightbox({ selector: '.glightbox' });
 
-  /**
-   * Initiate Pure Counter
-   */
+  // Inisialisasi PureCounter
   new PureCounter();
 
-  /**
-   * Init isotope layout and filters
-   */
-  document.querySelectorAll('.isotope-layout').forEach(function(isotopeItem) {
+  // Inisialisasi Isotope Layout
+  document.querySelectorAll('.isotope-layout').forEach(function (isotopeItem) {
     let layout = isotopeItem.getAttribute('data-layout') ?? 'masonry';
     let filter = isotopeItem.getAttribute('data-default-filter') ?? '*';
     let sort = isotopeItem.getAttribute('data-sort') ?? 'original-order';
 
     let initIsotope;
-    imagesLoaded(isotopeItem.querySelector('.isotope-container'), function() {
+    imagesLoaded(isotopeItem.querySelector('.isotope-container'), function () {
       initIsotope = new Isotope(isotopeItem.querySelector('.isotope-container'), {
         itemSelector: '.isotope-item',
         layoutMode: layout,
@@ -132,29 +127,22 @@
       });
     });
 
-    isotopeItem.querySelectorAll('.isotope-filters li').forEach(function(filters) {
-      filters.addEventListener('click', function() {
+    isotopeItem.querySelectorAll('.isotope-filters li').forEach(function (filters) {
+      filters.addEventListener('click', function () {
         isotopeItem.querySelector('.isotope-filters .filter-active').classList.remove('filter-active');
         this.classList.add('filter-active');
-        initIsotope.arrange({
-          filter: this.getAttribute('data-filter')
-        });
+        initIsotope.arrange({ filter: this.getAttribute('data-filter') });
         if (typeof aosInit === 'function') {
           aosInit();
         }
       }, false);
     });
-
   });
 
-  /**
-   * Init swiper sliders
-   */
+  // Inisialisasi Swiper
   function initSwiper() {
-    document.querySelectorAll(".init-swiper").forEach(function(swiperElement) {
-      let config = JSON.parse(
-        swiperElement.querySelector(".swiper-config").innerHTML.trim()
-      );
+    document.querySelectorAll(".init-swiper").forEach(function (swiperElement) {
+      let config = JSON.parse(swiperElement.querySelector(".swiper-config").innerHTML.trim());
 
       if (swiperElement.classList.contains("swiper-tab")) {
         initSwiperWithCustomPagination(swiperElement, config);
@@ -166,10 +154,8 @@
 
   window.addEventListener("load", initSwiper);
 
-  /**
-   * Correct scrolling position upon page load for URLs containing hash links.
-   */
-  window.addEventListener('load', function(e) {
+  // Scroll ke elemen hash saat load
+  window.addEventListener('load', function (e) {
     if (window.location.hash) {
       if (document.querySelector(window.location.hash)) {
         setTimeout(() => {
@@ -184,9 +170,7 @@
     }
   });
 
-  /**
-   * Navmenu Scrollspy
-   */
+  // Scrollspy menu aktif
   let navmenulinks = document.querySelectorAll('.navmenu a');
 
   function navmenuScrollspy() {
@@ -201,59 +185,14 @@
       } else {
         navmenulink.classList.remove('active');
       }
-    })
+    });
   }
+
   window.addEventListener('load', navmenuScrollspy);
   document.addEventListener('scroll', navmenuScrollspy);
 
+
+
+  
+
 })();
-
-
-
-// bagian galeri kotak Layak anak
-// let currentIndex = 0;
-
-// document.addEventListener("DOMContentLoaded", function () {
-//     // Event listener untuk klik gambar atau overlay
-//     document.addEventListener("click", function (event) {
-//         if (event.target.classList.contains("overlay") || event.target.classList.contains("gallery-image")) {
-//             const imgSrc = event.target.getAttribute("data-img-src");
-//             currentIndex = event.target.getAttribute("data-img-index");
-//             const description = event.target.getAttribute("data-img-description");
-
-//             // Update modal dengan gambar dan deskripsi
-//             document.getElementById("modalImage").setAttribute("src", imgSrc);
-//             document.getElementById("imageDescription").textContent = description;
-//             updateImageCounter();
-//         }
-//     });
-
-//     // Navigasi ke gambar sebelumnya
-//     document.getElementById("prevBtn").addEventListener("click", function () {
-//         if (currentIndex > 0) {
-//             currentIndex--;
-//             const img = document.querySelector(`[data-img-index="${currentIndex}"]`);
-//             document.getElementById("modalImage").setAttribute("src", img.getAttribute("data-img-src"));
-//             document.getElementById("imageDescription").textContent = img.getAttribute("data-img-description");
-//             updateImageCounter();
-//         }
-//     });
-
-//     // Navigasi ke gambar berikutnya
-//     document.getElementById("nextBtn").addEventListener("click", function () {
-//         const nextIndex = parseInt(currentIndex) + 1;
-//         const img = document.querySelector(`[data-img-index="${nextIndex}"]`);
-//         if (img) {
-//             currentIndex = nextIndex;
-//             document.getElementById("modalImage").setAttribute("src", img.getAttribute("data-img-src"));
-//             document.getElementById("imageDescription").textContent = img.getAttribute("data-img-description");
-//             updateImageCounter();
-//         }
-//     });
-
-//     // Update counter gambar di modal
-//     function updateImageCounter() {
-//         const totalImages = document.querySelectorAll(".gallery-image").length;
-//         document.getElementById("imageCounter").textContent = `Foto ${parseInt(currentIndex) + 1} dari ${totalImages}`;
-//     }
-// });

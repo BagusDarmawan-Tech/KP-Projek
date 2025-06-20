@@ -34,7 +34,7 @@
                 <table class="table table-hover table-bordered align-middle text-center" id="myTable">
                     <thead class="table-primary">        
                         <tr>
-                            <th class="text-center" >No</th>
+                            <th class="text-center">No</th>
                             <th class="text-center">Gambar</th>
                             <th class="text-center">Nama</th>
                             <th class="text-center">Keterangan</th>

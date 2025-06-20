@@ -5,6 +5,14 @@
 <link href="{{ asset('assets/css/tabel.css') }}" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+<style>
+    .text-wrap {
+        word-wrap: break-word;
+        white-space: normal;
+    }
+</style>
+
+
 <div class="container mt-5">
     @if ($errors->any())
     @foreach ($errors->all() as $error)
@@ -35,7 +43,7 @@
                             <th>No</th>
                             <th>Gambar</th>
                             <th>Nama</th>
-                            <th>Keterangan</th>
+                            <!-- <th>Keterangan</th> -->
                             <th>Dibuat Oleh</th>
                             <th>Status</th>
                             <th>Actions</th>
@@ -46,8 +54,8 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td><img src="{{ asset($kegiatan->gambar) }}" alt="Gambar" width="50"></td>
-                            <td>{{ $kegiatan->nama }}</td>
-                            <td>{{ $kegiatan->deskripsi }}</td>
+                            <td>{{ Str::limit($kegiatan->nama, 10, '...') }}</td>                            
+                            <!-- <td>{{ $kegiatan->deskripsi }}</td> -->
                             <td>{{ $kegiatan->user ? $kegiatan->user->name : 'Tidak ada pengguna' }}</td>
                             <td>
                                 @if($kegiatan->is_active == 0)
@@ -75,7 +83,20 @@
                                         data-nama ="{{ $kegiatan->nama }}"
                                         data-bs-toggle="modal" 
                                         data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i>
-                                    </button>                            
+                                    </button>    
+                                    
+                                    <!-- Lihat detail -->
+                                <a href="#" 
+                                class="lihat-keterangan btn btn-sm rounded-circle edit-verifikasi" style="background-color: #FFC107; width: 36px; height: 36px;" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#keteranganModal"
+                                data-nama="{{ $kegiatan->nama}}"
+                                data-caption="{{ $kegiatan->caption }}" 
+                                data-deskripsi="{{ $kegiatan->deskripsi }}"
+                                data-gambar="{{ asset($kegiatan->gambar) }}">
+                                <i class="bi bi-list-task text-white fs-6"></i>
+                                </a>
+
                                 </td>
                         </tr>
                         @endforeach
@@ -218,6 +239,45 @@
     </div>
 </div>
 
+
+<!-- bagian detail -->
+
+<div class="modal fade" id="keteranganModal" tabindex="-1" aria-labelledby="keteranganModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Header Modal -->
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold w-100 text-center" id="keteranganModalLabel">Detail Kegiatan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!-- Body Modal -->
+            <div class="modal-body">
+                <div class="row g-4 align-items-center">
+                    <!-- Gambar -->
+                    <div class="col-md-5">
+                        <img id="modalGambar" src="" alt="Gambar Kegiatan" class="img-fluid rounded" style="max-height: 300px; object-fit: contain;">
+                    </div>
+
+                    <!-- Nama, Caption, dan Deskripsi -->
+                    <div class="col-md-7">
+                        <h6 id="modalNama" class="mb-3 text-wrap" style="color: #333;"></h6>
+                        <p id="modalCaption" class="text-wrap mb-2" style="text-align: justify; font-size: 0.95rem; color: black;"></p>
+                        <p id="modalDeskripsi" class="text-wrap" style="text-align: justify; font-size: 0.95rem; color: black;"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Modal -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <script> 
     document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll(".edit-arekSuroboyo").forEach(button => {
@@ -272,5 +332,29 @@
         });
     });
 </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const modal = document.getElementById('keteranganModal');
+    modal.addEventListener('show.bs.modal', function (event) {
+        // Button that triggered the modal
+        const button = event.relatedTarget;
+
+        // Extract data attributes
+        const nama = button.getAttribute('data-nama');
+        const caption = button.getAttribute('data-caption');
+        const deskripsi = button.getAttribute('data-deskripsi');
+        const gambar = button.getAttribute('data-gambar');
+
+        // Update modal content
+        modal.querySelector('#modalNama').innerHTML = `<strong>Nama :</strong><br>${nama}`;
+        modal.querySelector('#modalCaption').innerHTML = `<strong>Caption:</strong><br>${caption}`;
+        modal.querySelector('#modalDeskripsi').innerHTML = `<strong>Deskripsi :</strong><br>${deskripsi}`;
+        modal.querySelector('#modalGambar').src = gambar;
+    });
+});
+
+</script>
+
 
 @endsection

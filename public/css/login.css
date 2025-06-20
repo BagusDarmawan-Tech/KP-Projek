@@ -3,10 +3,10 @@
     background: #fccb90;
     
     /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+    background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #4CBBB9, #367591);
     
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+    background: linear-gradient(to right, #367591, #77D8D8, #4CBBB9, #367591);
     }
     
     @media (min-width: 768px) {
@@ -20,3 +20,19 @@
     border-bottom-right-radius: .3rem;
     }
     }
+
+
+    .wave {
+          position: fixed;
+          width: 100%;
+          height: auto;
+      }
+
+    .top-wave {
+              top: 0;
+              transform: scale(-1,-1);
+      }
+
+      .bottom-wave {
+          bottom: 0;
+      }
