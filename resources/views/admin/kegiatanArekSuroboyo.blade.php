@@ -97,11 +97,11 @@
                     @csrf 
                     <div class="mb-3">
                         <label for="judul" class="form-label">Judul</label>
-                        <input name="judul" type="text" class="form-control" id="judul" value="{{ old('judul') }}"    >
+                        <input name="judul" placeholder="Masukan Judul" type="text" class="form-control" id="judul" value="{{ old('judul') }}"    >
                     </div>
                     <div class="mb-3">
                         <label for="tag" class="form-label">Tag</label>
-                        <input type="text" name="tag" class="form-control" id="tag" value="{{ old('tag') }}"    >
+                        <input type="text" placeholder="Masukan Tag" name="tag" class="form-control" id="tag" value="{{ old('tag') }}"    >
                     </div>
                     <div class="mb-3">
                         <label for="gambar" class="form-label">Gambar</label>
@@ -109,7 +109,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="konten" class="form-label">Konten</label>
-                        <textarea class="form-control" name="konten" id="konten" rows="3">{{ old('konten') }}</textarea>
+                        <textarea class="form-control" placeholder="Masukan Konten" name="konten" id="konten" rows="3">{{ old('konten') }}</textarea>
                     </div>                    
                     <div class="mb-3">
                         <label class="form-label">Status</label>
@@ -187,7 +187,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="deleteMenuModalLabel">Hapus Menu</h5>
+                <h5 class="modal-title" id="deleteMenuModalLabel">Hapus Kegiatan</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form id="deleteForm" method="POST">
@@ -195,7 +195,12 @@
                 @method('DELETE')
                 <div class="modal-body">
                     <input type="hidden" id="deleteId" name="id">
-                    <p>Apakah Anda yakin ingin menghapus record<br> <strong id="deleteNama"></strong>?</p>
+                    <p>
+                    Anda akan menghapus kegiatan <strong id="deleteNama"></strong> dari sistem.<br>
+                    Tindakan ini bersifat permanen.<br><br>
+                    <span class="text-danger">Apakah Anda yakin ingin melanjutkan?</span>
+                    </p>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>

@@ -84,14 +84,16 @@
 
                             <!-- Tombol  detail -->
                             <a href="#" 
-                            class="lihat-keterangan btn btn-sm rounded-circle edit-verifikasi" style="background-color: #FFC107; width: 36px; height: 36px;" 
-                                data-bs-toggle="modal" 
-                                data-bs-target="#keteranganModal"
-                                data-nama="{{ $kegiatan->nama }}"
-                                data-keterangan="{{ $kegiatan->keterangan }}"
-                                data-gambar="{{asset($kegiatan->gambar) }}">
-                               galer
+                            class="lihat-keterangan btn btn-sm rounded-circle edit-verifikasi" 
+                            style="background-color: #FFC107; width: 30px; height: 30px;" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#keteranganModal"
+                            data-nama="{{ $kegiatan->nama }}"
+                            data-keterangan="{{ $kegiatan->keterangan }}"
+                            data-gambar="{{ asset($kegiatan->gambar) }}">
+                            <i class="bi bi-eye"></i>
                             </a>
+
                             </td>                          
                         </tr>
                         @endforeach
@@ -124,7 +126,7 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="namaKegiatan" class="form-label fw-semibold">Nama</label>
+                            <label for="namaKegiatan" class="form-label fw-semibold">Nama Kegiatan</label>
                             <input type="text" name="nama" class="form-control" id="namaKegiatan" placeholder="Masukkan nama kegiatan" value="{{ old('nama') }}" >
                         </div>
                         <div class="mb-3">

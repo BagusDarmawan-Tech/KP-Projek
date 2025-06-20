@@ -97,8 +97,8 @@
                 <form method="POST" id="myForm" action="{{ route('createKategoriArtikel') }}">
                     @csrf    
                     <div class="mb-3">
-                        <label for="nama" class="form-label">Nama</label>
-                        <input type="text" class="form-control" id="nama" name="nama" value="{{ old('nama') }}" >
+                        <label for="nama" class="form-label">Nama Kategori</label>
+                        <input type="text" class="form-control" id="nama" placeholder="Masukan Nama Kategori" name="nama" value="{{ old('nama') }}" >
                     </div>
             
                     <div class="mb-3">

@@ -25,7 +25,11 @@ class landingpagescontroller extends Controller
             'maps',
         ])->pluck('detail', 'nama');
         
-        $galeri = ForumAnakSurabaya::where('is_active', true)->take(6)->get();
+        $galeri = ForumAnakSurabaya::where('is_active', true)
+            ->orderBy('created_at', 'desc')
+            ->take(10)
+            ->get();
+
 
         $kategoriArtikel = KategoriArtikel::where('is_active', true)
         ->take(5) 

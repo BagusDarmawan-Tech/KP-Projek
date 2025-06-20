@@ -117,16 +117,16 @@
                 <form method="POST" id="myForm" action="{{ route('createSlider') }}" enctype="multipart/form-data">
                     @csrf 
                     <div class="mb-3">
-                        <label class="form-label">Nama</label>
-                        <input type="text" class="form-control" name="nama" value="{{ old('nama') }}" >
+                        <label class="form-label">Nama Menu Slider</label>
+                        <input type="text" placeholder="Masukan Nama Menu Slider" class="form-control" name="nama" value="{{ old('nama') }}" >
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Caption</label>
-                        <input type="text" class="form-control" name="caption" value="{{ old('caption') }}" >
+                        <input type="text" placeholder="Masukan Nama Caption" class="form-control" name="caption" value="{{ old('caption') }}" >
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Deskripsi</label>
-                        <textarea class="form-control" name="deskripsi" >{{ old('deskripsi') }}</textarea>
+                        <textarea class="form-control" placeholder="Masukan Deskripsi" name="deskripsi" >{{ old('deskripsi') }}</textarea>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Gambar</label>
@@ -214,7 +214,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="deleteMenuModalLabel">Hapus Menu</h5>
+                <h5 class="modal-title" id="deleteMenuModalLabel">Hapus Slider</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form id="deleteForm" method="POST">
@@ -222,8 +222,11 @@
                 @method('DELETE')
                 <div class="modal-body">
                     <input type="hidden" id="deleteId" name="id">
-                    <p>Apakah Anda yakin ingin menghapus Slider<br> <strong id="deleteNama"></strong>?</p>
-                </div>
+                    <p>
+                    Anda akan menghapus slider <strong id="deleteNama"></strong> dari sistem.<br>
+                    Tindakan ini bersifat permanen.<br><br>
+                    <span class="text-danger">Apakah Anda yakin ingin melanjutkan?</span>
+                    </p>                </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
                     <button type="submit" class="btn btn-danger">Hapus</button>
