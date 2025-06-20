@@ -4,6 +4,13 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- <script src="{{ asset('assets/js/hapus.js') }}"></script> -->
 
+<style>
+    .text-wrap {
+        word-wrap: break-word;
+        white-space: normal;
+    }
+</style>
+
 <div class="container mt-5">
     @if ($errors->any())
     @foreach ($errors->all() as $error)
@@ -36,7 +43,7 @@
                             <th class="text-center">No</th>
                             <th class="text-center">Gambar</th>
                             <th class="text-center">Judul</th>
-                            <th class="text-center">Tag</th>
+                            <!-- <th class="text-center">Tag</th> -->
                             <th class="text-center">Dibuat Oleh</th>
                             <th class="text-center">Status</th>
                             <th class="text-center">Actions</th>
@@ -45,10 +52,10 @@
                     <tbody>
                         @foreach($kegiatans as $index => $kegiatan)
                         <tr class="text-start">
-                            <td >{{ $loop->iteration }}</td>
+                            <td class="text-center">{{ $loop->iteration }}</td>
                             <td><img src="{{ asset($kegiatan->gambar) }}" alt="Slider Image" width="80"></td>
-                            <td>{{ $kegiatan->judul }}</td>
-                            <td>{{ $kegiatan->tag }}</td>
+                            <td>{{ Str::limit($kegiatan->judul, 20, '...') }}</td>
+                            <!-- <td>{{ Str::limit($kegiatan->tag, 20, '...')}}</td> -->
                             <td>{{ $kegiatan->user ? $kegiatan->user->name : 'Tidak ada pengguna' }}</td>
                             <td>
                                 @if($kegiatan->is_active == 0)
@@ -73,7 +80,18 @@
                                     data-nama ="{{ $kegiatan->judul }}"
                                     data-bs-toggle="modal" 
                                     data-bs-target="#deleteMenuModal"><i class="bi bi-trash"></i>
-                                </button>                            
+                                </button>  
+                                
+                                  <a href="#" 
+                                class="lihat-keterangan btn btn-sm rounded-circle edit-verifikasi" style="background-color: #FFC107; width: 36px; height: 36px;" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#keteranganModal"
+                                data-judul="{{ $kegiatan->judul }}" 
+                                data-konten="{{ $kegiatan->konten }}" 
+                                data-tag="{{ $kegiatan->tag }}"
+                                data-gambar="{{ asset($kegiatan->gambar) }}">
+                                <i class="bi bi-list-task text-white fs-6"></i>
+                            </a>
                             </td>
                         </tr>
                         @endforeach
@@ -212,6 +230,43 @@
 </div>
 
 
+<!-- bagian detail -->
+
+<div class="modal fade" id="keteranganModal" tabindex="-1" aria-labelledby="keteranganModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Header Modal -->
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold w-100 text-center" id="keteranganModalLabel">Detail Kegiatan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!-- Body Modal -->
+            <div class="modal-body">
+                <div class="row g-4 align-items-center">
+                    <!-- Gambar -->
+                    <div class="col-md-5">
+                        <img id="modalGambar" src="" alt="Gambar Kegiatan" class="img-fluid rounded" style="max-height: 300px; object-fit: contain;">
+                    </div>
+
+                    <!-- Judul, Konten, dan Tag -->
+                    <div class="col-md-7">
+                        <h6 id="modalJudul" class="fw-bold mb-3 text-wrap" style="color: #333;"></h6>
+                        <p id="modalKonten" class="text-wrap mb-2" style="text-align: justify; font-size: 0.95rem; color: black;"></p>
+                        <p id="modalTag" class="text-wrap" style="font-size: 0.9rem; color: black;"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Modal -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll(".edit-arekSuroboyo").forEach(button => {
@@ -265,5 +320,31 @@
         });
     });
 </script>
+
+
+<!-- bagian detail  -->
+<script>
+        document.addEventListener('DOMContentLoaded', function () {
+        const modal = document.getElementById('keteranganModal');
+        modal.addEventListener('show.bs.modal', function (event) {
+            // Button that triggered the modal
+            const button = event.relatedTarget;
+
+            // Extract data attributes
+            const judul = button.getAttribute('data-judul');
+            const konten = button.getAttribute('data-konten');
+            const tag = button.getAttribute('data-tag');
+            const gambar = button.getAttribute('data-gambar');
+
+            // Update modal content
+            modal.querySelector('#modalJudul').innerHTML = `<strong>Judul :</strong><br>${judul}`;
+            modal.querySelector('#modalKonten').innerHTML = `<strong>Konten :</strong><br>${konten}`;
+            modal.querySelector('#modalTag')   .textContent = `Tag: ${tag}`;
+            modal.querySelector('#modalGambar').src = gambar;
+        });
+    });
+
+</script>
+
 
 @endsection

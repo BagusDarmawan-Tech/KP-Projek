@@ -46,7 +46,7 @@
                       <tr>
                           <td style="text-align: center;">{{ $loop->iteration }}</td>
 
-                          <td>{{ $kegiatan->nama }}</td>
+                          <td style="text-align: left;">{{ Str::limit($kegiatan->nama, 40, '...') }}</td>
                 
                             <td> {{ $kegiatan->user ? $kegiatan->user->name : 'Tidak ada pengguna' }}</td>                            <td>
                               @if($kegiatan->is_active == 0)
@@ -77,6 +77,7 @@
                                 </button> 
                             @endif  
                             
+                            <!-- detail -->
                             <a href="#" 
                                 class="lihat-keterangan btn btn-sm rounded-circle edit-verifikasi" style="background-color: #FFC107; width: 36px; height: 36px;" 
                                 data-bs-toggle="modal" 

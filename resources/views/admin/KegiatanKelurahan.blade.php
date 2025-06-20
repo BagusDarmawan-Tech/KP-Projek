@@ -34,8 +34,9 @@
                     <thead class="table-primary">
                         <tr>
                             <th class="text-center" width="10%">No</th>
+                            <th class="text-center" width="20%">Gambar</th>
                             <th class="text-center" width="20%">Nama</th>
-                            <th class="text-center" width="17%">Kelurahan</th>
+                            <!-- <th class="text-center" width="17%">Kelurahan</th> -->
                             <th class="text-center" width="17%">Dibuat Oleh</th>
                             <th class="text-center" width="12%">Status</th>
                             <th class="text-center" width="18%" >Actions</th>
@@ -45,9 +46,9 @@
                         @foreach($kegiatans as $index => $kegiatan)
                         <tr>
                             <td style="text-align: center;">{{ $loop->iteration }}</td>
-                            <!-- <td><img src="{{ asset($kegiatan->gambar) }}" alt="Slider Image" width="80"></td> -->
+                            <td><img src="{{ asset($kegiatan->gambar) }}" alt="Slider Image" width="80"></td>
                             <td class="text-start">{{ $kegiatan->nama }}</td>
-                            <td class="text-start">{{ $kegiatan->kelurahan ? $kegiatan->kelurahan->nama : 'Tidak ada Nama' }}</td>
+                            <!-- <td class="text-start">{{ $kegiatan->kelurahan ? $kegiatan->kelurahan->nama : 'Tidak ada Nama' }}</td> -->
                             <td>{{ $kegiatan->user ? $kegiatan->user->name : 'Tidak ada pengguna' }}</td>
                             <td>
                                 @if($kegiatan->is_active == 0)
@@ -92,6 +93,12 @@
                             data-keterangan="{{ $kegiatan->keterangan }}"
                             data-gambar="{{ asset($kegiatan->gambar) }}">
                             <i class="bi bi-eye"></i>
+=======
+                                data-bs-toggle="modal" 
+                                data-bs-target="#keteranganModal"
+                                data-nama="{{ $kegiatan->nama }}"
+                                data-keterangan="{{ $kegiatan->keterangan }}"
+                                data-gambar="{{asset($kegiatan->gambar) }}">
                             </a>
 
                             </td>                          

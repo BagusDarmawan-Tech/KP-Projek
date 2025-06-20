@@ -31,11 +31,11 @@
 /* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
 :root {
   --nav-color: white;  /* The default color of the main navmenu links */
-  --nav-hover-color: white; /* Applied to main navmenu links when they are hovered over or active */
+  /* --nav-hover-color: white; Applied to main navmenu links when they are hovered over or active */
   --nav-mobile-background-color: #ffffff; /* Used as the background color for mobile navigation menu */
   --nav-dropdown-background-color: #ffffff; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
-  --nav-dropdown-color: #5f687b; /* Used for navigation links of the dropdown items in the navigation menu. */
-  --nav-dropdown-hover-color: rgb(233, 36,103); /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
+  --nav-dropdown-color: #367591; /* Used for navigation links of the dropdown items in the navigation menu. */
+  --nav-dropdown-hover-color: rgb(33, 184, 176); /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
 }
 
 /* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
@@ -420,13 +420,12 @@ h6 {
 /* Navmenu - Mobile */
 @media (max-width: 1200px) {
   .mobile-nav-toggle {
-    /* display: none;  */
-    color: var(--nav-color);
+    display: block;
+    color: #fff;
     font-size: 28px;
-    line-height: 0;
-    margin-right: 10px;
     cursor: pointer;
-    transition: color 0.3s;
+    position: relative;
+    z-index: 9999;
   }
 
   .navmenu {
@@ -437,7 +436,7 @@ h6 {
   .navmenu ul {
     display: none;
     list-style: none;
-    position: absolute;
+    position: static;
     inset: 60px 20px 20px 20px;
     padding: 10px 0;
     margin: 0;
@@ -506,17 +505,42 @@ h6 {
     background-color: var(--nav-dropdown-background-color);
     border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
     box-shadow: none;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.3s ease-in-out;
   }
 
   .navmenu .dropdown ul ul {
     background-color: rgba(33, 37, 41, 0.1);
   }
 
-  .navmenu .dropdown>.dropdown-active {
+  .navmenu .dropdown > .dropdown-active,
+  .navmenu .dropdown ul.dropdown-active {
     display: block;
-    background-color: rgba(33, 37, 41, 0.03);
+    position: static;
+    padding: 10px 0;
+    background-color: var(--nav-dropdown-background-color);
+    transition: all 0.3s ease-in-out;
   }
+
+  /* .navmenu .dropdown > a.active {
+    color: #3498db;
+  } */
+
+  .toggle-dropdown.active i,
+.toggle-submenu.active i {
+  transform: rotate(180deg);
+  transition: transform 0.3s ease;
+}
+
+  .navmenu .dropdown > a i {
+  background-color: white;
+  color: var(--accent-color); /* warna ikon, kalau mau pakai hijau bisa pakai langsung #1CC5B7 */
+}
+
+/* Ikon toggle dropdown saat aktif (menu terbuka) */
+.navmenu .dropdown > a.active i {
+  background-color: var(--accent-color);
+  color: var(--contrast-color); /* putih misalnya */
+}
 
   .mobile-nav-active {
     overflow: hidden;
@@ -528,19 +552,18 @@ h6 {
     font-size: 32px;
     top: 15px;
     right: 15px;
-    margin-right: 0;
     z-index: 9999;
   }
 
   .mobile-nav-active .navmenu {
     position: fixed;
-    overflow: hidden;
     inset: 0;
+    overflow: hidden;
     background: rgba(33, 37, 41, 0.8);
     transition: 0.3s;
   }
 
-  .mobile-nav-active .navmenu>ul {
+  .mobile-nav-active .navmenu > ul {
     display: block;
   }
 }
@@ -1270,84 +1293,55 @@ section,
 }
 
 @media (max-width: 575px) {
-  .portfolio .portfolio-filters li {
-    font-size: 14px;
-    margin: 0 5px;
-  }
+.portfolio-item {
+  max-width: 350px;
+  margin: 0 auto;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  transition: transform 0.3s ease-in-out;
 }
 
-.portfolio .portfolio-item {
-  position: relative;
-
-
-
+.portfolio-item:hover {
+  transform: scale(1.05);
 }
 
-.portfolio .card {
-font-family: 'Nunito', sans-serif;  }
+.portfolio-item .image-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
 
-
-.portfolio .portfolio-item .portfolio-info {
-  background-color: color-mix(in srgb, var(--surface-color), transparent 10%);
-  opacity: 0;
-  position: absolute;
-  left: 30px;
-  right: 30px;
-  bottom: 0;
-  z-index: 3;
-  transition: all ease-in-out 0.3s;
+.portfolio-info {
   padding: 15px;
-  
+  background-color: #fff;
 }
 
-.portfolio .portfolio-item .portfolio-info h4 {
+.portfolio-info h4 {
   font-size: 18px;
-  font-weight: 600;
-  padding-right: 50px;
-  
+  font-weight: bold;
+  color: #333;
+  margin: 0;
 }
 
-.portfolio .portfolio-item .portfolio-info p {
-  color: color-mix(in srgb, var(--default-color), transparent 30%);
-  font-size: 14px;
-  margin-bottom: 0;
-  padding-right: 50px;
+.preview-link {
+  margin-top: 10px;
+  text-decoration: none;
+  color: #fff;
+  background-color: #007bff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
 }
 
-.portfolio .portfolio-item .portfolio-info .preview-link,
-.portfolio .portfolio-item .portfolio-info .details-link {
-  position: absolute;
-  right: 50px;
-  font-size: 24px;
-  top: calc(50% - 14px);
-  color: color-mix(in srgb, var(--default-color), transparent 30%);
-  transition: 0.3s;
-  line-height: 0;
-  
-  
+.preview-link:hover {
+  background-color: #0056b3;
 }
 
-.portfolio .portfolio-item .portfolio-info .preview-link:hover,
-.portfolio .portfolio-item .portfolio-info .details-link:hover {
-  color: var(--accent-color);
-  
-  
-}
-
-.portfolio .portfolio-item .portfolio-info .details-link {
-  right: 14px;
-  font-size: 28px;
-  
-  
-}
-
-.portfolio .portfolio-item:hover .portfolio-info {
-  opacity: 1;
-  bottom: 20px;
-}
 
 /*--------------------------------------------------------------
-# Testimonials Section (BERITA DAN ARTIKEL)
+# Testimonials 
 --------------------------------------------------------------*/
 .testimonials .testimonials-carousel,
 .testimonials .testimonials-slider {
@@ -1618,6 +1612,7 @@ font-family: 'Nunito', sans-serif;  }
 .team .member .social i {
   font-size: 16px;
   margin: 0 2px;
+}
 }
 
 /*--------------------------------------------------------------
@@ -2041,7 +2036,6 @@ font-family: 'Nunito', sans-serif;  }
 }
 
 /* Title Modal */
-
 .modal-title-center {
   flex: 1;
   margin: 0;
@@ -2180,3 +2174,4 @@ font-family: 'Nunito', sans-serif;  }
   word-break: break-word;
   font-size: 15px ;
 }
+

@@ -48,7 +48,7 @@
                             <td style="text-align: center;">{{ $loop->iteration }}</td>
                             <td><img src="{{ asset($artikel->gambar) }}" alt="Slider Image" width="80"></td>
                             <td> {{ $artikel->kategori ? $artikel->kategori->nama : 'Tidak ada kategori' }}</td>
-                            <td>{{ $artikel->judul }}</td>
+                            <td style="text-align: left;">{{ $artikel->judul }}</td>
                             <td>{{ $artikel->user ? $artikel->user->name : 'Tidak ada pengguna' }}</td>
                             <td>
                                 @if($artikel->is_active == 0)
