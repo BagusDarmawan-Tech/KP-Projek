@@ -12,7 +12,7 @@
             <div class="card text-center shadow p-4">
                 <div class="card-body">
                     <img src="{{ asset('kids-rm.png') }}" alt="Dashboard Image" class="img-fluid mb-3" width="350">
-                    <h4 class="fw-bold text-danger">Selamat Datang Admin</h4>
+                    <h4 class="fw-bold text-danger">Selamat Datang {{ Auth::user()->roles->first()->name ?? 'Sahabat' }}</h4>
                     <p class="text-dark">Sistem Kota Layak Anak Surabaya</p>
                 </div>
             </div>
