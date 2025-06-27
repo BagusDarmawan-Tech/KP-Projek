@@ -50,14 +50,15 @@
                             <label for="floatingInputDisabled" :value="__('Email')" class=" ">Email</label>
                             <input id="email" class="form-control border border-dark" type="email" placeholder="Masukan Email" name="email" :value="old('email')" required autofocus autocomplete="username">
                         </div>
-      
-                        <div class="input-group mb-4">
-                          <input id="password" type="password" class="form-control border border-dark" name="password" placeholder="Masukan Password" required>
-                          <button type="button" class="btn btn-outline-secondary" onclick="togglePassword()" tabindex="-1">
-                            <i id="toggleIcon" class="fa-solid fa-eye inline-block text-gray-800 text-xl"></i>
-                          </button>
+                        <div class="mb-4">
+                          <label for="password" class="form-label">Password</label>
+                          <div class="input-group">
+                            <input id="password" type="password" class="form-control border border-dark" name="password" placeholder="Masukkan Password" required>
+                            <button type="button" class="btn btn-outline-secondary" onclick="togglePassword()" tabindex="-1">
+                              <i id="toggleIcon" class="fa-solid fa-eye text-gray-800 text-xl"></i>
+                            </button>
+                          </div>
                         </div>
-
                         <script>
                           function togglePassword() {
                             const input = document.getElementById('password');
