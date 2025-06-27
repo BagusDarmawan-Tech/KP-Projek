@@ -122,8 +122,8 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="nama" class="form-label">Nama</label>
-                        <input type="text" class="form-control" id="namaSubKegiatan" value="{{ old('nama') }}" name="nama" >
+                        <label for="nama" class="form-label">Nama Sub Kegiatan</label>
+                        <input type="text" placeholder="Masukan Nama Sub Kegiatan" class="form-control" id="namaSubKegiatan" value="{{ old('nama') }}" name="nama" >
                     </div>
                     <div class="mb-3">
                         <label for="dataDukung" class="form-label">Data Dukung</label>
@@ -131,7 +131,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="keterangan" class="form-label">Keterangan</label>
-                        <input type="text" value="{{ old('keterangan') }}" class="form-control" id="keterangan" name="keterangan">
+                        <textarea class="form-control" placeholder="Masukan Keterangan" id="keterangan" name="keterangan" rows="4">{{ old('keterangan') }}</textarea>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Status</label>

@@ -271,7 +271,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="deleteMenuModalLabel">Hapus Menu</h5>
+                <h5 class="modal-title" id="deleteMenuModalLabel">Hapus Artikel</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form id="deleteForm" method="POST">
@@ -279,7 +279,11 @@
                 @method('DELETE')
                 <div class="modal-body">
                     <input type="hidden" id="deleteId" name="id">
-                    <p>Apakah Anda yakin ingin menghapus Slider<br> <strong id="deleteNama"></strong>?</p>
+                    <p>
+                    Anda akan menghapus artikel <strong id="deleteNama"></strong> dari sistem.<br>
+                    Tindakan ini bersifat permanen.<br><br>
+                    <span class="text-danger">Apakah Anda yakin ingin melanjutkan?</span>
+                    </p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>

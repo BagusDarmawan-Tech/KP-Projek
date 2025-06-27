@@ -111,7 +111,7 @@
         <form method="POST" id="myForm" action="{{ route('createKegiatanMitraAnak') }}" enctype="multipart/form-data">
           @csrf
           <div class="mb-3">
-            <label for="namaKegiatan" class="form-label fw-semibold">Nama</label>
+            <label for="namaKegiatan" class="form-label fw-semibold">Nama Kegiatan</label>
             <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan nama kegiatan" value="{{ old('nama') }}"    >
           </div>
           <div class="mb-3">

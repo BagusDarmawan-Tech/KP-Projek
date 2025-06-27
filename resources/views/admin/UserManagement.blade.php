@@ -31,7 +31,7 @@
                 <div class="col-md-12 d-flex justify-content-end">
                     @if (auth()->user()->hasPermissionTo('user management-add'))
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#subKegiatanModal">
-                        Registrasi User
+                        Tambah Pengguna
                     </button>
                     @endif
                 </div>
@@ -81,7 +81,7 @@
                 @csrf    
                     <div class="mb-3">
                         <label class="form-label" for="name" :value="__('Name')">Nama</label>
-                        <input type="text" class="form-control"  id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" >
+                        <input type="text" placeholder="Steve" class="form-control"  id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" >
                         <x-input-error :messages="$errors->get('name')" class="text-danger" />
                     </div>
                     
@@ -101,27 +101,27 @@
 
                     <div class="mb-3">
                         <label class="form-label" for="email" :value="__('Email')">Email</label>
-                        <input type="email" class="form-control" name="email" :value="old('email')" >
+                        <input type="email" placeholder="example@gmail.com" class="form-control" name="email" :value="old('email')" >
                         <x-input-error :messages="$errors->get('email')" class="text-danger" />
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label" for="password" :value="__('Password')">Password</label>
-                        <input id="password" name="password" type="password" class="form-control"  autocomplete="new-password">
+                        <input id="password" placeholder="KataSandi@123" name="password" type="password" class="form-control"  autocomplete="new-password">
                         <x-input-error :messages="$errors->get('password')" class="text-danger" />
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label" for="password_confirmation" :value="__('Confirm Password')">Confirm Password</label>
-                        <input id="password_confirmation" class="form-control"
+                        <input id="password_confirmation" class="form-control" placeholder="KataSandi@123"
                         type="password"
                         name="password_confirmation"  autocomplete="new-password">
                         <x-input-error :messages="$errors->get('password_confirmation')" class="text-danger" />
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    <button type="submit" id="submitBtn" class="btn btn-primary">{{ __('Register') }}</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" id="submitBtn" class="btn btn-primary">{{ __('Tambah') }}</button>
                 </div>
                         </form>
         </div>

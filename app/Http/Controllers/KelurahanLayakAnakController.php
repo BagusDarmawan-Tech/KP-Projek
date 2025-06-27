@@ -30,7 +30,8 @@ class KelurahanLayakAnakController extends Controller
         }
         
 
-        $kelurahans = Kelurahan::all();
+        $kelurahans = Kelurahan::orderBy('nama', 'asc')->get();
+
         $surats = JenisSurat::all();
         return view('admin.dokumenKelurahan',compact('dokumens','kelurahans','surats'));
     }

@@ -156,7 +156,7 @@
                 <form method="POST" id="myForm" action="{{ route('createMitraCfci') }}" enctype="multipart/form-data">
                     @csrf 
                     <div class="mb-3">
-                        <label for="nama" class="form-label">Nama</label>
+                        <label for="nama" class="form-label">Nama Kegiatan</label>
                         <input type="text" class="form-control" placeholder="Masukkan Nama" id="nama" name="nama" value="{{ old('nama') }}" >
                     </div>
                     <div class="mb-3">

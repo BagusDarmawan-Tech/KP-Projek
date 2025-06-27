@@ -132,8 +132,8 @@
                             </div>                            
                         
                             <div class="mb-3">
-                                <label class="form-label">Nama</label>
-                                <input type="text" class="form-control" name="nama">
+                                <label class="form-label">Nama Dokumen</label>
+                                <input type="text" placeholder="Masukan Nama Dokumen" class="form-control" name="nama">
                             </div>
                             
                             <div class="mb-3">
@@ -142,7 +142,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Keterangan</label>
-                                <textarea class="form-control" name="keterangan"></textarea>
+                                <textarea class="form-control" placeholder="Masukan Keterangan" name="keterangan"></textarea>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Status</label>

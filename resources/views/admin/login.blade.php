@@ -5,6 +5,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
@@ -46,16 +48,35 @@
                         @csrf
                         <div data-mdb-input-init class="form-outline mb-4">
                             <label for="floatingInputDisabled" :value="__('Email')" class=" ">Email</label>
-                            <input id="email" class="form-control border border-dark" type="email" name="email" :value="old('email')" required autofocus autocomplete="username">
+                            <input id="email" class="form-control border border-dark" type="email" placeholder="Masukan Email" name="email" :value="old('email')" required autofocus autocomplete="username">
                         </div>
-      
-                        <div data-mdb-input-init class="form-outline mb-4">
-                            <labelfor="password" :value="__('Password')" class=" ">Password</labelfor=>
-                          <input id="password" class="form-control border border-dark"
-                          type="password"
-                          name="password"
-                          required autocomplete="current-password" />
+                        <div class="mb-4">
+                          <label for="password" class="form-label">Password</label>
+                          <div class="input-group">
+                            <input id="password" type="password" class="form-control border border-dark" name="password" placeholder="Masukkan Password" required>
+                            <button type="button" class="btn btn-outline-secondary" onclick="togglePassword()" tabindex="-1">
+                              <i id="toggleIcon" class="fa-solid fa-eye text-gray-800 text-xl"></i>
+                            </button>
+                          </div>
                         </div>
+                        <script>
+                          function togglePassword() {
+                            const input = document.getElementById('password');
+                            const icon = document.getElementById('toggleIcon');
+
+                            if (input.type === 'password') {
+                              input.type = 'text';
+                              icon.classList.remove('fa-eye');
+                              icon.classList.add('fa-eye-slash');
+                            } else {
+                              input.type = 'password';
+                              icon.classList.remove('fa-eye-slash');
+                              icon.classList.add('fa-eye');
+                            }
+                          }
+                        </script>
+
+
                         <x-input-error :messages="$errors->get('password')" class="mt-2" />
 
                         <div>

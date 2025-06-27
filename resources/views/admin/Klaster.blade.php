@@ -132,8 +132,8 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="kategoriNama" class="form-label">Nama</label>
-                        <input type="text" class="form-control"  id="nama" name="nama" value="{{ old('nama') }}" placeholder="Masukkan Nama">
+                        <label for="kategoriNama" class="form-label">Nama Klaster</label>
+                        <input type="text" class="form-control"  id="nama" name="nama" value="{{ old('nama') }}" placeholder="Masukkan Nama Klaster">
                     </div>
 
                     <div class="mb-3">
