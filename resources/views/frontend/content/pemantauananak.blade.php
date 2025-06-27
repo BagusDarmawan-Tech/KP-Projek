@@ -30,9 +30,9 @@
         @forelse($datas as $key => $data)
             <tr class="text-start">
                 <td class=" text-center col-no" data-label="No">{{ $key + 1 }}</td>
-                <td class=" text-center col-kategori" data-label="Kategori">{{ $data->namaUsulan }}</td>
-                <td class="col-nama" data-label="Nama">{{ $data->user ? $data->user->name : 'Tidak ada pengguna' }}</td>
-                <td class="col-keterangan" data-label="Keterangan">{{ $data->keterangan }}</td>
+                <td class=" text-center col-kategori" data-label="Kategori">{{ $data->nomorSuara }}</td>
+                <td class="col-nama" data-label="Nama">{{ $data->pemohon ? $data->user->name : 'Tidak ada pengguna' }}</td>
+                <td class="col-keterangan" data-label="Keterangan">{{ $data->deskripsi }}</td>
                 <td  class="text-center col-file" data-label="File">{{ $data->tindakLanjut }}</td>
             </tr>
         @empty

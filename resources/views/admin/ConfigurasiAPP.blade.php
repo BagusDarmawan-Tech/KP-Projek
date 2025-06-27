@@ -47,7 +47,8 @@
                         <tr>
                             <td style="text-align: center;">{{ $loop->iteration }}</td>
                             <td>{{ $komponen->nama }}</td>
-                            <td>{{ $komponen->detail }}</td>
+                            <td class="text-wrap text-break" style="max-width: 200px;">{{ $komponen->detail }}</td>
+
                             <td>
                             @if (auth()->user()->hasPermissionTo('configurasi app-edit'))
                                 <button class="btn btn-sm btn-primary btn-edit-kegiatan"

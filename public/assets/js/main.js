@@ -190,9 +190,44 @@ siblings.forEach(sib => {
 
   window.addEventListener('load', navmenuScrollspy);
   document.addEventListener('scroll', navmenuScrollspy);
+document.addEventListener("DOMContentLoaded", function () {
+    const galleryImages = document.querySelectorAll(".gallery-image");
+    const modalImage = document.getElementById("modalImage");
+    const modalTitle = document.getElementById("imageModalLabel");
+    const imageDescription = document.getElementById("imageDescription");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
 
+    let currentIndex = 0;
 
+    // Fungsi untuk menampilkan gambar di modal berdasarkan indeks
+    function updateModalImage(index) {
+        const selectedImage = galleryImages[index];
+        modalImage.src = selectedImage.dataset.imgSrc;
+        modalTitle.textContent = selectedImage.dataset.imgName;
+        imageDescription.textContent = selectedImage.dataset.imgDescription;
+        currentIndex = index;
+    }
 
-  
+    // Event listener untuk klik gambar
+    galleryImages.forEach((img, index) => {
+        img.addEventListener("click", function () {
+            updateModalImage(index);
+        });
+    });
+
+    // Navigasi ke gambar sebelumnya
+    prevBtn.addEventListener("click", function () {
+        const newIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+        updateModalImage(newIndex);
+    });
+
+    // Navigasi ke gambar berikutnya
+    nextBtn.addEventListener("click", function () {
+        const newIndex = (currentIndex + 1) % galleryImages.length;
+        updateModalImage(newIndex);
+    });
+});
+
 
 })();

@@ -7,6 +7,7 @@ use App\Models\DokumenKecamatan;
 use App\Models\DokumenKelurahan;
 use App\Models\ForumAnakSurabaya;
 use App\Models\PemantauanUsulan;
+use App\Models\SuaraAnak;
 use App\Models\JenisSurat;
 class forumanakController extends Controller
 {
@@ -35,7 +36,7 @@ class forumanakController extends Controller
     public function pemantauananak()
     {
         // $documents = skkel::paginate(10);
-        $datas = PemantauanUsulan::where('is_active', true)->get();
+        $datas = SuaraAnak::where('is_active', true)->get();
         return view('frontend.content.Pemantauananak',compact('datas')); 
     }
 

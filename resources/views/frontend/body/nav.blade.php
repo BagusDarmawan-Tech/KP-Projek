@@ -40,7 +40,7 @@
                                 <li><a href="{{route('kegiatanforumanakkelurahan')}}">Kegiatan Forum Anak Kelurahan</a></li>
                             </ul>
                         </li>
-                        <li><a href="{{route('pemantauananak')}}">Pemantauan Usulan Anak</a></li>
+                        <!-- <li><a href="{{route('pemantauananak')}}">Pemantauan Usulan Anak</a></li> -->
                         <li><a href="{{route('kegareksby')}}">Kegiatan Forum Anak Surabaya</a></li>
                     </ul>
                 </li>

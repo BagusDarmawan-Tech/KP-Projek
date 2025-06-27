@@ -28,7 +28,7 @@
           height: auto;
       }
 
-    .top-wave {
+        .top-wave {
               top: 0;
               transform: scale(-1,-1);
       }
